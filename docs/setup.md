@@ -28,6 +28,10 @@ powershell -ExecutionPolicy Bypass -File tools\setup.ps1
 .\mcd.cmd shell
 ```
 
+コンパイラ構築の並列数は`MCD_JOBS`で調整できます（既定2、Windows CIでは4）。
+例えばセットアップ前にPowerShellで`$env:MCD_JOBS = '4'`を指定します。
+正常に構築したコンパイラは次回以降再利用するため、通常のサンプル編集では再構築しません。
+
 導入の工程と時刻は`.deps/logs/bootstrap.log`、コンパイラ構築の詳細は
 `.deps/logs/binutils.log`と`gcc.log`にあります。失敗した場合は原因を修正して再実行できます。
 Windows PowerShell 5.1のダウンロードは`-UseBasicParsing`と300秒のタイムアウトを使用します。

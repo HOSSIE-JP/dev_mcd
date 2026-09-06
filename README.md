@@ -70,6 +70,7 @@ BIOSやセーブステートは結果に含めません。CIもBIOSを必要と�
 ## 設計・拡張
 
 - [構成、API、メモリ配置、IPC](docs/architecture.md)
+- [画像・ADPCM・CD-DA素材の形式と差し替え](docs/asset-formats.md)
 - [他PCでの再構築・BIOSの扱い](docs/setup.md)
 - [検証結果と制限](docs/validation.md)
 
