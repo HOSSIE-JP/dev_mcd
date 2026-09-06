@@ -7,12 +7,12 @@ case "$project_root" in *' '* ) echo 'Use a path without spaces for GNU configur
 prefix="$project_root/.deps/toolchain"
 cache="$project_root/.deps/downloads"
 sources="$project_root/.deps/sources"
-work="$project_root/.deps/toolchain-build/m68000-v2"
+work="$project_root/.deps/toolchain-build/m68000-v3"
 logs="$project_root/.deps/logs"
-# New host GCC releases default to C23/C++20. GCC 14's libcody expects
-# pre-C++20 UTF-8 literals, so pin the HOST language modes explicitly.
+# New host GCC releases default to C23/C++20. GCC 14's libcody configure
+# requires C++11 specifically; newer modes also change its UTF-8 literals.
 export CFLAGS='-O2 -std=gnu11'
-export CXXFLAGS='-O2 -std=gnu++17'
+export CXXFLAGS='-O2 -std=gnu++11'
 export CFLAGS_FOR_BUILD="$CFLAGS" CXXFLAGS_FOR_BUILD="$CXXFLAGS"
 host_args=()
 case "$(uname -s)" in
@@ -23,10 +23,17 @@ case "$(uname -s)" in
     ;;
 esac
 mkdir -p "$prefix" "$cache" "$sources" "$work" "$logs"
-if [ -f "$prefix/.complete-14.2.0-2.44-m68000-v2" ]; then
+if [ -f "$prefix/.complete-14.2.0-2.44-m68000-v3" ]; then
   "$prefix/bin/m68k-elf-gcc" --version
   exit 0
 fi
+failed() {
+  echo "Build failed. First errors and final output from $1:" >&2
+  # A parallel configure may print successful checks after the actual error.
+  grep -m 10 -B 2 -A 3 -E 'configure: error:|: error:|Error [0-9]' "$1" >&2 || true
+  tail -40 "$1" >&2
+  exit 1
+}
 fetch() {
   local archive="$1" url="$2" checksum="$3"
   if [ ! -f "$cache/$archive" ]; then
@@ -51,7 +58,7 @@ mkdir -p "$work/binutils" "$work/gcc"
   fi
   make -j"$jobs" || exit 1
   make install || exit 1
-) > "$logs/binutils.log" 2>&1 || { tail -60 "$logs/binutils.log" >&2; exit 1; }
+) > "$logs/binutils.log" 2>&1 || failed "$logs/binutils.log"
 echo 'Binutils installed; building GCC (first setup can take a while).'
 (
   cd "$work/gcc" || exit 1
@@ -68,6 +75,6 @@ echo 'Binutils installed; building GCC (first setup can take a while).'
   make -j"$jobs" all-target-libgcc || exit 1
   make install-gcc || exit 1
   make install-target-libgcc || exit 1
-) > "$logs/gcc.log" 2>&1 || { tail -60 "$logs/gcc.log" >&2; exit 1; }
+) > "$logs/gcc.log" 2>&1 || failed "$logs/gcc.log"
 "$prefix/bin/m68k-elf-gcc" --version
-touch "$prefix/.complete-14.2.0-2.44-m68000-v2"
+touch "$prefix/.complete-14.2.0-2.44-m68000-v3"
