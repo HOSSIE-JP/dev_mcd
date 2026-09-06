@@ -17,6 +17,7 @@ class MediaTests(unittest.TestCase):
     def test_iso_extents_and_payloads(self):
         data=(ROOT/'dist/mcd_demo.iso').read_bytes()
         self.assertEqual(data[:16],b'SEGADISCSYSTEM  ')
+        self.assertEqual(data[0x110:0x120],b'(C)2026 HOSSIE  ')
         self.assertEqual(data[16*2048:16*2048+7],b'\1CD001\1')
         pvd=data[16*2048:17*2048]
         self.assertEqual(struct.unpack('<I',pvd[80:84])[0]*2048,len(data))

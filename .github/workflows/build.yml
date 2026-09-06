@@ -40,6 +40,9 @@ jobs:
       - name: Build portable native toolchain and sample
         shell: powershell
         run: ./tools/setup.ps1
+      - name: Verify Windows command launcher
+        shell: cmd
+        run: .\mcd.cmd build && .\mcd.cmd doctor && .\mcd.cmd test
       - uses: actions/upload-artifact@v4
         if: always()
         with:

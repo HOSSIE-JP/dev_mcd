@@ -60,6 +60,13 @@ Mainは1800フレーム、Subの読み込みは1200 INT2を超えるとタイム
 
 ## SGDK風APIの対応範囲
 
+`make libs`で`build/libmcd_main.a`と`build/libmcd_sub.a`を生成します。
+サンプルもこの2つの静的ライブラリをリンクしています。
+アプリケーションは`include/mcd/bridge.h`を取り込み、Main側ライブラリをリンクします。
+Sub側は常駐サービスとディスクのアセットIDテーブルを構成するためのライブラリです。
+SP起動コード・MegadevのCDコルーチン・リンカスクリプトは併せて必要です。
+独立した既存SGDK ROMへそのままリンクする用途ではありません。
+
 | API | 現在の機能 |
 |---|---|
 | `SYS_doVBlankProcess()` | VBlank待ち、パッド更新、MCD要求の進行 |

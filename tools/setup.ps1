@@ -1,6 +1,8 @@
 [CmdletBinding()]
 param([switch]$SkipUpdate)
 $ErrorActionPreference = 'Stop'
+# Windows PowerShell's per-chunk progress rendering slows large downloads.
+$ProgressPreference = 'SilentlyContinue'
 $projectRoot = Split-Path $PSScriptRoot -Parent
 if ($projectRoot -match '[^\x21-\x7E]' -or $projectRoot.Contains("'")) {
     throw 'MSYS2 and GNU configure require an ASCII path without spaces, e.g. D:\homebrew\dev_mcd.'

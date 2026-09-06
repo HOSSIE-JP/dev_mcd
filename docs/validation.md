@@ -17,6 +17,7 @@
 | ADPCM約2秒再生後の無音 | PASS |
 | CD-DAトラック2のステレオ音声出力 | PASS（左右ch RMS 約7777） |
 | CD-DA一時停止・再開 | PASS（無音／音声の切り替わり） |
+| CD-DA未再生時の一時停止・再開 | PASS（NOT_READY、画面更新継続） |
 | 読み込み済みADPCMとCD-DAの同時出力 | PASS（440 Hz / 330 Hz / 550 Hzを同じ出力で検出） |
 | 両方の音声停止 | PASS |
 | CDから画像を再ロード | PASS |
@@ -32,6 +33,12 @@
 `tools/smoke.py`はコントローラ入力を送り、実際のエミュレータ画面・音声を取得して検査します。
 テレメトリはサンプルが予約した24バイトのみ読みます。
 起動・画面のソースコード検査だけを実行確認と扱っていません。
+
+![日本版BIOSから起動したサンプル画面](evidence/native-cd.png)
+
+実行時の数値は[正常系JSON](evidence/emulator-report.json)と
+[異常系JSON](evidence/error-report.json)に保存しています。
+ディスクのSHA-256、サンプル専用テレメトリ、音声の測定結果を含みます。
 
 Linuxの[クリーンCIビルド](https://github.com/HOSSIE-JP/dev_mcd/actions/runs/34046950978)も成功し、
 CIで生成したCUE / ISO / WAVをローカルへ取得して同じBIOSで再検証しました。

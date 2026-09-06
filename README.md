@@ -5,6 +5,7 @@ Megadev v1.2.0のCDブートを基盤に、SGDK風Main APIとSub CPU常駐サー
 
 画像表示、IMA ADPCMのSub CPU展開→RF5C164再生、CD-DAトラック2の再生に対応。
 SGDK本体はリンクしていません。APIの対応範囲は限定されています。
+`make libs`でMain / Sub用の静的ライブラリを生成でき、サンプル自身もこれらを使用します。
 
 ## Windowsで始める
 
