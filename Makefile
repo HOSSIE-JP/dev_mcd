@@ -7,6 +7,9 @@ OBJCOPY = $(CROSS)objcopy
 NM68 = $(CROSS)nm
 PYTHON ?= python3
 REGION ?= JP
+ifneq ($(REGION),JP)
+$(error This sample currently supports REGION=JP / NTSC only)
+endif
 DEFS = -imacros build.def.h -DTARGET=MEGACD -DREGION=$(REGION) -DVIDEO=NTSC \
  -DVRAM_SIZE=VRAM_64K -DPROJECT_ID=mcd_demo -DPROJECT_NAME='MCD BRIDGE MEDIA DEMO' \
  -DPROJECT_NAME_DOMESTIC='MCD BRIDGE MEDIA DEMO' -DHEADER_HARDWARE_ID='SEGA MEGA DRIVE' \
@@ -16,10 +19,13 @@ DEFS = -imacros build.def.h -DTARGET=MEGACD -DREGION=$(REGION) -DVIDEO=NTSC \
 INCS = -Iinclude -I$(MEGADEV)/lib -Ibuild
 CFLAGS = -std=gnu11 -O2 -m68000 -ffreestanding -fno-builtin -fno-pic -fno-pie \
  -fno-common -fomit-frame-pointer -fno-asynchronous-unwind-tables -fno-unwind-tables \
- -Wall -Wextra -Wno-main -Wa,--register-prefix-optional $(INCS) $(DEFS)
+ -Wall -Wextra -Wno-main -MMD -MP -Wa,--register-prefix-optional $(INCS) $(DEFS)
 ASFLAGS = $(CFLAGS) -Wa,--bitwise-or -Wa,-Ibuild -x assembler-with-cpp
 MAIN_OBJS = build/main_init.o build/main_layout.o build/main_bridge.o build/main_bios.o build/demo.o
 SUB_OBJS = build/sp_header.o build/sp.o build/sub_kernel.o build/sub_ima.o build/sub_bios.o
+.DEFAULT_GOAL := all
+-include $(wildcard build/*.d)
+$(MAIN_OBJS) $(SUB_OBJS) build/security.o build/ip.o: Makefile
 .PHONY: all clean assets doctor host-test smoke
 .DELETE_ON_ERROR:
 all: build/disc/IPX.MMD build/boot.bin build/assets.stamp

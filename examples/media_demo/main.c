@@ -39,7 +39,10 @@ void main(void)
     T->flags = MCD_getAudioFlags(); T->sub_ticks = MCD_getSubTicks();
     keys = JOY_readJoypad(JOY_1); hit = keys & ~old_keys; old_keys = keys;
     if (MCD_isBusy()) continue;
-    if (T->event != T->completed) { T->completed = T->event; T->error = MCD_getResult(); }
+    if (T->event != T->completed) {
+      T->completed = T->event; T->error = MCD_getResult();
+      if (T->error) hud("COMMAND FAILED - CHECK STATE");
+    }
     if (hit & BUTTON_A) {
       if (MCD_playADPCM()) { T->event++; hud("IMA ADPCM -> RF5C164 PCM"); }
     } else if (hit & BUTTON_B) {

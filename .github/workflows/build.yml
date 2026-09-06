@@ -2,6 +2,7 @@ name: Native Mega CD build
 on:
   push:
     branches: [long-term/mcdk-native]
+    paths-ignore: ['docs/**', 'README.md', 'AGENTS.md', 'THIRD_PARTY_NOTICES.md']
   pull_request:
   workflow_dispatch:
 permissions:
@@ -26,8 +27,16 @@ jobs:
   windows:
     runs-on: windows-2022
     timeout-minutes: 90
+    env:
+      MCD_JOBS: 4
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: |
+            .deps/toolchain
+            .deps/downloads
+          key: mcd-win-m68000-${{ hashFiles('tools/build-toolchain.sh', 'toolchain.lock.json') }}
       - name: Build portable native toolchain and sample
         shell: powershell
         run: ./tools/setup.ps1

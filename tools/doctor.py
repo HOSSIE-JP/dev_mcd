@@ -16,6 +16,8 @@ def main():
     for name in ('megadev',):
         got=sp.check_output(['git','-C',str(ROOT/'.deps'/name),'rev-parse','HEAD'],text=True).strip()
         assert got==lock[name]['commit'],f'{name} version mismatch'
+        dirty=sp.check_output(['git','-C',str(ROOT/'.deps'/name),'status','--porcelain','--untracked-files=no'],text=True)
+        assert not dirty,f'{name} has modified tracked files'
         report[name]=got
     tracked=sp.check_output(['git','ls-files','-z'],cwd=ROOT).decode().split('\0')
     for path in tracked:

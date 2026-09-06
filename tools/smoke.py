@@ -33,7 +33,7 @@ def png(path,w,h,rgb):
     path.write_bytes(b'\x89PNG\r\n\x1a\n'+chunk(b'IHDR',struct.pack('>IIBBBBB',w,h,8,2,0,0,0))+chunk(b'IDAT',zlib.compress(scan))+chunk(b'IEND',b''))
 
 class Emulator:
-    def __init__(self,core,system,out):
+    def __init__(self,core,system,out,disc):
         self.lib=C.CDLL(str(core.resolve()))
         self.directory=str(system.resolve()).encode()
         self.options={b'genesis_plus_gx_region_detect':b'ntsc-j',b'genesis_plus_gx_bios':b'enabled'}
@@ -47,7 +47,7 @@ class Emulator:
         self.lib.retro_get_memory_size.argtypes=[C.c_uint]; self.lib.retro_get_memory_size.restype=C.c_size_t
         self.lib.retro_set_controller_port_device.argtypes=[C.c_uint,C.c_uint]
         self.lib.retro_set_controller_port_device(0,1)
-        path=str((ROOT/'dist/mcd_demo.cue').resolve()).encode()
+        path=str(disc.resolve()).encode()
         if not self.lib.retro_load_game(C.byref(GameInfo(path,None,0,None))): raise RuntimeError('libretro rejected the disc')
     def env(self,cmd,data):
         if cmd in (9,30,31): C.cast(data,C.POINTER(C.c_char_p))[0]=self.directory; return True
@@ -74,6 +74,9 @@ class Emulator:
     def telemetry(self):
         ptr=self.lib.retro_get_memory_data(2)
         if not ptr or self.lib.retro_get_memory_size(2)<0xF018: return {}
+        magic=C.string_at(ptr+0xF000,4)
+        if sys.byteorder=='little': magic=magic[0:2][::-1]+magic[2:4][::-1]
+        if magic!=b'MCDB': return {}
         data=C.string_at(ptr+0xF000,24)
         # GPGX exposes native little-endian 16-bit work RAM words on this host.
         if sys.byteorder=='little': data=b''.join(data[i:i+2][::-1] for i in range(0,24,2))
@@ -105,22 +108,36 @@ class Emulator:
         with wave.open(str(self.out/(name+'.wav')),'wb') as f:
             f.setparams((2,2,44100,0,'NONE','not compressed')); f.writeframes(self.audio)
         return {'samples':len(values)//2,'rms_left':round(rms[0],2),'rms_right':round(rms[1],2)}
+    def tone(self,freq,channel):
+        values=array.array('h',self.audio)
+        if sys.byteorder!='little': values.byteswap()
+        values=values[channel::2]
+        # Direct Fourier amplitude at a diagnostic tone (no NumPy dependency).
+        phase=2*math.pi*freq/44100
+        real=sum(v*math.cos(phase*n) for n,v in enumerate(values))
+        imag=sum(v*math.sin(phase*n) for n,v in enumerate(values))
+        return 2*math.hypot(real,imag)/max(1,len(values))
     def close(self): self.lib.retro_unload_game(); self.lib.retro_deinit()
 
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument('--bios',required=True,type=Path)
     ap.add_argument('--core',type=Path,default=ROOT/'.deps/genesis-plus-gx/genesis_plus_gx_libretro.so')
+    ap.add_argument('--disc',type=Path,default=ROOT/'dist/mcd_demo.cue')
+    ap.add_argument('--expect-error',type=int,default=0)
+    ap.add_argument('--output',type=Path,default=ROOT/'build/validation')
     ap.add_argument('--debug-boot',action='store_true')
     args=ap.parse_args()
     if not args.bios.is_file() or args.bios.stat().st_size!=131072: ap.error('Provide your own 128 KiB Japanese Mega CD BIOS')
     system=ROOT/'.local/smoke/system'; system.mkdir(parents=True,exist_ok=True)
     shutil.copyfile(args.bios,system/'bios_CD_J.bin')
-    out=ROOT/'build/validation'; out.mkdir(parents=True,exist_ok=True)
-    emu=Emulator(args.core,system,out); report={'core_commit':json.loads((ROOT/'toolchain.lock.json').read_text())['genesis-plus-gx']['commit'],'checks':{}}
+    out=args.output; out.mkdir(parents=True,exist_ok=True)
+    emu=Emulator(args.core,system,out,args.disc); report={'core_commit':json.loads((ROOT/'toolchain.lock.json').read_text())['genesis-plus-gx']['commit'],'checks':{}}
+    report['disc_sha256']=hashlib.sha256(args.disc.with_suffix('.iso').read_bytes()).hexdigest()
     try:
         ready=False
         for frame in range(2400):
             t=emu.run(1,[3] if frame%240 in range(180,188) else []) # Start at BIOS menu
+            if t.get('magic')==0x4D434442 and t.get('stage')==0xFFFF: break
             if t.get('magic')==0x4D434442 and t.get('stage')==3:
                 ready=True; break
             if frame%300==299:
@@ -128,9 +145,19 @@ def main():
                 if args.debug_boot: emu.capture('boot-'+str(frame+1))
         emu.capture('ready')
         report['boot_frames']=frame+1; report['telemetry']=t
+        if args.expect_error:
+            assert t.get('stage')==0xFFFF and t.get('error')==args.expect_error, 'Expected target error was not reported'
+            before=t['frame']; emu.run(120)
+            assert emu.telemetry()['frame']>before+100, 'Target froze after reporting an error'
+            report['checks']['expected_target_error']=args.expect_error
+            report['status']='pass'; print(json.dumps(report,indent=2)); return
         assert ready, 'Native CD boot did not reach READY'
         assert t['image_ok']==1 and t['prepared']==1 and t['error']==0
         report['checks']['native_boot_image_adpcm_prepare']=True
+        for key in (4,5):
+            emu.press(key)
+            assert emu.telemetry()['error']==6, 'Pause/resume without an active track must reject safely'
+        report['checks']['cdda_invalid_state_rejected']=True
         emu.run(60); emu.audio.clear(); emu.run(60)
         silence=emu.audio_metrics('silence'); assert max(silence['rms_left'],silence['rms_right'])<10
         emu.audio.clear(); before=emu.telemetry(); emu.press(1) # Genesis A = libretro Y
@@ -149,8 +176,12 @@ def main():
         emu.press(5); emu.run(120); emu.audio.clear(); emu.run(60) # Down
         resumed=emu.audio_metrics('resumed'); assert min(resumed['rms_left'],resumed['rms_right'])>100, 'Resume failed'
         report['checks']['cdda_pause_resume']=True
-        emu.press(1); emu.run(50); assert emu.telemetry()['error']==0
-        report['checks']['adpcm_while_cdda']=True
+        emu.audio.clear(); emu.run(1,[1]); emu.run(14)
+        mixed={'adpcm_440_left':round(emu.tone(440,0),2),'cdda_330_left':round(emu.tone(330,0),2),
+               'cdda_550_right':round(emu.tone(550,1),2)}
+        assert min(mixed.values())>1000, 'Both PCM and CD-DA tones must be present simultaneously'
+        assert emu.telemetry()['flags'] & 3 == 3 and emu.telemetry()['error']==0
+        emu.audio_metrics('mixed'); report['checks']['adpcm_while_cdda']=mixed
         emu.press(8); emu.run(120); emu.audio.clear(); emu.run(60) # C = libretro A
         stopped=emu.audio_metrics('stopped'); assert max(stopped['rms_left'],stopped['rms_right'])<10, 'Stop failed'
         report['checks']['stop']=True

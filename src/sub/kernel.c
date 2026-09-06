@@ -183,10 +183,12 @@ void sub_main(void)
       mcd_bios_call(BIOS_MSC_STOP, 0); flags &= ~(MCD_CDDA_REQUESTED | MCD_CDDA_PAUSED);
       finish(MCD_OK); break;
     case MCD_CMD_PAUSE_CDDA:
+      if (!(flags & MCD_CDDA_REQUESTED)) { finish(MCD_ERR_NOT_READY); break; }
       mcd_bios_call(BIOS_MSC_PAUSEON, 0);
       flags = (flags & ~MCD_CDDA_REQUESTED) | MCD_CDDA_PAUSED;
       finish(MCD_OK); break;
     case MCD_CMD_RESUME_CDDA:
+      if (!(flags & MCD_CDDA_PAUSED)) { finish(MCD_ERR_NOT_READY); break; }
       mcd_bios_call(BIOS_MSC_PAUSEOFF, 0);
       flags = (flags & ~MCD_CDDA_PAUSED) | MCD_CDDA_REQUESTED;
       finish(MCD_OK); break;

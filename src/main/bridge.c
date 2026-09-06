@@ -94,7 +94,7 @@ u16 VDP_drawImage(VDPPlane plane, const void *image, u32 bytes)
 {
   const u16 *p = image;
   u16 count, x, y, sr;
-  if (!image || ((u32)image & 1) || bytes < 44 || plane > BG_B) return MCD_ERR_ARGUMENT;
+  if (!image || ((u32)image & 1) || bytes < 44 || (plane != BG_A && plane != BG_B)) return MCD_ERR_ARGUMENT;
   if (p[0] != 0x4D49 || p[1] != 0x4D47 || p[2] != 40 || p[3] != 28) return MCD_ERR_FORMAT;
   count = p[4];
   if (!count || count > 1120 || p[5] != 0 || bytes != 44UL + (u32)count*32 + 2240) return MCD_ERR_SIZE;

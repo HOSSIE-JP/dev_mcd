@@ -17,7 +17,7 @@
 | ADPCM約2秒再生後の無音 | PASS |
 | CD-DAトラック2のステレオ音声出力 | PASS（左右ch RMS 約7777） |
 | CD-DA一時停止・再開 | PASS（無音／音声の切り替わり） |
-| 読み込み済みADPCMをCD-DA再生中に要求 | PASS |
+| 読み込み済みADPCMとCD-DAの同時出力 | PASS（440 Hz / 330 Hz / 550 Hzを同じ出力で検出） |
 | 両方の音声停止 | PASS |
 | CDから画像を再ロード | PASS |
 | ADPCM再生中にMainフレームカウンタが進む | PASS |
@@ -25,10 +25,16 @@
 | ISOディレクトリ・extent・ファイル内容 | PASS |
 | CD-DAの音声形式・2秒プリギャップ | PASS |
 | アセット再生成でSHA-256一致 | PASS |
+| 存在しない画像ファイル | PASS（NOT_FOUND、画面更新継続） |
+| 256 KiBを超える画像ファイルの申告サイズ | PASS（SIZEエラー、転送開始前に拒否） |
+| ADPCMヘッダの不正なステップインデックス | PASS（FORMATエラー、画面更新継続） |
 
 `tools/smoke.py`はコントローラ入力を送り、実際のエミュレータ画面・音声を取得して検査します。
 テレメトリはサンプルが予約した24バイトのみ読みます。
 起動・画面のソースコード検査だけを実行確認と扱っていません。
+
+Linuxの[クリーンCIビルド](https://github.com/HOSSIE-JP/dev_mcd/actions/runs/34046950978)も成功し、
+CIで生成したCUE / ISO / WAVをローカルへ取得して同じBIOSで再検証しました。
 
 実機での確認は未実施です。Windowsポータブル環境のクリーンセットアップはCIで検証し、
 結果が得られ次第この記録を更新します。
@@ -40,6 +46,7 @@ make all host-test
 python3 tools/deps.py --emulator
 make -C .deps/genesis-plus-gx -f Makefile.libretro -j2
 python3 tools/smoke.py --bios /path/to/your-japanese-bios.bin
+python3 tools/error_smoke.py --bios /path/to/your-japanese-bios.bin
 ```
 
 `build/validation/report.json`が集計、同じ場所のPNG / WAVがエミュレータ出力です。

@@ -7,7 +7,7 @@ case "$project_root" in *' '* ) echo 'Use a path without spaces for GNU configur
 prefix="$project_root/.deps/toolchain"
 cache="$project_root/.deps/downloads"
 sources="$project_root/.deps/sources"
-work="$project_root/.deps/toolchain-build"
+work="$project_root/.deps/toolchain-build/m68000"
 logs="$project_root/.deps/logs"
 host_args=()
 case "$(uname -s)" in
@@ -18,7 +18,7 @@ case "$(uname -s)" in
     ;;
 esac
 mkdir -p "$prefix" "$cache" "$sources" "$work" "$logs"
-if [ -f "$prefix/.complete-14.2.0-2.44" ]; then
+if [ -f "$prefix/.complete-14.2.0-2.44-m68000" ]; then
   "$prefix/bin/m68k-elf-gcc" --version
   exit 0
 fi
@@ -55,10 +55,10 @@ echo 'Binutils installed; building GCC (first setup can take a while).'
       --enable-languages=c --without-headers --with-newlib --disable-nls \
       --disable-multilib --disable-threads --disable-shared --disable-libssp \
       --disable-libquadmath --disable-libgomp --disable-libatomic --disable-libstdcxx \
-      --disable-bootstrap --with-arch=m68k
+      --disable-bootstrap --with-arch=m68k --with-cpu=m68000
   fi
   make -j"$jobs" all-gcc all-target-libgcc
   make install-gcc install-target-libgcc
 ) > "$logs/gcc.log" 2>&1 || { tail -60 "$logs/gcc.log" >&2; exit 1; }
 "$prefix/bin/m68k-elf-gcc" --version
-touch "$prefix/.complete-14.2.0-2.44"
+touch "$prefix/.complete-14.2.0-2.44-m68000"
