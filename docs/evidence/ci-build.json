@@ -1,0 +1,47 @@
+{
+  "source_commit": "c5e90071c2115c936d1fb5fe80882ab496159cee",
+  "workflow_run": "https://github.com/HOSSIE-JP/dev_mcd/actions/runs/34057673873",
+  "windows_runner": "windows-2022",
+  "windows_artifact_id": 9997015589,
+  "host_preparation_seconds": 97,
+  "compiler_and_sample_seconds": 2071,
+  "launcher_checks": [
+    "mcd.cmd build",
+    "mcd.cmd doctor",
+    "mcd.cmd test"
+  ],
+  "host_tests_passed": 4,
+  "toolchain": {
+    "gcc": "m68k-elf-gcc.exe (GCC) 14.2.0",
+    "ld": "GNU ld (GNU Binutils) 2.44",
+    "objcopy": "GNU objcopy (GNU Binutils) 2.44",
+    "megadev": "7a7246c14b845ad2f1bd3c7d73afb04cf67d83ef"
+  },
+  "host_packages": {
+    "make": "4.4.1-3",
+    "mingw-w64-ucrt-x86_64-gcc": "16.2.0-3",
+    "mingw-w64-ucrt-x86_64-gmp": "6.3.0-2",
+    "mingw-w64-ucrt-x86_64-mpc": "1.4.1-1",
+    "mingw-w64-ucrt-x86_64-mpfr": "4.2.2-3",
+    "msys2-runtime": "3.6.10-3",
+    "python": "3.12.14-1"
+  },
+  "windows_files": {
+    "mcd_demo.cue": {
+      "bytes": 156,
+      "sha256": "9fd2d76559b664fa213f0219a23b550039276df879a31c2fb5e9cf28991e5597"
+    },
+    "mcd_demo.iso": {
+      "bytes": 921600,
+      "sha256": "6937002418ab9ec7d1a97123f2aea5b1706d7b187c674b14dd657b874bdc21fb"
+    },
+    "track02.wav": {
+      "bytes": 1764044,
+      "sha256": "b79547d658b072be7e31e446ca44a57b265af3a2e2016483bdff8a1e90a605d0"
+    }
+  },
+  "linux_artifact_id": 9996464701,
+  "linux_artifact_matches_verified_local_build": true,
+  "bios_in_ci": false,
+  "real_hardware_tested": false
+}

@@ -26,6 +26,7 @@ powershell -ExecutionPolicy Bypass -File tools\setup.ps1
 M68000向けクロスコンパイラを`.deps/toolchain`にビルドします。
 MSYS2配布物・GNUソースのSHA-256、Megadevのコミットを固定しています。
 初回のコンパイラ構築には時間と数GBの空き容量が必要です。2回目以降は再利用します。
+Windows CIでは新規導入からサンプル構築まで約36分で完了しています（環境により変動します）。
 ホストMSYS2パッケージは更新されるため、導入バージョンを`.deps/logs/msys2-packages.txt`に記録します。
 
 ## Linux
@@ -56,6 +57,7 @@ ISO単体にはCD-DAがありません。音源・画像はツールが生成す
 ## 検証
 
 提供された日本版BIOSでGenesis Plus GXを起動し、画像・音声出力、停止・一時停止・再開を確認しています。
+Windows / LinuxのクリーンCIビルドも成功し、Windows生成物も同じBIOSで再生確認済みです。
 詳細は[検証記録](docs/validation.md)を参照してください。実機での検証は別途必要です。
 
 ```sh

@@ -40,17 +40,37 @@
 [異常系JSON](evidence/error-report.json)に保存しています。
 ディスクのSHA-256、サンプル専用テレメトリ、音声の測定結果を含みます。
 
-Linuxの[クリーンCIビルド](https://github.com/HOSSIE-JP/dev_mcd/actions/runs/34049115223)も成功し、
-コミット`a8d650d`のCIで生成したCUE / ISO / WAVをローカルへ取得して同じBIOSで再検証しました。
-3ファイルはローカルビルドとバイト単位で一致しています。
+Linuxの[クリーンCIビルド](https://github.com/HOSSIE-JP/dev_mcd/actions/runs/34057673873)も成功しました。
+コミット`c5e9007`のCIで生成したCUE / ISO / WAVを取得し、提供BIOSで検証済みの
+ローカルビルドと3ファイルがバイト単位で一致することを確認しています。
 
 加えて、Linux上でソースから構築した`m68k-elf-gcc 14.2.0`とbinutils 2.42でも、
 分離したチェックアウトからサンプルを生成して同じBIOS検証を通しました。
 画像表示・ADPCM・CD-DA・同時再生・停止・再開の全項目がPASSです。
 数値は[GCC 14の正常系JSON](evidence/gcc14-emulator-report.json)に保存しています。
 
-実機での確認は未実施です。Windowsポータブル環境のクリーンセットアップはCIで検証し、
-結果が得られ次第この記録を更新します。
+## Windowsのクリーン構築と生成物
+
+同じ[CI実行](https://github.com/HOSSIE-JP/dev_mcd/actions/runs/34057673873)のWindows Server 2022で、
+MSYS2の新規展開からGCC 14.2.0 / binutils 2.44の構築、サンプル生成まで成功しました。
+`mcd.cmd build`、`mcd.cmd doctor`、`mcd.cmd test`の3コマンドも実際に実行して成功しています。
+BIOSを使用しないホストテスト4件もPASSです。
+
+初回の参考時間は、ホスト準備97秒、クロスコンパイラとサンプルの構築2071秒、合計約36分です。
+CIの並列数は4で、PCの性能や回線によって時間は変わります。
+通常のサンプル編集では構築済みコンパイラを再利用します。
+
+WindowsのCIが生成したCUE / ISO / WAVをローカルへ取得し、提供BIOSと同じGenesis Plus GXで
+起動・画像表示・ADPCM・CD-DA・同時再生・停止・一時停止・再開・画像再読み込みを確認しました。
+全項目PASSで、画面の目視確認も実施しています。これはWindowsで生成したディスクを
+Linux上のエミュレータで検査した結果です。
+
+[Windows生成物の正常系JSON](evidence/windows-emulator-report.json)と
+[CI・ツール版・生成物SHA-256の記録](evidence/ci-build.json)を保存しています。
+Linux版とWindows版はコンパイラ・リンカの版が異なり、ISOのSHA-256も異なります。
+CUEとCD-DAのWAVは一致しています。
+
+実機での確認は未実施です。WindowsのGUIエミュレータ、別BIOS、PALでの確認も未実施です。
 
 ## 再実行
 
