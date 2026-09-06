@@ -1,7 +1,75 @@
-# dev_mcd
+# dev_mcd / MCD Bridge
 
-メガCD開発環境とSGDK風ブリッジの開発用リポジトリです。
+メガCD専用の長期開発ブランチ `long-term/mcdk-native`。
+Megadev v1.2.0のCDブートを基盤に、SGDK風Main APIとSub CPU常駐サービスを実装しています。
 
-実装・セットアップ・サンプルは [`long-term/mcdk-native`](https://github.com/HOSSIE-JP/dev_mcd/tree/long-term/mcdk-native) ブランチを参照してください。
+画像表示、IMA ADPCMのSub CPU展開→RF5C164再生、CD-DAトラック2の再生に対応。
+SGDK本体はリンクしていません。APIの対応範囲は限定されています。
 
-BIOSファイルはGitに登録しません。
+## Windowsで始める
+
+Windows 10/11 x64、Git、PowerShell、標準の`tar.exe`を使用します。
+Docker・WSL・システムへのMSYS2インストールは不要です。
+パスはASCII文字・空白なしにしてください（例: `D:\homebrew\dev_mcd`）。
+
+```powershell
+git clone --branch long-term/mcdk-native https://github.com/HOSSIE-JP/dev_mcd.git
+cd dev_mcd
+powershell -ExecutionPolicy Bypass -File tools\setup.ps1
+.\mcd.cmd build
+.\mcd.cmd doctor
+.\mcd.cmd test
+```
+
+初回は`.deps/msys64`にポータブルMSYS2を展開し、GCC 14.2.0 / binutils 2.44の
+M68000向けクロスコンパイラを`.deps/toolchain`にビルドします。
+MSYS2配布物・GNUソースのSHA-256、Megadevのコミットを固定しています。
+初回のコンパイラ構築には時間と数GBの空き容量が必要です。2回目以降は再利用します。
+ホストMSYS2パッケージは更新されるため、導入バージョンを`.deps/logs/msys2-packages.txt`に記録します。
+
+## Linux
+
+```sh
+sudo apt-get install git make python3 gcc gcc-m68k-linux-gnu binutils-m68k-linux-gnu
+bash tools/setup-linux.sh
+```
+
+## サンプルを動かす
+
+ビルド結果は`dist/mcd_demo.cue`、`mcd_demo.iso`、`track02.wav`です。
+**3ファイルを同じ場所に置き、CUEをエミュレータで開いてください。**
+ISO単体にはCD-DAがありません。音源・画像はツールが生成するオリジナルの検査用素材です。
+
+| メガドライブのボタン | 動作 |
+|---|---|
+| A | 読み込み済みADPCMを再生（約2秒） |
+| B | CD-DAトラック2を繰り返し再生 |
+| C | 両方の音声を停止 |
+| 上 / 下 | CD-DAを一時停止 / 再開 |
+| START | CDから画像を再読み込み（CD-DAを停止） |
+
+日本向けBIOS・NTSCのメガCDを対象にしています。BIOSは同梱しません。
+手元で吸い出したBIOSは`.local/`などGit管理外の場所に置いてください。
+ビルド自体にBIOSは必要ありません。
+
+## 検証
+
+提供された日本版BIOSでGenesis Plus GXを起動し、画像・音声出力、停止・一時停止・再開を確認しています。
+詳細は[検証記録](docs/validation.md)を参照してください。実機での検証は別途必要です。
+
+```sh
+python3 tools/deps.py --emulator
+make -C .deps/genesis-plus-gx -f Makefile.libretro -j2
+python3 tools/smoke.py --bios /absolute/path/to/your-japanese-bios.bin
+```
+
+上記の自動エミュレータ検証はLinux向けです。画面・音声・結果JSONを`build/validation/`に出力します。
+BIOSやセーブステートは結果に含めません。CIもBIOSを必要としないビルド・ホストテストのみ実行します。
+
+## 設計・拡張
+
+- [構成、API、メモリ配置、IPC](docs/architecture.md)
+- [他PCでの再構築・BIOSの扱い](docs/setup.md)
+- [検証結果と制限](docs/validation.md)
+
+Megadev由来コードの著作権表示は[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)にあります。

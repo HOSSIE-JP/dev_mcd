@@ -1,0 +1,28 @@
+# Private firmware and emulator state must never enter Git.
+/.local/
+/bios/
+**/bios/
+**/BIOS/
+**/jp_mcd*.bin
+**/us_scd*.bin
+**/eu_mcd*.bin
+*.bin
+*.rom
+*.iso
+*.cue
+*.chd
+*.srm
+*.brm
+*.state*
+# Recreated dependencies, assets, builds and machine-local configuration.
+/.deps/
+/build/
+/dist/
+/.env
+__pycache__/
+*.pyc
+*.o
+*.elf
+*.so
+*.dll
+*.exe

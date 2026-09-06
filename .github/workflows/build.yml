@@ -1,0 +1,44 @@
+name: Native Mega CD build
+on:
+  push:
+    branches: [long-term/mcdk-native]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  linux:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y gcc-m68k-linux-gnu binutils-m68k-linux-gnu
+      - run: bash tools/setup-linux.sh
+      - name: Check firmware exclusion
+        run: python3 tools/doctor.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mcd-demo-linux
+          path: |
+            dist/mcd_demo.iso
+            dist/mcd_demo.cue
+            dist/track02.wav
+            .deps/logs/doctor.json
+  windows:
+    runs-on: windows-2022
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build portable native toolchain and sample
+        shell: powershell
+        run: ./tools/setup.ps1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mcd-windows-build-and-logs
+          path: |
+            dist/mcd_demo.iso
+            dist/mcd_demo.cue
+            dist/track02.wav
+            .deps/logs/*.log
+            .deps/logs/*.json
+            .deps/logs/msys2-packages.txt
