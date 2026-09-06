@@ -9,7 +9,7 @@ SGDK本体はリンクしていません。APIの対応範囲は限定されて�
 
 ## Windowsで始める
 
-Windows 10/11 x64、Git、PowerShell、標準の`tar.exe`を使用します。
+Windows 10/11 x64、Git、PowerShellを使用します。
 Docker・WSL・システムへのMSYS2インストールは不要です。
 パスはASCII文字・空白なしにしてください（例: `D:\homebrew\dev_mcd`）。
 

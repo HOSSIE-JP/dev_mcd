@@ -20,9 +20,10 @@ function Write-Stage([string]$Message) {
     Add-Content -Path $bootstrapLog -Value $line -Encoding UTF8
 }
 if (!(Test-Path $bash)) {
-    $archive = Join-Path $deps 'msys2-base-x86_64-20260611.tar.xz'
-    $url = 'https://github.com/msys2/msys2-installer/releases/download/2026-06-11/msys2-base-x86_64-20260611.tar.xz'
-    $expected = 'a2d047e8ee213c3c6a49a8de427eb1069df12207c0422ff1b3cbb5c905c34221'
+    if (Test-Path $msys) { throw 'Incomplete .deps/msys64 exists. Move it aside and rerun setup.ps1.' }
+    $archive = Join-Path $deps 'msys2-base-x86_64-20260611.sfx.exe'
+    $url = 'https://github.com/msys2/msys2-installer/releases/download/2026-06-11/msys2-base-x86_64-20260611.sfx.exe'
+    $expected = 'c105946e64e08f099ac0e4647461ce762b95333ad211777666476a9a41451d65'
     if (!(Test-Path $archive)) {
         Write-Stage 'Downloading portable MSYS2 (timeout: 300 seconds).'
         # Basic parsing downloads bytes without the PowerShell 5.1 HTML/script
@@ -35,9 +36,30 @@ if (!(Test-Path $bash)) {
     if ((Get-FileHash $archive -Algorithm SHA256).Hash.ToLowerInvariant() -ne $expected) {
         throw 'MSYS2 archive checksum mismatch. Remove the cached archive and run setup again.'
     }
-    Write-Stage 'Extracting portable MSYS2.'
-    & tar.exe -xf $archive -C $deps
-    if ($LASTEXITCODE -ne 0 -or !(Test-Path $bash)) { throw 'MSYS2 extraction failed.' }
+    Write-Stage 'Extracting the official portable MSYS2 self-extracting package.'
+    # Match the upstream MSYS2 CI action. Avoid Windows tar implementations
+    # which can stall on .tar.xz or interpret drive letters as remote paths.
+    $unpack = Join-Path $deps 'msys2-unpack'
+    New-Item -ItemType Directory -Force $unpack | Out-Null
+    $extractProcess = Start-Process -FilePath $archive -ArgumentList '-y' `
+        -WorkingDirectory $unpack -NoNewWindow -Wait -PassThru
+    if ($extractProcess.ExitCode -ne 0) { throw 'MSYS2 extraction failed.' }
+    $unpackedRoot = Join-Path $unpack 'msys64'
+    if (!(Test-Path (Join-Path $unpackedRoot 'usr\bin\bash.exe'))) { throw 'MSYS2 archive layout mismatch.' }
+    Move-Item -Path $unpackedRoot -Destination $msys
+}
+# The upstream first-start script allows key-server refresh failures, but has
+# no time limit. Bound that optional network operation; retain key population,
+# package signature verification, and the subsequent full package update.
+$keyPost = Join-Path $msys 'etc\post-install\07-pacman-key.post'
+if (Test-Path $keyPost) {
+    $content = [IO.File]::ReadAllText($keyPost)
+    $bounded = $content.Replace('    /usr/bin/pacman-key --refresh-keys || true',
+        '    /usr/bin/timeout --kill-after=5s 60s /usr/bin/pacman-key --refresh-keys || true')
+    if ($bounded -ne $content) {
+        Write-Stage 'Limiting optional first-start key-server refresh to 60 seconds.'
+        [IO.File]::WriteAllText($keyPost, $bounded, [Text.UTF8Encoding]::new($false))
+    }
 }
 $oldMSYSTEM = $env:MSYSTEM
 $oldChere = $env:CHERE_INVOKING

@@ -3,7 +3,7 @@
 ## Windows
 
 `tools/setup.ps1`が専用のMSYS2を`.deps/msys64`に展開します。
-Windows 10/11 x64の標準PowerShellと`tar.exe`、Gitが前提です。
+Windows 10/11 x64の標準PowerShellとGitが前提です。
 初期セットアップにネットワークが必要です。管理者権限、Docker、WSLは使いません。
 既存のMSYS2やシステムのPATHは書き換えません。
 
@@ -13,6 +13,8 @@ MSYS2/GNU configureの制約から、チェックアウト先はASCII文字・�
 初回はMSYS2の完全更新を実行してからUCRT64のネイティブC/C++コンパイラと開発ライブラリを導入し、
 M68000向けGCC 14.2.0 / binutils 2.44をソースから構築します。
 配布アーカイブはSHA-256、MegadevはコミットIDで固定します。
+MSYS2の展開は公式CIと同じ自己展開パッケージを使い、リポジトリ内で完結します。
+一時フォルダへの展開に成功してから`.deps/msys64`へ配置します。
 MSYS2のホストパッケージはローリング更新です。完全なバイナリ同一性までは保証せず、
 導入一覧を`.deps/logs/msys2-packages.txt`に残します。
 
@@ -29,6 +31,9 @@ powershell -ExecutionPolicy Bypass -File tools\setup.ps1
 Windows PowerShell 5.1のダウンロードは`-UseBasicParsing`と300秒のタイムアウトを使用します。
 HTMLの解析やスクリプト実行を伴わず、無人セットアップで確認待ちが発生しない方式です
 （[Microsoftの説明](https://support.microsoft.com/en-us/servicing/os/windows/2025/12/powershell-5-1-invoke-webrequest-preventing-script-execution-from-web-content)）。
+MSYS2初回起動の任意のキーサーバー問い合わせは60秒で打ち切ります。
+これは[MSYS2公式CIも対処している工程](https://github.com/msys2/setup-msys2/blob/main/main.js)です。
+同梱キーの登録、pacmanのパッケージ署名検証、通常のパッケージ更新は実行します。
 MSYS2更新で再起動を求められた場合は、そのMSYS2のシェルを閉じてセットアップを再実行します。
 コンパイラの正常インストール完了後にのみ完了マーカーを作るため、途中失敗を成功扱いしません。
 別の場所へ移動した後にクロスコンパイラを再構築する場合は、古いconfigureの絶対パスが残る
