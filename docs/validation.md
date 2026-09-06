@@ -40,8 +40,9 @@
 [異常系JSON](evidence/error-report.json)に保存しています。
 ディスクのSHA-256、サンプル専用テレメトリ、音声の測定結果を含みます。
 
-Linuxの[クリーンCIビルド](https://github.com/HOSSIE-JP/dev_mcd/actions/runs/34046950978)も成功し、
-CIで生成したCUE / ISO / WAVをローカルへ取得して同じBIOSで再検証しました。
+Linuxの[クリーンCIビルド](https://github.com/HOSSIE-JP/dev_mcd/actions/runs/34049115223)も成功し、
+コミット`a8d650d`のCIで生成したCUE / ISO / WAVをローカルへ取得して同じBIOSで再検証しました。
+3ファイルはローカルビルドとバイト単位で一致しています。
 
 実機での確認は未実施です。Windowsポータブル環境のクリーンセットアップはCIで検証し、
 結果が得られ次第この記録を更新します。

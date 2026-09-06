@@ -24,7 +24,11 @@ powershell -ExecutionPolicy Bypass -File tools\setup.ps1
 .\mcd.cmd shell
 ```
 
-構築ログは`.deps/logs/binutils.log`と`gcc.log`にあります。失敗した場合は原因を修正して再実行できます。
+導入の工程と時刻は`.deps/logs/bootstrap.log`、コンパイラ構築の詳細は
+`.deps/logs/binutils.log`と`gcc.log`にあります。失敗した場合は原因を修正して再実行できます。
+Windows PowerShell 5.1のダウンロードは`-UseBasicParsing`と300秒のタイムアウトを使用します。
+HTMLの解析やスクリプト実行を伴わず、無人セットアップで確認待ちが発生しない方式です
+（[Microsoftの説明](https://support.microsoft.com/en-us/servicing/os/windows/2025/12/powershell-5-1-invoke-webrequest-preventing-script-execution-from-web-content)）。
 MSYS2更新で再起動を求められた場合は、そのMSYS2のシェルを閉じてセットアップを再実行します。
 コンパイラの正常インストール完了後にのみ完了マーカーを作るため、途中失敗を成功扱いしません。
 別の場所へ移動した後にクロスコンパイラを再構築する場合は、古いconfigureの絶対パスが残る

@@ -9,5 +9,7 @@ export PATH="/ucrt64/bin:$PATH"
 mkdir -p .deps/logs
 pacman -Q > .deps/logs/msys2-packages.txt
 python3 tools/deps.py
+if [ "${1:-}" = --prepare-only ]; then exit 0; fi
+echo 'Building the M68000 cross-compiler; detailed output is in .deps/logs.'
 bash tools/build-toolchain.sh
 PATH="$PWD/.deps/toolchain/bin:$PATH" make CROSS=m68k-elf- doctor all host-test
