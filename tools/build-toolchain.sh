@@ -7,8 +7,13 @@ case "$project_root" in *' '* ) echo 'Use a path without spaces for GNU configur
 prefix="$project_root/.deps/toolchain"
 cache="$project_root/.deps/downloads"
 sources="$project_root/.deps/sources"
-work="$project_root/.deps/toolchain-build/m68000"
+work="$project_root/.deps/toolchain-build/m68000-v2"
 logs="$project_root/.deps/logs"
+# New host GCC releases default to C23/C++20. GCC 14's libcody expects
+# pre-C++20 UTF-8 literals, so pin the HOST language modes explicitly.
+export CFLAGS='-O2 -std=gnu11'
+export CXXFLAGS='-O2 -std=gnu++17'
+export CFLAGS_FOR_BUILD="$CFLAGS" CXXFLAGS_FOR_BUILD="$CXXFLAGS"
 host_args=()
 case "$(uname -s)" in
   MSYS*|MINGW*)
@@ -18,7 +23,7 @@ case "$(uname -s)" in
     ;;
 esac
 mkdir -p "$prefix" "$cache" "$sources" "$work" "$logs"
-if [ -f "$prefix/.complete-14.2.0-2.44-m68000" ]; then
+if [ -f "$prefix/.complete-14.2.0-2.44-m68000-v2" ]; then
   "$prefix/bin/m68k-elf-gcc" --version
   exit 0
 fi
@@ -39,26 +44,30 @@ export PATH="$prefix/bin:$PATH"
 jobs="${MCD_JOBS:-2}"
 mkdir -p "$work/binutils" "$work/gcc"
 (
-  cd "$work/binutils"
+  cd "$work/binutils" || exit 1
   if [ ! -f Makefile ]; then
     "$sources/binutils-2.44/configure" "${host_args[@]}" --target=m68k-elf --prefix="$prefix" \
-      --disable-nls --disable-werror --disable-gdb --disable-gprofng --disable-sim
+      --disable-nls --disable-werror --disable-gdb --disable-gprofng --disable-sim || exit 1
   fi
-  make -j"$jobs"
-  make install
+  make -j"$jobs" || exit 1
+  make install || exit 1
 ) > "$logs/binutils.log" 2>&1 || { tail -60 "$logs/binutils.log" >&2; exit 1; }
 echo 'Binutils installed; building GCC (first setup can take a while).'
 (
-  cd "$work/gcc"
+  cd "$work/gcc" || exit 1
   if [ ! -f Makefile ]; then
     "$sources/gcc-14.2.0/configure" "${host_args[@]}" --target=m68k-elf --prefix="$prefix" \
       --enable-languages=c --without-headers --with-newlib --disable-nls \
       --disable-multilib --disable-threads --disable-shared --disable-libssp \
       --disable-libquadmath --disable-libgomp --disable-libatomic --disable-libstdcxx \
-      --disable-bootstrap --with-arch=m68k --with-cpu=m68000
+      --disable-bootstrap --disable-lto --with-arch=m68k --with-cpu=m68000 || exit 1
   fi
-  make -j"$jobs" all-gcc all-target-libgcc
-  make install-gcc install-target-libgcc
+  # Explicit exits are necessary: errexit is suppressed inside a subshell
+  # whose status is tested by the outer log/error handler.
+  make -j"$jobs" all-gcc || exit 1
+  make -j"$jobs" all-target-libgcc || exit 1
+  make install-gcc || exit 1
+  make install-target-libgcc || exit 1
 ) > "$logs/gcc.log" 2>&1 || { tail -60 "$logs/gcc.log" >&2; exit 1; }
 "$prefix/bin/m68k-elf-gcc" --version
-touch "$prefix/.complete-14.2.0-2.44-m68000"
+touch "$prefix/.complete-14.2.0-2.44-m68000-v2"
