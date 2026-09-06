@@ -1,0 +1,52 @@
+{
+  "core_commit": "a7985a9c4278ac352f8ca7bb4d3cc6b36e9e3e7d",
+  "checks": {
+    "native_boot_image_adpcm_prepare": true,
+    "cdda_invalid_state_rejected": true,
+    "adpcm_one_shot": {
+      "samples": 86841,
+      "rms_left": 5458.16,
+      "rms_right": 5458.16
+    },
+    "cdda_play": {
+      "samples": 88314,
+      "rms_left": 7776.47,
+      "rms_right": 7777.61
+    },
+    "cdda_pause_resume": true,
+    "adpcm_while_cdda": {
+      "adpcm_440_left": 7615.22,
+      "cdda_330_left": 10272.28,
+      "cdda_550_right": 10305.17
+    },
+    "stop": true,
+    "image_reload": true
+  },
+  "disc_sha256": "64d4a4c66e61e9516de6730e9c743e679dcd176e703b1a3b67aad693c51a23be",
+  "boot_frames": 1082,
+  "telemetry": {
+    "magic": 1296254018,
+    "frame": 286,
+    "stage": 3,
+    "error": 0,
+    "image_ok": 1,
+    "prepared": 1,
+    "flags": 0,
+    "sub_ticks": 0,
+    "event": 0,
+    "completed": 0
+  },
+  "final_telemetry": {
+    "magic": 1296254018,
+    "frame": 1988,
+    "stage": 3,
+    "error": 0,
+    "image_ok": 1,
+    "prepared": 1,
+    "flags": 1,
+    "sub_ticks": 2251,
+    "event": 9,
+    "completed": 9
+  },
+  "status": "pass"
+}

@@ -7,7 +7,7 @@ case "$project_root" in *' '* ) echo 'Use a path without spaces for GNU configur
 prefix="$project_root/.deps/toolchain"
 cache="$project_root/.deps/downloads"
 sources="$project_root/.deps/sources"
-work="$project_root/.deps/toolchain-build/m68000-v3"
+work="$project_root/.deps/toolchain-build/m68000-v4"
 logs="$project_root/.deps/logs"
 # New host GCC releases default to C23/C++20. GCC 14's libcody configure
 # requires C++11 specifically; newer modes also change its UTF-8 literals.
@@ -15,15 +15,17 @@ export CFLAGS='-O2 -std=gnu11'
 export CXXFLAGS='-O2 -std=gnu++11'
 export CFLAGS_FOR_BUILD="$CFLAGS" CXXFLAGS_FOR_BUILD="$CXXFLAGS"
 host_args=()
+configure_prefix="$prefix"
 case "$(uname -s)" in
   MSYS*|MINGW*)
     export PATH="/ucrt64/bin:$PATH"
     export CC=gcc CXX=g++
+    configure_prefix="$(cygpath -m "$prefix")"
     host_args=(--build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32)
     ;;
 esac
 mkdir -p "$prefix" "$cache" "$sources" "$work" "$logs"
-if [ -f "$prefix/.complete-14.2.0-2.44-m68000-v3" ]; then
+if [ -f "$prefix/.complete-14.2.0-2.44-m68000-v4" ]; then
   "$prefix/bin/m68k-elf-gcc" --version
   exit 0
 fi
@@ -50,10 +52,15 @@ done
 export PATH="$prefix/bin:$PATH"
 jobs="${MCD_JOBS:-2}"
 mkdir -p "$work/binutils" "$work/gcc"
+# Native MinGW generators read source paths from files such as gtyp-input.list.
+# MSYS2 only converts process arguments, not paths stored inside those files.
+# Relative source paths work in both the MSYS shell and native Windows tools.
+binutils_source="$(realpath --relative-to="$work/binutils" "$sources/binutils-2.44")"
+gcc_source="$(realpath --relative-to="$work/gcc" "$sources/gcc-14.2.0")"
 (
   cd "$work/binutils" || exit 1
   if [ ! -f Makefile ]; then
-    "$sources/binutils-2.44/configure" "${host_args[@]}" --target=m68k-elf --prefix="$prefix" \
+    "$binutils_source/configure" "${host_args[@]}" --target=m68k-elf --prefix="$configure_prefix" \
       --disable-nls --disable-werror --disable-gdb --disable-gprofng --disable-sim || exit 1
   fi
   make -j"$jobs" || exit 1
@@ -63,7 +70,7 @@ echo 'Binutils installed; building GCC (first setup can take a while).'
 (
   cd "$work/gcc" || exit 1
   if [ ! -f Makefile ]; then
-    "$sources/gcc-14.2.0/configure" "${host_args[@]}" --target=m68k-elf --prefix="$prefix" \
+    "$gcc_source/configure" "${host_args[@]}" --target=m68k-elf --prefix="$configure_prefix" \
       --enable-languages=c --without-headers --with-newlib --disable-nls \
       --disable-multilib --disable-threads --disable-shared --disable-libssp \
       --disable-libquadmath --disable-libgomp --disable-libatomic --disable-libstdcxx \
@@ -77,4 +84,4 @@ echo 'Binutils installed; building GCC (first setup can take a while).'
   make install-target-libgcc || exit 1
 ) > "$logs/gcc.log" 2>&1 || failed "$logs/gcc.log"
 "$prefix/bin/m68k-elf-gcc" --version
-touch "$prefix/.complete-14.2.0-2.44-m68000-v3"
+touch "$prefix/.complete-14.2.0-2.44-m68000-v4"

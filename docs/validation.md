@@ -44,6 +44,11 @@ Linuxの[クリーンCIビルド](https://github.com/HOSSIE-JP/dev_mcd/actions/r
 コミット`a8d650d`のCIで生成したCUE / ISO / WAVをローカルへ取得して同じBIOSで再検証しました。
 3ファイルはローカルビルドとバイト単位で一致しています。
 
+加えて、Linux上でソースから構築した`m68k-elf-gcc 14.2.0`とbinutils 2.42でも、
+分離したチェックアウトからサンプルを生成して同じBIOS検証を通しました。
+画像表示・ADPCM・CD-DA・同時再生・停止・再開の全項目がPASSです。
+数値は[GCC 14の正常系JSON](evidence/gcc14-emulator-report.json)に保存しています。
+
 実機での確認は未実施です。Windowsポータブル環境のクリーンセットアップはCIで検証し、
 結果が得られ次第この記録を更新します。
 
