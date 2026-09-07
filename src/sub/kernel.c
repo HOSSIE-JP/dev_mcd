@@ -5,6 +5,8 @@
 #include <mcd/protocol.h>
 #include <mcd/ima.h>
 #include <mcd/stream.h>
+#include <mcd/video_stream.h>
+#include <mcd/video_source.h>
 
 #define CMD ((volatile u16 *)0xFF8010)
 #define STAT ((volatile u16 *)0xFF8020)
@@ -25,7 +27,8 @@ static u16 active, flags, result, start_tick, audio_start_tick;
 static u16 track_number;
 static u32 loaded, sample_count, decoded;
 static MCD_IMAState ima;
-/* 0 idle, 1 reading, 2 decoding, 3 waiting for Main's acknowledgement. */
+/* 0 idle, 1 ordinary CD read, 2 decoding, 3 waiting for Main acknowledgement,
+ * 4 legacy PCM priming, 5 video-source operation (independent CD ownership). */
 static u16 phase;
 static bool returning_word;
 static u32 range_bytes;
@@ -42,7 +45,8 @@ static void finish(u16 error)
   STAT[1] = error;
   STAT[2] = loaded >> 16;
   STAT[3] = loaded;
-  STAT[4] = flags | mcd_stream_flags();
+  STAT[4] = flags | mcd_stream_flags() | mcd_video_pcm_flags() |
+    (mcd_video_source_active()?MCD_VIDEO_SOURCE_ACTIVE:0);
   barrier();
   STAT[0] = active;
   phase = 3;
@@ -123,6 +127,54 @@ static void pcm_put(u32 pos, u8 value)
   *(volatile u8 *)(0xFF2001UL + ((pos & 0xFFF) << 1)) = value;
 }
 
+static void begin_video_source(void)
+{
+  const u8 *info;
+  u32 offset=((u32)CMD[2]<<16)|CMD[3],bytes=((u32)CMD[4]<<16)|CMD[5];
+  u32 rounded;
+  u16 error;
+  if(mcd_video_source_active() || access_op) {finish(MCD_ERR_BUSY);return;}
+  if(CMD[1] || !bytes || (offset&2047)) {finish(MCD_ERR_ARGUMENT);return;}
+  if(bytes>0xFFFFF800UL) {finish(MCD_ERR_SIZE);return;}
+  rounded=(bytes+2047UL)&~2047UL;
+  info=mcd_find_file("NOVEL.PAK;1");
+  if(!info) {finish(MCD_ERR_NOT_FOUND);return;}
+  if(offset>be32(info+18) || rounded>be32(info+18)-offset) {finish(MCD_ERR_SIZE);return;}
+  if(flags&(MCD_CDDA_REQUESTED|MCD_CDDA_PAUSED))mcd_bios_call(BIOS_MSC_STOP,0);
+  /* The source banks overlap both IMA caches. Never leave ready/playing legacy
+   * channels pointing into memory that the CDC is about to overwrite. */
+  if(!mcd_video_pcm_active()) {*PCM_CDISABLE=0xFF;mcd_stream_reset();}
+  flags=0;
+  error=mcd_video_source_open(be32(info+14),be32(info+18),offset,bytes);
+  if(error)finish(error);else phase=5;
+}
+
+static void read_video_source(void)
+{
+  u32 offset=((u32)CMD[2]<<16)|CMD[3],bytes=((u32)CMD[4]<<16)|CMD[5];
+  u16 destination=CMD[1],error;
+  if(destination>=128 || !(MEMMODE&2)) {finish(MCD_ERR_ARGUMENT);return;}
+  if(bytes>0x40000UL-((u32)destination<<11)) {finish(MCD_ERR_SIZE);return;}
+  error=mcd_video_source_read(offset,bytes,WORD+((u32)destination<<11));
+  if(error)finish(error);else phase=5;
+}
+
+static void video_workspace(bool save)
+{
+  u16 error;
+  if(!(MEMMODE&2)) {finish(MCD_ERR_ARGUMENT);return;}
+  if(mcd_video_pcm_active()) {finish(MCD_ERR_BUSY);return;}
+  error=save?mcd_video_workspace_save(WORD+0x20000UL):mcd_video_workspace_restore(WORD+0x20000UL);
+  if(error) {finish(error);return;}
+  if(save) {
+    /* The backup uses the upper legacy BGM cache. The first SAVE reserves and
+     * invalidates it even when performed before SOURCE_OPEN. */
+    if(flags&(MCD_CDDA_REQUESTED|MCD_CDDA_PAUSED))mcd_bios_call(BIOS_MSC_STOP,0);
+    *PCM_CDISABLE=0xFF;mcd_stream_reset();flags=0;
+  }
+  phase=5;
+}
+
 static void decode_chunk(void)
 {
   u16 budget = 256;
@@ -158,7 +210,15 @@ void sub_main(void)
   STAT[6] = MCD_ABI_VERSION;
   STAT[7] = MCD_READY_MAGIC;
   for (;;) {
-    mcd_stream_update();
+    if(mcd_video_pcm_active())mcd_video_pcm_update();else mcd_stream_update();
+    mcd_video_source_update();
+    if(mcd_video_source_quarantined()) {
+      /* An in-flight optical transfer is never cancelled by clearing access_op.
+       * Keep its PRG buffers reserved and keep INT2/PCM progressing; Main must
+       * treat the unacknowledged command as a fatal timeout. */
+      STAT[1]=MCD_ERR_TIMEOUT;
+      for(;;) {mcd_video_pcm_update();STAT[5]=sub_ticks;}
+    }
     STAT[5] = sub_ticks;
     if (flags & MCD_AUDIO_PLAYING) {
       u16 pos = ((u16)*(volatile u8 *)0xFF0023 << 8) | *(volatile u8 *)0xFF0021;
@@ -167,7 +227,8 @@ void sub_main(void)
         flags &= ~MCD_AUDIO_PLAYING;
       }
     }
-    STAT[4] = flags | mcd_stream_flags();
+    STAT[4] = flags | mcd_stream_flags() | mcd_video_pcm_flags() |
+      (mcd_video_source_active()?MCD_VIDEO_SOURCE_ACTIVE:0);
     if (phase == 3) {
       if (!CMD[0]) { STAT[0] = 0; phase = 0; }
       continue;
@@ -191,11 +252,67 @@ void sub_main(void)
     }
     if (phase == 2) { decode_chunk(); continue; }
     if (phase == 4) {if(mcd_stream_ready(stream_channel))finish(MCD_OK);continue;}
+    if (phase == 5) {
+      if(!mcd_video_source_pending()) {
+        loaded=mcd_video_source_loaded();finish(mcd_video_source_result());
+      }
+      continue;
+    }
     active = CMD[0];
     if (!active || active != CMD[0]) continue;
     loaded = 0;
-    returning_word = active == MCD_CMD_READ || active == MCD_CMD_READ_RANGE;
+    returning_word = active == MCD_CMD_READ || active == MCD_CMD_READ_RANGE ||
+      active == MCD_CMD_VIDEO_AUDIO_FEED || active == MCD_CMD_VIDEO_AUDIO_FEED_BATCH ||
+      active == MCD_CMD_VIDEO_SOURCE_READ || active == MCD_CMD_VIDEO_WORKSPACE_SAVE ||
+      active == MCD_CMD_VIDEO_WORKSPACE_RESTORE;
+    /* Source reservation outlives PCM STOP until CLOSE drains prefetch. Other
+     * optical/IMA commands cannot claim its coroutine or overlapping PRG RAM. */
+    if((mcd_video_source_active() || mcd_video_workspace_saved()) &&
+       (active<MCD_CMD_VIDEO_AUDIO_BEGIN || active>MCD_CMD_VIDEO_WORKSPACE_RESTORE)) {
+      finish(MCD_ERR_BUSY);continue;
+    }
+    if(mcd_video_pcm_active() && active!=MCD_CMD_READ_RANGE &&
+       (active<MCD_CMD_VIDEO_AUDIO_BEGIN || active>MCD_CMD_VIDEO_WORKSPACE_RESTORE)) {
+      finish(MCD_ERR_BUSY);continue;
+    }
     switch (active) {
+    case MCD_CMD_VIDEO_WORKSPACE_SAVE: video_workspace(true);break;
+    case MCD_CMD_VIDEO_WORKSPACE_RESTORE: video_workspace(false);break;
+    case MCD_CMD_VIDEO_SOURCE_OPEN: begin_video_source();break;
+    case MCD_CMD_VIDEO_SOURCE_READ: read_video_source();break;
+    case MCD_CMD_VIDEO_SOURCE_CLOSE: {
+      u16 error=mcd_video_source_close();
+      if(error)finish(error);else phase=5;
+      break;
+    }
+    case MCD_CMD_VIDEO_AUDIO_BEGIN: {
+      u32 count=((u32)CMD[1]<<16)|CMD[2];
+      if(mcd_video_pcm_active()) {finish(MCD_ERR_BUSY);break;}
+      if(!count || count>115200000UL) {finish(MCD_ERR_ARGUMENT);break;}
+      if(flags&(MCD_CDDA_REQUESTED|MCD_CDDA_PAUSED))mcd_bios_call(BIOS_MSC_STOP,0);
+      mcd_stream_reset();flags=0;
+      finish(mcd_video_pcm_begin(count));break;
+    }
+    case MCD_CMD_VIDEO_AUDIO_FEED: {
+      u32 offset=((u32)CMD[1]<<16)|CMD[2];u16 count=CMD[3],error;
+      if(!(MEMMODE&2) || offset>=0x40000UL || !count || count>32768 || count>0x40000UL-offset)
+        error=MCD_ERR_ARGUMENT;
+      else error=mcd_video_pcm_feed(WORD+offset,count);
+      loaded=mcd_video_pcm_clock();finish(error);break;
+    }
+    case MCD_CMD_VIDEO_AUDIO_FEED_BATCH: {
+      u32 offset=((u32)CMD[1]<<16)|CMD[2];
+      u16 error=!(MEMMODE&2)?MCD_ERR_ARGUMENT:mcd_video_pcm_feed_batch(WORD,offset,CMD[3]);
+      loaded=mcd_video_pcm_clock();finish(error);break;
+    }
+    case MCD_CMD_VIDEO_AUDIO_PLAY: {
+      u16 error=mcd_video_pcm_play();loaded=mcd_video_pcm_clock();finish(error);break;
+    }
+    case MCD_CMD_VIDEO_AUDIO_STOP:
+      mcd_video_pcm_update();loaded=mcd_video_pcm_clock();mcd_video_pcm_stop();finish(MCD_OK);break;
+    case MCD_CMD_VIDEO_AUDIO_CLOCK:
+      loaded=mcd_video_pcm_clock();
+      finish(mcd_video_pcm_active()?mcd_video_pcm_result():MCD_ERR_NOT_READY);break;
     case MCD_CMD_READ: begin_read(CMD[1], false); break;
     case MCD_CMD_READ_RANGE: begin_range(false);break;
     case MCD_CMD_PREPARE_STREAM: begin_range(true);break;

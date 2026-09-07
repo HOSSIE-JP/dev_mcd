@@ -1,0 +1,141 @@
+{
+  "emulator": "Genesis Plus GX",
+  "hardware_tested": false,
+  "core_commit": "a7985a9c4278ac352f8ca7bb4d3cc6b36e9e3e7d",
+  "disc_sha256": "10a904c5dab10a3e0ff7dce065ad23b878b997fe2f46e56bef706100ffd6810d",
+  "expected": {
+    "frames": 36,
+    "audio_samples": 48000,
+    "video_sha256": "d912cd71e60697862221c7205baddeb659df5b7061a76a7386525ef6240a255f"
+  },
+  "cases": {
+    "audio_eof": {
+      "status": "pass",
+      "case": "audio_eof",
+      "checks": {
+        "target_completed_without_error": true,
+        "all_video_frames_accounted_for": true,
+        "exact_audio_eof": true,
+        "nonzero_audio_energy": true
+      },
+      "boot_frames": 793,
+      "captures": [
+        {
+          "file": "playing-0030.png",
+          "play_frame": 30
+        },
+        {
+          "file": "playing-0120.png",
+          "play_frame": 120
+        },
+        {
+          "file": "playing-0240.png",
+          "play_frame": 240
+        }
+      ],
+      "play_start_frame": 797,
+      "final_telemetry": {
+        "magic": 1297503281,
+        "stage": 3,
+        "error": 0,
+        "frames_shown": 24,
+        "frames_dropped": 12,
+        "cache_reads": 3,
+        "rebuffer_count": 2,
+        "audio_samples_played": 48000,
+        "skipped": 0
+      },
+      "emulated_frames": 1291,
+      "play_frames": 493,
+      "audio": {
+        "samples": 366502,
+        "rms_left": 843.58,
+        "rms_right": 843.58
+      },
+      "wall_seconds": 1.209
+    },
+    "silent_eof": {
+      "status": "pass",
+      "case": "silent_eof",
+      "checks": {
+        "target_completed_without_error": true,
+        "all_video_frames_accounted_for": true
+      },
+      "boot_frames": 793,
+      "captures": [
+        {
+          "file": "playing-0030.png",
+          "play_frame": 30
+        },
+        {
+          "file": "playing-0120.png",
+          "play_frame": 120
+        },
+        {
+          "file": "playing-0240.png",
+          "play_frame": 240
+        }
+      ],
+      "play_start_frame": 797,
+      "final_telemetry": {
+        "magic": 1297503281,
+        "stage": 3,
+        "error": 0,
+        "frames_shown": 36,
+        "frames_dropped": 0,
+        "cache_reads": 3,
+        "rebuffer_count": 0,
+        "audio_samples_played": 0,
+        "skipped": 0
+      },
+      "emulated_frames": 1163,
+      "play_frames": 365,
+      "audio": {
+        "samples": 272301,
+        "rms_left": 0.0,
+        "rms_right": 0.0
+      },
+      "wall_seconds": 1.073
+    },
+    "skip": {
+      "status": "pass",
+      "case": "skip",
+      "checks": {
+        "target_completed_without_error": true,
+        "controller_skip_acknowledged": true
+      },
+      "boot_frames": 793,
+      "captures": [
+        {
+          "file": "playing-0030.png",
+          "play_frame": 30
+        },
+        {
+          "file": "playing-0120.png",
+          "play_frame": 120
+        }
+      ],
+      "play_start_frame": 797,
+      "final_telemetry": {
+        "magic": 1297503281,
+        "stage": 3,
+        "error": 0,
+        "frames_shown": 1,
+        "frames_dropped": 0,
+        "cache_reads": 1,
+        "rebuffer_count": 0,
+        "audio_samples_played": 2716,
+        "skipped": 1
+      },
+      "emulated_frames": 923,
+      "play_frames": 125,
+      "audio": {
+        "samples": 95673,
+        "rms_left": 674.13,
+        "rms_right": 674.13
+      },
+      "wall_seconds": 0.765
+    }
+  },
+  "status": "pass"
+}

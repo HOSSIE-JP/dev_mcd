@@ -1,0 +1,90 @@
+{
+  "emulator": "Genesis Plus GX",
+  "hardware_tested": false,
+  "core_commit": "a7985a9c4278ac352f8ca7bb4d3cc6b36e9e3e7d",
+  "disc_sha256": "76e864c14b969a449d51757c1321aa8bc1f04ce370aeb842a53dbe377e76eef6",
+  "require_no_rebuffer": true,
+  "skip_after_audio": false,
+  "expected": {
+    "frames": 91,
+    "audio_samples": 241333,
+    "video_sha256": "5de175f69d42bbab3ad33c117e3080afce1b509a57bc34a11a53dfc728143b51"
+  },
+  "cases": {
+    "audio_eof": {
+      "status": "pass",
+      "case": "audio_eof",
+      "checks": {
+        "target_completed_without_error": true,
+        "no_audio_rebuffer": true,
+        "all_video_frames_accounted_for": true,
+        "exact_audio_eof": true,
+        "nonzero_audio_energy": true
+      },
+      "boot_frames": 793,
+      "play_request_frame": 793,
+      "captures": [
+        {
+          "file": "playing-0030.png",
+          "play_frame": 30
+        },
+        {
+          "file": "playing-0120.png",
+          "play_frame": 120
+        },
+        {
+          "file": "playing-0240.png",
+          "play_frame": 240
+        }
+      ],
+      "play_start_frame": 797,
+      "final_telemetry": {
+        "magic": 1297503281,
+        "stage": 3,
+        "error": 0,
+        "frames_shown": 48,
+        "frames_dropped": 43,
+        "cache_reads": 23,
+        "rebuffer_count": 0,
+        "audio_samples_played": 241333,
+        "skipped": 0
+      },
+      "emulated_frames": 1880,
+      "play_frames": 1082,
+      "audio": {
+        "samples": 799975,
+        "rms_left": 2607.35,
+        "rms_right": 2607.35
+      },
+      "wall_seconds": 1.907,
+      "audio_timing": {
+        "frame_indices_zero_based": true,
+        "nonzero_threshold_int16": 1,
+        "emulator_fps": 59.92274340431231,
+        "output_sample_rate_hz": 44100.0,
+        "first_nonzero_frame": 954,
+        "last_nonzero_frame": 1849,
+        "first_nonzero_output_sample": 118614,
+        "last_nonzero_output_sample": 777665,
+        "frames_with_nonzero_audio": 896,
+        "request_to_first_nonzero_frames": 161,
+        "playback_to_first_nonzero_frames": 157,
+        "request_to_first_nonzero_seconds": 2.68966,
+        "audible_span_frames": 896,
+        "audible_span_seconds": 14.94449,
+        "note": "Audible span covers first through last nonzero output, including any intervening source silence; it does not classify silent gaps or establish continuity."
+      }
+    }
+  },
+  "status": "pass",
+  "native_sources_sha256": {
+    "src/main/video.c": "64982215b87f676b638ec677bf14edc00e85cde8a383f00021a12795f41de514",
+    "src/main/bridge.c": "f26871cc1961c92f84e226b33a38f2a49f7c19fca79d7dc3f4899f9b15318f8a",
+    "src/common/video_format.c": "e53f788fc0c89f550c5301ca3f76d22736ef92a917a6cb24049d281ef8905844",
+    "src/common/video_upload.c": "8ec69c67a5f103a27aecd1a196fc022aab5c71def304c06a855da21dfaef32fa",
+    "src/sub/video_source.c": "1d6848c2b3e1b5f81d450c5614fa45599eccd4581f7ffa8cd84651e8ae0cb52c",
+    "src/sub/video_stream.c": "ba7ad1c00bcb156bbafe753ab60dd11b3d86edad75ee6a80ad55b6d3dd22bee4",
+    "src/sub/kernel.c": "31fc1e155869fd4a7c5b832798d93dc49e0a3e460ac0148c85d634c77719ef00",
+    "include/mcd/protocol.h": "d7c6c431bec71382268a39bbf2e476c3b4c034b0c5d182b2c2186d54ca3d2f7e"
+  }
+}

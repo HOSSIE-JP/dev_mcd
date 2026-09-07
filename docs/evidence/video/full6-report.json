@@ -1,0 +1,59 @@
+{
+  "emulator": "Genesis Plus GX",
+  "hardware_tested": false,
+  "core_commit": "a7985a9c4278ac352f8ca7bb4d3cc6b36e9e3e7d",
+  "disc_sha256": "11b8a7ba543d6bc7b870132ede3641a8e9fd980304668110b95705fa62dbc1c7",
+  "expected": {
+    "frames": 91,
+    "audio_samples": 241333,
+    "video_sha256": "5de175f69d42bbab3ad33c117e3080afce1b509a57bc34a11a53dfc728143b51"
+  },
+  "cases": {
+    "audio_eof": {
+      "status": "pass",
+      "case": "audio_eof",
+      "checks": {
+        "target_completed_without_error": true,
+        "all_video_frames_accounted_for": true,
+        "exact_audio_eof": true,
+        "nonzero_audio_energy": true
+      },
+      "boot_frames": 793,
+      "captures": [
+        {
+          "file": "playing-0030.png",
+          "play_frame": 30
+        },
+        {
+          "file": "playing-0120.png",
+          "play_frame": 120
+        },
+        {
+          "file": "playing-0240.png",
+          "play_frame": 240
+        }
+      ],
+      "play_start_frame": 797,
+      "final_telemetry": {
+        "magic": 1297503281,
+        "stage": 3,
+        "error": 0,
+        "frames_shown": 70,
+        "frames_dropped": 21,
+        "cache_reads": 23,
+        "rebuffer_count": 22,
+        "audio_samples_played": 241333,
+        "skipped": 0
+      },
+      "emulated_frames": 3795,
+      "play_frames": 2997,
+      "audio": {
+        "samples": 2209315,
+        "rms_left": 1568.77,
+        "rms_right": 1568.77
+      },
+      "wall_seconds": 3.126
+    }
+  },
+  "status": "pass"
+}
