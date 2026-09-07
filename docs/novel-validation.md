@@ -68,3 +68,27 @@ Dockerを使わず、LinuxネイティブのGCC 13.3.0 / binutils 2.42でビル�
 BIOSの全バイト列が追跡ファイルに含まれず、BIOSに一致するGitオブジェクトも
 存在しないことを確認した。CIの成果物はディスクとログを個別に列挙しており、
 BIOSやエミュレーターの保存状態は含めない。
+
+## Windows / Linux のチェックアウト検証
+
+実装コミット `bfe8b2bb793caa219fd0266f85398474d73ec85a` の
+[GitHub Actions](https://github.com/HOSSIE-JP/dev_mcd/actions/runs/34082740215)
+で、両環境のセットアップ、メディアサンプル、ノベルサンプル、8件のホストテスト、
+BIOS除外検査がすべて成功した。WindowsはポータブルMSYS2を使用し、
+DockerとWSLは使用していない。
+
+| 環境 | ターゲットコンパイラ | binutils | 結果 |
+|---|---|---|---|
+| Ubuntu 24.04 | m68k-linux-gnu GCC 13.3.0 | 2.42 | PASS |
+| Windows Server 2022 / MSYS2 UCRT64 | m68k-elf GCC 14.2.0 | 2.44 | PASS |
+
+Windowsでは `mcd.cmd build`、`mcd.cmd novel`、`mcd.cmd doctor`、
+`mcd.cmd test` のコマンドランチャーを経由して検証した。
+CIにはBIOSを渡していない。
+
+WindowsのCI成果物をダウンロードし、ローカルのGenesis Plus GXで
+選択1→1の全ルートを追加実行した。254会話、長い台詞とBGMの同時再生、
+エンディングのCD-DA、ロゴへの復帰まで合格し、エラー・アンダーランは0だった。
+[Windows生成ディスクの実行結果](evidence/novel-ep01/windows-route-00.json) に記録した。
+検証したISOのSHA-256は
+`1ecedf2e6066dc1215f4b8276834eb0a337ed829b8e0686f82aeb01fbd09ab06`。
