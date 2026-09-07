@@ -60,3 +60,6 @@ The Japanese glyph subset is derived from JF-Dot-Shinonome16, distributed with
 MD Game Editor. The accompanying efont/Shinonome notice is reproduced in
 `examples/ishinoura_ep01/FONT-LICENSE.txt` (lossless EUC-JP to UTF-8 conversion).
 The full font is not required for normal builds and is not bundled.
+
+## Release toolchains
+Original SDK code is MIT; see LICENSE. Sample audiovisual content and screenshots retain their separate rights. Compiler Release licensing, source correspondence and artifact allowlists are documented in docs/RELEASE-LICENSING.md. GCC runtime exceptions apply only as stated in the upstream license; they do not remove compiler distribution obligations.

@@ -1,0 +1,50 @@
+name: Windows toolchain release
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the verified compiler and matching sources as a Release
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: windows-2022
+    timeout-minutes: 180
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build pinned compiler without firmware
+        shell: powershell
+        run: ./tools/setup.ps1
+      - name: Collect allowlisted binaries and matching sources
+        shell: powershell
+        env:
+          PYTHONUTF8: '1'
+        run: ./.deps/msys64/ucrt64/bin/python.exe tools/package-release.py
+      - name: Verify relocation without MSYS2 on PATH
+        shell: powershell
+        run: ./.deps/msys64/ucrt64/bin/python.exe tools/verify-toolchain-release.py dist/release/dev-mcd-toolchain-win32-x64.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: verified-toolchain-release
+          if-no-files-found: error
+          path: |
+            dist/release/dev-mcd-toolchain-win32-x64.zip
+            dist/release/dev-mcd-toolchain-sources.zip
+            dist/release/dev-mcd-toolchain-release.json
+      - name: Publish binary and corresponding source together
+        if: inputs.publish
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh release create mcd-toolchain-gcc14.2.0-binutils2.44-v1
+          --target $env:GITHUB_SHA
+          --title "Windows M68000 toolchain: GCC 14.2.0 / Binutils 2.44"
+          --notes-file docs/TOOLCHAIN-RELEASE.md
+          dist/release/dev-mcd-toolchain-win32-x64.zip
+          dist/release/dev-mcd-toolchain-sources.zip
+          dist/release/dev-mcd-toolchain-release.json
