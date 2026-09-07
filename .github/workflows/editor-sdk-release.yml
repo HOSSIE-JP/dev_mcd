@@ -1,0 +1,21 @@
+name: Editor SDK release
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  package:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Package allowlisted SDK sources and video converters
+        run: python3 tools/package-editor-sdk.py
+      - name: Publish editor SDK
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh release create mcd-editor-sdk-v1 --target "$GITHUB_SHA"
+          --title "MD Game Editor SDK v1"
+          --notes "Editor SDK sources and video converter scripts. No game media, BIOS or emulator. Runtime dependencies are installed separately; the pinned compiler is supplied by the toolchain Release."
+          dist/editor-sdk-release/dev-mcd-editor-sdk.zip
+          dist/editor-sdk-release/dev-mcd-editor-sdk-release.json

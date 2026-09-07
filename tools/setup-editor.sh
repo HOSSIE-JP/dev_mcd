@@ -12,4 +12,4 @@ python3 -m venv .deps/python
 .deps/python/bin/python3 -m pip install -r tools/requirements-novel.txt
 .deps/python/bin/python3 tools/deps.py
 bash tools/build-toolchain.sh
-PATH="$PWD/.deps/python/bin:$PWD/.deps/toolchain/bin:$PATH" make CROSS=m68k-elf- doctor all host-test
+PATH="$PWD/.deps/python/bin:$PWD/.deps/toolchain/bin:$PATH" make CROSS=m68k-elf- libs build/libmcd_novel.a doctor

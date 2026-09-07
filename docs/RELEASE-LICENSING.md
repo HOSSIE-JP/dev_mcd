@@ -40,3 +40,6 @@ References:
 - https://www.gnu.org/licenses/gpl-3.0.html (section 6)
 - https://www.gnu.org/licenses/gcc-exception-3.1.html
 - https://www.msys2.org/dev/mirrors/
+
+## Editor SDK Release
+The editor SDK archive uses a tracked-file allowlist: original SDK sources, include files, tools, top-level licenses/configuration, and the original examples/ishinoura_ep01/main.c entry point required by the editor builder. Sample data and audiovisual material are excluded. Python/FFmpeg/MSYS2 remain separately installed dependencies; compiler binaries and corresponding source remain in the pinned toolchain Release.
