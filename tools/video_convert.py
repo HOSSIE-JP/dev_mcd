@@ -196,7 +196,35 @@ def video_metadata(metadata):
     return {'stream_index':index,'width':width,'height':height,'total_samples':total,
             'has_audio':any(stream.get('codec_type')=='audio' for stream in streams)}
 
-def convert_video(source, output, profile='medium12', ffmpeg='ffmpeg', ffprobe=None):
+def processing_options(options, metadata):
+    options = options or {}
+    if not isinstance(options, dict): raise ValueError('Video options must be an object')
+    import math
+    def number(key, default, low, high):
+        value = options.get(key, default)
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or not low <= value <= high:
+            raise ValueError('Invalid video option: ' + key)
+        return value
+    duration = metadata['total_samples']/RATE
+    start = number('trimStart', 0, 0, duration)
+    end = number('trimEnd', duration, 0, duration) if options.get('trimEnd') is not None else duration
+    if end-start < 1/RATE: raise ValueError('Empty video trim range')
+    result = dict(trimStart=start, trimEnd=end)
+    for key, default, low, high in [('brightness',0,-1,1),('contrast',1,0,2),('gamma',1,0.1,3),('saturation',1,0,3),('volume',1,0,2)]:
+        result[key] = number(key, default, low, high)
+    result['fit'] = options.get('fit', 'pad')
+    if result['fit'] not in ('pad','crop'): raise ValueError('Invalid video fit')
+    result['mute'] = options.get('mute', False)
+    if not isinstance(result['mute'], bool): raise ValueError('Invalid video mute')
+    crop = options.get('crop') or dict(x=0,y=0,width=metadata['width'],height=metadata['height'])
+    if not isinstance(crop,dict) or any(isinstance(crop.get(k),bool) or not isinstance(crop.get(k),int) for k in ('x','y','width','height')):
+        raise ValueError('Invalid video crop')
+    if crop['x']<0 or crop['y']<0 or crop['width']<1 or crop['height']<1 or crop['x']+crop['width']>metadata['width'] or crop['y']+crop['height']>metadata['height']:
+        raise ValueError('Video crop outside source')
+    result['crop'] = crop
+    return result
+
+def convert_video(source, output, profile='medium12', ffmpeg='ffmpeg', ffprobe=None, options=None):
     _profile(profile);source,output=Path(source),Path(output)
     if not source.is_file():raise ValueError('Video source does not exist: '+str(source))
     if source.resolve()==output.resolve():raise ValueError('Video output must differ from its source')
@@ -213,19 +241,28 @@ def convert_video(source, output, profile='medium12', ffmpeg='ffmpeg', ffprobe=N
         'stream=index,codec_type,duration,width,height:stream_disposition=attached_pic:stream_tags=rotate:stream_side_data=rotation:format=duration',
         '-of','json',str(source.resolve())],capture_output=True,text=True,check=True,shell=False,timeout=30)
     metadata=video_metadata(json.loads(result.stdout))
-    total=metadata['total_samples']
+    edit=processing_options(options, metadata)
+    total=int(round((edit['trimEnd']-edit['trimStart'])*RATE))
     width,height,fn,fd,_=_profile(profile);count=(total*fn+RATE*fd-1)//(RATE*fd)
     # Bound the raw pipe to viewport scale while correcting H40 pixel aspect.
     # FFmpeg autorotates before -vf; precompute fit from those display dimensions.
-    source_w,source_h=metadata['width'],metadata['height']
-    aspect=source_w/source_h*15/14
-    fw=min(width,max(1,round(height*aspect)));fh=min(height,max(1,round(fw/aspect)))
-    vf=f'fps={fn}/{fd},scale={fw}:{fh}:flags=area,pad={width}:{height}:(ow-iw)/2:(oh-ih)/2:black,tpad=stop_mode=clone:stop_duration=1'
+    crop=edit['crop']
+    aspect=crop['width']/crop['height']*15/14
+    if edit['fit']=='pad':
+        fw=min(width,max(1,round(height*aspect)));fh=min(height,max(1,round(fw/aspect)))
+        fit=f'scale={fw}:{fh}:flags=area,pad={width}:{height}:(ow-iw)/2:(oh-ih)/2:black'
+    else:
+        fw=max(width,round(height*aspect));fh=max(height,round(fw/aspect))
+        fit=f'scale={fw}:{fh}:flags=area,crop={width}:{height}'
+    vf=(f"crop={crop['width']}:{crop['height']}:{crop['x']}:{crop['y']}:exact=1,"
+        f"eq=brightness={edit['brightness']}:contrast={edit['contrast']}:gamma={edit['gamma']}:saturation={edit['saturation']},"
+        f'fps={fn}/{fd},{fit},tpad=stop_mode=clone:stop_duration=1')
+    seek=['-ss',str(edit['trimStart'])]
     with tempfile.TemporaryDirectory(prefix='mcd-video-audio-') as temporary, tempfile.TemporaryFile() as errors:
         audio=Path(temporary)/'audio.s16le'
-        if metadata['has_audio']:
-            subprocess.run([exe,'-nostdin','-v','error','-protocol_whitelist','file,pipe','-i',str(source.resolve()),'-map','0:a:0','-vn','-ac','1','-ar',str(RATE),'-t',str(Decimal(total)/RATE),'-f','s16le',str(audio)],check=True,shell=False)
-        process=subprocess.Popen([exe,'-nostdin','-v','error','-protocol_whitelist','file,pipe','-i',str(source.resolve()),'-map','0:'+str(metadata['stream_index']),'-an','-sn','-dn','-vf',vf,'-frames:v',str(count),'-pix_fmt','rgb24','-f','rawvideo','pipe:1'],stdout=subprocess.PIPE,stderr=errors,shell=False)
+        if metadata['has_audio'] and not edit['mute']:
+            subprocess.run([exe,'-nostdin','-v','error','-protocol_whitelist','file,pipe','-i',str(source.resolve()),*seek,'-map','0:a:0','-af',f"volume={edit['volume']}",'-vn','-ac','1','-ar',str(RATE),'-t',str(Decimal(total)/RATE),'-f','s16le',str(audio)],check=True,shell=False)
+        process=subprocess.Popen([exe,'-nostdin','-v','error','-protocol_whitelist','file,pipe','-i',str(source.resolve()),*seek,'-map','0:'+str(metadata['stream_index']),'-an','-sn','-dn','-vf',vf,'-frames:v',str(count),'-pix_fmt','rgb24','-f','rawvideo','pipe:1'],stdout=subprocess.PIPE,stderr=errors,shell=False)
         def frames():
             size=width*height*3
             while True:
@@ -259,9 +296,10 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--source',type=Path);parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--profile',choices=PROFILES,default='medium12');parser.add_argument('--ffmpeg',default='ffmpeg');parser.add_argument('--ffprobe');parser.add_argument('--demo',action='store_true')
+    parser.add_argument('--options',type=Path,help='JSON processing recipe')
     args=parser.parse_args()
     if args.demo==bool(args.source):parser.error('Specify exactly one of --source and --demo')
     try:
-        info=encode_frames(demo_frames(args.profile),args.output,args.profile) if args.demo else convert_video(args.source,args.output,args.profile,args.ffmpeg,args.ffprobe)
+        info=encode_frames(demo_frames(args.profile),args.output,args.profile) if args.demo else convert_video(args.source,args.output,args.profile,args.ffmpeg,args.ffprobe,json.loads(args.options.read_text()) if args.options else None)
     except (ValueError,OSError,subprocess.SubprocessError) as exc:parser.exit(1,str(exc)+'\n')
     print(json.dumps(info,ensure_ascii=False,indent=2))

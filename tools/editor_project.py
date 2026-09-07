@@ -191,7 +191,7 @@ def prepare_project(project, stage):
             if actual != v.get('sha256') or a.get('source') != v['sourcePath']:
                 raise ValueError('Video source/settings hash mismatch: ' + asset_id)
             fingerprint[v['sourcePath']] = actual
-            a['options'] = dict(a.get('options', {}), profile=v.get('profile', 'medium12'))
+            a['options'] = dict(a.get('options', {}), profile=v.get('profile', 'medium12'), processing=v.get('options', {}))
         elif a.get('source'):
             src = source_for(a, binding=False)
         else:
