@@ -1,5 +1,6 @@
 /* Exercise actual bridge C against VDP ports, never an alternative renderer. */
 #include <assert.h>
+#include <stdlib.h>
 #include <string.h>
 #include <mcd/bridge.h>
 #include "bridge_host.h"
@@ -14,7 +15,10 @@ void mcd_test_control(u32 value) {
 }
 void mcd_test_register(u16 value) {
   u16 index = (value >> 8) & 0x1F;
-  assert(index < 24); registers[index] = value & 255;
+  /* Some Windows CRT assert declarations are not marked noreturn. Keep the
+   * invalid path explicitly terminal for GCC's array-bounds analysis. */
+  if (index >= 24) { assert(index < 24); abort(); }
+  registers[index] = value & 255;
   if (index == 15) increment = value & 255;
 }
 void mcd_test_data(u16 value) {
