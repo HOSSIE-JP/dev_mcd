@@ -185,7 +185,7 @@ def convert(source,font,out,ffmpeg='ffmpeg',ffprobe=None):
             if src.suffix.lower()=='.mtv':
                 data=src.read_bytes();validate_video(data)
             else:
-                convert_video(src,video_path,profile=opt.get('profile','medium12'),ffmpeg=ffmpeg,ffprobe=ffprobe)
+                convert_video(src,video_path,profile=opt.get('profile','medium12'),ffmpeg=ffmpeg,ffprobe=ffprobe,options=opt.get('processing'))
                 data=video_path.read_bytes();video_path.unlink()
             rk=7
         else:raise ValueError(f'Unsupported asset type {kind}: {asset_id}')

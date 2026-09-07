@@ -68,7 +68,7 @@ class VideoToolchainTests(unittest.TestCase):
                     novel_convert.convert(source, Path('font.ttf'), Path(temporary) / 'output',
                                           ffmpeg='/ffmpeg path', ffprobe='/probe path')
                 self.assertEqual(convert.call_args.kwargs, {
-                    'profile': 'full6', 'ffmpeg': '/ffmpeg path', 'ffprobe': '/probe path'})
+                    'profile': 'full6', 'ffmpeg': '/ffmpeg path', 'ffprobe': '/probe path', 'options': None})
 
 
 if __name__ == '__main__':
