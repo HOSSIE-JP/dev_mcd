@@ -12,6 +12,7 @@ MSYS2/GNU configureの制約から、チェックアウト先はASCII文字・�
 
 初回はMSYS2の完全更新を実行してからUCRT64のネイティブC/C++コンパイラと開発ライブラリを導入し、
 M68000向けGCC 14.2.0 / binutils 2.44をソースから構築します。
+動画サンプル・動画変換・エディター連携のためUCRT64版PythonとNumPy/Pillowも導入します。
 ホスト側の構築はGNU C11 / GNU C++11を指定し、ホストコンパイラの既定値に依存させません。
 GCC 14のlibcodyは構成チェックでC++11を要求するため、C++17/20への変更は避けてください。
 GNUソースへの参照は相対パス、Windows上のインストール先は`cygpath -m`で指定します。
@@ -72,9 +73,17 @@ Genesis Plus GX / RetroArchでは、手元の日本版BIOSをシステムディ�
 
 ## ビルド内容
 
-画像・フォント・ADPCM・CD-DAはPython標準ライブラリで生成します。
+基本のメディアデモの画像・フォント・ADPCM・CD-DAはPython標準ライブラリで生成します。
+動画サンプル・動画変換・ノベル取り込みとホスト回帰にはNumPy/Pillowが必要です。
+Linuxの準備は[README](../README.md#linux)を参照してください。
+元動画を取り込む場合はFFmpeg/ffprobeも別途配置してください。
+現在の動画サービスはIPC ABI`0102`です。Main/Subを同じチェックアウトから両方再ビルドしてください。
+Subの192KiB×2先読み、Word RAMの62KiB×2窓、立ち絵64KiBの一時退避を組み合わせます。
+退避先はSub PRGの`0x70000..0x7DFFF`（56KiB）と`0xE000..0xFFFF`（8KiB）です。
 ISO9660もリポジトリ内のツールで生成するため、Java・SGDK・mkisofsは不要です。
-配布するのは`dist`内のCUE / ISO / WAVの3点です。BIOSや`.local`は配布しません。
+配布するのは対象サンプルのCUEと、CUEが参照するISO・WAV全てです。
+動画デモはCUE＋ISO、基本のメディアデモはCUE＋ISO＋WAVとなり、ノベルは使用曲数で変わります。
+BIOSや`.local`は配布しません。[サンプル一覧](../README.md#サンプルとライブラリの入口)を参照してください。
 
 確認対象を増やす際も、GitHub ActionsへBIOSをコミット・アップロードしないでください。
 CIは新しい環境でのビルドと、BIOSなしのホストテストを担当します。

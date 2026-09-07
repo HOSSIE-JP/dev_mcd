@@ -18,15 +18,17 @@ DEFS = -imacros build.def.h -DTARGET=MEGACD -DREGION=$(REGION) -DVIDEO=NTSC \
  -DHEADER_REGION='J' -DHEADER_DISC_ID='SEGADISCSYSTEM' \
  -DHEADER_SYS_ID='MCDK' -DHEADER_VOL_ID='MCDK'
 INCS = -Iinclude -I$(MEGADEV)/lib -Ibuild
-CFLAGS = -std=gnu11 -O2 -m68000 -ffreestanding -fno-builtin -fno-pic -fno-pie \
+# GCC 13 can merge adjacent byte flags into an odd-address word store on
+# M68000. Disable that optimization; the target has no unaligned word access.
+CFLAGS = -std=gnu11 -O2 -m68000 -fno-store-merging -ffreestanding -fno-builtin -fno-pic -fno-pie \
  -fno-common -fomit-frame-pointer -fno-asynchronous-unwind-tables -fno-unwind-tables \
  -Wall -Wextra -Wno-main -MMD -MP -Wa,--register-prefix-optional $(INCS) $(DEFS)
 ASFLAGS = $(CFLAGS) -Wa,--bitwise-or -Wa,-Ibuild -x assembler-with-cpp
 MAIN_OBJS = build/main_init.o build/main_layout.o build/main_bridge.o build/main_bios.o build/demo.o
 SUB_OBJS = build/sp_header.o build/sp.o build/sub_kernel.o build/sub_ima.o build/sub_bios.o
 .DEFAULT_GOAL := all
--include $(wildcard build/*.d)
-$(MAIN_OBJS) $(SUB_OBJS) build/security.o build/ip.o: Makefile
+-include $(wildcard build/*.d build/*/*.d)
+$(wildcard build/*.o build/*/*.o) $(MAIN_OBJS) $(SUB_OBJS) build/security.o build/ip.o: Makefile
 .PHONY: all clean assets doctor host-test smoke libs
 .DELETE_ON_ERROR:
 all: build/disc/IPX.MMD build/boot.bin build/assets.stamp
@@ -62,9 +64,9 @@ build/main_bios.o: src/main/bios_calls.s | build
 	$(CC68) $(ASFLAGS) -c $< -o $@
 build/demo.o: examples/media_demo/main.c include/mcd/bridge.h include/mcd/protocol.h | build
 	$(CC68) $(CFLAGS) -c $< -o $@
-build/libmcd_main.a: build/main_bridge.o build/main_bios.o build/arithmetic.o
+build/libmcd_main.a: build/main_bridge.o build/main_bios.o build/arithmetic.o build/main_video.o build/video_format.o build/video_upload.o
 	$(AR68) rcs $@ $^
-build/libmcd_sub.a: build/sub_kernel.o build/sub_ima.o build/sub_bios.o build/sub_stream.o build/arithmetic.o
+build/libmcd_sub.a: build/sub_kernel.o build/sub_ima.o build/sub_bios.o build/sub_stream.o build/sub_video_stream.o build/sub_video_source.o build/arithmetic.o
 	$(AR68) rcs $@ $^
 libs: build/libmcd_main.a build/libmcd_sub.a
 build/disc/IPX.MMD: build/main_init.o build/main_layout.o build/demo.o build/libmcd_main.a
@@ -86,7 +88,7 @@ build/arithmetic.o: src/arithmetic.c | build
 build/sub_bios.o: src/sub/bios_calls.s | build
 	$(CC68) $(ASFLAGS) -c $< -o $@
 build/sp.bin: build/sp_header.o build/sp.o build/libmcd_sub.a
-	$(LD68) $(LDFLAGS) -T $(MEGADEV)/cfg/sp.ld -Map build/sub.map $^ -o build/sub.elf
+	$(LD68) $(LDFLAGS) --defsym=SP_LENGTH=0x6000 -T $(MEGADEV)/cfg/sp.ld -Map build/sub.map $^ -o build/sub.elf
 	$(NM68) -n build/sub.elf > build/sub.sym
 	$(OBJCOPY) -O binary build/sub.elf $@
 build/security.o: $(MEGADEV)/lib/security.c | build
@@ -108,3 +110,45 @@ smoke: all
 	$(PYTHON) tools/smoke.py --bios "$(BIOS)"
 clean:
 	rm -rf build dist
+
+# Video format/upload core follows the 2026-09-07 MTV1 study.
+.PHONY: video-core bridge
+video-core: build/libmcd_video_core.a
+build/libmcd_video_core.a: build/video_format.o build/video_upload.o
+	$(AR68) rcs $@ $^
+build/video_format.o: src/common/video_format.c include/mcd/video_format.h | build
+	$(CC68) $(CFLAGS) -c $< -o $@
+build/video_upload.o: src/common/video_upload.c include/mcd/video_upload.h | build
+	$(CC68) $(CFLAGS) -c $< -o $@
+build/main_video.o: src/main/video.c include/mcd/video.h include/mcd/video_format.h include/mcd/video_upload.h | build
+	$(CC68) $(CFLAGS) -c $< -o $@
+build/sub_video_stream.o: src/sub/video_stream.c include/mcd/video_stream.h | build
+	$(CC68) $(CFLAGS) -c $< -o $@
+build/sub_video_source.o: src/sub/video_source.c include/mcd/video_source.h | build
+	$(CC68) $(CFLAGS) -c $< -o $@
+build/sub_kernel.o: include/mcd/video_stream.h include/mcd/video_source.h include/mcd/stream.h
+bridge: build/bridge/IPX.MMD build/boot.bin build/assets.stamp
+	$(PYTHON) examples/bridge_demo/disc.py
+build/bridge:
+	mkdir -p build/bridge
+build/bridge/main.o: examples/bridge_demo/main.c include/mcd/bridge.h | build/bridge
+	$(CC68) $(CFLAGS) -c $< -o $@
+build/bridge/IPX.MMD: build/main_init.o build/main_layout.o build/bridge/main.o build/libmcd_main.a
+	$(LD68) $(LDFLAGS) -T $(MEGADEV)/cfg/module_mmd.ld -Map build/bridge/main.map $^ -o build/bridge/main.elf
+	$(NM68) -n build/bridge/main.elf > build/bridge/main.sym
+	$(OBJCOPY) -O binary build/bridge/main.elf $@
+
+.PHONY: video video-data
+VIDEO_PROFILE ?= medium12
+video-data:
+	$(PYTHON) examples/video_demo/prepare.py --profile $(VIDEO_PROFILE)
+build/video/video_demo_config.h:
+	$(PYTHON) examples/video_demo/prepare.py --profile $(VIDEO_PROFILE)
+build/video/main.o: examples/video_demo/main.c build/video/video_demo_config.h include/mcd/video.h | build
+	$(CC68) $(CFLAGS) -include build/video/video_demo_config.h -c $< -o $@
+build/video/IPX.MMD: build/main_init.o build/main_layout.o build/video/main.o build/libmcd_main.a
+	$(LD68) $(LDFLAGS) -T $(MEGADEV)/cfg/module_mmd.ld -Map build/video/main.map $^ -o build/video/main.elf
+	$(NM68) -n build/video/main.elf > build/video/main.sym
+	$(OBJCOPY) -O binary build/video/main.elf $@
+video: build/video/IPX.MMD build/boot.bin
+	$(PYTHON) examples/video_demo/disc.py

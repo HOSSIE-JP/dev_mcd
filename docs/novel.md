@@ -2,13 +2,14 @@
 
 MD Game Editorのノベルプラグインが生成する `NovelScene` / `NovelCommand`
 モデルを参考に、メガCDのネイティブCD起動用エンジンを実装した。
-エディター本体と元のPCEプロジェクトは変更していない。
-SGDKのROM用実行ファイルをそのまま起動する方式ではない。
+MD Game Editor側のMD／メガCD出力切替との接続は
+[同一ノベルプロジェクトのビルド手順](editor-novel.md)を参照。
+素材と命令をメガCD用に変換し、専用ランタイムで実行する。
 
 ## チェックアウト後の実行
 
 既存の [環境構築手順](setup.md) でポータブルMSYS2またはLinuxネイティブ環境を構築する。
-Docker、WSL、追加のPythonパッケージは通常のビルドには不要。
+セットアップ・ホスト検査にはPillowとNumPyを使う。既存第1話のデータは収録済みなので再変換は不要。
 
 Windowsでは `mcd.cmd novel`、Linuxでは `make novel` を実行する。
 出力は `dist/ishinoura_ep01/`。`ishinoura_ep01.cue` を日本版メガCDに対応した
@@ -47,7 +48,7 @@ CD-DAは第2トラックが `cdda_eye_catch_all`、第3が `cdda_eyecatch`、
 | 元プラグインの機能 | メガCD版 |
 |---|---|
 | background / fade | CDから読み込んだ16色背景、フェード |
-| sprite / spritemove | 立ち絵3スロット、反転、表情、瞬き、口パク、同期・非同期移動 |
+| sprite / spritemove | 立ち絵4スロット、反転、表情、瞬き、口パク、同期・非同期移動 |
 | message | 話者名、文字色、16ドット日本語、19字×4行、改ページ、自動送り |
 | choice / jump | 選択結果の変数、シーン分岐と合流 |
 | label / goto / inputcheck | ラベル解決、入力待ち・非同期入力監視 |
@@ -55,6 +56,7 @@ CD-DAは第2トラックが `cdda_eye_catch_all`、第3が `cdda_eyecatch`、
 | wait / shake | フレーム待機、画面の揺れ |
 | audio / voiceAssetId | CD-DAと、BGM・台詞/SFX用の独立したPCMチャンネル |
 | cache | 変換時にヒントとして受け取り、実行命令はNOP |
+| video | MTV1映像＋16kHzモノラルPCM、EOF／スキップ後にノベル画面へ復帰。実験対応 |
 
 今回の描画プロファイルはPCEの256ピクセル座標を320×224画面の中央へ配置する。
 通常の背景は224×136、全画面画像は256×224。
@@ -63,7 +65,8 @@ CD-DAは第2トラックが `cdda_eye_catch_all`、第3が `cdda_eyecatch`、
 元PCEの12ドットフォントから、MDプラグインにも含まれる東雲16ドットへ変更する。
 このプロファイルを超える素材や未知の命令は変換時にエラーにする。
 任意のMD Game Editorプロジェクトとの完全互換を保証するものではない。
-SRAM保存・バックログ・動画は実装していない。
+SRAM保存・バックログは未実装。動画の形式・音声・読込待ちの制約は
+[動画ライブラリ](video.md)を参照。第1話の元データには動画を追加していない。
 
 ## 音声とメモリー
 
@@ -89,8 +92,12 @@ Main CPUのWord RAMは次のように使う。
 |---|---|
 | `0x00000..0x17FFF` | シナリオと素材インデックス、最大96 KiB |
 | `0x18000..0x1FFFF` | 日本語フォント、最大32 KiB |
-| `0x20000..0x2C2FF` | 立ち絵3個のアニメーションキャッシュ |
+| `0x20000..0x2FFFF` | 立ち絵4個の画素キャッシュ、各16 KiB。メタデータはMain RAM |
 | `0x30000..0x3FFFF` | CD転送用の64 KiB作業領域 |
+
+これは通常のノベル表示時の配置。動画再生中は立ち絵64 KiBをSub PRGへ退避し、
+上位128 KiBを2個の62 KiB読込窓と予約セクタへ切り替える。終了時に立ち絵を元の位置へ復元する。
+詳細と測定結果は[video.md](video.md)を参照。
 
 `MCD_readRangeAsync()` は `NOVEL.PAK` 内のセクター境界から必要な範囲だけ読む。
 丸めた長さ、パックの終端、転送先の容量をSub側でも検査する。
@@ -99,7 +106,7 @@ Word RAMの所有権がSubにある間はMainからキャッシュを読まな�
 
 ## 元データから再変換する
 
-通常のビルドには不要。素材を更新する場合だけ、Python 3.12以上の環境で
+素材を更新する場合は、Python 3.12以上の環境で
 `python -m pip install -r tools/requirements-novel.txt` を実行する。
 元のPCEプロジェクトとMD Game Editorのフォントを手元に置き、次を実行する。
 

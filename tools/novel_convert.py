@@ -10,7 +10,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 from assets import ima_encode, tile_bytes
 
-OPS={k:i for i,k in enumerate(('nop','background','sprite','spritemove','message','audio','wait','jump','inputcheck','spritetext','choice','effect','variable','if','switch','goto'))}
+OPS={k:i for i,k in enumerate(('nop','background','sprite','spritemove','message','audio','wait','jump','inputcheck','spritetext','choice','effect','variable','if','switch','goto','video'))}
 BUTTONS={'up':1,'down':2,'left':4,'right':8,'i':16,'ii':32,'select':64,'run':128}
 NONE=65535
 def mdcolor(rgb):
@@ -92,8 +92,8 @@ def quantize(image,colors=16,palette=None):
 def background(path,full):
     image=Image.open(path).convert('RGB')
     expected=(256,224) if full else (224,136)
-    if image.size!=expected:raise ValueError(f'Background {path.name}: {image.size}, expected {expected}')
-    canvas=Image.new('RGB',(320,224));canvas.paste(image,(32,0) if full else (48,8))
+    if image.size not in (expected,(320,224)):raise ValueError(f'Background {path.name}: {image.size}, expected {expected} or prepared 320x224')
+    canvas=Image.new('RGB',(320,224));canvas.paste(image,(0,0) if image.size==(320,224) else (32,0) if full else (48,8))
     q=quantize(canvas);p=q.getpalette();p+=([0]*(48-len(p)));colors=[mdcolor(p[i*3:i*3+3]) for i in range(16)]
     pixels=np.array(q);tiles=[];indices=[];dedup={}
     for y in range(0,224,8):
@@ -126,13 +126,13 @@ def sprite(path,options,palette,bank):
             delays.append(max(1,int(ds[min(idx,len(ds)-1)])))
     return b'NSPR'+struct.pack('>6H',bank,*delays,(counts[0]<<8)|counts[1])+struct.pack('>16H',*colors)+b''.join(frames)
 
-def convert(source,font,out):
+def convert(source,font,out,ffmpeg='ffmpeg',ffprobe=None):
     scene_doc=json.loads((source/'assets/pce-vn-scenes.json').read_text('utf-8-sig'))
     catalog=json.loads((source/'assets/pce-assets.json').read_text('utf-8-sig'))['assets'];assets={a['id']:a for a in catalog}
     scenes=scene_doc['scenes'];scene_ids={s['id']:i for i,s in enumerate(scenes)}
     commands=[];scene_rows=[];labels=[];refs=set();fullrefs=set();texts=['▶','はじめる']
     for s in scenes:
-        rows=[c for c in s['commands'] if not c.get('skip') and c['type']!='comment'];label={};emitted=[]
+        rows=[c for c in s['commands'] if not any(c.get(k) for k in ('skip','skipped','debugSkip')) and c['type']!='comment'];label={};emitted=[]
         for c in rows:
             if c['type']=='label':label[c['name']]=len(emitted);continue
             if c['type'] not in OPS and c['type']!='cache':raise ValueError('Unsupported command '+c['type'])
@@ -156,7 +156,7 @@ def convert(source,font,out):
     # Shared character palette per group leaves palette 3 exclusively for UI.
     palettes={}
     for bank in (1,2):
-        images=[Image.open(source/a['source']).convert('RGB') for a in sprite_assets if (2 if 'ren' in a['id'] else 1)==bank]
+        images=[Image.open(source/a['source']).convert('RGB') for a in sprite_assets if a.get('mcdPalette',2 if 'ren' in a['id'] else 1)==bank]
         strip=Image.new('RGB',(128,256*max(1,len(images))))
         for i,im in enumerate(images):
             rgb=np.array(im);rgb[np.all(rgb==rgb[0,0],axis=2)]=0;strip.paste(Image.fromarray(rgb),(0,i*256))
@@ -170,7 +170,7 @@ def convert(source,font,out):
         aux=0
         if kind=='image':data=background(src,asset_id in fullrefs);rk=1
         elif kind=='sprite':
-            bank=2 if 'ren' in asset_id else 1;data=sprite(src,opt,palettes[bank],bank);rk=2
+            bank=a.get('mcdPalette',2 if 'ren' in asset_id else 1);data=sprite(src,opt,palettes[bank],bank);rk=2
         elif kind=='adpcm':data=mima(read_wave(src,11025),11025);rk=3
         elif kind in ('psg-song','psg-sfx'):
             rate=8000 if kind=='psg-song' else 16000;data=mima(render_psg(opt,rate),rate);rk=4 if kind=='psg-song' else 6
@@ -179,6 +179,15 @@ def convert(source,font,out):
             track=len(tracks)+2;name=f'track{track:02}.pcmz';(out/'cdda'/name).write_bytes(zlib.compress(pcm,9))
             tracks.append({'assetId':asset_id,'track':track,'file':name,'samples':len(pcm)//4,'sha256':sha(pcm),'loop':bool(opt.get('loop'))})
             data=b'';rk=5;aux=track
+        elif kind=='video':
+            from video_convert import convert_video, validate_video
+            video_path=out/(sha(asset_id.encode())[:16]+'.mtv')
+            if src.suffix.lower()=='.mtv':
+                data=src.read_bytes();validate_video(data)
+            else:
+                convert_video(src,video_path,profile=opt.get('profile','medium12'),ffmpeg=ffmpeg,ffprobe=ffprobe)
+                data=video_path.read_bytes();video_path.unlink()
+            rk=7
         else:raise ValueError(f'Unsupported asset type {kind}: {asset_id}')
         if rk in (3,6) and len(padded(data))>131072:raise ValueError('Voice/SFX capacity exceeded: '+asset_id)
         if rk==4 and len(padded(data))>253952:raise ValueError('BGM capacity exceeded: '+asset_id)
@@ -199,10 +208,21 @@ def convert(source,font,out):
     for index,(si,c) in enumerate(commands):
         typ=c['type'];op=OPS.get(typ,0);flags=slot=x=y=frames=aux=count=data=e1=e2=e3=0;target=-1
         slot=int(c.get('slot',0));x=int(c.get('x',0));y=int(c.get('y',0));frames=int(c.get('frames',0))
-        if slot>2 and typ in ('sprite','spritemove'):raise ValueError('Sample renderer supports actor slots 0..2')
+        if not 0<=slot<=3 and typ in ('sprite','spritemove'):raise ValueError('Renderer supports actor slots 0..3')
         if typ=='background':target=resource_ids[c['assetId']];flags=int(c.get('transition')=='fade')*16;frames=int(c.get('fadeOutFrames',0));aux=int(c.get('fadeInFrames',0))
         elif typ=='sprite':
-            target=resource_ids.get(c.get('assetId'),-1);flags=int(c.get('visible',True))|int(c.get('flipX',False))*2|int(c.get('flipY',False))*4;aux=int(c.get('animationId','default')!='default')
+            target=resource_ids.get(c.get('assetId'),-1);flags=int(c.get('visible',True))|int(c.get('flipX',False))*2|int(c.get('flipY',False))*4
+            if target>=0:
+                animations=assets[c['assetId']].get('options',{}).get('animations',[])
+                requested=c.get('animationId','default')
+                matches=[i for i,a in enumerate(animations) if a.get('id','default')==requested]
+                if not matches:raise ValueError('Unknown sprite animation: '+str(requested))
+                aux=matches[0]
+                if aux>1:raise ValueError('MCD supports two sprite animations')
+        elif typ=='video':
+            if type(c.get('skippable',True)) is not bool:raise ValueError('Video skippable must be Boolean')
+            target=resource_ids[c['assetId']];flags=int(c.get('skippable',True))
+            if assets[c['assetId']]['type']!='video':raise ValueError('Video command requires video asset')
         elif typ=='spritemove':flags=int(c.get('async',False))*8
         elif typ=='message':
             pages=[string(p) for p in paginate(c.get('text',''))];speaker=string(c.get('speaker',''))
@@ -252,4 +272,4 @@ def convert(source,font,out):
     (out/'scenario.json').write_text(json.dumps(scene_doc,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print('Converted',len(scenes),'scenes,',len(commands),'commands,',len(glyphs),'glyphs,',len(payload),'pack bytes',flush=True)
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--source',type=Path,required=True);p.add_argument('--font',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args();convert(a.source,a.font,a.output)
+    p=argparse.ArgumentParser();p.add_argument('--source',type=Path,required=True);p.add_argument('--font',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--ffmpeg',default='ffmpeg');p.add_argument('--ffprobe');a=p.parse_args();convert(a.source,a.font,a.output,a.ffmpeg,a.ffprobe)

@@ -30,6 +30,13 @@ void mcd_stream_stop(u16 c) {
   disable_mask|=1<<c; *PCM_CDISABLE=disable_mask;
   streams[c].playing=false;
 }
+void mcd_stream_reset(void) {
+  mcd_stream_stop(0); mcd_stream_stop(1);
+  for(u16 c=0;c<2;++c) {
+    streams[c].ready=false; streams[c].priming=false;
+  }
+  underruns=0;
+}
 u16 mcd_stream_prepare(u16 c,u32 bytes,bool loop) {
   const u8 *p;Stream *s;
   if(c>1)return MCD_ERR_ARGUMENT;
