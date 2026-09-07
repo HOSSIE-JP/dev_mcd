@@ -1,0 +1,75 @@
+name: Native Mega CD build
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['docs/**', 'README.md', 'AGENTS.md', 'THIRD_PARTY_NOTICES.md']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  linux:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y gcc-m68k-linux-gnu binutils-m68k-linux-gnu
+      - run: bash tools/setup-linux.sh
+      - name: Build the imported novel sample
+        run: make novel
+      - name: Check firmware exclusion
+        run: python3 tools/doctor.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mcd-demo-linux
+          include-hidden-files: true
+          path: |
+            dist/mcd_demo.iso
+            dist/mcd_demo.cue
+            dist/track02.wav
+            dist/ishinoura_ep01/ishinoura_ep01.iso
+            dist/ishinoura_ep01/ishinoura_ep01.cue
+            dist/ishinoura_ep01/track02.wav
+            dist/ishinoura_ep01/track03.wav
+            dist/ishinoura_ep01/track04.wav
+            .deps/logs/doctor.json
+  windows:
+    runs-on: windows-2022
+    timeout-minutes: 120
+    env:
+      MCD_JOBS: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: |
+            .deps/toolchain
+            .deps/downloads
+          key: mcd-win-m68000-${{ hashFiles('tools/build-toolchain.sh', 'toolchain.lock.json') }}
+      - name: Prepare portable MSYS2 and host tools
+        timeout-minutes: 20
+        shell: powershell
+        run: ./tools/setup.ps1 -PrepareOnly
+      - name: Build M68000 cross-compiler and sample
+        timeout-minutes: 90
+        shell: powershell
+        run: ./tools/setup.ps1 -SkipUpdate
+      - name: Verify Windows command launcher
+        shell: cmd
+        run: .\mcd.cmd build && .\mcd.cmd novel && .\mcd.cmd doctor && .\mcd.cmd test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mcd-windows-build-and-logs
+          include-hidden-files: true
+          path: |
+            dist/mcd_demo.iso
+            dist/mcd_demo.cue
+            dist/track02.wav
+            dist/ishinoura_ep01/ishinoura_ep01.iso
+            dist/ishinoura_ep01/ishinoura_ep01.cue
+            dist/ishinoura_ep01/track02.wav
+            dist/ishinoura_ep01/track03.wav
+            dist/ishinoura_ep01/track04.wav
+            .deps/logs/*.log
+            .deps/logs/*.json
+            .deps/logs/msys2-packages.txt

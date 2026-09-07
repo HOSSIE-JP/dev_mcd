@@ -1,0 +1,11 @@
+{
+  "megadev": {
+    "url": "https://github.com/drojaazu/megadev.git",
+    "tag": "v1.2.0",
+    "commit": "7a7246c14b845ad2f1bd3c7d73afb04cf67d83ef"
+  },
+  "genesis-plus-gx": {
+    "url": "https://github.com/libretro/Genesis-Plus-GX.git",
+    "commit": "a7985a9c4278ac352f8ca7bb4d3cc6b36e9e3e7d"
+  }
+}

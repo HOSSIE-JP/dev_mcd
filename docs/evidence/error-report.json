@@ -1,0 +1,65 @@
+{
+  "invalid-adpcm-index": {
+    "core_commit": "a7985a9c4278ac352f8ca7bb4d3cc6b36e9e3e7d",
+    "checks": {
+      "expected_target_error": 4
+    },
+    "disc_sha256": "ed221a9c1fff2bdcf10950068293e05fdf4239dd7525611a221392b86032ad15",
+    "boot_frames": 856,
+    "telemetry": {
+      "magic": 1296254018,
+      "frame": 59,
+      "stage": 65535,
+      "error": 4,
+      "image_ok": 1,
+      "prepared": 0,
+      "flags": 0,
+      "sub_ticks": 0,
+      "event": 0,
+      "completed": 0
+    },
+    "status": "pass"
+  },
+  "missing-image": {
+    "core_commit": "a7985a9c4278ac352f8ca7bb4d3cc6b36e9e3e7d",
+    "checks": {
+      "expected_target_error": 2
+    },
+    "disc_sha256": "db9a14c666282c649e24dd2492f5a92986139b634157f6440473544b508825f4",
+    "boot_frames": 791,
+    "telemetry": {
+      "magic": 1296254018,
+      "frame": 2,
+      "stage": 65535,
+      "error": 2,
+      "image_ok": 0,
+      "prepared": 0,
+      "flags": 0,
+      "sub_ticks": 0,
+      "event": 0,
+      "completed": 0
+    },
+    "status": "pass"
+  },
+  "oversized-image": {
+    "core_commit": "a7985a9c4278ac352f8ca7bb4d3cc6b36e9e3e7d",
+    "checks": {
+      "expected_target_error": 8
+    },
+    "disc_sha256": "29711b7166ca6808391f8ddf9da84debf73b1b84813a507699770a8603e20d47",
+    "boot_frames": 791,
+    "telemetry": {
+      "magic": 1296254018,
+      "frame": 2,
+      "stage": 65535,
+      "error": 8,
+      "image_ok": 0,
+      "prepared": 0,
+      "flags": 0,
+      "sub_ticks": 0,
+      "event": 0,
+      "completed": 0
+    },
+    "status": "pass"
+  }
+}
