@@ -31,6 +31,21 @@ $(MAIN_OBJS) $(SUB_OBJS) build/security.o build/ip.o: Makefile
 .DELETE_ON_ERROR:
 all: build/disc/IPX.MMD build/boot.bin build/assets.stamp
 	$(PYTHON) tools/disc.py
+.PHONY: novel
+novel: build/novel/IPX.MMD build/boot.bin
+	$(PYTHON) tools/novel_disc.py
+build/novel:
+	mkdir -p build/novel
+build/novel/main.o: examples/ishinoura_ep01/main.c include/mcd/novel.h | build/novel
+	$(CC68) $(CFLAGS) -c $< -o $@
+build/novel/engine.o: src/main/novel.c include/mcd/novel.h | build/novel
+	$(CC68) $(CFLAGS) -c $< -o $@
+build/libmcd_novel.a: build/novel/engine.o
+	$(AR68) rcs $@ $^
+build/novel/IPX.MMD: build/main_init.o build/main_layout.o build/novel/main.o build/libmcd_novel.a build/libmcd_main.a
+	$(LD68) $(LDFLAGS) -T $(MEGADEV)/cfg/module_mmd.ld -Map build/novel/main.map $^ -o build/novel/main.elf
+	$(NM68) -n build/novel/main.elf > build/novel/main.sym
+	$(OBJCOPY) -O binary build/novel/main.elf $@
 build:
 	mkdir -p build/disc dist
 build/assets.stamp: tools/assets.py | build
@@ -47,9 +62,9 @@ build/main_bios.o: src/main/bios_calls.s | build
 	$(CC68) $(ASFLAGS) -c $< -o $@
 build/demo.o: examples/media_demo/main.c include/mcd/bridge.h include/mcd/protocol.h | build
 	$(CC68) $(CFLAGS) -c $< -o $@
-build/libmcd_main.a: build/main_bridge.o build/main_bios.o
+build/libmcd_main.a: build/main_bridge.o build/main_bios.o build/arithmetic.o
 	$(AR68) rcs $@ $^
-build/libmcd_sub.a: build/sub_kernel.o build/sub_ima.o build/sub_bios.o
+build/libmcd_sub.a: build/sub_kernel.o build/sub_ima.o build/sub_bios.o build/sub_stream.o build/arithmetic.o
 	$(AR68) rcs $@ $^
 libs: build/libmcd_main.a build/libmcd_sub.a
 build/disc/IPX.MMD: build/main_init.o build/main_layout.o build/demo.o build/libmcd_main.a
@@ -63,6 +78,10 @@ build/sp.o: src/boot/sp.s | build
 build/sub_kernel.o: src/sub/kernel.c include/mcd/protocol.h include/mcd/ima.h | build
 	$(CC68) $(CFLAGS) -c $< -o $@
 build/sub_ima.o: src/sub/ima.c include/mcd/ima.h | build
+	$(CC68) $(CFLAGS) -c $< -o $@
+build/sub_stream.o: src/sub/stream.c include/mcd/stream.h | build
+	$(CC68) $(CFLAGS) -c $< -o $@
+build/arithmetic.o: src/arithmetic.c | build
 	$(CC68) $(CFLAGS) -c $< -o $@
 build/sub_bios.o: src/sub/bios_calls.s | build
 	$(CC68) $(ASFLAGS) -c $< -o $@

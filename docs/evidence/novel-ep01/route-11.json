@@ -1,0 +1,1102 @@
+{
+  "disc_sha256": "742a0a5e384536171823540f2c9c30c9eaf41c1d361b5fe976bf2c90ea6d2843",
+  "route": "1,1",
+  "scenes": [
+    "logo",
+    "title",
+    "ep01_01_openning",
+    "ep01_02_clubroom",
+    "ep01_03_pce",
+    "ep01_03_02_branch",
+    "ep01_04_battle",
+    "ep01_05_round1",
+    "ep01_06_choice",
+    "ep01_06_02_branch",
+    "ep01_07_battle",
+    "ep01_08_wakai",
+    "ep01_09_game_battle",
+    "ep01_10_game_shop",
+    "ep01_10_ending",
+    "eye_catch"
+  ],
+  "messages": [
+    {
+      "scene": "ep01_01_openning",
+      "pc": 2
+    },
+    {
+      "scene": "ep01_01_openning",
+      "pc": 4
+    },
+    {
+      "scene": "ep01_01_openning",
+      "pc": 6
+    },
+    {
+      "scene": "ep01_01_openning",
+      "pc": 7
+    },
+    {
+      "scene": "ep01_01_openning",
+      "pc": 8
+    },
+    {
+      "scene": "ep01_02_clubroom",
+      "pc": 3
+    },
+    {
+      "scene": "ep01_02_clubroom",
+      "pc": 6
+    },
+    {
+      "scene": "ep01_02_clubroom",
+      "pc": 7
+    },
+    {
+      "scene": "ep01_02_clubroom",
+      "pc": 12
+    },
+    {
+      "scene": "ep01_02_clubroom",
+      "pc": 13
+    },
+    {
+      "scene": "ep01_02_clubroom",
+      "pc": 14
+    },
+    {
+      "scene": "ep01_02_clubroom",
+      "pc": 15
+    },
+    {
+      "scene": "ep01_02_clubroom",
+      "pc": 16
+    },
+    {
+      "scene": "ep01_02_clubroom",
+      "pc": 17
+    },
+    {
+      "scene": "ep01_02_clubroom",
+      "pc": 19
+    },
+    {
+      "scene": "ep01_02_clubroom",
+      "pc": 20
+    },
+    {
+      "scene": "ep01_03_02_branch",
+      "pc": 1
+    },
+    {
+      "scene": "ep01_03_02_branch",
+      "pc": 3
+    },
+    {
+      "scene": "ep01_03_02_branch",
+      "pc": 5
+    },
+    {
+      "scene": "ep01_03_02_branch",
+      "pc": 6
+    },
+    {
+      "scene": "ep01_03_02_branch",
+      "pc": 8
+    },
+    {
+      "scene": "ep01_03_02_branch",
+      "pc": 10
+    },
+    {
+      "scene": "ep01_03_02_branch",
+      "pc": 11
+    },
+    {
+      "scene": "ep01_03_02_branch",
+      "pc": 13
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 3
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 4
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 5
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 6
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 7
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 8
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 9
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 10
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 11
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 12
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 13
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 14
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 15
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 19
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 20
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 21
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 22
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 23
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 24
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 25
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 26
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 27
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 31
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 32
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 33
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 34
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 35
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 36
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 37
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 38
+    },
+    {
+      "scene": "ep01_03_pce",
+      "pc": 42
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 6
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 7
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 9
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 11
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 13
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 14
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 15
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 17
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 19
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 21
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 22
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 24
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 26
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 27
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 29
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 31
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 32
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 33
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 34
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 36
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 38
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 39
+    },
+    {
+      "scene": "ep01_04_battle",
+      "pc": 41
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 4
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 6
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 7
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 8
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 9
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 10
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 11
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 12
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 13
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 14
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 15
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 16
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 17
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 18
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 19
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 20
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 21
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 22
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 23
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 24
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 25
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 26
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 27
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 28
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 29
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 30
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 31
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 32
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 33
+    },
+    {
+      "scene": "ep01_05_round1",
+      "pc": 34
+    },
+    {
+      "scene": "ep01_06_02_branch",
+      "pc": 4
+    },
+    {
+      "scene": "ep01_06_02_branch",
+      "pc": 6
+    },
+    {
+      "scene": "ep01_06_02_branch",
+      "pc": 7
+    },
+    {
+      "scene": "ep01_06_02_branch",
+      "pc": 8
+    },
+    {
+      "scene": "ep01_06_02_branch",
+      "pc": 10
+    },
+    {
+      "scene": "ep01_06_02_branch",
+      "pc": 12
+    },
+    {
+      "scene": "ep01_06_02_branch",
+      "pc": 13
+    },
+    {
+      "scene": "ep01_06_02_branch",
+      "pc": 15
+    },
+    {
+      "scene": "ep01_06_02_branch",
+      "pc": 17
+    },
+    {
+      "scene": "ep01_06_02_branch",
+      "pc": 19
+    },
+    {
+      "scene": "ep01_06_02_branch",
+      "pc": 21
+    },
+    {
+      "scene": "ep01_06_02_branch",
+      "pc": 23
+    },
+    {
+      "scene": "ep01_06_02_branch",
+      "pc": 25
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 4
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 5
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 6
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 7
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 9
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 11
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 12
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 13
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 14
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 16
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 17
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 19
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 21
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 23
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 25
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 27
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 29
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 31
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 33
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 34
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 35
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 36
+    },
+    {
+      "scene": "ep01_06_choice",
+      "pc": 37
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 3
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 5
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 7
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 8
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 10
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 11
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 13
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 14
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 16
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 18
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 20
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 22
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 23
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 25
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 26
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 28
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 29
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 30
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 32
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 34
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 35
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 37
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 39
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 41
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 43
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 44
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 46
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 47
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 49
+    },
+    {
+      "scene": "ep01_07_battle",
+      "pc": 50
+    },
+    {
+      "scene": "ep01_08_wakai",
+      "pc": 1
+    },
+    {
+      "scene": "ep01_08_wakai",
+      "pc": 3
+    },
+    {
+      "scene": "ep01_08_wakai",
+      "pc": 4
+    },
+    {
+      "scene": "ep01_08_wakai",
+      "pc": 5
+    },
+    {
+      "scene": "ep01_08_wakai",
+      "pc": 7
+    },
+    {
+      "scene": "ep01_08_wakai",
+      "pc": 9
+    },
+    {
+      "scene": "ep01_08_wakai",
+      "pc": 10
+    },
+    {
+      "scene": "ep01_08_wakai",
+      "pc": 11
+    },
+    {
+      "scene": "ep01_08_wakai",
+      "pc": 12
+    },
+    {
+      "scene": "ep01_08_wakai",
+      "pc": 13
+    },
+    {
+      "scene": "ep01_08_wakai",
+      "pc": 14
+    },
+    {
+      "scene": "ep01_08_wakai",
+      "pc": 16
+    },
+    {
+      "scene": "ep01_08_wakai",
+      "pc": 18
+    },
+    {
+      "scene": "ep01_08_wakai",
+      "pc": 19
+    },
+    {
+      "scene": "ep01_08_wakai",
+      "pc": 20
+    },
+    {
+      "scene": "ep01_08_wakai",
+      "pc": 22
+    },
+    {
+      "scene": "ep01_09_game_battle",
+      "pc": 5
+    },
+    {
+      "scene": "ep01_09_game_battle",
+      "pc": 6
+    },
+    {
+      "scene": "ep01_09_game_battle",
+      "pc": 7
+    },
+    {
+      "scene": "ep01_09_game_battle",
+      "pc": 8
+    },
+    {
+      "scene": "ep01_09_game_battle",
+      "pc": 9
+    },
+    {
+      "scene": "ep01_09_game_battle",
+      "pc": 11
+    },
+    {
+      "scene": "ep01_09_game_battle",
+      "pc": 12
+    },
+    {
+      "scene": "ep01_09_game_battle",
+      "pc": 13
+    },
+    {
+      "scene": "ep01_09_game_battle",
+      "pc": 14
+    },
+    {
+      "scene": "ep01_09_game_battle",
+      "pc": 15
+    },
+    {
+      "scene": "ep01_09_game_battle",
+      "pc": 21
+    },
+    {
+      "scene": "ep01_09_game_battle",
+      "pc": 22
+    },
+    {
+      "scene": "ep01_09_game_battle",
+      "pc": 23
+    },
+    {
+      "scene": "ep01_09_game_battle",
+      "pc": 24
+    },
+    {
+      "scene": "ep01_09_game_battle",
+      "pc": 25
+    },
+    {
+      "scene": "ep01_09_game_battle",
+      "pc": 26
+    },
+    {
+      "scene": "ep01_10_ending",
+      "pc": 5
+    },
+    {
+      "scene": "ep01_10_ending",
+      "pc": 6
+    },
+    {
+      "scene": "ep01_10_ending",
+      "pc": 7
+    },
+    {
+      "scene": "ep01_10_ending",
+      "pc": 8
+    },
+    {
+      "scene": "ep01_10_ending",
+      "pc": 9
+    },
+    {
+      "scene": "ep01_10_ending",
+      "pc": 10
+    },
+    {
+      "scene": "ep01_10_ending",
+      "pc": 11
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 2
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 3
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 4
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 5
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 6
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 7
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 9
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 11
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 12
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 13
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 14
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 16
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 18
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 19
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 23
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 25
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 27
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 29
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 31
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 33
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 35
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 37
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 39
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 41
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 43
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 45
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 47
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 48
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 49
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 51
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 52
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 53
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 54
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 56
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 58
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 59
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 61
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 63
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 65
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 67
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 69
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 73
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 75
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 77
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 78
+    },
+    {
+      "scene": "ep01_10_game_shop",
+      "pc": 80
+    }
+  ],
+  "choices": [
+    {
+      "scene": "ep01_03_pce",
+      "selection": 1
+    },
+    {
+      "scene": "ep01_06_choice",
+      "selection": 1
+    }
+  ],
+  "checks": {
+    "title-cdda": {
+      "samples": 133206,
+      "rms_left": 3775.5,
+      "rms_right": 3697.78
+    },
+    "ending_reached": true
+  },
+  "emulator": "Genesis Plus GX",
+  "hardware_tested": false,
+  "final_telemetry": {
+    "magic": 1314278961,
+    "frame": 61495,
+    "scene": 17,
+    "pc": 3,
+    "mode": 0,
+    "error": 0,
+    "page": 1,
+    "choice": 1,
+    "flags": 84,
+    "io_count": 931,
+    "voice_count": 262,
+    "bgm_count": 6,
+    "branches": 2,
+    "completed": 1,
+    "variable0": 2,
+    "variable1": 2,
+    "resource": 7,
+    "underruns": 0
+  },
+  "frames": 64480,
+  "status": "pass"
+}

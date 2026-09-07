@@ -37,4 +37,10 @@ bool MCD_playCDDA(u16 track, bool repeat);
 bool MCD_stopCDDA(void);
 bool MCD_pauseCDDA(void);
 bool MCD_resumeCDDA(void);
+/* Sector-aligned offsets within NOVEL.PAK. Word destination is in 2 KiB units. */
+bool MCD_readRangeAsync(u32 offset, u32 bytes, u16 destinationSector);
+/* channel 0: resident BGM, channel 1: voice/SFX. MIMA, 4-bit IMA, mono. */
+bool MCD_prepareStreamAsync(u32 offset, u32 bytes, u16 channel, bool loop);
+bool MCD_playStream(u16 channel);
+bool MCD_stopStream(u16 channel);
 #endif

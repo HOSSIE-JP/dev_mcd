@@ -4,6 +4,7 @@
 #include <sub/pcm.h>
 #include <mcd/protocol.h>
 #include <mcd/ima.h>
+#include <mcd/stream.h>
 
 #define CMD ((volatile u16 *)0xFF8010)
 #define STAT ((volatile u16 *)0xFF8020)
@@ -17,6 +18,7 @@ extern const char *filename;
 extern u8 *filebuff;
 extern void mcd_bios_call(u16 op, const void *param);
 extern const u8 *mcd_find_file(const char *name);
+extern void mcd_read_range(u32 sector,u32 count,u8 *destination);
 volatile u16 sub_ticks;
 static const char *const names[] = {"IPX.MMD;1", "IMAGE.MIM;1", "SOUND.IMA;1", "MISSING.DAT;1"};
 static u16 active, flags, result, start_tick, audio_start_tick;
@@ -26,6 +28,8 @@ static MCD_IMAState ima;
 /* 0 idle, 1 reading, 2 decoding, 3 waiting for Main's acknowledgement. */
 static u16 phase;
 static bool returning_word;
+static u32 range_bytes;
+static u16 stream_channel;
 
 static u32 be32(const u8 *p) { return ((u32)p[0]<<24)|((u32)p[1]<<16)|((u32)p[2]<<8)|p[3]; }
 static u16 be16(const u8 *p) { return ((u16)p[0]<<8)|p[1]; }
@@ -38,7 +42,7 @@ static void finish(u16 error)
   STAT[1] = error;
   STAT[2] = loaded >> 16;
   STAT[3] = loaded;
-  STAT[4] = flags;
+  STAT[4] = flags | mcd_stream_flags();
   barrier();
   STAT[0] = active;
   phase = 3;
@@ -88,6 +92,31 @@ static void decode_begin(void)
   phase = 2;
 }
 
+static void begin_range(bool stream)
+{
+  const u8 *info=mcd_find_file("NOVEL.PAK;1");
+  u32 offset=((u32)CMD[2]<<16)|CMD[3],bytes=((u32)CMD[4]<<16)|CMD[5];
+  u32 rounded=(bytes+2047UL)&~2047UL,capacity,destination;
+  u16 option=CMD[1];
+  if(!info) {finish(MCD_ERR_NOT_FOUND);return;}
+  if(!bytes || bytes>0x40000UL || (offset&2047) || offset>be32(info+18) ||
+     rounded>be32(info+18)-offset) {finish(MCD_ERR_SIZE);return;}
+  if(stream) {
+    if(option>3) {finish(MCD_ERR_ARGUMENT);return;}
+    stream_channel=option&1;
+    capacity=mcd_stream_capacity(stream_channel);destination=(u32)mcd_stream_buffer(stream_channel);
+  } else {
+    if(option>=128 || !(MEMMODE&2)) {finish(MCD_ERR_ARGUMENT);return;}
+    destination=0x80000UL+((u32)option<<11);capacity=0x40000UL-((u32)option<<11);
+  }
+  if(rounded>capacity) {finish(MCD_ERR_SIZE);return;}
+  if(flags&(MCD_CDDA_REQUESTED|MCD_CDDA_PAUSED))mcd_bios_call(BIOS_MSC_STOP,0);
+  flags&=~(MCD_CDDA_REQUESTED|MCD_CDDA_PAUSED);
+  if(stream)mcd_stream_stop(stream_channel);
+  range_bytes=bytes;start_tick=sub_ticks;phase=1;
+  mcd_read_range(be32(info+14)+(offset>>11),rounded>>11,(u8 *)destination);
+}
+
 static void pcm_put(u32 pos, u8 value)
 {
   *PCM_CTRL = 0x80 | (pos >> 12);
@@ -129,6 +158,7 @@ void sub_main(void)
   STAT[6] = MCD_ABI_VERSION;
   STAT[7] = MCD_READY_MAGIC;
   for (;;) {
+    mcd_stream_update();
     STAT[5] = sub_ticks;
     if (flags & MCD_AUDIO_PLAYING) {
       u16 pos = ((u16)*(volatile u8 *)0xFF0023 << 8) | *(volatile u8 *)0xFF0021;
@@ -137,16 +167,20 @@ void sub_main(void)
         flags &= ~MCD_AUDIO_PLAYING;
       }
     }
-    STAT[4] = flags;
+    STAT[4] = flags | mcd_stream_flags();
     if (phase == 3) {
       if (!CMD[0]) { STAT[0] = 0; phase = 0; }
       continue;
     }
     if (phase == 1) {
       if (!access_op) {
-        loaded = filesize;
+        loaded = (active==MCD_CMD_READ_RANGE || active==MCD_CMD_PREPARE_STREAM) ? range_bytes : filesize;
         if (access_op_result != CDROM_RESULT_OK) { finish(MCD_ERR_READ); continue; }
-        if (active == MCD_CMD_PREPARE_ADPCM) decode_begin();
+        if (active == MCD_CMD_PREPARE_STREAM) {
+          u16 error=mcd_stream_prepare(stream_channel,loaded,(CMD[1]&2)!=0);
+          if(error)finish(error);else phase=4;
+        }
+        else if (active == MCD_CMD_PREPARE_ADPCM) decode_begin();
         else finish(MCD_OK);
       } else if ((u16)(sub_ticks-start_tick) > 1200) {
         /* Quarantine a hung coroutine. Never return a buffer still being written. */
@@ -156,12 +190,19 @@ void sub_main(void)
       continue;
     }
     if (phase == 2) { decode_chunk(); continue; }
+    if (phase == 4) {if(mcd_stream_ready(stream_channel))finish(MCD_OK);continue;}
     active = CMD[0];
     if (!active || active != CMD[0]) continue;
     loaded = 0;
-    returning_word = active == MCD_CMD_READ;
+    returning_word = active == MCD_CMD_READ || active == MCD_CMD_READ_RANGE;
     switch (active) {
     case MCD_CMD_READ: begin_read(CMD[1], false); break;
+    case MCD_CMD_READ_RANGE: begin_range(false);break;
+    case MCD_CMD_PREPARE_STREAM: begin_range(true);break;
+    case MCD_CMD_PLAY_STREAM: finish(mcd_stream_play(CMD[1]));break;
+    case MCD_CMD_STOP_STREAM:
+      if(CMD[1]>1)finish(MCD_ERR_ARGUMENT);
+      else {mcd_stream_stop(CMD[1]);finish(MCD_OK);}break;
     case MCD_CMD_PREPARE_ADPCM: begin_read(MCD_ASSET_AUDIO, true); break;
     case MCD_CMD_PLAY_ADPCM:
       if (!(flags & MCD_AUDIO_READY)) { finish(MCD_ERR_NOT_READY); break; }
@@ -174,8 +215,8 @@ void sub_main(void)
       *PCM_CDISABLE = 0xFF; flags &= ~MCD_AUDIO_PLAYING;
       finish(MCD_OK); break;
     case MCD_CMD_PLAY_CDDA:
-      if (CMD[1] != 2 || CMD[2] > 1) { finish(MCD_ERR_ARGUMENT); break; }
-      track_number = 2;
+      if (CMD[1] < 2 || CMD[1]>99 || CMD[2] > 1) { finish(MCD_ERR_ARGUMENT); break; }
+      track_number = CMD[1];
       mcd_bios_call(CMD[2] ? BIOS_MSC_PLAYR : BIOS_MSC_PLAY1, &track_number);
       flags = (flags & ~MCD_CDDA_PAUSED) | MCD_CDDA_REQUESTED;
       finish(MCD_OK); break;

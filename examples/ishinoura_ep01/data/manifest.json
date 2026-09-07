@@ -1,0 +1,6302 @@
+{
+  "format": "MCD-NVN-1",
+  "source_repositories": {
+    "md-game-editor": "26f0cda3d9869acd3c44961d89e42e102af6381d",
+    "pce-novel-game-projects": "6e0ff601e7ac2af69ce39677b623781ff01f1e0c"
+  },
+  "title": "いしのうらにいる！？ 第1話 部室の白い箱",
+  "scenes": [
+    {
+      "id": "logo",
+      "index": 0,
+      "commands": 8
+    },
+    {
+      "id": "title",
+      "index": 1,
+      "commands": 14
+    },
+    {
+      "id": "ep01_01_openning",
+      "index": 2,
+      "commands": 10
+    },
+    {
+      "id": "ep01_02_clubroom",
+      "index": 3,
+      "commands": 22
+    },
+    {
+      "id": "ep01_03_pce",
+      "index": 4,
+      "commands": 44
+    },
+    {
+      "id": "ep01_03_01_branch",
+      "index": 5,
+      "commands": 9
+    },
+    {
+      "id": "ep01_03_02_branch",
+      "index": 6,
+      "commands": 15
+    },
+    {
+      "id": "ep01_04_battle",
+      "index": 7,
+      "commands": 43
+    },
+    {
+      "id": "ep01_05_round1",
+      "index": 8,
+      "commands": 36
+    },
+    {
+      "id": "ep01_06_choice",
+      "index": 9,
+      "commands": 39
+    },
+    {
+      "id": "ep01_06_01_branch",
+      "index": 10,
+      "commands": 21
+    },
+    {
+      "id": "ep01_06_02_branch",
+      "index": 11,
+      "commands": 27
+    },
+    {
+      "id": "ep01_07_battle",
+      "index": 12,
+      "commands": 52
+    },
+    {
+      "id": "ep01_08_wakai",
+      "index": 13,
+      "commands": 24
+    },
+    {
+      "id": "ep01_09_game_battle",
+      "index": 14,
+      "commands": 31
+    },
+    {
+      "id": "ep01_10_game_shop",
+      "index": 15,
+      "commands": 82
+    },
+    {
+      "id": "ep01_10_ending",
+      "index": 16,
+      "commands": 14
+    },
+    {
+      "id": "eye_catch",
+      "index": 17,
+      "commands": 10
+    }
+  ],
+  "script_bytes": 35590,
+  "glyphs": 437,
+  "commands": 501,
+  "variables": {
+    "choice1": 0,
+    "choice2": 1
+  },
+  "pack_bytes": 7079936,
+  "pack_sha256": "26b3a350eba675d87476d4d313c02c6435ddfdea9d0bcb40efd9fe98ad55894b",
+  "tracks": [
+    {
+      "assetId": "cdda_eye_catch_all",
+      "track": 2,
+      "file": "track02.pcmz",
+      "samples": 176400,
+      "sha256": "6b215451ba758816340495b22877a688443e7dfc483b477954158e6fc297e5fa",
+      "loop": false
+    },
+    {
+      "assetId": "cdda_eyecatch",
+      "track": 3,
+      "file": "track03.pcmz",
+      "samples": 176400,
+      "sha256": "e664cb45ea98665c190fa2e9b728b3263b7713d38339c48638638cad7c213c83",
+      "loop": false
+    },
+    {
+      "assetId": "cdda_title",
+      "track": 4,
+      "file": "track04.pcmz",
+      "samples": 2269092,
+      "sha256": "9c97bff9ac1fc098c88fbcc7d6c6775ed34f85c0561bf00059122a7421dec924",
+      "loop": true
+    }
+  ],
+  "assets": [
+    {
+      "id": "argument_battle",
+      "kind": "psg-song",
+      "resource": 1,
+      "offset": 131072,
+      "bytes": 128016,
+      "sha256": "3ae699bbdcfa9eee0b9ff22697f27bb978153a551e5ce91473da4c0d78da83c5",
+      "source": "assets/psg/argument_battle.psg.json",
+      "source_sha256": "c56bf68b532c90250c836dbc1d06347984d28f4ad6c52f10dccf3acf245ea849"
+    },
+    {
+      "id": "bg_clubroom_day",
+      "kind": "image",
+      "resource": 2,
+      "offset": 260096,
+      "bytes": 16588,
+      "sha256": "7243226a31a7ee3baeaca27e30d77e317f26e83161fb921c572c483ebc943609",
+      "source": "assets/images/bg_clubroom_day.png",
+      "source_sha256": "ea08b55840af57e45f0c02f4d0e0f990bee96da2df0db39025b63f2889366ceb"
+    },
+    {
+      "id": "bg_clubroom_door",
+      "kind": "image",
+      "resource": 3,
+      "offset": 278528,
+      "bytes": 10412,
+      "sha256": "b2e0440dc4b08a5f2b2abbe951f98264d5cda66780387fa9042c8d20b0fca114",
+      "source": "assets/images/bg_clubroom_door.png",
+      "source_sha256": "60ce67c5bd49e17d49d85814f3c45609c85e5386b002d77a57808ea60e731499"
+    },
+    {
+      "id": "bg_hallway_day",
+      "kind": "image",
+      "resource": 4,
+      "offset": 290816,
+      "bytes": 14828,
+      "sha256": "edf7576f411e9ec2250659defce2cc5af3c7772744b9db3b6fdaa5b99b702148",
+      "source": "assets/images/bg_hallway_day.png",
+      "source_sha256": "e0de15d4be0265b703c91aa29cb740ff85b04f9ff4484a21dc374aa95262fd3f"
+    },
+    {
+      "id": "bg_school_day",
+      "kind": "image",
+      "resource": 5,
+      "offset": 307200,
+      "bytes": 16716,
+      "sha256": "cc085de13aea7f4add9ff97a87f9d13e4fa2f381b4a3123148fd52c0d7dea0d5",
+      "source": "assets/images/bg_clubroom_day_01.png",
+      "source_sha256": "1ade61a3fbebc492f6393989ec7ab33aa94476225bffa7c70b9a7aa201381491"
+    },
+    {
+      "id": "cdda_eye_catch_all",
+      "kind": "cdda-track",
+      "resource": 6,
+      "offset": 325632,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "assets/cdda/cdda_eye_catch_all.wav",
+      "source_sha256": "a6e4809547074f829145bc0d0739b46791add99c47fc68ea9193e970b1928f51"
+    },
+    {
+      "id": "cdda_eyecatch",
+      "kind": "cdda-track",
+      "resource": 7,
+      "offset": 325632,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "assets/cdda/cdda_eyecatch.wav",
+      "source_sha256": "8c071502ec04dd9a466823deefd6f85f31536bfee2920306d650f3788cbfab4f"
+    },
+    {
+      "id": "cdda_title",
+      "kind": "cdda-track",
+      "resource": 8,
+      "offset": 325632,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "assets/cdda/cdda_title.wav",
+      "source_sha256": "182cb6673ee3b67bee89633bfa31e6fed59c0852b60fdf57ac072bca27d28515"
+    },
+    {
+      "id": "classroom_whisper",
+      "kind": "psg-song",
+      "resource": 9,
+      "offset": 325632,
+      "bytes": 118170,
+      "sha256": "cff00f1a343aa83db88ca5ba760d3e1f92e3055f9e681fdcc24cc645e6ec8b4c",
+      "source": "assets/psg/classroom_whisper.psg.json",
+      "source_sha256": "d32b7a9a2aba94c760a34c2fa691cb8838a599103bbfc235548b5395db3da91b"
+    },
+    {
+      "id": "desperate_battle",
+      "kind": "psg-song",
+      "resource": 10,
+      "offset": 444416,
+      "bytes": 102416,
+      "sha256": "2530e1bc1c2bedf39b16338e1e82add2c228c9dcea2ab963b6d8a0b33c98ffd4",
+      "source": "assets/psg/desperate_battle.psg.json",
+      "source_sha256": "21fdd277ca9428a4d531841686eb978e62d76bb1682cf3008a03cf43d66ec587"
+    },
+    {
+      "id": "ep01_001",
+      "kind": "image",
+      "resource": 11,
+      "offset": 548864,
+      "bytes": 17516,
+      "sha256": "c9f31d092f2ac91ac8550fee2b0eba176d0513a1891bce07784747fd9646ad42",
+      "source": "assets/images/ep01_001.png",
+      "source_sha256": "694653a8dfc219c1be5e6da4287b4edb7931c81ab167166893c6cde0a92bfcf8"
+    },
+    {
+      "id": "ep01_002",
+      "kind": "image",
+      "resource": 12,
+      "offset": 567296,
+      "bytes": 17548,
+      "sha256": "a0e813d6e49a9e42387c75eb2c4a115ab09f9502cad16de3df677d855ae6128a",
+      "source": "assets/images/ep01_002.png",
+      "source_sha256": "c3ccacd606f3ac835b0e2c7055b341cbe9b7e1c05ff9f65b813c172cebced2c5"
+    },
+    {
+      "id": "ep01_003",
+      "kind": "image",
+      "resource": 13,
+      "offset": 585728,
+      "bytes": 17260,
+      "sha256": "6c9eee06bb709578660e38cd372fe0c55ecbbc363c4b10038c5a031caf0dfd57",
+      "source": "assets/images/ep01_003.png",
+      "source_sha256": "98f4f75f21dbb5eb8639631f23e3f7f29a293f4b122f6f00d302a7f187a81105"
+    },
+    {
+      "id": "ep01_004",
+      "kind": "image",
+      "resource": 14,
+      "offset": 604160,
+      "bytes": 16972,
+      "sha256": "9caa1e96ebaf26abe88100e332ac995c93e4972f08023d99cfac7b0a7c6f51b6",
+      "source": "assets/images/ep01_004.png",
+      "source_sha256": "8f6c76f423da21fabd43073fbd378a70b43182cce71716afebde7391b7111406"
+    },
+    {
+      "id": "ep01_005",
+      "kind": "image",
+      "resource": 15,
+      "offset": 622592,
+      "bytes": 17132,
+      "sha256": "58578c7af684f199b50bcf96f63c9ec51537310cc947481507464eba8da7dc17",
+      "source": "assets/images/res_battle.png",
+      "source_sha256": "a4a12fa4f54ab13b104a239a6a0965989e945bdba4fe9e5151c933dd34b1860d"
+    },
+    {
+      "id": "eye_catch",
+      "kind": "image",
+      "resource": 16,
+      "offset": 641024,
+      "bytes": 25068,
+      "sha256": "5a551400d1e2248469b51ae9d20bf33fbd0dc5de973ccc68b843b867ccc92474",
+      "source": "assets/images/eye_catch.png",
+      "source_sha256": "8b54a87770e1e749593ae98af52f0c1a7013da748ffe1b779b66866154928cc9"
+    },
+    {
+      "id": "nonki_bukatsu_bgm",
+      "kind": "psg-song",
+      "resource": 17,
+      "offset": 667648,
+      "bytes": 213350,
+      "sha256": "e62dee27b4fdda0d59c93d3796bb0c123ee068229d294c6bd70aba401ffcb3bc",
+      "source": "assets/psg/nonki_bukatsu_bgm.psg.json",
+      "source_sha256": "61dc5bee0fb92fa6e3b8aaa6573878c311e7d89182c38c6a6ffb8632283cc9db"
+    },
+    {
+      "id": "psg_1784890793301",
+      "kind": "psg-sfx",
+      "resource": 18,
+      "offset": 882688,
+      "bytes": 11841,
+      "sha256": "01c62efa386eec12ff44f023a949821bc40891bbf18adfee5625f4dc90768a0e",
+      "source": "",
+      "source_sha256": null
+    },
+    {
+      "id": "psg_1784890911053",
+      "kind": "psg-sfx",
+      "resource": 19,
+      "offset": 894976,
+      "bytes": 11216,
+      "sha256": "b8dbc4b4be537c1d71cf74d3a0b258aa96b051f649f47a420c44cf46c77cd47c",
+      "source": "",
+      "source_sha256": null
+    },
+    {
+      "id": "sp_chika_01",
+      "kind": "sprite",
+      "resource": 20,
+      "offset": 907264,
+      "bytes": 16432,
+      "sha256": "9995bfdaea6e281688ddd1d4774f8973ab46c0443b224c494730304759c1e096",
+      "source": "assets/sprites/sp_chika_01.png",
+      "source_sha256": "73382cc74db638bd178b2b3197ed7a1c46f7064e978e86db199b0a466271fe89"
+    },
+    {
+      "id": "sp_chika_02",
+      "kind": "sprite",
+      "resource": 21,
+      "offset": 925696,
+      "bytes": 16432,
+      "sha256": "cb3aea867d533ede5f3ab2a1eceb5c9b44e55f4313cdf74ec3bf6f58fbc0571a",
+      "source": "assets/sprites/sp_chika_02.png",
+      "source_sha256": "bd9b607680a22b0d491efced485b2c477bd6c3c977e821b45c94fb347643b4f6"
+    },
+    {
+      "id": "sp_chika_03",
+      "kind": "sprite",
+      "resource": 22,
+      "offset": 944128,
+      "bytes": 16432,
+      "sha256": "99c0a0dfda39c75eb014cb12ff36cf5526532144282af749fe22de61f9db4bbf",
+      "source": "assets/sprites/sp_chika_03.png",
+      "source_sha256": "ae3149464110c21f5437e6fe70b236c7634303135b476553ff7cfab44d6f2a3d"
+    },
+    {
+      "id": "sp_chika_04",
+      "kind": "sprite",
+      "resource": 23,
+      "offset": 962560,
+      "bytes": 16432,
+      "sha256": "c0f5dd2138f6cb422f38266b860bd95ea39fa2581c71e003feb75e19a1957cef",
+      "source": "assets/sprites/sp_chika_04.png",
+      "source_sha256": "24a4d690060fdea57b278b2c88608345bb4c85aa8f16d916b0bb0776321f2a8c"
+    },
+    {
+      "id": "sp_chika_05",
+      "kind": "sprite",
+      "resource": 24,
+      "offset": 980992,
+      "bytes": 16432,
+      "sha256": "817a2f03c247d445360b47e8f53d6f962937a87b410690b7cd03a50f5dddf49a",
+      "source": "assets/sprites/sp_chika_05.png",
+      "source_sha256": "684c7bb3160a08e68cc3fed6e77e9b3cd52328ab96b2c7a99b37b9fe1e315d88"
+    },
+    {
+      "id": "sp_chika_06",
+      "kind": "sprite",
+      "resource": 25,
+      "offset": 999424,
+      "bytes": 16432,
+      "sha256": "3b8b65c9cd84943b19dc40e2b6d1e97d801cf755a30a610c05654b9ea9a0f967",
+      "source": "assets/sprites/sp_chika_06.png",
+      "source_sha256": "6db1ebb69e889aefde464ea7b46f6197082aac5d0df3f69ea45632370a141267"
+    },
+    {
+      "id": "sp_mu_01",
+      "kind": "sprite",
+      "resource": 26,
+      "offset": 1017856,
+      "bytes": 16432,
+      "sha256": "5fb83881f49aaff9104a73b8aa74b7d37ffdf93a0a386223154a820bc60c5482",
+      "source": "assets/sprites/sp_mu_01.png",
+      "source_sha256": "0b4a614754fb690f53d113a9bc3a587a68dcd3ae2a2624571768f8f296d695b6"
+    },
+    {
+      "id": "sp_mu_02",
+      "kind": "sprite",
+      "resource": 27,
+      "offset": 1036288,
+      "bytes": 16432,
+      "sha256": "16c47bd515bd3884d31b48e28cc9338bd07a0823191ba2d0fa7753343986c421",
+      "source": "assets/sprites/sp_mu_02.png",
+      "source_sha256": "6106b432cd82222f242a84bad4d489c66a5fa13d6d8397758f824025bef5631f"
+    },
+    {
+      "id": "sp_mu_03",
+      "kind": "sprite",
+      "resource": 28,
+      "offset": 1054720,
+      "bytes": 16432,
+      "sha256": "2b8d001a18a91e97e8bb9a1610d3560355844608452fb93f3bd1b0821b08c93f",
+      "source": "assets/sprites/sp_mu_03.png",
+      "source_sha256": "9837d1cb3e7d13294288c06690baf9517e241e62c3a4a6837457e7bddb432d95"
+    },
+    {
+      "id": "sp_mu_04",
+      "kind": "sprite",
+      "resource": 29,
+      "offset": 1073152,
+      "bytes": 16432,
+      "sha256": "fc9d0cc9932d473387044b836c558e7865c83b76a227fefcc39bde6d7d02e75a",
+      "source": "assets/sprites/sp_mu_04.png",
+      "source_sha256": "374dd3ec3c48dcd4ef3c6286efb6c1ca74b7a9ae5abd2e579cb0ce192116c249"
+    },
+    {
+      "id": "sp_mu_05",
+      "kind": "sprite",
+      "resource": 30,
+      "offset": 1091584,
+      "bytes": 16432,
+      "sha256": "b0520dbb157701b35ab50afdca9708ee46fd6a431319fb1688364da18be754e5",
+      "source": "assets/sprites/sp_mu_05.png",
+      "source_sha256": "7ceadf412d57c3b9f3d731d2411f83ee90a2a113bf8d9efecfcc832ad0fd68f8"
+    },
+    {
+      "id": "sp_mu_06",
+      "kind": "sprite",
+      "resource": 31,
+      "offset": 1110016,
+      "bytes": 16432,
+      "sha256": "e9eaa010cf6e5adf742ccb7216e1f9a96693353a1c9a21d7501de559c6b35ed8",
+      "source": "assets/sprites/sp_mu_06.png",
+      "source_sha256": "7fb93b9bd4a813a58eb332b711ea5aa047fb54ac7b42197076970f94a83ac109"
+    },
+    {
+      "id": "sp_ren_01",
+      "kind": "sprite",
+      "resource": 32,
+      "offset": 1128448,
+      "bytes": 16432,
+      "sha256": "f5e9801145aa3f1840c308a89ac6ab49712a8fe862f3dd0548fcff5b528d236a",
+      "source": "assets/sprites/sp_ren_01.png",
+      "source_sha256": "6250335827a08ff2c5f1c517ba5a52befad15f6a2bdd00b2edd3705b8c9485fc"
+    },
+    {
+      "id": "sp_ren_02",
+      "kind": "sprite",
+      "resource": 33,
+      "offset": 1146880,
+      "bytes": 16432,
+      "sha256": "5d9ac024c8ef8a42ad6d278692b4388c1ecbe73167bf5f22fddc2a9644339b96",
+      "source": "assets/sprites/sp_ren_02.png",
+      "source_sha256": "57166a93f2343b82fa4cb762a40a50d0bc5876561f28583f97d60da4bf9d3427"
+    },
+    {
+      "id": "sp_ren_03",
+      "kind": "sprite",
+      "resource": 34,
+      "offset": 1165312,
+      "bytes": 16432,
+      "sha256": "af62c1fbbc7840ead0cf238b6eb7b77170929eb70e137f6d51f037c3078b1df7",
+      "source": "assets/sprites/sp_ren_03.png",
+      "source_sha256": "4db048c04c16b7f4fef72ae6022aa7686d027a286622cf9f3c66eabc04b88713"
+    },
+    {
+      "id": "sp_ren_04",
+      "kind": "sprite",
+      "resource": 35,
+      "offset": 1183744,
+      "bytes": 16432,
+      "sha256": "857032986c9e4736dbd71bd226588eca4f3a20b008c9f56542192c0af6f88160",
+      "source": "assets/sprites/sp_ren_04.png",
+      "source_sha256": "5d5a18ee713f432121377f6babfd03171a4a2444132fc134bad7f15581f74126"
+    },
+    {
+      "id": "sp_ren_05",
+      "kind": "sprite",
+      "resource": 36,
+      "offset": 1202176,
+      "bytes": 16432,
+      "sha256": "afdf7fd819294cbcdf98b9d8e6486a5cb2cf5e59df103b537df45fd63f0b0273",
+      "source": "assets/sprites/sp_ren_05.png",
+      "source_sha256": "7e2a6a6a8278833eec0252a006ab3786c67758da8a9a78ada0394b1e38a51ac3"
+    },
+    {
+      "id": "sp_ren_06",
+      "kind": "sprite",
+      "resource": 37,
+      "offset": 1220608,
+      "bytes": 16432,
+      "sha256": "9333b1b742a3c8b8d9b680f6829c66daa8d73fa5740df3a8a9fdd85ea7d18385",
+      "source": "assets/sprites/sp_ren_06.png",
+      "source_sha256": "c1b1f4e2dd9f545dd01d5efb848b5dbccd50f55979ae8611bb6cb54b108dbbbd"
+    },
+    {
+      "id": "system_01",
+      "kind": "image",
+      "resource": 38,
+      "offset": 1239040,
+      "bytes": 10348,
+      "sha256": "c068bfe9488145346375b34f86b4459de53e7ee86ff68de2167c847dafd978af",
+      "source": "assets/images/system_01.png",
+      "source_sha256": "4208fb940863d49f35e3ccb70da39b40c9c3ec0e58c13790c7db141e8b6fda29"
+    },
+    {
+      "id": "system_02",
+      "kind": "image",
+      "resource": 39,
+      "offset": 1251328,
+      "bytes": 8876,
+      "sha256": "af7d85ea4263325ccfae5d4d379cc506e48e23b44e6526069baba29f753ed336",
+      "source": "assets/images/system_03.png",
+      "source_sha256": "2ecba7a6fa49905ad1673b7aeb4bf7834e64b6f3bbcac9cb7189afa4989ac04c"
+    },
+    {
+      "id": "title",
+      "kind": "image",
+      "resource": 40,
+      "offset": 1261568,
+      "bytes": 27212,
+      "sha256": "71680f28df903752507a70acf9ef17da594a0a815b467d905d42d235c539a4d3",
+      "source": "assets/images/bg_asset.png",
+      "source_sha256": "e701261096d5046b90c101e786650e6bcab49ce4d2e4c99f677454bc7da64b5c"
+    },
+    {
+      "id": "voice_0001",
+      "kind": "adpcm",
+      "resource": 41,
+      "offset": 1290240,
+      "bytes": 13687,
+      "sha256": "9532c987fdc87ea88cab75ba21d2db52e307479aa8ffeb453bc6c3f304a518af",
+      "source": "assets/adpcm/voice_0001.wav",
+      "source_sha256": "3ddd0f1a56e3ffa434db7222de97c44b3cc3b04ea5811fb64f9772dd4d1e87dc"
+    },
+    {
+      "id": "voice_0002",
+      "kind": "adpcm",
+      "resource": 42,
+      "offset": 1304576,
+      "bytes": 40147,
+      "sha256": "5ff44d777c618b98e3aac35baf4652a4545c8de496cc7ed5f5adf121f8a27886",
+      "source": "assets/adpcm/voice_0002.wav",
+      "source_sha256": "d437b173920960485fb92f0bd8fde4d2c33522e3fde575e4d0cf557d5be4e29a"
+    },
+    {
+      "id": "voice_0003",
+      "kind": "adpcm",
+      "resource": 43,
+      "offset": 1345536,
+      "bytes": 6852,
+      "sha256": "f897402a3d57996f2d25d2baa7c7f3a3ccd08d4af7e14691a07c9ff0ca232069",
+      "source": "assets/adpcm/voice_0003.wav",
+      "source_sha256": "b9e8b293ee8fe612cd9f9355163e867c65afba2e6c7467b57b177b54ccc65b63"
+    },
+    {
+      "id": "voice_0004",
+      "kind": "adpcm",
+      "resource": 44,
+      "offset": 1353728,
+      "bytes": 37060,
+      "sha256": "5718c921b02e7fc1dc50e7dfb4804b3673881cb5c8caa6d2af52ff8f7a6275b8",
+      "source": "assets/adpcm/voice_0004.wav",
+      "source_sha256": "8158fe8ee0f5e15249b10b2c2a566020b958399ef34e9e580a0cd4fcc1fc4d52"
+    },
+    {
+      "id": "voice_0005",
+      "kind": "adpcm",
+      "resource": 45,
+      "offset": 1392640,
+      "bytes": 24933,
+      "sha256": "0882e1ba6479500623e9717681f1aab40641d7dac6f528d77aab47af7140710f",
+      "source": "assets/adpcm/voice_0005.wav",
+      "source_sha256": "52c2c48d853d9d7ab5c3b4cc5c28f0dc417cd4fbfb931772999c0b61d11574c0"
+    },
+    {
+      "id": "voice_0006",
+      "kind": "adpcm",
+      "resource": 46,
+      "offset": 1419264,
+      "bytes": 33753,
+      "sha256": "18ce74b8c75ad4dc9196eb9563b248e13e053c81575b5712ed526954849f8a4c",
+      "source": "assets/adpcm/voice_0006.wav",
+      "source_sha256": "4fae06d7326233c224bb0526229ad1af1c73f1e811df3cff9fdf03061ea08c50"
+    },
+    {
+      "id": "voice_0007",
+      "kind": "adpcm",
+      "resource": 47,
+      "offset": 1454080,
+      "bytes": 24933,
+      "sha256": "3337996dc20bf38df1bd6322060e9bc8970fd7b1f275f8ebdc36a2154784fedd",
+      "source": "assets/adpcm/voice_0007.wav",
+      "source_sha256": "03d6d30a569bd7c568ec231da161f74c437e2e551db5f53df0a10234c8978e5d"
+    },
+    {
+      "id": "voice_0008",
+      "kind": "adpcm",
+      "resource": 48,
+      "offset": 1480704,
+      "bytes": 35958,
+      "sha256": "e5b2f625cdc3bd74b6308d6999419129ac60d4bcd15cc70cfb21cacb334e34d3",
+      "source": "assets/adpcm/voice_0008.wav",
+      "source_sha256": "62abcd33e64c1e20c9baad67a8541645de54de3d735403dd552829127e84942f"
+    },
+    {
+      "id": "voice_0009",
+      "kind": "adpcm",
+      "resource": 49,
+      "offset": 1517568,
+      "bytes": 25815,
+      "sha256": "e6c768b86807ba4f2a652ccc99d9b7c082dabe1f6715026be582444d017b9327",
+      "source": "assets/adpcm/voice_0009.wav",
+      "source_sha256": "8b74acdb05c192a67ebfcfa2706bd5708569c6a9da0b9b173023f049c2338855"
+    },
+    {
+      "id": "voice_0010",
+      "kind": "adpcm",
+      "resource": 50,
+      "offset": 1544192,
+      "bytes": 24933,
+      "sha256": "0869b52329945b22546e6bb3a73003ff9f0c6f6799941786f1446f2289c9ff9c",
+      "source": "assets/adpcm/voice_0010.wav",
+      "source_sha256": "56b062f1649f16531cdb8481180a2982d6637fb8103e6cd944188f684ce302ce"
+    },
+    {
+      "id": "voice_0011",
+      "kind": "adpcm",
+      "resource": 51,
+      "offset": 1570816,
+      "bytes": 22948,
+      "sha256": "2ffae3a1306f38fca174c10fff02eb66b2382de042a55f515e3f0424d09ee49f",
+      "source": "assets/adpcm/voice_0011.wav",
+      "source_sha256": "856b68f722a5628b809e876542fa9c6c24e432a1719dc1b85c3992a9479df0e3"
+    },
+    {
+      "id": "voice_0012",
+      "kind": "adpcm",
+      "resource": 52,
+      "offset": 1595392,
+      "bytes": 22066,
+      "sha256": "2b7487c56927f0e3d519f64eeb0aca4180f547008f084847f215b3f7b5bf0f8d",
+      "source": "assets/adpcm/voice_0012.wav",
+      "source_sha256": "2043d0570abe7a61373d1822415975cf1ee3acef4e121a4fdeef87bc2cb49ef4"
+    },
+    {
+      "id": "voice_0013",
+      "kind": "adpcm",
+      "resource": 53,
+      "offset": 1617920,
+      "bytes": 11703,
+      "sha256": "a31a2e77bf1ffd8e5f3d29c8995f86a4bfdd8e9fbcfe77e5aeb822f823a723e6",
+      "source": "assets/adpcm/voice_0013.wav",
+      "source_sha256": "7208dabb10b9ad32855f7e36c0649a44d1ef43b69478e8f17690f9d1a3434314"
+    },
+    {
+      "id": "voice_0014",
+      "kind": "adpcm",
+      "resource": 54,
+      "offset": 1630208,
+      "bytes": 14569,
+      "sha256": "ffd49a93eafa9e7130d90d0d3084c54e75a4c624b81a976e3e4e38099a5047ca",
+      "source": "assets/adpcm/voice_0014.wav",
+      "source_sha256": "5d180620f344cba1b0baacba9877812dac7acb759b95d44155a8988c6746ecc2"
+    },
+    {
+      "id": "voice_0015",
+      "kind": "adpcm",
+      "resource": 55,
+      "offset": 1646592,
+      "bytes": 35076,
+      "sha256": "f5ef3da7842f8a39f59bcd571bc3414c5489b9a3577a4cdedeed4d80a3b02556",
+      "source": "assets/adpcm/voice_0015.wav",
+      "source_sha256": "46e53a85a8bc984c65db759247ae07fbdc75ca0400920e7105558914393d6a1c"
+    },
+    {
+      "id": "voice_0016",
+      "kind": "adpcm",
+      "resource": 56,
+      "offset": 1683456,
+      "bytes": 29784,
+      "sha256": "2752bab727c80f260c3beab792f3f9151d01f3df8adab5ab04c1a381a11dac44",
+      "source": "assets/adpcm/voice_0016.wav",
+      "source_sha256": "22ee147beecbd05999d8a50c27f7e624144eeb854569b189926029d6e5422b62"
+    },
+    {
+      "id": "voice_0017",
+      "kind": "adpcm",
+      "resource": 57,
+      "offset": 1714176,
+      "bytes": 13026,
+      "sha256": "c18fff76796380200294c1468357d926056ecaa9f2f245047bd22cf8db9a670a",
+      "source": "assets/adpcm/voice_0017.wav",
+      "source_sha256": "f1cbd11dfc1d86c4c29b4de19e1efe8bc1a001f1c173204aa7573c45261a6034"
+    },
+    {
+      "id": "voice_0018",
+      "kind": "adpcm",
+      "resource": 58,
+      "offset": 1728512,
+      "bytes": 17215,
+      "sha256": "695412de5e7301869ff335570ddc6fce4678c4e73f736e28ee75939bfce6bae2",
+      "source": "assets/adpcm/voice_0018.wav",
+      "source_sha256": "3405233be1f17404f10d90d468334f576a6b9c1a7321a4e561f446b15babab78"
+    },
+    {
+      "id": "voice_0019",
+      "kind": "adpcm",
+      "resource": 59,
+      "offset": 1746944,
+      "bytes": 18318,
+      "sha256": "c47b242da9aba7d7c5b11b6c3422bed4206dd39bf5918bcde889503a8264da0a",
+      "source": "assets/adpcm/voice_0019.wav",
+      "source_sha256": "8c037d072c0b45ae9fc4b7c0695dc2002af1670e93d02726dd77e8d7e81530b2"
+    },
+    {
+      "id": "voice_0020",
+      "kind": "adpcm",
+      "resource": 60,
+      "offset": 1765376,
+      "bytes": 25153,
+      "sha256": "57aa893ead3df3aed5f4f3826cc81359ef2c4daf27e611107b324537b1e3561c",
+      "source": "assets/adpcm/voice_0020.wav",
+      "source_sha256": "83f7a7e03895933e2ea91338a7f9cd32417a8b94f35e39571d77f6f2525f9b5d"
+    },
+    {
+      "id": "voice_0021",
+      "kind": "adpcm",
+      "resource": 61,
+      "offset": 1792000,
+      "bytes": 27799,
+      "sha256": "197c32b384de2ba9868e67b98fa6bb513eba8403f4e7eb1b12f652d37e166e8a",
+      "source": "assets/adpcm/voice_0021.wav",
+      "source_sha256": "1b23341cd444f26a14c7137dc469918940f65b7c8e6ce9dfbe40820fc7c12477"
+    },
+    {
+      "id": "voice_0022",
+      "kind": "adpcm",
+      "resource": 62,
+      "offset": 1820672,
+      "bytes": 26476,
+      "sha256": "24863b637dd3b7184b0917776fa3e1890d33a8f291783d5438b6c2fa4726ab93",
+      "source": "assets/adpcm/voice_0022.wav",
+      "source_sha256": "97c4dc9a6b6dff5aa582e8c726336669ca60cd163932c7b4494fdb4879322451"
+    },
+    {
+      "id": "voice_0023",
+      "kind": "adpcm",
+      "resource": 63,
+      "offset": 1847296,
+      "bytes": 29784,
+      "sha256": "363963d18120d62e9fb6b89201d5e1c246d01e4ab1bd7ce4a5b7127b1abaffa3",
+      "source": "assets/adpcm/voice_0023.wav",
+      "source_sha256": "75dc6e7a763318d9857471e7ac42051ab6b234b47178590aeb163645bcfc2c14"
+    },
+    {
+      "id": "voice_0024",
+      "kind": "adpcm",
+      "resource": 64,
+      "offset": 1878016,
+      "bytes": 24492,
+      "sha256": "de4de59ea1e7e02aaf6f02d3ca8e12a35a8215663454b4127abcd056531d7fbf",
+      "source": "assets/adpcm/voice_0024.wav",
+      "source_sha256": "2357f212a5cc675fbf182ff38da557362932c146526ccf088bd30d5576e8f88d"
+    },
+    {
+      "id": "voice_0025",
+      "kind": "adpcm",
+      "resource": 65,
+      "offset": 1902592,
+      "bytes": 23169,
+      "sha256": "8e5520a7547b94ae59a046ff0211fd3970ac6a3abbc10628bfce32b5242a6881",
+      "source": "assets/adpcm/voice_0025.wav",
+      "source_sha256": "f456c6dd0bf959f442173e0fb64857f9a49a1ecf056b937666cbf6d0cc9f62f8"
+    },
+    {
+      "id": "voice_0026",
+      "kind": "adpcm",
+      "resource": 66,
+      "offset": 1927168,
+      "bytes": 13246,
+      "sha256": "7321b298ad8b9bfdbdea48575082f8f4a305f83c16009e33afc91464d1b47c8e",
+      "source": "assets/adpcm/voice_0026.wav",
+      "source_sha256": "ce53997b927787cd788ab759cb0d33ed7be3de02c7a05507767483b59c8d9a3b"
+    },
+    {
+      "id": "voice_0027",
+      "kind": "adpcm",
+      "resource": 67,
+      "offset": 1941504,
+      "bytes": 25153,
+      "sha256": "632effe04fae56be4f3a83dc0ba82fc14def0ef968ae54addfa04d48e10ff1ac",
+      "source": "assets/adpcm/voice_0027.wav",
+      "source_sha256": "f16da6bd2e8447d66320161dd2af82c40f8e63a63e4fec7d20f69f406b299b46"
+    },
+    {
+      "id": "voice_0028",
+      "kind": "adpcm",
+      "resource": 68,
+      "offset": 1968128,
+      "bytes": 43234,
+      "sha256": "ad76eb47ec4102f22b521b2788d57a8bbdd9e71c14cf5de3ac70af185fd3611f",
+      "source": "assets/adpcm/voice_0028.wav",
+      "source_sha256": "f913c9643a2505a6aabe034df2aabc96ab5de75c2ff3f78aacefc75fb21406ac"
+    },
+    {
+      "id": "voice_0029",
+      "kind": "adpcm",
+      "resource": 69,
+      "offset": 2013184,
+      "bytes": 36619,
+      "sha256": "6fc179478c00de8bcc3eacefd16d4c3feeb8086657c3feebc7bebfc78f5f1bb9",
+      "source": "assets/adpcm/voice_0029.wav",
+      "source_sha256": "439237591742a9b64dd630098e83074be3c90ef091a86abbb365c1e724138cb7"
+    },
+    {
+      "id": "voice_0030",
+      "kind": "adpcm",
+      "resource": 70,
+      "offset": 2050048,
+      "bytes": 40588,
+      "sha256": "0124ef5018cee6d59567e640cc7cfbf90aa79c6ecf40d7aafedbf2cdcf71948b",
+      "source": "assets/adpcm/voice_0030.wav",
+      "source_sha256": "9c6e6b9b7973a834bfa134009d0117f8ee48046a52fc1f650d814e0a0ae703b9"
+    },
+    {
+      "id": "voice_0031",
+      "kind": "adpcm",
+      "resource": 71,
+      "offset": 2091008,
+      "bytes": 14790,
+      "sha256": "1cd67ab785e3829e9a6b34832a32eb773b39bafd11c61d723d2e595ebff1b6fe",
+      "source": "assets/adpcm/voice_0031.wav",
+      "source_sha256": "5fb8add8c84c6b3ddc06ce33caeab891fa3e07a7456974439ea02dc7b0dd2ea6"
+    },
+    {
+      "id": "voice_0032",
+      "kind": "adpcm",
+      "resource": 72,
+      "offset": 2107392,
+      "bytes": 26917,
+      "sha256": "5aead51d1e714a4ff918a2d6bb98e7931abb8b90a4e589a61bb59802af04ddbf",
+      "source": "assets/adpcm/voice_0032.wav",
+      "source_sha256": "b2418fc0b83b44758199798a1ac22ae75faf1aaf2ddfc4429f81878e7a8a9988"
+    },
+    {
+      "id": "voice_0033",
+      "kind": "adpcm",
+      "resource": 73,
+      "offset": 2136064,
+      "bytes": 27138,
+      "sha256": "9cd319fd9808439635e862b6f1eadf07df8834b8159d6638aca8b7c251e3e3e2",
+      "source": "assets/adpcm/voice_0033.wav",
+      "source_sha256": "94ded9eee1095fa366bacce0baa82c5bf83122da7cd0bfcc8328e8b3deec2f11"
+    },
+    {
+      "id": "voice_0034",
+      "kind": "adpcm",
+      "resource": 74,
+      "offset": 2164736,
+      "bytes": 20523,
+      "sha256": "c12ed43e84ebf65e04d530ecd220ab01307347b2b992e2291bd97cbfac614c42",
+      "source": "assets/adpcm/voice_0034.wav",
+      "source_sha256": "6822473f03b0f3b5d54855714afe053d9cfd5d6ca082cedd0740416381133aa5"
+    },
+    {
+      "id": "voice_0035",
+      "kind": "adpcm",
+      "resource": 75,
+      "offset": 2187264,
+      "bytes": 23389,
+      "sha256": "028ec24cc020be12791aafced5398833e1b402ffbaf3bbd808cf649f66b55eec",
+      "source": "assets/adpcm/voice_0035.wav",
+      "source_sha256": "fff90d87538c92829331bc1fe127a428467995a26751103bd7c4842cbf8ec942"
+    },
+    {
+      "id": "voice_0036",
+      "kind": "adpcm",
+      "resource": 76,
+      "offset": 2211840,
+      "bytes": 22287,
+      "sha256": "cef2d6790d57fe258d79bdf35507b6c87ad8546a48c61b0becaf22f9a789d8aa",
+      "source": "assets/adpcm/voice_0036.wav",
+      "source_sha256": "befead23c1f0ce5c70202766aab4d939345a6bb89fd3f1468f990ad5a2c8b60d"
+    },
+    {
+      "id": "voice_0037",
+      "kind": "adpcm",
+      "resource": 77,
+      "offset": 2234368,
+      "bytes": 19861,
+      "sha256": "9670c27a68617c3d12b0a28e59b311c612cc2a6af071db6fe808b87507a2e5d2",
+      "source": "assets/adpcm/voice_0037.wav",
+      "source_sha256": "7141ee80c9a63ac84cc5308f73d868a441d1f4683ace2a070365dbfdc24b0e65"
+    },
+    {
+      "id": "voice_0038",
+      "kind": "adpcm",
+      "resource": 78,
+      "offset": 2254848,
+      "bytes": 19200,
+      "sha256": "13ee2043d3f91afed07713026f395e908e56076fc5d811f3fc41c269efdbe8d8",
+      "source": "assets/adpcm/voice_0038.wav",
+      "source_sha256": "0f0ec13c7cb629a55e98af9319f9177677234fe97e8d004723b6eb2072d0abad"
+    },
+    {
+      "id": "voice_0039",
+      "kind": "adpcm",
+      "resource": 79,
+      "offset": 2275328,
+      "bytes": 7293,
+      "sha256": "9675f040086a5f94d33b90ffddac1657e83fbd65322a752d594a4aeef0af190f",
+      "source": "assets/adpcm/voice_0039.wav",
+      "source_sha256": "fc4b0daa44c7394239f0aab1f31c52668842ef511cbad47a8287f8601d5d90bd"
+    },
+    {
+      "id": "voice_0040",
+      "kind": "adpcm",
+      "resource": 80,
+      "offset": 2283520,
+      "bytes": 20523,
+      "sha256": "c20abde9b7ea2537bcc5419c03e0f07a456b772ce4c62efbd1448dc37d6479f5",
+      "source": "assets/adpcm/voice_0040.wav",
+      "source_sha256": "ed72d23359004ce09c117ac6744502a92e9735626d33aaaa1a32fff30a19853d"
+    },
+    {
+      "id": "voice_0041",
+      "kind": "adpcm",
+      "resource": 81,
+      "offset": 2306048,
+      "bytes": 24712,
+      "sha256": "15a7479e7c7b88411d82a88212084b2651e2efcb5b319bf1e0a5d529794b78aa",
+      "source": "assets/adpcm/voice_0041.wav",
+      "source_sha256": "0a7af69583de8862e52dce0f7b96380bcf9841833767662a27ea9be1aa1f2de4"
+    },
+    {
+      "id": "voice_0042",
+      "kind": "adpcm",
+      "resource": 82,
+      "offset": 2332672,
+      "bytes": 27138,
+      "sha256": "1801132e9e2dcc5819b0afef8541187f84b55fd1838f877330a4f97be739f34a",
+      "source": "assets/adpcm/voice_0042.wav",
+      "source_sha256": "a241a30faf6b1fe23bde7056b9bd2640732aa5adcddc57f5d4ed6b4b34ed6431"
+    },
+    {
+      "id": "voice_0043",
+      "kind": "adpcm",
+      "resource": 83,
+      "offset": 2361344,
+      "bytes": 15231,
+      "sha256": "fa5de2856678d7ef7e3ca17442cbed0ddfcc2dbd5cf2eec118d4abef242095c9",
+      "source": "assets/adpcm/voice_0043.wav",
+      "source_sha256": "a158938f5353070d26f8f0390ab17e30d4717a64405102750d1ffa96cca5445e"
+    },
+    {
+      "id": "voice_0044",
+      "kind": "adpcm",
+      "resource": 84,
+      "offset": 2377728,
+      "bytes": 12364,
+      "sha256": "ce65212c2673c4987b61a708d49204b1b547f23317599bb1329b7d6e91a16327",
+      "source": "assets/adpcm/voice_0044.wav",
+      "source_sha256": "599746ebfbd0829662312cba710f3db19001fa385f2c598d7abd5937debd3efe"
+    },
+    {
+      "id": "voice_0045",
+      "kind": "adpcm",
+      "resource": 85,
+      "offset": 2392064,
+      "bytes": 20302,
+      "sha256": "6a1100e33660d1f4164c05bf40c0442bf77495f9058a118ee05ba37c5a7f91d7",
+      "source": "assets/adpcm/voice_0045.wav",
+      "source_sha256": "b801c6498ef1e2505c933f8a8d22dcadf9bbc28d63aba72ab56b32ae804ae1ac"
+    },
+    {
+      "id": "voice_0046",
+      "kind": "adpcm",
+      "resource": 86,
+      "offset": 2412544,
+      "bytes": 34635,
+      "sha256": "204c19f303c5c652508b9909265d182257d211849111c289e2ae71cbdf07ccae",
+      "source": "assets/adpcm/voice_0046.wav",
+      "source_sha256": "69565509ec8ef5a12439279c1490d2b1dd854e90a544bb77d996d171d90e1d50"
+    },
+    {
+      "id": "voice_0047",
+      "kind": "adpcm",
+      "resource": 87,
+      "offset": 2447360,
+      "bytes": 13687,
+      "sha256": "604a959294767c07d5fff33273b975ff60f4431436e60ccf957244d8d5059fb1",
+      "source": "assets/adpcm/voice_0047.wav",
+      "source_sha256": "4ecccdb393a6473f6fb5edca1dd7711385da46cbb18bf18ccac85cdd82c15a63"
+    },
+    {
+      "id": "voice_0048",
+      "kind": "adpcm",
+      "resource": 88,
+      "offset": 2461696,
+      "bytes": 22507,
+      "sha256": "0e18b47584d8a0bc55b166e2f4295c1e4331405263a2156bff01f70eb2fa656d",
+      "source": "assets/adpcm/voice_0048.wav",
+      "source_sha256": "6796eb6a72f136e8f26524aa3c750a22772db5e84719a6030199ade5be414788"
+    },
+    {
+      "id": "voice_0049",
+      "kind": "adpcm",
+      "resource": 89,
+      "offset": 2484224,
+      "bytes": 31768,
+      "sha256": "73f75d8205b0336613a230445897778c0d3f43194caea8c5a3d3759bccd8087c",
+      "source": "assets/adpcm/voice_0049.wav",
+      "source_sha256": "8a28f44ce4ba57897c7005522b88215361947d395d3c46248e27dd2ed5af29b3"
+    },
+    {
+      "id": "voice_0050",
+      "kind": "adpcm",
+      "resource": 90,
+      "offset": 2516992,
+      "bytes": 26476,
+      "sha256": "f7651d1d7bea153182e5a163ed90467e0b04974399f2b91145f014760101a414",
+      "source": "assets/adpcm/voice_0050.wav",
+      "source_sha256": "cf6aa73d2bb5010e463de47ae578e3a4982b404750ae193a3c211f6a9845ead3"
+    },
+    {
+      "id": "voice_0051",
+      "kind": "adpcm",
+      "resource": 91,
+      "offset": 2543616,
+      "bytes": 20082,
+      "sha256": "6eece514906f861dc73c45647a2563d16e90ebb483d38c13a7a69f116c19190a",
+      "source": "assets/adpcm/voice_0051.wav",
+      "source_sha256": "d12f5f4593bb8d977368c3f77c9c6425660be99cac5bfc0ef049d9599b898d60"
+    },
+    {
+      "id": "voice_0052",
+      "kind": "adpcm",
+      "resource": 92,
+      "offset": 2564096,
+      "bytes": 26256,
+      "sha256": "13121b53cc1b91661941c390ef57bdbec7282f9dbcac5108e3cfb87863db1d71",
+      "source": "assets/adpcm/voice_0052.wav",
+      "source_sha256": "a8168f4e1419ca4e40de495ab527730b3290e90a48ff787947d03c3f8f53abf4"
+    },
+    {
+      "id": "voice_0053",
+      "kind": "adpcm",
+      "resource": 93,
+      "offset": 2590720,
+      "bytes": 15010,
+      "sha256": "02e0faf913c07ceefff21d1cca5f73a03ac3442cbc8677b1ba526909d5ec46ec",
+      "source": "assets/adpcm/voice_0053.wav",
+      "source_sha256": "e572d09dc24c7739a2aa3c9d5a7b18167defa195a44a505ef5a1bd61841af493"
+    },
+    {
+      "id": "voice_0054",
+      "kind": "adpcm",
+      "resource": 94,
+      "offset": 2607104,
+      "bytes": 21846,
+      "sha256": "952130b6cc59a44e16027405b4529cd29aa39a77173961a32dda30f74ae9b941",
+      "source": "assets/adpcm/voice_0054.wav",
+      "source_sha256": "ee513f10a6e294d2cee06e92423348db75fb78c8e29c24d2626dcf41c2b605c1"
+    },
+    {
+      "id": "voice_0055",
+      "kind": "adpcm",
+      "resource": 95,
+      "offset": 2629632,
+      "bytes": 9277,
+      "sha256": "f2d7eb79941e0aa35b35414df6668ffe79e9bb3f8397092462c2d7c3f5b44edb",
+      "source": "assets/adpcm/voice_0055.wav",
+      "source_sha256": "5ffd410b1217e45cc3d06a37be3b48ca1dd913b6e1f161e1ed6c31f9eeb235ad"
+    },
+    {
+      "id": "voice_0056",
+      "kind": "adpcm",
+      "resource": 96,
+      "offset": 2639872,
+      "bytes": 10380,
+      "sha256": "6c7af6b1bd74b27a949c159b61709b9c1814f63bd5ad17021408b79d8775a763",
+      "source": "assets/adpcm/voice_0056.wav",
+      "source_sha256": "07d065293d31e10460cd1610379c052edb9f4b19cca413680fe0913bd2db023e"
+    },
+    {
+      "id": "voice_0057",
+      "kind": "adpcm",
+      "resource": 97,
+      "offset": 2652160,
+      "bytes": 31768,
+      "sha256": "b0238530124f6606e7204c1c6d325ae8a12aac49ef4af790649b635d6ace6f8f",
+      "source": "assets/adpcm/voice_0057.wav",
+      "source_sha256": "50cd90a3e4c49e16eef1511c523272a340a19280eba4446fbd51f8a1d4c2807b"
+    },
+    {
+      "id": "voice_0058",
+      "kind": "adpcm",
+      "resource": 98,
+      "offset": 2684928,
+      "bytes": 12585,
+      "sha256": "89c0bfa43825d175bd6e52b451aa55d4ead8c7fdf300ea68ee995261a48e2085",
+      "source": "assets/adpcm/voice_0058.wav",
+      "source_sha256": "4596598c40b3d62178891da7f073394931051d5f1cbe0414291da68cd529e39c"
+    },
+    {
+      "id": "voice_0059",
+      "kind": "adpcm",
+      "resource": 99,
+      "offset": 2699264,
+      "bytes": 26256,
+      "sha256": "0b02dcca0d33fcb261f6b23219c350563f9dcf90f929c248b0822417beddc531",
+      "source": "assets/adpcm/voice_0059.wav",
+      "source_sha256": "600644d7c2968f6719737c8776fa9bc7588cead1e1b6accaf1fe9a77689f41ad"
+    },
+    {
+      "id": "voice_0060",
+      "kind": "adpcm",
+      "resource": 100,
+      "offset": 2725888,
+      "bytes": 24271,
+      "sha256": "d311ec69c427277a349e770b678c4ea9543a03fd85b15bb6a0f8ec8aef1a74de",
+      "source": "assets/adpcm/voice_0060.wav",
+      "source_sha256": "247c5a3bb0f4da5361086ab200142bea15be25c53cf0b68ac30fc4a5888cb5fd"
+    },
+    {
+      "id": "voice_0061",
+      "kind": "adpcm",
+      "resource": 101,
+      "offset": 2750464,
+      "bytes": 16995,
+      "sha256": "9ddb57e134b13ea6c7753e542d4524cfc49bf9047ab5eadf70522c9882570194",
+      "source": "assets/adpcm/voice_0061.wav",
+      "source_sha256": "41a6dbddd399774b9a3378b904de2c7a1fbd39ceddc0963da5d5fafc970e63b2"
+    },
+    {
+      "id": "voice_0062",
+      "kind": "adpcm",
+      "resource": 102,
+      "offset": 2768896,
+      "bytes": 23169,
+      "sha256": "f0a5da559b7b6af6bb47588ad2f498126d2580a3a0bee92979ccac3430cd3a19",
+      "source": "assets/adpcm/voice_0062.wav",
+      "source_sha256": "d1a66929e1389291dbc7b901edff8accd9620064675a33a9b355655099681a7f"
+    },
+    {
+      "id": "voice_0063",
+      "kind": "adpcm",
+      "resource": 103,
+      "offset": 2793472,
+      "bytes": 20302,
+      "sha256": "9c3611bc7a9c60a1d17996f6947ca0737e799dfbcc4a3eb434fad1eab9ce692e",
+      "source": "assets/adpcm/voice_0063.wav",
+      "source_sha256": "b2a66eb79d8edefb0570164b18bbf3e5d09257572bd5d944b118f51ccb7fc8a0"
+    },
+    {
+      "id": "voice_0064",
+      "kind": "adpcm",
+      "resource": 104,
+      "offset": 2813952,
+      "bytes": 21625,
+      "sha256": "ca7cb5361c38d66fe2a479aaec83cde6f6c87401f0fbd805d8b7e24c7f68b101",
+      "source": "assets/adpcm/voice_0064.wav",
+      "source_sha256": "660d2152e8d987d5ca3b23a8bb10f2dc400030933c1fea473e3e3220c17c478c"
+    },
+    {
+      "id": "voice_0065",
+      "kind": "adpcm",
+      "resource": 105,
+      "offset": 2836480,
+      "bytes": 25594,
+      "sha256": "e8bb5d65854311f4eac7cee2e39427c95c7f9a7e146f5c54728ee1030e525d3f",
+      "source": "assets/adpcm/voice_0065.wav",
+      "source_sha256": "861d75d142299589094352d2d89088517b762d516a8a4b0c305f4ac7aa1301e2"
+    },
+    {
+      "id": "voice_0066",
+      "kind": "adpcm",
+      "resource": 106,
+      "offset": 2863104,
+      "bytes": 18979,
+      "sha256": "caecffb5be650b2160abcc8d17a93c73b41ad1cd0342ac4c2ee19f726f73eb3d",
+      "source": "assets/adpcm/voice_0066.wav",
+      "source_sha256": "9da638ceb991b2bc8c8adf77031e298f1d94fb0aaf8edaad096c9fdd14015af8"
+    },
+    {
+      "id": "voice_0067",
+      "kind": "adpcm",
+      "resource": 107,
+      "offset": 2883584,
+      "bytes": 16995,
+      "sha256": "ac89d81cbf88d23c4b7185bf90515c2df3462d9d23e919877b5c267df864c003",
+      "source": "assets/adpcm/voice_0067.wav",
+      "source_sha256": "31ef78cc9dff01344e117007e0b3d46a532ea12d82d992666826119337998987"
+    },
+    {
+      "id": "voice_0068",
+      "kind": "adpcm",
+      "resource": 108,
+      "offset": 2902016,
+      "bytes": 25374,
+      "sha256": "00fe09808c152ea46b7c70d22e269a8298c50d6e4a0e463e185550143bd7a161",
+      "source": "assets/adpcm/voice_0068.wav",
+      "source_sha256": "cff277d04e19577a4d18d0bb13484bb6ee41fc21f6afb8b309f9b0cd70eaa69b"
+    },
+    {
+      "id": "voice_0069",
+      "kind": "adpcm",
+      "resource": 109,
+      "offset": 2928640,
+      "bytes": 21625,
+      "sha256": "0fce0e793a80e8f8be914174180f0160f11a495768655fc14a9d6ee19104fc85",
+      "source": "assets/adpcm/voice_0069.wav",
+      "source_sha256": "bbdce4000d553cfda884cfa1ea29fd3e2a8a79a0affe76d6f000be22c017e0dd"
+    },
+    {
+      "id": "voice_0070",
+      "kind": "adpcm",
+      "resource": 110,
+      "offset": 2951168,
+      "bytes": 25815,
+      "sha256": "3c7afe500f0e7cde5bfacc6ae8bf4a4ef5ca282245e2bb5ac4dd22d588b9d59a",
+      "source": "assets/adpcm/voice_0070.wav",
+      "source_sha256": "d8457c5ee9a2df1abccb80c1804633d362eb74c4d4afd3fedbdd88f2f77b6514"
+    },
+    {
+      "id": "voice_0071",
+      "kind": "adpcm",
+      "resource": 111,
+      "offset": 2977792,
+      "bytes": 6852,
+      "sha256": "92f06fb6bee0a91d8b0a8648d3a288ec015b6f12b80603427938a7ec14913405",
+      "source": "assets/adpcm/voice_0071.wav",
+      "source_sha256": "20bf62f77c5d7e262d5588db0fc5dbd7cf4a0acd7ffabba70e1087c804e8622b"
+    },
+    {
+      "id": "voice_0072",
+      "kind": "adpcm",
+      "resource": 112,
+      "offset": 2985984,
+      "bytes": 10159,
+      "sha256": "48eeb2bee34de5b1ec41771a0bf0c98413ecefc3f6cae26f3db0a14b774f23fb",
+      "source": "assets/adpcm/voice_0072.wav",
+      "source_sha256": "be5a78baba71fdee1264f5e3ce80471f313e3a433cd3bf0fed36b9ebf0b3924d"
+    },
+    {
+      "id": "voice_0073",
+      "kind": "adpcm",
+      "resource": 113,
+      "offset": 2996224,
+      "bytes": 17436,
+      "sha256": "2b6ed6d2c68426c77b9fbf79c8100e4057e5c41ad545df331988963c48a04a59",
+      "source": "assets/adpcm/voice_0073.wav",
+      "source_sha256": "4ce3f6eafa22ab40a5a240b26f92c32f03e0fcc5d7c5a7c8c62b51af76bc567b"
+    },
+    {
+      "id": "voice_0074",
+      "kind": "adpcm",
+      "resource": 114,
+      "offset": 3014656,
+      "bytes": 19641,
+      "sha256": "b1fed3c2614050cc2cbf78707130196800c6daf23b9f7b817dc1d28f3660ec56",
+      "source": "assets/adpcm/voice_0074.wav",
+      "source_sha256": "c0d26766bf87eda0d1eb5f2e796b91165707a18da86316e56263cae16ec55bf1"
+    },
+    {
+      "id": "voice_0075",
+      "kind": "adpcm",
+      "resource": 115,
+      "offset": 3035136,
+      "bytes": 32871,
+      "sha256": "917139dccd19aa8dcdfea2c6218078f585d030ce57eeac56e826db81de5b0961",
+      "source": "assets/adpcm/voice_0075.wav",
+      "source_sha256": "0f093673992b6295630397bb770e5c61133bcaf3b23a008c8490077767e92854"
+    },
+    {
+      "id": "voice_0076",
+      "kind": "adpcm",
+      "resource": 116,
+      "offset": 3069952,
+      "bytes": 9277,
+      "sha256": "1f665112ac15d01c2e5440e480a570f6c9f3d0418869499a965de652be5e3e2a",
+      "source": "assets/adpcm/voice_0076.wav",
+      "source_sha256": "d102e7f6efcc027d35158bfeb64fc46097913d117f5e15289667b6766914cf13"
+    },
+    {
+      "id": "voice_0077",
+      "kind": "adpcm",
+      "resource": 117,
+      "offset": 3080192,
+      "bytes": 14349,
+      "sha256": "988bc161c4ae82198ca19aaaab0ea5bb70c7a68fb74b3b00b6d2364bed0efcc3",
+      "source": "assets/adpcm/voice_0077.wav",
+      "source_sha256": "6906c3169a054fd465050908fd2e704c129085856140c88f9a92ec16c3c18e4f"
+    },
+    {
+      "id": "voice_0078",
+      "kind": "adpcm",
+      "resource": 118,
+      "offset": 3096576,
+      "bytes": 21405,
+      "sha256": "ebbc2a378825b2c1dea9c38645d065be326b31d8e4454bcfbf2bf1878505a079",
+      "source": "assets/adpcm/voice_0078.wav",
+      "source_sha256": "28ab1fb727b489e1c1500de75582d9cc084f45a9eb1563b4a7341892e9352363"
+    },
+    {
+      "id": "voice_0079",
+      "kind": "adpcm",
+      "resource": 119,
+      "offset": 3119104,
+      "bytes": 17215,
+      "sha256": "4406027848c17c5d6cb5337b89880e87ea87975056b050687e16a6f9022fc531",
+      "source": "assets/adpcm/voice_0079.wav",
+      "source_sha256": "a33fd1ac258af9502fde0395ca5761754a5b286f4315fceabc44c2cd92617675"
+    },
+    {
+      "id": "voice_0080",
+      "kind": "adpcm",
+      "resource": 120,
+      "offset": 3137536,
+      "bytes": 26256,
+      "sha256": "670aa016fb28b8f6e06eef1c1708def963fb2540dd3103f16e8777c41b32e251",
+      "source": "assets/adpcm/voice_0080.wav",
+      "source_sha256": "be38f2d639a02abddb5d19a80f6dca7579046a06684861100855392beb70d683"
+    },
+    {
+      "id": "voice_0081",
+      "kind": "adpcm",
+      "resource": 121,
+      "offset": 3164160,
+      "bytes": 28461,
+      "sha256": "9e75d4ff58d231da079fb857b08cffcc6824502a45e657d1591eeee8d400c936",
+      "source": "assets/adpcm/voice_0081.wav",
+      "source_sha256": "a54bfd0867521ca3517a1b4e9332a56e8396ac8de0e752c2debc3bf7d996c957"
+    },
+    {
+      "id": "voice_0082",
+      "kind": "adpcm",
+      "resource": 122,
+      "offset": 3192832,
+      "bytes": 17656,
+      "sha256": "39edfec688b45388cbe4a0774975dd25fffe902dd0ac3142f2410e69d01ab7b2",
+      "source": "assets/adpcm/voice_0082.wav",
+      "source_sha256": "4dc114d617013ef70ec7d989889dcbc287c5adea814cd3d5f03e07bb03821f20"
+    },
+    {
+      "id": "voice_0083",
+      "kind": "adpcm",
+      "resource": 123,
+      "offset": 3211264,
+      "bytes": 21405,
+      "sha256": "2c47b2e33ed7b2dc72ea6350bdf58489a977b38f32c093303e6a9b11d64fcf41",
+      "source": "assets/adpcm/voice_0083.wav",
+      "source_sha256": "389fc8416437a726d1c4c2eb4ff6fd5bc8ca5adf45b94cfa176378f740240aee"
+    },
+    {
+      "id": "voice_0084",
+      "kind": "adpcm",
+      "resource": 124,
+      "offset": 3233792,
+      "bytes": 17436,
+      "sha256": "e2e0a175a3907729e79da4165dfe7c84ee7194e7bb7f85ff16588487eb5862b0",
+      "source": "assets/adpcm/voice_0084.wav",
+      "source_sha256": "708239d37dc9321f831588245e43f52e7036d7b1168a78287673b169d4082d01"
+    },
+    {
+      "id": "voice_0085",
+      "kind": "adpcm",
+      "resource": 125,
+      "offset": 3252224,
+      "bytes": 7072,
+      "sha256": "1056ae32f6c0b2505cc2b74fedafcae2c95a9e7fb4bc74d6ea9c4a31ce865752",
+      "source": "assets/adpcm/voice_0085.wav",
+      "source_sha256": "e58d983c8d5dadb16ae2c13b5c685e03c8c55337f06b16f0c0d1da8c1ec62ed8"
+    },
+    {
+      "id": "voice_0086",
+      "kind": "adpcm",
+      "resource": 126,
+      "offset": 3260416,
+      "bytes": 13026,
+      "sha256": "daac961eb7d5335ec3579403a0683f138f5aa892aaf45b0d427f28218bca8072",
+      "source": "assets/adpcm/voice_0086.wav",
+      "source_sha256": "6a41c93770c691e19ba155645e96687017cb23b6aaa9c1ccce228c9967742a23"
+    },
+    {
+      "id": "voice_0087",
+      "kind": "adpcm",
+      "resource": 127,
+      "offset": 3274752,
+      "bytes": 22066,
+      "sha256": "a66825c34bd9759f46114f5cdff2e05365e949339c912d7d45fb963c07c02a65",
+      "source": "assets/adpcm/voice_0087.wav",
+      "source_sha256": "4993bba8ac03a09eb189f26dee4424b1662d6157a546868fceced0f308d20f6d"
+    },
+    {
+      "id": "voice_0088",
+      "kind": "adpcm",
+      "resource": 128,
+      "offset": 3297280,
+      "bytes": 7513,
+      "sha256": "cf7ede08e6e3caa7e0628eeeb61f1afafeaf1b2edaf4352d081407f4915501df",
+      "source": "assets/adpcm/voice_0088.wav",
+      "source_sha256": "7d6e28ecf558ac819767fdde03655d1877d2071642812bb4732cbf2fc4a1e589"
+    },
+    {
+      "id": "voice_0089",
+      "kind": "adpcm",
+      "resource": 129,
+      "offset": 3305472,
+      "bytes": 24712,
+      "sha256": "3c644419bb33cc474ebd583c5e0c01f9de37efc0b94e9f491f62d9ab3bb1a1cd",
+      "source": "assets/adpcm/voice_0089.wav",
+      "source_sha256": "649cc9193c054036c1924a36a56c554944a7375656973bd8241edf992ee05799"
+    },
+    {
+      "id": "voice_0090",
+      "kind": "adpcm",
+      "resource": 130,
+      "offset": 3332096,
+      "bytes": 13026,
+      "sha256": "0e0cdea95f4b08d77990ec2e92994b3a9fa39b73e35487d1f4a339b67c4e8d76",
+      "source": "assets/adpcm/voice_0090.wav",
+      "source_sha256": "532814f6ac0a8cab29c06c2efff08b2c846ae01fb9b21d773b082af1870d8ac8"
+    },
+    {
+      "id": "voice_0091",
+      "kind": "adpcm",
+      "resource": 131,
+      "offset": 3346432,
+      "bytes": 14128,
+      "sha256": "fe62bd4f937f5b596371b190333fdc14b0d394500c3d68aa88567b9cc0eb182c",
+      "source": "assets/adpcm/voice_0091.wav",
+      "source_sha256": "9ff65bd25a38e6956d53e3b3fc3193307175ad48782f7051a102007b1bd5058b"
+    },
+    {
+      "id": "voice_0092",
+      "kind": "adpcm",
+      "resource": 132,
+      "offset": 3360768,
+      "bytes": 13687,
+      "sha256": "e383c6edb46a42c4b3b89653376f0f7c6c73e70ac6069142ad71f70d9c46ea6f",
+      "source": "assets/adpcm/voice_0092.wav",
+      "source_sha256": "6befb914128c33539b0fcb4442ad8332421066e9b18756e6f2c77acd607bf738"
+    },
+    {
+      "id": "voice_0093",
+      "kind": "adpcm",
+      "resource": 133,
+      "offset": 3375104,
+      "bytes": 18538,
+      "sha256": "657ee3bfbc4bfa850e7510efd7e242791fc2b755f0362bd7d82694c8db231093",
+      "source": "assets/adpcm/voice_0093.wav",
+      "source_sha256": "b3e32d1f46ef7f7a7a0e7c5403bbdf742177a16d3261d5b9b95a0c710c3c750a"
+    },
+    {
+      "id": "voice_0094",
+      "kind": "adpcm",
+      "resource": 134,
+      "offset": 3395584,
+      "bytes": 8395,
+      "sha256": "3865f0220d3f3f70d526e99e1a58751467374e654842a5b9bb1635ea2a90ecc8",
+      "source": "assets/adpcm/voice_0094.wav",
+      "source_sha256": "c434b3e0744a41fa1bb5603dfd7f238df8a7cf88f4dc6ccaef961a25ce9dac29"
+    },
+    {
+      "id": "voice_0095",
+      "kind": "adpcm",
+      "resource": 135,
+      "offset": 3405824,
+      "bytes": 18979,
+      "sha256": "5e11cc19d7572d68c4be98f60d40882f47ebfeb525566bfac524f460bec48c3f",
+      "source": "assets/adpcm/voice_0095.wav",
+      "source_sha256": "026ba208bc2822d8659c8fd6e9d8b8626cbf861e68f5c4fa47033143b343197c"
+    },
+    {
+      "id": "voice_0096",
+      "kind": "adpcm",
+      "resource": 136,
+      "offset": 3426304,
+      "bytes": 23830,
+      "sha256": "65e0b1b08bfcc84247e0e56598efa523d86aa9fb35ab77b06da1de4e14025669",
+      "source": "assets/adpcm/voice_0096.wav",
+      "source_sha256": "67d5418965215a5162c139f8bd029fda518d2680229e524d11c167c890b2d724"
+    },
+    {
+      "id": "voice_0097",
+      "kind": "adpcm",
+      "resource": 137,
+      "offset": 3450880,
+      "bytes": 13246,
+      "sha256": "2e8817e801f81de19089b237bbcc70710746369415e9930fbbd012c97112dbd2",
+      "source": "assets/adpcm/voice_0097.wav",
+      "source_sha256": "00adef364f81c932ff0d0e9e197767d58e2b226781112838f0387b687c1dbe29"
+    },
+    {
+      "id": "voice_0098",
+      "kind": "adpcm",
+      "resource": 138,
+      "offset": 3465216,
+      "bytes": 21405,
+      "sha256": "5afcab29bc0005386b6e594cf9247cc5f2eeaca6b0f3b219636b4feeed8fcc43",
+      "source": "assets/adpcm/voice_0098.wav",
+      "source_sha256": "927d6a5a8e5a9ce79212e1c410ba13e1060f40a5a9beee4f09641f1d689b9320"
+    },
+    {
+      "id": "voice_0099",
+      "kind": "adpcm",
+      "resource": 139,
+      "offset": 3487744,
+      "bytes": 9498,
+      "sha256": "fbe26cca9d000c8b770d1c1b989343a6c16cc957b512d571f261fac3893dc82c",
+      "source": "assets/adpcm/voice_0099.wav",
+      "source_sha256": "abcb8cd10916f13aecb64b02f41ac029b3f5f43390ecf1970147c7179efa5cee"
+    },
+    {
+      "id": "voice_0100",
+      "kind": "adpcm",
+      "resource": 140,
+      "offset": 3497984,
+      "bytes": 20964,
+      "sha256": "e70a0f5a94b8b39e8d525a000b5b6852930ba5d4e1924a1b0ea2fb946a236412",
+      "source": "assets/adpcm/voice_0100.wav",
+      "source_sha256": "bfca7f3f5f92d89872d9b7ed2aacbcde7420d02e6c11a5b835c8ec880b93aa29"
+    },
+    {
+      "id": "voice_0101",
+      "kind": "adpcm",
+      "resource": 141,
+      "offset": 3520512,
+      "bytes": 21846,
+      "sha256": "4ae03b8023857429dd734127d0f5e6de8199329c1014ec44307497462ace370b",
+      "source": "assets/adpcm/voice_0101.wav",
+      "source_sha256": "91d810f066e64ac1d4ba4bfab720c6142e8492c3b432613e63f11a57cd999215"
+    },
+    {
+      "id": "voice_0102",
+      "kind": "adpcm",
+      "resource": 142,
+      "offset": 3543040,
+      "bytes": 22287,
+      "sha256": "a19e4992b562ecb305e290394a1e64ef49cf57354ed74b0afe3063692df02618",
+      "source": "assets/adpcm/voice_0102.wav",
+      "source_sha256": "dd5d43e9916dce7794f121eb5381ad45d4845d6cfcf601a17338295f889af8e5"
+    },
+    {
+      "id": "voice_0103",
+      "kind": "adpcm",
+      "resource": 143,
+      "offset": 3565568,
+      "bytes": 37722,
+      "sha256": "e370057c83290d491539fec3e3e2efb91a095fe061c243ab1e6337bf1fa36d3c",
+      "source": "assets/adpcm/voice_0103.wav",
+      "source_sha256": "5a4736e518e4a4968bee41a282e5362a136ec82fb4f4530be13561ac073d4868"
+    },
+    {
+      "id": "voice_0104",
+      "kind": "adpcm",
+      "resource": 144,
+      "offset": 3604480,
+      "bytes": 23389,
+      "sha256": "741a1e3201026e2aadee35419fbe044f9fe4f65d8a1610a6ee403935044834e2",
+      "source": "assets/adpcm/voice_0104.wav",
+      "source_sha256": "94d5ed19df33388e5b67c07dbd07ba1d65ef3b802deabb59551a343febd6c45f"
+    },
+    {
+      "id": "voice_0105",
+      "kind": "adpcm",
+      "resource": 145,
+      "offset": 3629056,
+      "bytes": 16995,
+      "sha256": "0b7d8ea53c0f0fe33d8076b3cc6122d6d25cc2d2b6de8da3a8da4daeae3a3329",
+      "source": "assets/adpcm/voice_0105.wav",
+      "source_sha256": "97c2418ba7dc96471ed1e88d9b2602417a5b6dca8cadade5500d814b6db3ab25"
+    },
+    {
+      "id": "voice_0106",
+      "kind": "adpcm",
+      "resource": 146,
+      "offset": 3647488,
+      "bytes": 24492,
+      "sha256": "9577cf86acb5334eed93a5edf80ffb4b8d79faf5823deb6544950dd86b7f4097",
+      "source": "assets/adpcm/voice_0106.wav",
+      "source_sha256": "d670600261cc2c4307dade4bfbaa45e3a3ffe1c7688bf32e29a97f5419becdb3"
+    },
+    {
+      "id": "voice_0107",
+      "kind": "adpcm",
+      "resource": 147,
+      "offset": 3672064,
+      "bytes": 33312,
+      "sha256": "a6e473c480ddc0c999c270d99b461573d15d662b9dba512d91919af2cef1990b",
+      "source": "assets/adpcm/voice_0107.wav",
+      "source_sha256": "54ddeb346f0d13bede86a4cd2e3b7f1f581c1bfd18f614ad5c26716e5d8df9c6"
+    },
+    {
+      "id": "voice_0108",
+      "kind": "adpcm",
+      "resource": 148,
+      "offset": 3706880,
+      "bytes": 10380,
+      "sha256": "18f7fa2904aaeeff3b817f32e004f284f0d4f2ab9020d4c45429a806baff8947",
+      "source": "assets/adpcm/voice_0108.wav",
+      "source_sha256": "ff83018ea3aeab38795ab5884e308a5ec7a817941960c9829a65dc654f9ff8a3"
+    },
+    {
+      "id": "voice_0109",
+      "kind": "adpcm",
+      "resource": 149,
+      "offset": 3719168,
+      "bytes": 13687,
+      "sha256": "41bbe401a5292d521a2c1c70467649f1798207933b5ab36ef0207033cb0aed4f",
+      "source": "assets/adpcm/voice_0109.wav",
+      "source_sha256": "05ed1e5d3bb6787ce64995b5c58b0510881639cdf441acb804d8e4d62ecc2f31"
+    },
+    {
+      "id": "voice_0110",
+      "kind": "adpcm",
+      "resource": 150,
+      "offset": 3733504,
+      "bytes": 31989,
+      "sha256": "9410bd26e61307ff5bdebc368aac01804a0a7059994b9ff50ce6229277a48739",
+      "source": "assets/adpcm/voice_0110.wav",
+      "source_sha256": "e3c84de8fff27bcb8cf612753ef322391abd892afff1aa282a869328af2fb6c3"
+    },
+    {
+      "id": "voice_0111",
+      "kind": "adpcm",
+      "resource": 151,
+      "offset": 3766272,
+      "bytes": 12144,
+      "sha256": "9e266715813550c2ed8f74b07e7384fef9a01673f8a515361096a850df559079",
+      "source": "assets/adpcm/voice_0111.wav",
+      "source_sha256": "3dd5f85bca74b78d1c66788268e9ca47b593a3880ff4e66f880b4458587de2fb"
+    },
+    {
+      "id": "voice_0112",
+      "kind": "adpcm",
+      "resource": 152,
+      "offset": 3778560,
+      "bytes": 25153,
+      "sha256": "222d8cde91f6748128d15e7b2a61f9ee2b793a116034f0df1bef377105dc8681",
+      "source": "assets/adpcm/voice_0112.wav",
+      "source_sha256": "d5b4b90a15160482e73752b409adfdda34799a302c3fda02fcb44e551a0bfb66"
+    },
+    {
+      "id": "voice_0113",
+      "kind": "adpcm",
+      "resource": 153,
+      "offset": 3805184,
+      "bytes": 29784,
+      "sha256": "8612edbf4318a739060d7b0ea94c40a081150b54df4fc0f8c80a5388294d4983",
+      "source": "assets/adpcm/voice_0113.wav",
+      "source_sha256": "d23da2eab85ad7fc3c5f548521c5035fe000e6815eea13af89676e40bee56545"
+    },
+    {
+      "id": "voice_0114",
+      "kind": "adpcm",
+      "resource": 154,
+      "offset": 3835904,
+      "bytes": 39486,
+      "sha256": "ed1d14df485ba513e94c02d03c036611cfa7e43af385064ebf1b1d28d265c9bf",
+      "source": "assets/adpcm/voice_0114.wav",
+      "source_sha256": "da0e0183d51452282f62661a378b0a6f41637e8ddd1d1f50a647e48a42bf967f"
+    },
+    {
+      "id": "voice_0115",
+      "kind": "adpcm",
+      "resource": 155,
+      "offset": 3876864,
+      "bytes": 9277,
+      "sha256": "4f7d80cb7b93f5051c90d9db3a38cb9dc0832653a086603fc45936763a913847",
+      "source": "assets/adpcm/voice_0115.wav",
+      "source_sha256": "29a1a929d410ef61d95ef995733147ede0cf39d1766a4266ea57539eadcac64b"
+    },
+    {
+      "id": "voice_0116",
+      "kind": "adpcm",
+      "resource": 156,
+      "offset": 3887104,
+      "bytes": 15231,
+      "sha256": "2a4c468a189effe6b2b2865b3775ae04721ab81b372f9192484f10bdd50b019e",
+      "source": "assets/adpcm/voice_0116.wav",
+      "source_sha256": "1ff51bce187ba398d1e08b073853a737aa85feba325e22b6f4cb6b018599be2f"
+    },
+    {
+      "id": "voice_0117",
+      "kind": "adpcm",
+      "resource": 157,
+      "offset": 3903488,
+      "bytes": 19200,
+      "sha256": "7c61d49b734f5ae90df5e760e33d85b47f6aff7e22c9ac23ee87a7de4a96c95f",
+      "source": "assets/adpcm/voice_0117.wav",
+      "source_sha256": "bbbdc10192a3d33633ac82f9c3fba1160cb5ccfb2b2efaad7c2dd60304ba1ba6"
+    },
+    {
+      "id": "voice_0118",
+      "kind": "adpcm",
+      "resource": 158,
+      "offset": 3923968,
+      "bytes": 23830,
+      "sha256": "31fa49d75e51c0e064095e9098810caaabee588d5b0dbe794edc4c59d48ebda8",
+      "source": "assets/adpcm/voice_0118.wav",
+      "source_sha256": "1ac3446f7cf21ad42574aa958f51fa8baabebc7896e8a69fa0080b5d13293f93"
+    },
+    {
+      "id": "voice_0119",
+      "kind": "adpcm",
+      "resource": 159,
+      "offset": 3948544,
+      "bytes": 33312,
+      "sha256": "02e0d86d55626dff7e851bf555974ff110552ae5a012169d4e3f4e626ab8e967",
+      "source": "assets/adpcm/voice_0119.wav",
+      "source_sha256": "6b808ee923c0ce20da87ac2b1edc21de19c0c020871a61f3be90ca46abfa3d5c"
+    },
+    {
+      "id": "voice_0120",
+      "kind": "adpcm",
+      "resource": 160,
+      "offset": 3983360,
+      "bytes": 10380,
+      "sha256": "00855ce7f3a71083f23f840974d68c39f520f5e893799300d518366858fcc4ba",
+      "source": "assets/adpcm/voice_0120.wav",
+      "source_sha256": "e3f5e2f0fd7a9950bd1cda48e9522a66970f58d065fcdbb2e865faa611d1a1ae"
+    },
+    {
+      "id": "voice_0121",
+      "kind": "adpcm",
+      "resource": 161,
+      "offset": 3995648,
+      "bytes": 33312,
+      "sha256": "d6860e6b6b00bbc47cf546ae8387a7441afe3aba51abca095a68ed113f16b8a8",
+      "source": "assets/adpcm/voice_0121.wav",
+      "source_sha256": "2cd228136b5ed657c8b8a3eea6be3b2fd557974c7e421178cf48fced77e90551"
+    },
+    {
+      "id": "voice_0122",
+      "kind": "adpcm",
+      "resource": 162,
+      "offset": 4030464,
+      "bytes": 12144,
+      "sha256": "6ba175da25f2b231fe5b36aa6490c37ac6c5c105fe0e952df74192877df512e1",
+      "source": "assets/adpcm/voice_0122.wav",
+      "source_sha256": "9f1c441bb44ebbc7f0264f553779136fe6206af5cd0d1b7c607178ed2e412a1a"
+    },
+    {
+      "id": "voice_0123",
+      "kind": "adpcm",
+      "resource": 163,
+      "offset": 4042752,
+      "bytes": 30225,
+      "sha256": "4c107c73848538ce2ea0e0bc6dcbbdec368a72bcd577130e1ffa70625077ed2b",
+      "source": "assets/adpcm/voice_0123.wav",
+      "source_sha256": "d49474f705cfd3d3405e58dfa166c3ccc0c1688df339895236d875684e26c0ef"
+    },
+    {
+      "id": "voice_0124",
+      "kind": "adpcm",
+      "resource": 164,
+      "offset": 4073472,
+      "bytes": 13687,
+      "sha256": "2384ba82ec4361a4c86955564f0343660203dfa92d76386d4faf2b9af5ae3255",
+      "source": "assets/adpcm/voice_0124.wav",
+      "source_sha256": "7ddbdcc26d83cf101ed15a7f0ea402a84984f75114b5d4c51d7994a4f36e7651"
+    },
+    {
+      "id": "voice_0125",
+      "kind": "adpcm",
+      "resource": 165,
+      "offset": 4087808,
+      "bytes": 31327,
+      "sha256": "0b2e15140b00b3fe6663c4e601f95620704dc42635de83c1177573f734cb0e0c",
+      "source": "assets/adpcm/voice_0125.wav",
+      "source_sha256": "219ce42fce2e91f52b0ef5202f4b96d686743f6dd308994a05a1f9be5a86add9"
+    },
+    {
+      "id": "voice_0126",
+      "kind": "adpcm",
+      "resource": 166,
+      "offset": 4120576,
+      "bytes": 38383,
+      "sha256": "bcba9865b7757d9e5491a863aa9de423531f11144eca9928ed3c20c3091718d5",
+      "source": "assets/adpcm/voice_0126.wav",
+      "source_sha256": "d7e3f0a57bde054022b9caf4ee3c5e13d59183bfdf0227882bbe89b5b83beb6d"
+    },
+    {
+      "id": "voice_0127",
+      "kind": "adpcm",
+      "resource": 167,
+      "offset": 4159488,
+      "bytes": 26035,
+      "sha256": "3143efcc7b47dc59731bdb92ceab291ea1aa7eca3b71c92001e360e042c011c1",
+      "source": "assets/adpcm/voice_0127.wav",
+      "source_sha256": "c5fcf956f1b5e5acc04877470985481e783c022c995fa8c7fb8e3b73ee903937"
+    },
+    {
+      "id": "voice_0128",
+      "kind": "adpcm",
+      "resource": 168,
+      "offset": 4186112,
+      "bytes": 17877,
+      "sha256": "6d56fc51c4a6290796d635b4d0abf80c1152462cd7e199252a09ecaf0a68eb19",
+      "source": "assets/adpcm/voice_0128.wav",
+      "source_sha256": "608595167dd85ba3bc9270630c8dca5142a5972b6b610d8592146386a1bcfb03"
+    },
+    {
+      "id": "voice_0129",
+      "kind": "adpcm",
+      "resource": 169,
+      "offset": 4204544,
+      "bytes": 21625,
+      "sha256": "0acffffff153abe96241045d59606873fa0b33a3240c5107b4fafc00bc2805c0",
+      "source": "assets/adpcm/voice_0129.wav",
+      "source_sha256": "437bfbe0b688f5b7f43eacc05a673405a5003d59e06b4c479aa6022628acfefb"
+    },
+    {
+      "id": "voice_0130",
+      "kind": "adpcm",
+      "resource": 170,
+      "offset": 4227072,
+      "bytes": 36619,
+      "sha256": "cd04fa8da60f4731e7c3d3370dac3dbc68dc09a47d96a59da6c2f0b2e2f0d54b",
+      "source": "assets/adpcm/voice_0130.wav",
+      "source_sha256": "fef80f813e917dea4f42eba7a3612b273ad67855efec3b024418706db88f6c90"
+    },
+    {
+      "id": "voice_0131",
+      "kind": "adpcm",
+      "resource": 171,
+      "offset": 4263936,
+      "bytes": 27799,
+      "sha256": "a16fbee50c0c316f6ee551d3877660b2308c89fba1b4ae5b6315a3902f2bce74",
+      "source": "assets/adpcm/voice_0131.wav",
+      "source_sha256": "cd3ca93baa6d24ac952ca283eea3bdfe8e2a45fa021570fd823c4e3f506c6872"
+    },
+    {
+      "id": "voice_0132",
+      "kind": "adpcm",
+      "resource": 172,
+      "offset": 4292608,
+      "bytes": 21625,
+      "sha256": "d729f45ff133caff037e2a90c6a06a6bc8741bb18aa6cacecbdc7f470d835bd7",
+      "source": "assets/adpcm/voice_0132.wav",
+      "source_sha256": "04eb3d35f69232a9290f892f12c6ac5b327e09b346e90f8ccd0c8e1252ee393f"
+    },
+    {
+      "id": "voice_0133",
+      "kind": "adpcm",
+      "resource": 173,
+      "offset": 4315136,
+      "bytes": 18538,
+      "sha256": "5f41b9f0be48bbf6ad51356ccd9f6af3cab0f7d7dd5f00d8285351d6b9a16df8",
+      "source": "assets/adpcm/voice_0133.wav",
+      "source_sha256": "c5a83d44b16a490164d0bcad95073c9030053807fde7cf6d041505a95502c556"
+    },
+    {
+      "id": "voice_0134",
+      "kind": "adpcm",
+      "resource": 174,
+      "offset": 4335616,
+      "bytes": 15892,
+      "sha256": "df79564bd6de9ebf2da15b05faef087d8c9314865ea2f90f4abb5efe631f9aa1",
+      "source": "assets/adpcm/voice_0134.wav",
+      "source_sha256": "4ee82d34f1a0df03bd33f46bb18fc361034eed6c9501450b842bd99cf8153415"
+    },
+    {
+      "id": "voice_0135",
+      "kind": "adpcm",
+      "resource": 175,
+      "offset": 4352000,
+      "bytes": 11482,
+      "sha256": "9dba2065f20d40fcb823f63f6af03fc5dc4ad272e4ed896b73407daaba8130fb",
+      "source": "assets/adpcm/voice_0135.wav",
+      "source_sha256": "bc140a7220301118c1206c7657b89f6a9286d4c637f29119a0bc54da06e97e68"
+    },
+    {
+      "id": "voice_0136",
+      "kind": "adpcm",
+      "resource": 176,
+      "offset": 4364288,
+      "bytes": 12585,
+      "sha256": "f6df0b9466e3bd418dbe40ebb660e626dcb8d2edcf126c6c8fe8072c2e2d84d3",
+      "source": "assets/adpcm/voice_0136.wav",
+      "source_sha256": "ca695e6187ea6b9246dc4e336716f2752a2a5550c217e5e2824e63f9e9119ebc"
+    },
+    {
+      "id": "voice_0137",
+      "kind": "adpcm",
+      "resource": 177,
+      "offset": 4378624,
+      "bytes": 11041,
+      "sha256": "538909dcc44b95054ad7d1af2f2158d70e9bac1eed9a2e5a2007b36dc88d1bd5",
+      "source": "assets/adpcm/voice_0137.wav",
+      "source_sha256": "cf774324efbd6d10a4bc2c9bb5ce1e6d68ec090b9b1839ea36f52935f3f2a1f3"
+    },
+    {
+      "id": "voice_0138",
+      "kind": "adpcm",
+      "resource": 178,
+      "offset": 4390912,
+      "bytes": 20302,
+      "sha256": "ab090b9d557527ab59b196a9a1fbeab6199b7fa588d6298651d5439a48d95b40",
+      "source": "assets/adpcm/voice_0138.wav",
+      "source_sha256": "4c8816e41c32bf7b4db39ebd535e90effd5ece6ff7c76097eb7a91b7226978dd"
+    },
+    {
+      "id": "voice_0139",
+      "kind": "adpcm",
+      "resource": 179,
+      "offset": 4411392,
+      "bytes": 29122,
+      "sha256": "b4c57d976bbe490ff94a5c729e4aab27b27ecdd765cd65ebed607b187eacfd38",
+      "source": "assets/adpcm/voice_0139.wav",
+      "source_sha256": "9e1c0d53caa7ab6ea640b29cedf2353914b79b5cacfd585e52ced4f2eec384ae"
+    },
+    {
+      "id": "voice_0140",
+      "kind": "adpcm",
+      "resource": 180,
+      "offset": 4442112,
+      "bytes": 12805,
+      "sha256": "d966da895d943ef4515318b879e206551505acb9fee3d7ca4882572c36ce0cee",
+      "source": "assets/adpcm/voice_0140.wav",
+      "source_sha256": "01dd5eff89e907ddd1e93ea06dff45ac121fc377e485068e7c3c9409fd79fdff"
+    },
+    {
+      "id": "voice_0141",
+      "kind": "adpcm",
+      "resource": 181,
+      "offset": 4456448,
+      "bytes": 26917,
+      "sha256": "b49b0a600f4923711a29112ab8b29f1191a5ab5d73e44e55f1f1b8f12a22b7ca",
+      "source": "assets/adpcm/voice_0141.wav",
+      "source_sha256": "82e540dd57a97cd0b97948eaa537c7c51df0b95031fce3f3aa648e5b9557e775"
+    },
+    {
+      "id": "voice_0142",
+      "kind": "adpcm",
+      "resource": 182,
+      "offset": 4485120,
+      "bytes": 17215,
+      "sha256": "4610d83f39c7735bc76cd5e51f44b71f7416e8043a1164ef6fab5d1fae821393",
+      "source": "assets/adpcm/voice_0142.wav",
+      "source_sha256": "ab6faf0481f86f53ecd63c0fc473a08d7af890dcb26361089835f2a032368081"
+    },
+    {
+      "id": "voice_0143",
+      "kind": "adpcm",
+      "resource": 183,
+      "offset": 4503552,
+      "bytes": 23610,
+      "sha256": "5c0d1a9111ca9698ddabc3aaf11b6d30430b38e8057cda6b8eaacf27e91ab6cb",
+      "source": "assets/adpcm/voice_0143.wav",
+      "source_sha256": "4b7088cb8995113465b7a2e283b4f27e6b2ed1a6bfde16d6f9535c1bd45e7566"
+    },
+    {
+      "id": "voice_0144",
+      "kind": "adpcm",
+      "resource": 184,
+      "offset": 4528128,
+      "bytes": 19641,
+      "sha256": "4e74a03e22bf5d61d38b10d14b249b784cad82ec2b3e83779df20624e2b90a2f",
+      "source": "assets/adpcm/voice_0144.wav",
+      "source_sha256": "f6d63f68857354f3053564d61bb9eb34f36d8ad39f63ea02111df6a4d1e622fb"
+    },
+    {
+      "id": "voice_0145",
+      "kind": "adpcm",
+      "resource": 185,
+      "offset": 4548608,
+      "bytes": 16995,
+      "sha256": "2718edcfb8b295324f85a9546f71841248a4f789d89e0d492c8e0cbc3cec4cae",
+      "source": "assets/adpcm/voice_0145.wav",
+      "source_sha256": "75fc6538e9b211f007bf5ce03dcf70c7f85dd6410a04b52fee12dcf209eb0c04"
+    },
+    {
+      "id": "voice_0146",
+      "kind": "adpcm",
+      "resource": 186,
+      "offset": 4567040,
+      "bytes": 27799,
+      "sha256": "9f281cac5889f83266da7b84a1dbda832a82cb30f7cd8dc509e865cb0922c773",
+      "source": "assets/adpcm/voice_0146.wav",
+      "source_sha256": "24bc17c72c25590e1c1dc0195c04f6050cd89fdd843218016e91c7b5de2d9c70"
+    },
+    {
+      "id": "voice_0147",
+      "kind": "adpcm",
+      "resource": 187,
+      "offset": 4595712,
+      "bytes": 19641,
+      "sha256": "be23aa90d199095e0dbebc5314c0610027c63e2252b0c992f65e1e5517ed603c",
+      "source": "assets/adpcm/voice_0147.wav",
+      "source_sha256": "c54233e1253a583fd6a61ab70cfe7fe5c85644b7e0ec2d7c4e51bb27bdd65e49"
+    },
+    {
+      "id": "voice_0148",
+      "kind": "adpcm",
+      "resource": 188,
+      "offset": 4616192,
+      "bytes": 18097,
+      "sha256": "2caca1a1252bebb750b2236d6f226dc113f964dc74212ca3cd4fab79c436b9e5",
+      "source": "assets/adpcm/voice_0148.wav",
+      "source_sha256": "38ea2c6e8a219f796bddbc28582292e1b0166e5c8af8a1d1f438923ad5947f85"
+    },
+    {
+      "id": "voice_0149",
+      "kind": "adpcm",
+      "resource": 189,
+      "offset": 4634624,
+      "bytes": 15010,
+      "sha256": "09b8945bf3afb11628e8ee270ff831a1086208392cd18dc40cef07e6f5526e28",
+      "source": "assets/adpcm/voice_0149.wav",
+      "source_sha256": "d1cfc0dc5a2e159bc7a720c9e14a2e999ff76d5713774a6f0013c5b1e13e129c"
+    },
+    {
+      "id": "voice_0150",
+      "kind": "adpcm",
+      "resource": 190,
+      "offset": 4651008,
+      "bytes": 24492,
+      "sha256": "b2e04b82861a8969386de586934dc127d2feadcb0b3fce343a68ac02d24dfc0f",
+      "source": "assets/adpcm/voice_0150.wav",
+      "source_sha256": "573fae5a4188da73be8f26221d9cf2430f40dccd6ac27ac64c2888212ccf6ba0"
+    },
+    {
+      "id": "voice_0151",
+      "kind": "adpcm",
+      "resource": 191,
+      "offset": 4675584,
+      "bytes": 13467,
+      "sha256": "5ad95e877f5429787725eb1d8aa8c65fb79ffdc758fa2f817236a65388393199",
+      "source": "assets/adpcm/voice_0151.wav",
+      "source_sha256": "40d7a32584b1c3a0a08964104157868dfce82edab215b3ad6bb9edb4f90fc359"
+    },
+    {
+      "id": "voice_0152",
+      "kind": "adpcm",
+      "resource": 192,
+      "offset": 4689920,
+      "bytes": 25374,
+      "sha256": "5eb66ef9fe653b3a0b6228267337f492f5c43b3f7785778867d7b24058b81b95",
+      "source": "assets/adpcm/voice_0152.wav",
+      "source_sha256": "024f53e433b46e7062159f78784df6acd2eb4f487f8f92d9bfaf07e5c9e54cb9"
+    },
+    {
+      "id": "voice_0153",
+      "kind": "adpcm",
+      "resource": 193,
+      "offset": 4716544,
+      "bytes": 7954,
+      "sha256": "8540e3106041b342eac6c83d592763b1a18eca39e18ac178b16ed7ffc88d32dc",
+      "source": "assets/adpcm/voice_0153.wav",
+      "source_sha256": "1207a326fc4246cc7b0f1733f03fc175cbc7efcc7a5f253aef5d6c6e43130158"
+    },
+    {
+      "id": "voice_0154",
+      "kind": "adpcm",
+      "resource": 194,
+      "offset": 4724736,
+      "bytes": 29122,
+      "sha256": "7ba80d405285ad9e535508e6296a64c9ebc1e9f790ab0b784447d2ce1523e566",
+      "source": "assets/adpcm/voice_0154.wav",
+      "source_sha256": "4bd26c2efd483ff1e08e7c0fd36264e64804dffe8cfc537cf366bc93a5dc583b"
+    },
+    {
+      "id": "voice_0155",
+      "kind": "adpcm",
+      "resource": 195,
+      "offset": 4755456,
+      "bytes": 12805,
+      "sha256": "b7fccb87748fe51c24aeed4da2502a3b1ca668df77a005490a4fe88b1ddfc4eb",
+      "source": "assets/adpcm/voice_0155.wav",
+      "source_sha256": "3cbac722baf51c64576cbe57c7cc5ad90793e939d4ce2a05add219391602c81c"
+    },
+    {
+      "id": "voice_0156",
+      "kind": "adpcm",
+      "resource": 196,
+      "offset": 4769792,
+      "bytes": 6190,
+      "sha256": "3a1a11f650c47435c12c6d33a963716d223a7f13faa5cb0cf8616ebbe7f63838",
+      "source": "assets/adpcm/voice_0156.wav",
+      "source_sha256": "0b40c85b857c7776cf53f419b78a9bc3fbff79f89a579f93e7e1b8562e014735"
+    },
+    {
+      "id": "voice_0157",
+      "kind": "adpcm",
+      "resource": 197,
+      "offset": 4777984,
+      "bytes": 19200,
+      "sha256": "57d794b73642f258c5cb43c9a482e34130dc916c7c819d8fe55490f9d1b32daf",
+      "source": "assets/adpcm/voice_0157.wav",
+      "source_sha256": "d10cbd2d2a3c8acf1f81b9e4ae3d86caf986497366417273179f1644113b906c"
+    },
+    {
+      "id": "voice_0158",
+      "kind": "adpcm",
+      "resource": 198,
+      "offset": 4798464,
+      "bytes": 5308,
+      "sha256": "c6c12159608cdfdba058c5e092357ff5251aa906e1403a9c3b0875b9bf6a4be5",
+      "source": "assets/adpcm/voice_0158.wav",
+      "source_sha256": "ffdbed0216b097bf26b3787ba76aa4848a05217fc7ccfaf2ff9ab6ec53025158"
+    },
+    {
+      "id": "voice_0159",
+      "kind": "adpcm",
+      "resource": 199,
+      "offset": 4804608,
+      "bytes": 21846,
+      "sha256": "4e5621fc6832f90fce2a0188b43b3f2dbe32cff979a04b199b5d8f2701500605",
+      "source": "assets/adpcm/voice_0159.wav",
+      "source_sha256": "2bf4f850d3e302da2c91cba4596dddfccc7fe7e4fd5f6dd336f564770b582da4"
+    },
+    {
+      "id": "voice_0160",
+      "kind": "adpcm",
+      "resource": 200,
+      "offset": 4827136,
+      "bytes": 8616,
+      "sha256": "c3c9b278eb575eeec04c00580ab69c6daa65c54f2a5fe1d08f646e824d994c3d",
+      "source": "assets/adpcm/voice_0160.wav",
+      "source_sha256": "16f2a37e3f49968d6ad26b5f68a508bc3f699f1fa1df8413964641b384e2a970"
+    },
+    {
+      "id": "voice_0161",
+      "kind": "adpcm",
+      "resource": 201,
+      "offset": 4837376,
+      "bytes": 35296,
+      "sha256": "83f6b1c50d22b1d380db8a0a716b6892fc2a6b94ef791455b8d986440bb7efb8",
+      "source": "assets/adpcm/voice_0161.wav",
+      "source_sha256": "010ae1f3c5de90c9260d7565ee00e2d74b47c54e651b992b8cf50c925fa1ee38"
+    },
+    {
+      "id": "voice_0162",
+      "kind": "adpcm",
+      "resource": 202,
+      "offset": 4874240,
+      "bytes": 22066,
+      "sha256": "c2b19412d777c78b5797bf077e84ffff3d477b3daa32eb4f835655c1cbf83902",
+      "source": "assets/adpcm/voice_0162.wav",
+      "source_sha256": "99306b96dc14474f6c60747dab3898bd3c98386caabc43e6f957928525e4f60a"
+    },
+    {
+      "id": "voice_0163",
+      "kind": "adpcm",
+      "resource": 203,
+      "offset": 4896768,
+      "bytes": 16113,
+      "sha256": "560404d4d1b583828cac1dbf9b149e21734c1c72ce71a553e7060e76cbc33b8f",
+      "source": "assets/adpcm/voice_0163.wav",
+      "source_sha256": "7b82f6bd7382bb846f4546d54074e2f21d4b4bba0147b9db9a605c63f203eaab"
+    },
+    {
+      "id": "voice_0164",
+      "kind": "adpcm",
+      "resource": 204,
+      "offset": 4913152,
+      "bytes": 20302,
+      "sha256": "dd06b5eedaf8d25ed4210b1799f18a45d9b7549161242eb69819db0bc669aa52",
+      "source": "assets/adpcm/voice_0164.wav",
+      "source_sha256": "a1fd16e0cd0b792a5964c77b394fb8d66d23cf0ee75c75ce0d5e28d9fbe6050d"
+    },
+    {
+      "id": "voice_0165",
+      "kind": "adpcm",
+      "resource": 205,
+      "offset": 4933632,
+      "bytes": 29563,
+      "sha256": "8aea21f4a8e4d89ee220852a73602d164efa74ea89952f84316b07e9031ff051",
+      "source": "assets/adpcm/voice_0165.wav",
+      "source_sha256": "76540634dc0522a072b043652c9430d3df3144470feccca884bf92550a7c0295"
+    },
+    {
+      "id": "voice_0166",
+      "kind": "adpcm",
+      "resource": 206,
+      "offset": 4964352,
+      "bytes": 20523,
+      "sha256": "f49297f907890622b75fb5bfa35bbe87a18234a93771bf3a8ad163ef77ea565e",
+      "source": "assets/adpcm/voice_0166.wav",
+      "source_sha256": "68ed0aac385d8f7eb129ac195cc2e1de9b9c0358fcf5bd014e99f30ab5fbf7c6"
+    },
+    {
+      "id": "voice_0167",
+      "kind": "adpcm",
+      "resource": 207,
+      "offset": 4986880,
+      "bytes": 24271,
+      "sha256": "e123024d7ae65db5a54b3879245a998dee1b7dda1560fda134a306dfd3ce2e59",
+      "source": "assets/adpcm/voice_0167.wav",
+      "source_sha256": "dc0c839cd8d2a3c9aaa1b43f11f584c947ee6a4db170e5f60c57603376e3ebc2"
+    },
+    {
+      "id": "voice_0168",
+      "kind": "adpcm",
+      "resource": 208,
+      "offset": 5011456,
+      "bytes": 34194,
+      "sha256": "c7647851883688c10db213728b98a2cf2ffa4f774fdf2544e3f38be6cc541c92",
+      "source": "assets/adpcm/voice_0168.wav",
+      "source_sha256": "6211bc8ad90541d8384c1e11e5d91474718e8ed505935fb90cf7af99a3c50a34"
+    },
+    {
+      "id": "voice_0169",
+      "kind": "adpcm",
+      "resource": 209,
+      "offset": 5046272,
+      "bytes": 10821,
+      "sha256": "208821a08d5ad143bd3e44d6c4c55c661875ad463b2a627aa0b5b54b1ad91b70",
+      "source": "assets/adpcm/voice_0169.wav",
+      "source_sha256": "64821d04f22d6cb69d770a85cc3908f56f49a1ddc17a4de220a33b3f192fbfb4"
+    },
+    {
+      "id": "voice_0170",
+      "kind": "adpcm",
+      "resource": 210,
+      "offset": 5058560,
+      "bytes": 30886,
+      "sha256": "d9ff94c78f00eb9540269c9e5446dde059fd0f629fffa248435c90282beda106",
+      "source": "assets/adpcm/voice_0170.wav",
+      "source_sha256": "42fcf280a277086eeaf6e9b563a9d47ae5bb980022555ec7f87566872c33dc31"
+    },
+    {
+      "id": "voice_0171",
+      "kind": "adpcm",
+      "resource": 211,
+      "offset": 5091328,
+      "bytes": 10821,
+      "sha256": "4dce0922b377be7f89abbbb9a0a16320afbcb150da8a28e81076a45be2da8741",
+      "source": "assets/adpcm/voice_0171.wav",
+      "source_sha256": "1f4588f57f9a1620bc1645c02996b2e16b7c3bc158693b8696f9b670f26f520f"
+    },
+    {
+      "id": "voice_0172",
+      "kind": "adpcm",
+      "resource": 212,
+      "offset": 5103616,
+      "bytes": 18538,
+      "sha256": "f2bbe1fcd09830aae1bdfa809439fd419260a060a7c3b2be182b59d8c97f332a",
+      "source": "assets/adpcm/voice_0172.wav",
+      "source_sha256": "4dfb6735ab1855d72f8b4c6a38bdf1bed30011d52fa1a77e11dd09addbad64a4"
+    },
+    {
+      "id": "voice_0173",
+      "kind": "adpcm",
+      "resource": 213,
+      "offset": 5124096,
+      "bytes": 18759,
+      "sha256": "dc3a5b9b8c17f8d4a99b53704a2926b4c95f78a498eb32e5a764f1843821f2ee",
+      "source": "assets/adpcm/voice_0173.wav",
+      "source_sha256": "925d0483961d5e9d51c5ab707db22d96280e81462e49aa44b612239bee07358e"
+    },
+    {
+      "id": "voice_0174",
+      "kind": "adpcm",
+      "resource": 214,
+      "offset": 5144576,
+      "bytes": 2883,
+      "sha256": "dc60f4baf8eadce596236addbd8bd6d2cb62b2e184116addee68d63abd4c0d13",
+      "source": "assets/adpcm/voice_0174.wav",
+      "source_sha256": "f6340bf3596b1976b91fa08a6e2370d9779ca8a70c0f7104f1a6732436c392ef"
+    },
+    {
+      "id": "voice_0175",
+      "kind": "adpcm",
+      "resource": 215,
+      "offset": 5148672,
+      "bytes": 18979,
+      "sha256": "49d1e055705374fc4ed2896c8fa84166c0bff3c6b507bbd22891fd75cd395665",
+      "source": "assets/adpcm/voice_0175.wav",
+      "source_sha256": "1ce011dd4b02ed13c082ddfea4b29b762817826d54970ba597dcdbbaf9be4da3"
+    },
+    {
+      "id": "voice_0176",
+      "kind": "adpcm",
+      "resource": 216,
+      "offset": 5169152,
+      "bytes": 25153,
+      "sha256": "1db68171baa04f7a4285154ad1b2444b34e00d44bab2e11fb617e52c81d5409c",
+      "source": "assets/adpcm/voice_0176.wav",
+      "source_sha256": "97e2b0faece010880c1c37f5513da9618607485a7b9e90b2738bb149d6ffe511"
+    },
+    {
+      "id": "voice_0177",
+      "kind": "adpcm",
+      "resource": 217,
+      "offset": 5195776,
+      "bytes": 20082,
+      "sha256": "7fecd38a5a100b3979239de3898572e3989b976208de96579dd20cd517e10ded",
+      "source": "assets/adpcm/voice_0177.wav",
+      "source_sha256": "3316b9fefdde4ba91f574ca07b526eb4a46c2df274477ba0e2d9439a5855fa5a"
+    },
+    {
+      "id": "voice_0178",
+      "kind": "adpcm",
+      "resource": 218,
+      "offset": 5216256,
+      "bytes": 24712,
+      "sha256": "1b885767e85f1960a5aa822fb7c2a8fbdc4d0617ad43346140c4176b196e0a08",
+      "source": "assets/adpcm/voice_0178.wav",
+      "source_sha256": "bb0cec4a7872340fedc6b8f389be2bc6117c3a031dde0ec2e77a9ae5e31801ad"
+    },
+    {
+      "id": "voice_0179",
+      "kind": "adpcm",
+      "resource": 219,
+      "offset": 5242880,
+      "bytes": 14128,
+      "sha256": "96bd41b195acc34cf3c57fe10fd1ae957a843c773fdd0caf1600761a1632aa25",
+      "source": "assets/adpcm/voice_0179.wav",
+      "source_sha256": "ae0f30029d978e95fd8030bfdd1d8720c062e6d271e29301680deaa1cac2862e"
+    },
+    {
+      "id": "voice_0180",
+      "kind": "adpcm",
+      "resource": 220,
+      "offset": 5257216,
+      "bytes": 3324,
+      "sha256": "444becf2af93528a93e2d5334930c2e71df39ee7cba6d55ac032dbb45dbd8388",
+      "source": "assets/adpcm/voice_0180.wav",
+      "source_sha256": "c7790c7926fa8ad49482f55b3ebef0b4e2eb6c7d2678a265eafa0b81ae53bc62"
+    },
+    {
+      "id": "voice_0181",
+      "kind": "adpcm",
+      "resource": 221,
+      "offset": 5261312,
+      "bytes": 19641,
+      "sha256": "0cea289f30ee92e99cb7516d845babea91d9e72d80be6904b25fbe830c1bf9e3",
+      "source": "assets/adpcm/voice_0181.wav",
+      "source_sha256": "df3f4dc991e4939f765f5614176784f1c8083d4f41176b29c27f5d9bb0ec6b3f"
+    },
+    {
+      "id": "voice_0182",
+      "kind": "adpcm",
+      "resource": 222,
+      "offset": 5281792,
+      "bytes": 16333,
+      "sha256": "de6e31bedd3cadc908805a4fbbe994dd7b4db41a74813848bc408e7a907d1201",
+      "source": "assets/adpcm/voice_0182.wav",
+      "source_sha256": "2d432e7d0f60c557ec183f21391f2ed137f557440dbd319c92543258d3afc038"
+    },
+    {
+      "id": "voice_0183",
+      "kind": "adpcm",
+      "resource": 223,
+      "offset": 5298176,
+      "bytes": 43234,
+      "sha256": "679245209c1c55aa9a3da8961995b1671e0599cf386e73baa6cdfb4b5a935649",
+      "source": "assets/adpcm/voice_0183.wav",
+      "source_sha256": "468864b4601011df66e6e733d2be268fdf0370cd8a334bf8f9ce69b3035e1b83"
+    },
+    {
+      "id": "voice_0184",
+      "kind": "adpcm",
+      "resource": 224,
+      "offset": 5343232,
+      "bytes": 3324,
+      "sha256": "d7ee88de10cf5c58cfa9aad8fcfcff4932668bd52eed2dd5f750b93935d709f1",
+      "source": "assets/adpcm/voice_0184.wav",
+      "source_sha256": "d411b81942fe7dd8b27c25b176312a8ce2ac2ce1091cf10573a7cd8022273e16"
+    },
+    {
+      "id": "voice_0185",
+      "kind": "adpcm",
+      "resource": 225,
+      "offset": 5347328,
+      "bytes": 24271,
+      "sha256": "902d5531ab304b22349ec10071008246a4c3c9b704709a0883f9543367b958a9",
+      "source": "assets/adpcm/voice_0185.wav",
+      "source_sha256": "cdd64b034054eadff28043bddc0c78b6287090e5f244616240edbc76c9c32986"
+    },
+    {
+      "id": "voice_0186",
+      "kind": "adpcm",
+      "resource": 226,
+      "offset": 5371904,
+      "bytes": 13026,
+      "sha256": "6e68d0376ee6ad88510a37d46a5ae0bb66c8254175c8727614cfbc3ab29245f4",
+      "source": "assets/adpcm/voice_0186.wav",
+      "source_sha256": "c372875a5d29b0540daa5d2db0510779747ce78c28466287601702c6dcc29073"
+    },
+    {
+      "id": "voice_0187",
+      "kind": "adpcm",
+      "resource": 227,
+      "offset": 5386240,
+      "bytes": 8616,
+      "sha256": "c78f3fc2359ea15589511f9cd676e4233f3db428d7a04595b8fb490d9956d095",
+      "source": "assets/adpcm/voice_0187.wav",
+      "source_sha256": "815ba8fedcf28314b5ef5e5f2a4870020da410281e270309ea708aea1853b744"
+    },
+    {
+      "id": "voice_0188",
+      "kind": "adpcm",
+      "resource": 228,
+      "offset": 5396480,
+      "bytes": 23169,
+      "sha256": "85831d22e86bd02d09aea3c11b8e28cd7c678374364627c14c26b43b634d2e3c",
+      "source": "assets/adpcm/voice_0188.wav",
+      "source_sha256": "0f3bb692956b7f5bfb8c787f71279c47f6394feaeadd9c4933cfb2fa452eba41"
+    },
+    {
+      "id": "voice_0189",
+      "kind": "adpcm",
+      "resource": 229,
+      "offset": 5421056,
+      "bytes": 17656,
+      "sha256": "c2b6ca1ad40d7f9a18b5b2e48df024a949a19f4e15b087efc83dc2a8442acc90",
+      "source": "assets/adpcm/voice_0189.wav",
+      "source_sha256": "f6e2b8f5958c171a8ac41c9dae055d742f294f066ea4d9927aedcaec18270c97"
+    },
+    {
+      "id": "voice_0190",
+      "kind": "adpcm",
+      "resource": 230,
+      "offset": 5439488,
+      "bytes": 15231,
+      "sha256": "393bfd9e8c20b4cce631b28cc884417d1680866c371c334651d654ef76c0b6ad",
+      "source": "assets/adpcm/voice_0190.wav",
+      "source_sha256": "6764c4863fbdeadcb436d080da43716d73c3b18ba6a49eaad8fa6a9f9fb08916"
+    },
+    {
+      "id": "voice_0191",
+      "kind": "adpcm",
+      "resource": 231,
+      "offset": 5455872,
+      "bytes": 23169,
+      "sha256": "adea66dedfdf4bdd8107908b1617cf04419fa0b55e1653ccfc76f8ed441af870",
+      "source": "assets/adpcm/voice_0191.wav",
+      "source_sha256": "084ab61af9ccd4beba568bc352550931968d995f38191b4b7243cce0699259d0"
+    },
+    {
+      "id": "voice_0192",
+      "kind": "adpcm",
+      "resource": 232,
+      "offset": 5480448,
+      "bytes": 5970,
+      "sha256": "804f17d1495afa2e6b87d5000191297bdb4fa2d9e60756db7c415a670d95e0c2",
+      "source": "assets/adpcm/voice_0192.wav",
+      "source_sha256": "894cf8f2ca5de1e8dbfb5da3918fceb56cea6ecbfb3f6dec51574b6d7dea59dd"
+    },
+    {
+      "id": "voice_0193",
+      "kind": "adpcm",
+      "resource": 233,
+      "offset": 5486592,
+      "bytes": 10821,
+      "sha256": "c5dede078f72876c63875b0e876d6bd4a2dccd53691bfef4139cfcea31c3534d",
+      "source": "assets/adpcm/voice_0193.wav",
+      "source_sha256": "dd1db0f239145ad225c35c6e2df5cc9e1d572711826ea9ad959bf7b2644ea2ac"
+    },
+    {
+      "id": "voice_0194",
+      "kind": "adpcm",
+      "resource": 234,
+      "offset": 5498880,
+      "bytes": 5529,
+      "sha256": "b3b27f44be66dabff1ab234cdefce00108eae9bf018c53164d0bf8487f6dbcd9",
+      "source": "assets/adpcm/voice_0194.wav",
+      "source_sha256": "faf2dde6a077487d9a42f854071dcddf56ed919c903ac6d89c8a3424cf0df2fb"
+    },
+    {
+      "id": "voice_0195",
+      "kind": "adpcm",
+      "resource": 235,
+      "offset": 5505024,
+      "bytes": 24492,
+      "sha256": "79274d579533fc969203311d76b7a0e63ec6af1beef39dae6dbd04657abd5f3b",
+      "source": "assets/adpcm/voice_0195.wav",
+      "source_sha256": "7cc82fcb2ba3dc4b49c5fe8afe52b896a7f8cca474000021ed9b70fcc1d84140"
+    },
+    {
+      "id": "voice_0196",
+      "kind": "adpcm",
+      "resource": 236,
+      "offset": 5529600,
+      "bytes": 20302,
+      "sha256": "5dd609fd9ec973ed40761d7da07d3f760ca0d87dfb8af95ac3235fdcb063726c",
+      "source": "assets/adpcm/voice_0196.wav",
+      "source_sha256": "9781f78c9ac8df6bbaa3396076e60c5943e898c64e7c252ebc06174dc28d03f9"
+    },
+    {
+      "id": "voice_0197",
+      "kind": "adpcm",
+      "resource": 237,
+      "offset": 5550080,
+      "bytes": 9718,
+      "sha256": "7f6971a52204e87f74b1b544a3582c0c519193007d431f02bf95fe65b1683dc1",
+      "source": "assets/adpcm/voice_0197.wav",
+      "source_sha256": "af94cdde3b67a7f11ee813326b10b32e26e8c60ffe921e5a1b2517539eb54938"
+    },
+    {
+      "id": "voice_0198",
+      "kind": "adpcm",
+      "resource": 238,
+      "offset": 5560320,
+      "bytes": 13246,
+      "sha256": "7a4794c5b5abbb85bc447bf4a2887491e68e7a29a685daf2b9da39eeccec8027",
+      "source": "assets/adpcm/voice_0198.wav",
+      "source_sha256": "d2bbd08431b240576485cb9d5fc65818744db4e66abf5edb5368992fec42add2"
+    },
+    {
+      "id": "voice_0199",
+      "kind": "adpcm",
+      "resource": 239,
+      "offset": 5574656,
+      "bytes": 9277,
+      "sha256": "9d6be072f217fa727429238a9307089988f670add12b62e47eb2e4d13d0fcb11",
+      "source": "assets/adpcm/voice_0199.wav",
+      "source_sha256": "47df61ffa4da02521430369fbae5af2936e457e09d63f9a1c7952ee674252bda"
+    },
+    {
+      "id": "voice_0200",
+      "kind": "adpcm",
+      "resource": 240,
+      "offset": 5584896,
+      "bytes": 9939,
+      "sha256": "cfc3a0b702f12bc73ae2670f12d82ceb3304a03b9b3e24130ae29b1e0a251854",
+      "source": "assets/adpcm/voice_0200.wav",
+      "source_sha256": "6ee365220711be93826c66de8c1c2b4967c261478422b1885a14ffa2138c7616"
+    },
+    {
+      "id": "voice_0201",
+      "kind": "adpcm",
+      "resource": 241,
+      "offset": 5595136,
+      "bytes": 28461,
+      "sha256": "6e1bc463e8914a9b21a6919ef6383bc82158ac02e4d5cd03773b1975df65cd3a",
+      "source": "assets/adpcm/voice_0201.wav",
+      "source_sha256": "0b07ec356a06a08bc2af7783f791a05ffd21a7d1f8e902a80cc3b6d5f8509de4"
+    },
+    {
+      "id": "voice_0202",
+      "kind": "adpcm",
+      "resource": 242,
+      "offset": 5623808,
+      "bytes": 15451,
+      "sha256": "916fc70ef28f5e1d6a957d425999542751afce8bfb36b0cffe6acbdfd19e5fbf",
+      "source": "assets/adpcm/voice_0202.wav",
+      "source_sha256": "39b613deed48aa813969c217b088e2c0c7728e8bd8a749e32cd7e4e3eebb0165"
+    },
+    {
+      "id": "voice_0203",
+      "kind": "adpcm",
+      "resource": 243,
+      "offset": 5640192,
+      "bytes": 11482,
+      "sha256": "bb230549a2c18325a439275841516853969f2b0fc4835c3e9739b08591e78260",
+      "source": "assets/adpcm/voice_0203.wav",
+      "source_sha256": "7d8da584e71c6c7a6383cb027f5e81df235fd8327fd6d2541cf094529f8995d8"
+    },
+    {
+      "id": "voice_0204",
+      "kind": "adpcm",
+      "resource": 244,
+      "offset": 5652480,
+      "bytes": 13467,
+      "sha256": "bd547d739dd3d3d3bdb3b7aecdebebe9e91cc81ff599cbb9eb5c07d41afafd45",
+      "source": "assets/adpcm/voice_0204.wav",
+      "source_sha256": "ce4937565483d276ac6cc32a9523832c39ff4faeb8b33542f5592f616b5ea16b"
+    },
+    {
+      "id": "voice_0205",
+      "kind": "adpcm",
+      "resource": 245,
+      "offset": 5666816,
+      "bytes": 15451,
+      "sha256": "4aaa02bda6b5cc93e571070cefcf522380f61372093dbd32cf4135f6381bf736",
+      "source": "assets/adpcm/voice_0205.wav",
+      "source_sha256": "e58e8d7267c638d89c7c6ccb071787692bd4e6c5a64c7e0cc0f3279b368cbdb0"
+    },
+    {
+      "id": "voice_0206",
+      "kind": "adpcm",
+      "resource": 246,
+      "offset": 5683200,
+      "bytes": 9718,
+      "sha256": "60be9283e5855b3a58845fd61c542d9bb3aa0d9f4306d49e5740b0386613274b",
+      "source": "assets/adpcm/voice_0206.wav",
+      "source_sha256": "293d5637a9006e24ab5fbe53031df07eff42c063f6056f121b1fa43fdbbd5bba"
+    },
+    {
+      "id": "voice_0207",
+      "kind": "adpcm",
+      "resource": 247,
+      "offset": 5693440,
+      "bytes": 15010,
+      "sha256": "7ad5a73a4e6c27f3bbbf980f28ac9a1803f62a5424281252c1ecd3b5005eec18",
+      "source": "assets/adpcm/voice_0207.wav",
+      "source_sha256": "7506e0ba99c59c37cd59b7bdf27b8947901fbeed093ea84f77d966f0623da6b0"
+    },
+    {
+      "id": "voice_0208",
+      "kind": "adpcm",
+      "resource": 248,
+      "offset": 5709824,
+      "bytes": 7072,
+      "sha256": "bb08286842589e8938e148f9caba5e44f14ccae0923c33c885de52cae7c3bcc3",
+      "source": "assets/adpcm/voice_0208.wav",
+      "source_sha256": "69048ab00865ca175f3297aa00f2d46c962ceff678dda00bd049e25dff0f495c"
+    },
+    {
+      "id": "voice_0209",
+      "kind": "adpcm",
+      "resource": 249,
+      "offset": 5718016,
+      "bytes": 14349,
+      "sha256": "f535af0b2bc7bbd2c9d5997e974b56e0091d57221993f1bfcc72c99acc8fe442",
+      "source": "assets/adpcm/voice_0209.wav",
+      "source_sha256": "cd7b7bbec3975c03543040e853115784cc210b7f9e392511f028e1dcc8f9fde4"
+    },
+    {
+      "id": "voice_0210",
+      "kind": "adpcm",
+      "resource": 250,
+      "offset": 5734400,
+      "bytes": 14790,
+      "sha256": "16e930d21d1cfeab3f4fb8e8a5f3ebc004e88069117fa125d05a6f674a6b6696",
+      "source": "assets/adpcm/voice_0210.wav",
+      "source_sha256": "c081fe56ea14060d83689acb57615269eeebdbe65bf5ba87719efe21e979ebc0"
+    },
+    {
+      "id": "voice_0211",
+      "kind": "adpcm",
+      "resource": 251,
+      "offset": 5750784,
+      "bytes": 13246,
+      "sha256": "71b2c9c912848cef91f5660ba69acec279c11c7e625e466cf3ce22fdab2ceda2",
+      "source": "assets/adpcm/voice_0211.wav",
+      "source_sha256": "d4c5a8f6b6985b11108c4ca1ed5eb3a4305cfc8188e7f73da7a5775d39f0e390"
+    },
+    {
+      "id": "voice_0212",
+      "kind": "adpcm",
+      "resource": 252,
+      "offset": 5765120,
+      "bytes": 11703,
+      "sha256": "e6f9324ae08cef286a95d3e0084b2884cba5b7dd02e9333510a93d52686f9a49",
+      "source": "assets/adpcm/voice_0212.wav",
+      "source_sha256": "af5674ef00d781d09961c895a9fa5c7f59d45b49e2cb0b30b14dedd6a238d6b0"
+    },
+    {
+      "id": "voice_0213",
+      "kind": "adpcm",
+      "resource": 253,
+      "offset": 5777408,
+      "bytes": 17656,
+      "sha256": "426a384fa4fc008a32d82668d42bd9403f267197d3811518adcd8346f9eb25ae",
+      "source": "assets/adpcm/voice_0213.wav",
+      "source_sha256": "bda801c0a2af24de5d3ed3b015053985080db415e912d26bfd2c1cfb5cee1461"
+    },
+    {
+      "id": "voice_0214",
+      "kind": "adpcm",
+      "resource": 254,
+      "offset": 5795840,
+      "bytes": 15010,
+      "sha256": "af976f5eeba8b50aad08c9b0908a993b08c712afe5ca7f9435c4b263b50d3b68",
+      "source": "assets/adpcm/voice_0214.wav",
+      "source_sha256": "c3501ddde0bdf126e905df393a103044fe98faa0fc9f9b5f1e2bf28b98226ed4"
+    },
+    {
+      "id": "voice_0215",
+      "kind": "adpcm",
+      "resource": 255,
+      "offset": 5812224,
+      "bytes": 18759,
+      "sha256": "eff1f90c485d62526d6467e37fabd849ef5598862ad995d4c0bf744c525a424a",
+      "source": "assets/adpcm/voice_0215.wav",
+      "source_sha256": "af38101c04c83d49e6f416b9784fba88a9d1c3ea0d37f3acd56046d837eda580"
+    },
+    {
+      "id": "voice_0216",
+      "kind": "adpcm",
+      "resource": 256,
+      "offset": 5832704,
+      "bytes": 6190,
+      "sha256": "f0d6777c9ff68ede481343356fbd174b0024945445d74bea5710d33ba62e23e4",
+      "source": "assets/adpcm/voice_0216.wav",
+      "source_sha256": "168d877b8d7620b7c07b5efca779c025d50f324e84bfe70888f792ca50775ae0"
+    },
+    {
+      "id": "voice_0217",
+      "kind": "adpcm",
+      "resource": 257,
+      "offset": 5840896,
+      "bytes": 31548,
+      "sha256": "d4bc592e5d3e4a8a370757362b2d753a2c1ad0492374a82150b541aa31cd7856",
+      "source": "assets/adpcm/voice_0217.wav",
+      "source_sha256": "05d7dab140bcf5ccfe8b0bf336aaf814ae6fa8e7655302ce9c35b29ef9c3ab19"
+    },
+    {
+      "id": "voice_0218",
+      "kind": "adpcm",
+      "resource": 258,
+      "offset": 5873664,
+      "bytes": 17436,
+      "sha256": "7eddf73eb7d0dcba8eb05c5b1c9a240febbb03838574c90316ed18f9cf6bcb70",
+      "source": "assets/adpcm/voice_0218.wav",
+      "source_sha256": "3268c3e44626412066eed71b985fbcef19d7bc649a2f2b8f6a3a786c6ea4c41e"
+    },
+    {
+      "id": "voice_0219",
+      "kind": "adpcm",
+      "resource": 259,
+      "offset": 5892096,
+      "bytes": 17436,
+      "sha256": "d51c87b9e4355445526921f63b3924c011161e06fce9d1f606e1bd946c0240fc",
+      "source": "assets/adpcm/voice_0219.wav",
+      "source_sha256": "ef7ad338ae1cf7e8fed8ce7df6955823a6f32ee966dd42ac296752f3ac4ddb88"
+    },
+    {
+      "id": "voice_0220",
+      "kind": "adpcm",
+      "resource": 260,
+      "offset": 5910528,
+      "bytes": 21625,
+      "sha256": "a73bdcb1b77ca945c5aba3a6c1f46f8c4ddcb0d1986f4050043965d50c3c25b4",
+      "source": "assets/adpcm/voice_0220.wav",
+      "source_sha256": "507bc372f4504617e3f4abe6bc0cef4826746b6a8391599b113a333c5abd907a"
+    },
+    {
+      "id": "voice_0221",
+      "kind": "adpcm",
+      "resource": 261,
+      "offset": 5933056,
+      "bytes": 11923,
+      "sha256": "34c006f52c737bbe761c1d53fb3c4d0bd27a8e23ec6f07b14f15891425146819",
+      "source": "assets/adpcm/voice_0221.wav",
+      "source_sha256": "89d819f9c9bf84b02342264063b519b73a7ae9a551a60a8e01bb821f4d21579a"
+    },
+    {
+      "id": "voice_0222",
+      "kind": "adpcm",
+      "resource": 262,
+      "offset": 5945344,
+      "bytes": 8175,
+      "sha256": "7998f0f092dd35da34030b09d4598b77a667e39f90d0bf5722ad7b3e46fba31a",
+      "source": "assets/adpcm/voice_0222.wav",
+      "source_sha256": "b162ca9159e83e4f476e4427243b36d788ffe6d0ac84c5632d5ebdad84ab2770"
+    },
+    {
+      "id": "voice_0223",
+      "kind": "adpcm",
+      "resource": 263,
+      "offset": 5953536,
+      "bytes": 11262,
+      "sha256": "358b2b74713e1e594b7447b5d57b00073b5f1b4998a080f006a98c6803d80ac2",
+      "source": "assets/adpcm/voice_0223.wav",
+      "source_sha256": "995f237022326d87d091a2cf5604cdd5ad56e50d4f91acdcc485030d7aa71dc2"
+    },
+    {
+      "id": "voice_0224",
+      "kind": "adpcm",
+      "resource": 264,
+      "offset": 5965824,
+      "bytes": 18097,
+      "sha256": "34d7e142cc699153a078c9a6153a9d41b76cdab43250f5314d79d91041359ca1",
+      "source": "assets/adpcm/voice_0224.wav",
+      "source_sha256": "989fe8fbcb6cc463041b3a0b0be08c01c934edb6026834aaeeba46dbd5f1d5b4"
+    },
+    {
+      "id": "voice_0225",
+      "kind": "adpcm",
+      "resource": 265,
+      "offset": 5984256,
+      "bytes": 18097,
+      "sha256": "c7d246874176b15e921c26db796a6a34efb1941624da9dec540ea2490ee8401e",
+      "source": "assets/adpcm/voice_0225.wav",
+      "source_sha256": "0c0d78b7f4a865a71965ac9c96d2eeaa30b451429229b2a7b5f206b2d818035b"
+    },
+    {
+      "id": "voice_0226",
+      "kind": "adpcm",
+      "resource": 266,
+      "offset": 6002688,
+      "bytes": 14349,
+      "sha256": "cec3d68af383ab2402316fde0a75b2e91590db77c9c6a9e571dc569ce174d1e8",
+      "source": "assets/adpcm/voice_0226.wav",
+      "source_sha256": "8d21b85ac746a405d56b9dcb42928ffbb28b9bc83a942e147efa9f0fc3afbafc"
+    },
+    {
+      "id": "voice_0227",
+      "kind": "adpcm",
+      "resource": 267,
+      "offset": 6019072,
+      "bytes": 27579,
+      "sha256": "5d1a45d26da5c99eb095ac506478b9d01e0cf45e4841dc8223c7be769e41379f",
+      "source": "assets/adpcm/voice_0227.wav",
+      "source_sha256": "f1ac6d4eb235db1e8bc22e9557c39f1b673b30056a374a323519989b40c41146"
+    },
+    {
+      "id": "voice_0228",
+      "kind": "adpcm",
+      "resource": 268,
+      "offset": 6047744,
+      "bytes": 15231,
+      "sha256": "1ce10e3a7883f8f510871fb5af0581a69bde726504e7e8e44f4d1763557a71e8",
+      "source": "assets/adpcm/voice_0228.wav",
+      "source_sha256": "d3515694329f5ad6038399ad0b02d0f48ae749c8525528172e397d442316841f"
+    },
+    {
+      "id": "voice_0229",
+      "kind": "adpcm",
+      "resource": 269,
+      "offset": 6064128,
+      "bytes": 17877,
+      "sha256": "0fa8bd8a5bdf0ce94bf908f7119e1bd2f2e2044edbc2d09a187ffff4ca7e00e7",
+      "source": "assets/adpcm/voice_0229.wav",
+      "source_sha256": "0fa6738d10199ca3e3d83ed4b1c6fb0e64b4042885e9092c8edd3b78198cfc03"
+    },
+    {
+      "id": "voice_0230",
+      "kind": "adpcm",
+      "resource": 270,
+      "offset": 6082560,
+      "bytes": 15892,
+      "sha256": "28294cf25c9657e1863ffbb16ec081bca04e7fe846723ad7e50c6a0532fdcdd9",
+      "source": "assets/adpcm/voice_0230.wav",
+      "source_sha256": "ad4906592fd6fc548aa33b930ba8a958ffdb346d12bb8f1275b8bc53bd3124f6"
+    },
+    {
+      "id": "voice_0231",
+      "kind": "adpcm",
+      "resource": 271,
+      "offset": 6098944,
+      "bytes": 22728,
+      "sha256": "1c388ee95dbb517b907abf7da16795e94b3417ac8b74ce0ae5c9e4c07c42410f",
+      "source": "assets/adpcm/voice_0231.wav",
+      "source_sha256": "1686fbc279c8fbd04b1681a3158776eb17b0ab87515490c09e2d765eef86ffc2"
+    },
+    {
+      "id": "voice_0232",
+      "kind": "adpcm",
+      "resource": 272,
+      "offset": 6123520,
+      "bytes": 7954,
+      "sha256": "6efc18dddcb3995777b50052665ec1fea46049d9db33654a2af556bb8099554a",
+      "source": "assets/adpcm/voice_0232.wav",
+      "source_sha256": "b4f80f6ae93663a0010639f5ea95bfc8e05d89f6023a86c33fb29de18ab5bbbc"
+    },
+    {
+      "id": "voice_0233",
+      "kind": "adpcm",
+      "resource": 273,
+      "offset": 6131712,
+      "bytes": 27138,
+      "sha256": "85a8438bf28946be8e6b27dc81aec459e6f01c0ce3c44756a4d5c8cc5ad47f1e",
+      "source": "assets/adpcm/voice_0233.wav",
+      "source_sha256": "0d912ca1d60486c23be4f09aa767b94bce69b9098668cfea6edf8c2c5a3baa7f"
+    },
+    {
+      "id": "voice_0234",
+      "kind": "adpcm",
+      "resource": 274,
+      "offset": 6160384,
+      "bytes": 20523,
+      "sha256": "0ef6fa02e87d86b133dc2dca474477b26d40988de7f0e658ed6a0e18d3c5311d",
+      "source": "assets/adpcm/voice_0234.wav",
+      "source_sha256": "3cdeb8e2fccceb03a447756f5d991f62ddcc9ddfe918b31a75020861dccaacbe"
+    },
+    {
+      "id": "voice_0235",
+      "kind": "adpcm",
+      "resource": 275,
+      "offset": 6182912,
+      "bytes": 32430,
+      "sha256": "971f6a3f92461e4aed6657bddc8dc24f3e861efa29e0a6be272cf1a012a95ac0",
+      "source": "assets/adpcm/voice_0235.wav",
+      "source_sha256": "d285572a6ecfccde96e19f80cdfe30f8db9d5cee82a54d8ccd572d1d0bb442c4"
+    },
+    {
+      "id": "voice_0236",
+      "kind": "adpcm",
+      "resource": 276,
+      "offset": 6215680,
+      "bytes": 29343,
+      "sha256": "94c330ba5245063ecffdbb93394486c4a267d48101e7cfbb63cea4fc1ac7cbbb",
+      "source": "assets/adpcm/voice_0236.wav",
+      "source_sha256": "e5700755a9880a124b1cea606e0303bac2a664595b74b659c94e9cffb3c7385d"
+    },
+    {
+      "id": "voice_0237",
+      "kind": "adpcm",
+      "resource": 277,
+      "offset": 6246400,
+      "bytes": 13908,
+      "sha256": "a4e8fe74f84a3f139756f6ea05111d83a0158a3d75c25f6ba1db8f0e825fd60c",
+      "source": "assets/adpcm/voice_0237.wav",
+      "source_sha256": "cd5b0209fafe459c7061a5b3d4cc87f67c256390249440603abaace8ba97cfb5"
+    },
+    {
+      "id": "voice_0238",
+      "kind": "adpcm",
+      "resource": 278,
+      "offset": 6260736,
+      "bytes": 9718,
+      "sha256": "8ffdb77f3b8d3cf27c4ffdf214b95ee636135b821011d14a83b733f3c7f6600c",
+      "source": "assets/adpcm/voice_0238.wav",
+      "source_sha256": "44cf744585266902a115da80637888553644f5fe1db53228d90714d12d4ebf81"
+    },
+    {
+      "id": "voice_0239",
+      "kind": "adpcm",
+      "resource": 279,
+      "offset": 6270976,
+      "bytes": 10600,
+      "sha256": "5192edd289bac81763b5f646019b17db353e5d9030a406d004049c4b7a723cbc",
+      "source": "assets/adpcm/voice_0239.wav",
+      "source_sha256": "848641a28e2762ab23349c20509252764bfeb9dd555cc9ba2162b7741b3c3ba0"
+    },
+    {
+      "id": "voice_0240",
+      "kind": "adpcm",
+      "resource": 280,
+      "offset": 6283264,
+      "bytes": 29343,
+      "sha256": "49de36860bac69027d2ad6df0aa59b356390a701aaffe0bc7e0fd2bc18149598",
+      "source": "assets/adpcm/voice_0240.wav",
+      "source_sha256": "ee39bc83d85a76a67fdec487723185d1faa133b2ce354cb3a8aec8e63085674a"
+    },
+    {
+      "id": "voice_0241",
+      "kind": "adpcm",
+      "resource": 281,
+      "offset": 6313984,
+      "bytes": 14349,
+      "sha256": "b4efd2a1bb8fd3778b716386e5fff1771476b0be13822d86ab4b517703050dd0",
+      "source": "assets/adpcm/voice_0241.wav",
+      "source_sha256": "0baca4990c2eb29e0c4fd6d71e868ada9a48627a996f7fb900926884d77e80d3"
+    },
+    {
+      "id": "voice_0242",
+      "kind": "adpcm",
+      "resource": 282,
+      "offset": 6330368,
+      "bytes": 9939,
+      "sha256": "2c64c551a6c3b982b2095caed976b00fa4c4c7df95522660412753a79cb34053",
+      "source": "assets/adpcm/voice_0242.wav",
+      "source_sha256": "8897603b64b9f24118a2b51100272e446e70a604d8ebc6a5b72b4c67f5c56773"
+    },
+    {
+      "id": "voice_0243",
+      "kind": "adpcm",
+      "resource": 283,
+      "offset": 6340608,
+      "bytes": 12585,
+      "sha256": "35283735304f52af4b56251f0acf0db7eb33d8047dd5a722139189510c269609",
+      "source": "assets/adpcm/voice_0243.wav",
+      "source_sha256": "4edd95cd3d8fdb3f278cadb1febaedf7bbca36f69643f108137f939a98bb45c6"
+    },
+    {
+      "id": "voice_0244",
+      "kind": "adpcm",
+      "resource": 284,
+      "offset": 6354944,
+      "bytes": 18979,
+      "sha256": "9816fd5f7e3a2edb54825444d82e6a0290c231212c8d1ab264111085940c6252",
+      "source": "assets/adpcm/voice_0244.wav",
+      "source_sha256": "69ef3fd4e283be989659537a2dd3e879685af5e5ce313011782f5602c6246c8b"
+    },
+    {
+      "id": "voice_0245",
+      "kind": "adpcm",
+      "resource": 285,
+      "offset": 6375424,
+      "bytes": 18979,
+      "sha256": "feab7006049df76c0a664d7f915ecea6b94cb8bafe660a05cb5bdd28f7689bbd",
+      "source": "assets/adpcm/voice_0245.wav",
+      "source_sha256": "79e2925515f174efcee6fb5082f7ff54b7d5977ac901644fb66f5978fa047bab"
+    },
+    {
+      "id": "voice_0246",
+      "kind": "adpcm",
+      "resource": 286,
+      "offset": 6395904,
+      "bytes": 11482,
+      "sha256": "e517b187d8855f5247985407d2d0a9a3e3c1c3b111c5e9a78b1f5985dc3967a1",
+      "source": "assets/adpcm/voice_0246.wav",
+      "source_sha256": "b185da523b236cf51f4ec7009e7e4a2dd01891646418ffe2035627d3240a34d6"
+    },
+    {
+      "id": "voice_0247",
+      "kind": "adpcm",
+      "resource": 287,
+      "offset": 6408192,
+      "bytes": 20743,
+      "sha256": "7f275590c4e451094f6ab887619ea24691745c9bacfa9c329761149797542bd0",
+      "source": "assets/adpcm/voice_0247.wav",
+      "source_sha256": "169bc48d9651d6f27b4d180b66b41854a718f9d79555a7777a79bff04b59d59f"
+    },
+    {
+      "id": "voice_0248",
+      "kind": "adpcm",
+      "resource": 288,
+      "offset": 6430720,
+      "bytes": 13467,
+      "sha256": "3da4e069846a7a7ff1b96a288c34adc30ca51cb57622eb38cf33a48478eb0cfb",
+      "source": "assets/adpcm/voice_0248.wav",
+      "source_sha256": "c2db0337ee67e0b92c8b8c6267818c6c8c78edab0c8e59f0939b6ffe64ef9e2f"
+    },
+    {
+      "id": "voice_0249",
+      "kind": "adpcm",
+      "resource": 289,
+      "offset": 6445056,
+      "bytes": 17215,
+      "sha256": "8585f1f6cd97e0114a9b14fcef7ecb9d3e864914ad6f1c88dd02b09c0008af26",
+      "source": "assets/adpcm/voice_0249.wav",
+      "source_sha256": "a31d1a58f31db55d569ae164e38b625954fb1efc42bd0a5922d174a7936d7643"
+    },
+    {
+      "id": "voice_0250",
+      "kind": "adpcm",
+      "resource": 290,
+      "offset": 6463488,
+      "bytes": 25153,
+      "sha256": "ba24fce7032f3fe0b6d652486bade4dbff8e444acbe5ff326c4d7da7195b93b6",
+      "source": "assets/adpcm/voice_0250.wav",
+      "source_sha256": "dfbb29c555537449369ae276a2af3fc5bb63dbaa7a1c19111e893a5fdfddf050"
+    },
+    {
+      "id": "voice_0251",
+      "kind": "adpcm",
+      "resource": 291,
+      "offset": 6490112,
+      "bytes": 25815,
+      "sha256": "1ecc9aa75453c8aab94da2e5e24d167afcfa8a19360436dcd71525c24fe847d1",
+      "source": "assets/adpcm/voice_0251.wav",
+      "source_sha256": "0bfe7f6adb2768554f0a99a4c2e11937a9c1f6d668a91233406a8af170868722"
+    },
+    {
+      "id": "voice_0252",
+      "kind": "adpcm",
+      "resource": 292,
+      "offset": 6516736,
+      "bytes": 28020,
+      "sha256": "edc983218d094bf0ec17682a846ae4e5f34524332e510d4a96faa3863ccadc3e",
+      "source": "assets/adpcm/voice_0252.wav",
+      "source_sha256": "7d2fac3b52498e1c9c080377734735069acd3a4312ca953f866f449b0e3ac63d"
+    },
+    {
+      "id": "voice_0253",
+      "kind": "adpcm",
+      "resource": 293,
+      "offset": 6545408,
+      "bytes": 17436,
+      "sha256": "7089f5c1c192806e696ef65fa4aabaa7d3362bbadb7f0883490f9461c21d6ed7",
+      "source": "assets/adpcm/voice_0253.wav",
+      "source_sha256": "62da040ec93827b88c438212362d0ea6c643e4858bc462d3f0ef41679617d4ed"
+    },
+    {
+      "id": "voice_0254",
+      "kind": "adpcm",
+      "resource": 294,
+      "offset": 6563840,
+      "bytes": 39265,
+      "sha256": "0f24885dd4e59d93c6e7d57ecddd5ac2f1aec31420d3c890a462314981250957",
+      "source": "assets/adpcm/voice_0254.wav",
+      "source_sha256": "4e2fb727f92046d972a3752b2da00468d3314ec94e8fcc74504fe3170b597041"
+    },
+    {
+      "id": "voice_0255",
+      "kind": "adpcm",
+      "resource": 295,
+      "offset": 6604800,
+      "bytes": 18538,
+      "sha256": "f557a0e7f032785c3e32b51000f573398f5bfbf3a38e889ca2668f2bc015e05e",
+      "source": "assets/adpcm/voice_0255.wav",
+      "source_sha256": "92d152f878ca93397b1c76abde83cfe14d30917e33761afc76a7b55fced9c2a2"
+    },
+    {
+      "id": "voice_0256",
+      "kind": "adpcm",
+      "resource": 296,
+      "offset": 6625280,
+      "bytes": 24712,
+      "sha256": "31d1aa4c36764f46eae22b0dc9ec26f8bb41327d59d27cb9a6f178d1cc57f1ca",
+      "source": "assets/adpcm/voice_0256.wav",
+      "source_sha256": "d8cff7f6b846204fa4ad08a5ff3300333befe54c48a91746ef15747a02bb5447"
+    },
+    {
+      "id": "voice_0257",
+      "kind": "adpcm",
+      "resource": 297,
+      "offset": 6651904,
+      "bytes": 31768,
+      "sha256": "383130163034385c4c6f7924eef0686192fa263e5d7682fe8a7cf26771120ae5",
+      "source": "assets/adpcm/voice_0257.wav",
+      "source_sha256": "b3759f080b51d6f0523a31af9bb7c681890d6d8967e3ad8572cc0a906364d2bf"
+    },
+    {
+      "id": "voice_0258",
+      "kind": "adpcm",
+      "resource": 298,
+      "offset": 6684672,
+      "bytes": 31327,
+      "sha256": "06af99b06f0e12ef0d6416105a9cf18eb22befae915395ab0b991faf4963b934",
+      "source": "assets/adpcm/voice_0258.wav",
+      "source_sha256": "4d5472bdc711bc620c7e2d1f2545c3e91b7f730624728e40cd0cc12eda411325"
+    },
+    {
+      "id": "voice_0259",
+      "kind": "adpcm",
+      "resource": 299,
+      "offset": 6717440,
+      "bytes": 17215,
+      "sha256": "eb40d02b4fb09f1e6b3aeffef0bea854bdc12b147846c0df648a24e2ebabc688",
+      "source": "assets/adpcm/voice_0259.wav",
+      "source_sha256": "60a168db765d365ab8aa9dff041c4f73fe92c3560a8d0ea2a2b9548896172866"
+    },
+    {
+      "id": "voice_0260",
+      "kind": "adpcm",
+      "resource": 300,
+      "offset": 6735872,
+      "bytes": 32430,
+      "sha256": "9470b168b12199f0b19da40ba8bd60d7bc45edfe191bbcde0057221ef1de9e30",
+      "source": "assets/adpcm/voice_0260.wav",
+      "source_sha256": "0d7781e69e50814f7f49e3160dd55afb59d5b5530af7d4d1905d72275531c718"
+    },
+    {
+      "id": "voice_0261",
+      "kind": "adpcm",
+      "resource": 301,
+      "offset": 6768640,
+      "bytes": 20964,
+      "sha256": "c177350315e7897e7b061d774229bf9bd8ea0e2d106ca09e3e07895f0f37a557",
+      "source": "assets/adpcm/voice_0261.wav",
+      "source_sha256": "46b9183f0e7b702150c9ece91906b3f92bf45db3a0772dd2f646d692abe53661"
+    },
+    {
+      "id": "voice_0262",
+      "kind": "adpcm",
+      "resource": 302,
+      "offset": 6791168,
+      "bytes": 18759,
+      "sha256": "e503308ee3d78f84fb5858c78f0a7900e973d57d3c7efa99d1b348359e171ffa",
+      "source": "assets/adpcm/voice_0262.wav",
+      "source_sha256": "32804100c4bfb124859ea08bb51a88177da7e26860fe6ea6a201c5d741b33e2d"
+    },
+    {
+      "id": "voice_0263",
+      "kind": "adpcm",
+      "resource": 303,
+      "offset": 6811648,
+      "bytes": 26697,
+      "sha256": "3333ccd07e602fdac4349aa0b8f506d6615a712b8009d2fb4b3845c21cd70723",
+      "source": "assets/adpcm/voice_0263.wav",
+      "source_sha256": "2f306e5dcbb39b50c24997e2c24a224a58287983a5aa939a76a73b0058b4b395"
+    },
+    {
+      "id": "voice_0264",
+      "kind": "adpcm",
+      "resource": 304,
+      "offset": 6840320,
+      "bytes": 17215,
+      "sha256": "b57f432943df7248817321f65041f8573049876769e42b5d16a86205f68eb14e",
+      "source": "assets/adpcm/voice_0264.wav",
+      "source_sha256": "e6416682fdad19a29039d8f155dbe547def9e39cc345d0a3f45e62084132a00e"
+    },
+    {
+      "id": "voice_0265",
+      "kind": "adpcm",
+      "resource": 305,
+      "offset": 6858752,
+      "bytes": 12364,
+      "sha256": "b7b84fd6d30b5dd7bbeb3b602cc47118511f1f2a13f5c1326fef81ee5396b6fd",
+      "source": "assets/adpcm/voice_0265.wav",
+      "source_sha256": "f463fad970910fe03aeea2100000a3770b439dae1ad30651c7a1b2c47b1709a1"
+    },
+    {
+      "id": "voice_0266",
+      "kind": "adpcm",
+      "resource": 306,
+      "offset": 6873088,
+      "bytes": 15010,
+      "sha256": "d3ee0b952dad8983fd3149cd294da088c7976e56f102f18a79bbbc7d5c3ef750",
+      "source": "assets/adpcm/voice_0266.wav",
+      "source_sha256": "4ec85cc17e74b68ad55dacb03dd049931e9cc899b29222efce163e18ea87466e"
+    },
+    {
+      "id": "voice_0267",
+      "kind": "adpcm",
+      "resource": 307,
+      "offset": 6889472,
+      "bytes": 26476,
+      "sha256": "498e0b9d627ec135ace22ed916d6f3d0b4f98651faad15bf5e4377acefaecba6",
+      "source": "assets/adpcm/voice_0267.wav",
+      "source_sha256": "b6a4bff24b02424221004632f7df6848ba20f2d5eec9de5819b2d74a63318c36"
+    },
+    {
+      "id": "voice_0268",
+      "kind": "adpcm",
+      "resource": 308,
+      "offset": 6916096,
+      "bytes": 21405,
+      "sha256": "47652391aefcde682ffa4e1df278637a317e4427a9919aa49abb5b57194d4b20",
+      "source": "assets/adpcm/voice_0268.wav",
+      "source_sha256": "ca943816f79e0f0fe014051c16a70474861d0c0ab0b27181c8df9fce0e5eb8bb"
+    },
+    {
+      "id": "voice_0269",
+      "kind": "adpcm",
+      "resource": 309,
+      "offset": 6938624,
+      "bytes": 13026,
+      "sha256": "d8e088641e2ff2c24b4251407cd7006ca4c3580f028cd9dba02c3b388bd11b52",
+      "source": "assets/adpcm/voice_0269.wav",
+      "source_sha256": "87e51c435c1de752dbe439131aa4e5a10a985a0cfb4df084614d51d2c7768998"
+    },
+    {
+      "id": "voice_0270",
+      "kind": "adpcm",
+      "resource": 310,
+      "offset": 6952960,
+      "bytes": 23830,
+      "sha256": "fb8c8c65c4d9a420b167b300ca8d0d235308184de4aa4de827b8499e999971fa",
+      "source": "assets/adpcm/voice_0270.wav",
+      "source_sha256": "aec294c8e8f430da561f1fd0c91e16ead9d60bd750dbe11488ca6510ada6e63b"
+    },
+    {
+      "id": "voice_0271",
+      "kind": "adpcm",
+      "resource": 311,
+      "offset": 6977536,
+      "bytes": 22066,
+      "sha256": "238e87ac5fb5c1e72ba35ee4d61f283e8c2dc2ad6cc01b27c707407dbb98ae6b",
+      "source": "assets/adpcm/voice_0271.wav",
+      "source_sha256": "c6f907be983e4ae16232459ea739296e76353505f266aac703c541cc5556ed60"
+    },
+    {
+      "id": "voice_0272",
+      "kind": "adpcm",
+      "resource": 312,
+      "offset": 7000064,
+      "bytes": 22507,
+      "sha256": "5ec1870f696919792ab13ebd2ffa32ac8ef2e712f56df110c1233a2b6867fc1a",
+      "source": "assets/adpcm/voice_0272.wav",
+      "source_sha256": "9c0460a8b0f86f8d5a2f6e7ee4779e9ede11d5999ae791b1bd7f722fa39cf006"
+    },
+    {
+      "id": "voice_0273",
+      "kind": "adpcm",
+      "resource": 313,
+      "offset": 7022592,
+      "bytes": 6631,
+      "sha256": "839e519bd1efdfa85649b3e69de4742da9a76e219a21c6ca013f06c7797a4125",
+      "source": "assets/adpcm/voice_0273.wav",
+      "source_sha256": "f8f87d785df2d06130bc2794f09b6aa5181974010a7b5063c93e6860be3a510a"
+    },
+    {
+      "id": "voice_0274",
+      "kind": "adpcm",
+      "resource": 314,
+      "offset": 7030784,
+      "bytes": 20743,
+      "sha256": "12defc8279b03ed2181eb5179d70cd64cfa24eefbfe0a4ea6aa5ec34ceb15d88",
+      "source": "assets/adpcm/voice_0274.wav",
+      "source_sha256": "05784c3771453becb97d80074a2d1a222f206252693252ed257b1892c08c11a3"
+    },
+    {
+      "id": "voice_0275",
+      "kind": "adpcm",
+      "resource": 315,
+      "offset": 7053312,
+      "bytes": 25374,
+      "sha256": "32a6521e6c7dd3009e8e50d4bd872b9275ae533925f49e4ed69d3ddedd7378a4",
+      "source": "assets/adpcm/voice_0275.wav",
+      "source_sha256": "71865336e33221e51abcd8e2d017a776ed6c704e14b9c892130dea21f650af23"
+    }
+  ],
+  "command_map": [
+    {
+      "index": 0,
+      "scene": "logo",
+      "pc": 0,
+      "type": "audio"
+    },
+    {
+      "index": 1,
+      "scene": "logo",
+      "pc": 1,
+      "type": "inputcheck"
+    },
+    {
+      "index": 2,
+      "scene": "logo",
+      "pc": 2,
+      "type": "background"
+    },
+    {
+      "index": 3,
+      "scene": "logo",
+      "pc": 3,
+      "type": "wait"
+    },
+    {
+      "index": 4,
+      "scene": "logo",
+      "pc": 4,
+      "type": "background"
+    },
+    {
+      "index": 5,
+      "scene": "logo",
+      "pc": 5,
+      "type": "wait"
+    },
+    {
+      "index": 6,
+      "scene": "logo",
+      "pc": 6,
+      "type": "inputcheck"
+    },
+    {
+      "index": 7,
+      "scene": "logo",
+      "pc": 7,
+      "type": "jump"
+    },
+    {
+      "index": 8,
+      "scene": "title",
+      "pc": 0,
+      "type": "background"
+    },
+    {
+      "index": 9,
+      "scene": "title",
+      "pc": 1,
+      "type": "audio"
+    },
+    {
+      "index": 10,
+      "scene": "title",
+      "pc": 2,
+      "type": "wait"
+    },
+    {
+      "index": 11,
+      "scene": "title",
+      "pc": 3,
+      "type": "spritetext"
+    },
+    {
+      "index": 12,
+      "scene": "title",
+      "pc": 4,
+      "type": "inputcheck"
+    },
+    {
+      "index": 13,
+      "scene": "title",
+      "pc": 5,
+      "type": "wait"
+    },
+    {
+      "index": 14,
+      "scene": "title",
+      "pc": 6,
+      "type": "inputcheck"
+    },
+    {
+      "index": 15,
+      "scene": "title",
+      "pc": 7,
+      "type": "spritetext"
+    },
+    {
+      "index": 16,
+      "scene": "title",
+      "pc": 8,
+      "type": "jump"
+    },
+    {
+      "index": 17,
+      "scene": "title",
+      "pc": 9,
+      "type": "inputcheck"
+    },
+    {
+      "index": 18,
+      "scene": "title",
+      "pc": 10,
+      "type": "spritetext"
+    },
+    {
+      "index": 19,
+      "scene": "title",
+      "pc": 11,
+      "type": "audio"
+    },
+    {
+      "index": 20,
+      "scene": "title",
+      "pc": 12,
+      "type": "wait"
+    },
+    {
+      "index": 21,
+      "scene": "title",
+      "pc": 13,
+      "type": "jump"
+    },
+    {
+      "index": 22,
+      "scene": "ep01_01_openning",
+      "pc": 0,
+      "type": "audio"
+    },
+    {
+      "index": 23,
+      "scene": "ep01_01_openning",
+      "pc": 1,
+      "type": "background"
+    },
+    {
+      "index": 24,
+      "scene": "ep01_01_openning",
+      "pc": 2,
+      "type": "message"
+    },
+    {
+      "index": 25,
+      "scene": "ep01_01_openning",
+      "pc": 3,
+      "type": "background"
+    },
+    {
+      "index": 26,
+      "scene": "ep01_01_openning",
+      "pc": 4,
+      "type": "message"
+    },
+    {
+      "index": 27,
+      "scene": "ep01_01_openning",
+      "pc": 5,
+      "type": "background"
+    },
+    {
+      "index": 28,
+      "scene": "ep01_01_openning",
+      "pc": 6,
+      "type": "message"
+    },
+    {
+      "index": 29,
+      "scene": "ep01_01_openning",
+      "pc": 7,
+      "type": "message"
+    },
+    {
+      "index": 30,
+      "scene": "ep01_01_openning",
+      "pc": 8,
+      "type": "message"
+    },
+    {
+      "index": 31,
+      "scene": "ep01_01_openning",
+      "pc": 9,
+      "type": "jump"
+    },
+    {
+      "index": 32,
+      "scene": "ep01_02_clubroom",
+      "pc": 0,
+      "type": "audio"
+    },
+    {
+      "index": 33,
+      "scene": "ep01_02_clubroom",
+      "pc": 1,
+      "type": "background"
+    },
+    {
+      "index": 34,
+      "scene": "ep01_02_clubroom",
+      "pc": 2,
+      "type": "sprite"
+    },
+    {
+      "index": 35,
+      "scene": "ep01_02_clubroom",
+      "pc": 3,
+      "type": "message"
+    },
+    {
+      "index": 36,
+      "scene": "ep01_02_clubroom",
+      "pc": 4,
+      "type": "audio"
+    },
+    {
+      "index": 37,
+      "scene": "ep01_02_clubroom",
+      "pc": 5,
+      "type": "sprite"
+    },
+    {
+      "index": 38,
+      "scene": "ep01_02_clubroom",
+      "pc": 6,
+      "type": "message"
+    },
+    {
+      "index": 39,
+      "scene": "ep01_02_clubroom",
+      "pc": 7,
+      "type": "message"
+    },
+    {
+      "index": 40,
+      "scene": "ep01_02_clubroom",
+      "pc": 8,
+      "type": "sprite"
+    },
+    {
+      "index": 41,
+      "scene": "ep01_02_clubroom",
+      "pc": 9,
+      "type": "sprite"
+    },
+    {
+      "index": 42,
+      "scene": "ep01_02_clubroom",
+      "pc": 10,
+      "type": "spritemove"
+    },
+    {
+      "index": 43,
+      "scene": "ep01_02_clubroom",
+      "pc": 11,
+      "type": "spritemove"
+    },
+    {
+      "index": 44,
+      "scene": "ep01_02_clubroom",
+      "pc": 12,
+      "type": "message"
+    },
+    {
+      "index": 45,
+      "scene": "ep01_02_clubroom",
+      "pc": 13,
+      "type": "message"
+    },
+    {
+      "index": 46,
+      "scene": "ep01_02_clubroom",
+      "pc": 14,
+      "type": "message"
+    },
+    {
+      "index": 47,
+      "scene": "ep01_02_clubroom",
+      "pc": 15,
+      "type": "message"
+    },
+    {
+      "index": 48,
+      "scene": "ep01_02_clubroom",
+      "pc": 16,
+      "type": "message"
+    },
+    {
+      "index": 49,
+      "scene": "ep01_02_clubroom",
+      "pc": 17,
+      "type": "message"
+    },
+    {
+      "index": 50,
+      "scene": "ep01_02_clubroom",
+      "pc": 18,
+      "type": "sprite"
+    },
+    {
+      "index": 51,
+      "scene": "ep01_02_clubroom",
+      "pc": 19,
+      "type": "message"
+    },
+    {
+      "index": 52,
+      "scene": "ep01_02_clubroom",
+      "pc": 20,
+      "type": "message"
+    },
+    {
+      "index": 53,
+      "scene": "ep01_02_clubroom",
+      "pc": 21,
+      "type": "jump"
+    },
+    {
+      "index": 54,
+      "scene": "ep01_03_pce",
+      "pc": 0,
+      "type": "sprite"
+    },
+    {
+      "index": 55,
+      "scene": "ep01_03_pce",
+      "pc": 1,
+      "type": "sprite"
+    },
+    {
+      "index": 56,
+      "scene": "ep01_03_pce",
+      "pc": 2,
+      "type": "background"
+    },
+    {
+      "index": 57,
+      "scene": "ep01_03_pce",
+      "pc": 3,
+      "type": "message"
+    },
+    {
+      "index": 58,
+      "scene": "ep01_03_pce",
+      "pc": 4,
+      "type": "message"
+    },
+    {
+      "index": 59,
+      "scene": "ep01_03_pce",
+      "pc": 5,
+      "type": "message"
+    },
+    {
+      "index": 60,
+      "scene": "ep01_03_pce",
+      "pc": 6,
+      "type": "message"
+    },
+    {
+      "index": 61,
+      "scene": "ep01_03_pce",
+      "pc": 7,
+      "type": "message"
+    },
+    {
+      "index": 62,
+      "scene": "ep01_03_pce",
+      "pc": 8,
+      "type": "message"
+    },
+    {
+      "index": 63,
+      "scene": "ep01_03_pce",
+      "pc": 9,
+      "type": "message"
+    },
+    {
+      "index": 64,
+      "scene": "ep01_03_pce",
+      "pc": 10,
+      "type": "message"
+    },
+    {
+      "index": 65,
+      "scene": "ep01_03_pce",
+      "pc": 11,
+      "type": "message"
+    },
+    {
+      "index": 66,
+      "scene": "ep01_03_pce",
+      "pc": 12,
+      "type": "message"
+    },
+    {
+      "index": 67,
+      "scene": "ep01_03_pce",
+      "pc": 13,
+      "type": "message"
+    },
+    {
+      "index": 68,
+      "scene": "ep01_03_pce",
+      "pc": 14,
+      "type": "message"
+    },
+    {
+      "index": 69,
+      "scene": "ep01_03_pce",
+      "pc": 15,
+      "type": "message"
+    },
+    {
+      "index": 70,
+      "scene": "ep01_03_pce",
+      "pc": 16,
+      "type": "background"
+    },
+    {
+      "index": 71,
+      "scene": "ep01_03_pce",
+      "pc": 17,
+      "type": "sprite"
+    },
+    {
+      "index": 72,
+      "scene": "ep01_03_pce",
+      "pc": 18,
+      "type": "sprite"
+    },
+    {
+      "index": 73,
+      "scene": "ep01_03_pce",
+      "pc": 19,
+      "type": "message"
+    },
+    {
+      "index": 74,
+      "scene": "ep01_03_pce",
+      "pc": 20,
+      "type": "message"
+    },
+    {
+      "index": 75,
+      "scene": "ep01_03_pce",
+      "pc": 21,
+      "type": "message"
+    },
+    {
+      "index": 76,
+      "scene": "ep01_03_pce",
+      "pc": 22,
+      "type": "message"
+    },
+    {
+      "index": 77,
+      "scene": "ep01_03_pce",
+      "pc": 23,
+      "type": "message"
+    },
+    {
+      "index": 78,
+      "scene": "ep01_03_pce",
+      "pc": 24,
+      "type": "message"
+    },
+    {
+      "index": 79,
+      "scene": "ep01_03_pce",
+      "pc": 25,
+      "type": "message"
+    },
+    {
+      "index": 80,
+      "scene": "ep01_03_pce",
+      "pc": 26,
+      "type": "message"
+    },
+    {
+      "index": 81,
+      "scene": "ep01_03_pce",
+      "pc": 27,
+      "type": "message"
+    },
+    {
+      "index": 82,
+      "scene": "ep01_03_pce",
+      "pc": 28,
+      "type": "sprite"
+    },
+    {
+      "index": 83,
+      "scene": "ep01_03_pce",
+      "pc": 29,
+      "type": "sprite"
+    },
+    {
+      "index": 84,
+      "scene": "ep01_03_pce",
+      "pc": 30,
+      "type": "background"
+    },
+    {
+      "index": 85,
+      "scene": "ep01_03_pce",
+      "pc": 31,
+      "type": "message"
+    },
+    {
+      "index": 86,
+      "scene": "ep01_03_pce",
+      "pc": 32,
+      "type": "message"
+    },
+    {
+      "index": 87,
+      "scene": "ep01_03_pce",
+      "pc": 33,
+      "type": "message"
+    },
+    {
+      "index": 88,
+      "scene": "ep01_03_pce",
+      "pc": 34,
+      "type": "message"
+    },
+    {
+      "index": 89,
+      "scene": "ep01_03_pce",
+      "pc": 35,
+      "type": "message"
+    },
+    {
+      "index": 90,
+      "scene": "ep01_03_pce",
+      "pc": 36,
+      "type": "message"
+    },
+    {
+      "index": 91,
+      "scene": "ep01_03_pce",
+      "pc": 37,
+      "type": "message"
+    },
+    {
+      "index": 92,
+      "scene": "ep01_03_pce",
+      "pc": 38,
+      "type": "message"
+    },
+    {
+      "index": 93,
+      "scene": "ep01_03_pce",
+      "pc": 39,
+      "type": "background"
+    },
+    {
+      "index": 94,
+      "scene": "ep01_03_pce",
+      "pc": 40,
+      "type": "sprite"
+    },
+    {
+      "index": 95,
+      "scene": "ep01_03_pce",
+      "pc": 41,
+      "type": "sprite"
+    },
+    {
+      "index": 96,
+      "scene": "ep01_03_pce",
+      "pc": 42,
+      "type": "message"
+    },
+    {
+      "index": 97,
+      "scene": "ep01_03_pce",
+      "pc": 43,
+      "type": "choice"
+    },
+    {
+      "index": 98,
+      "scene": "ep01_03_01_branch",
+      "pc": 0,
+      "type": "sprite"
+    },
+    {
+      "index": 99,
+      "scene": "ep01_03_01_branch",
+      "pc": 1,
+      "type": "message"
+    },
+    {
+      "index": 100,
+      "scene": "ep01_03_01_branch",
+      "pc": 2,
+      "type": "sprite"
+    },
+    {
+      "index": 101,
+      "scene": "ep01_03_01_branch",
+      "pc": 3,
+      "type": "message"
+    },
+    {
+      "index": 102,
+      "scene": "ep01_03_01_branch",
+      "pc": 4,
+      "type": "message"
+    },
+    {
+      "index": 103,
+      "scene": "ep01_03_01_branch",
+      "pc": 5,
+      "type": "message"
+    },
+    {
+      "index": 104,
+      "scene": "ep01_03_01_branch",
+      "pc": 6,
+      "type": "message"
+    },
+    {
+      "index": 105,
+      "scene": "ep01_03_01_branch",
+      "pc": 7,
+      "type": "message"
+    },
+    {
+      "index": 106,
+      "scene": "ep01_03_01_branch",
+      "pc": 8,
+      "type": "jump"
+    },
+    {
+      "index": 107,
+      "scene": "ep01_03_02_branch",
+      "pc": 0,
+      "type": "sprite"
+    },
+    {
+      "index": 108,
+      "scene": "ep01_03_02_branch",
+      "pc": 1,
+      "type": "message"
+    },
+    {
+      "index": 109,
+      "scene": "ep01_03_02_branch",
+      "pc": 2,
+      "type": "sprite"
+    },
+    {
+      "index": 110,
+      "scene": "ep01_03_02_branch",
+      "pc": 3,
+      "type": "message"
+    },
+    {
+      "index": 111,
+      "scene": "ep01_03_02_branch",
+      "pc": 4,
+      "type": "sprite"
+    },
+    {
+      "index": 112,
+      "scene": "ep01_03_02_branch",
+      "pc": 5,
+      "type": "message"
+    },
+    {
+      "index": 113,
+      "scene": "ep01_03_02_branch",
+      "pc": 6,
+      "type": "message"
+    },
+    {
+      "index": 114,
+      "scene": "ep01_03_02_branch",
+      "pc": 7,
+      "type": "sprite"
+    },
+    {
+      "index": 115,
+      "scene": "ep01_03_02_branch",
+      "pc": 8,
+      "type": "message"
+    },
+    {
+      "index": 116,
+      "scene": "ep01_03_02_branch",
+      "pc": 9,
+      "type": "sprite"
+    },
+    {
+      "index": 117,
+      "scene": "ep01_03_02_branch",
+      "pc": 10,
+      "type": "message"
+    },
+    {
+      "index": 118,
+      "scene": "ep01_03_02_branch",
+      "pc": 11,
+      "type": "message"
+    },
+    {
+      "index": 119,
+      "scene": "ep01_03_02_branch",
+      "pc": 12,
+      "type": "sprite"
+    },
+    {
+      "index": 120,
+      "scene": "ep01_03_02_branch",
+      "pc": 13,
+      "type": "message"
+    },
+    {
+      "index": 121,
+      "scene": "ep01_03_02_branch",
+      "pc": 14,
+      "type": "jump"
+    },
+    {
+      "index": 122,
+      "scene": "ep01_04_battle",
+      "pc": 0,
+      "type": "sprite"
+    },
+    {
+      "index": 123,
+      "scene": "ep01_04_battle",
+      "pc": 1,
+      "type": "sprite"
+    },
+    {
+      "index": 124,
+      "scene": "ep01_04_battle",
+      "pc": 2,
+      "type": "sprite"
+    },
+    {
+      "index": 125,
+      "scene": "ep01_04_battle",
+      "pc": 3,
+      "type": "spritemove"
+    },
+    {
+      "index": 126,
+      "scene": "ep01_04_battle",
+      "pc": 4,
+      "type": "spritemove"
+    },
+    {
+      "index": 127,
+      "scene": "ep01_04_battle",
+      "pc": 5,
+      "type": "spritemove"
+    },
+    {
+      "index": 128,
+      "scene": "ep01_04_battle",
+      "pc": 6,
+      "type": "message"
+    },
+    {
+      "index": 129,
+      "scene": "ep01_04_battle",
+      "pc": 7,
+      "type": "message"
+    },
+    {
+      "index": 130,
+      "scene": "ep01_04_battle",
+      "pc": 8,
+      "type": "sprite"
+    },
+    {
+      "index": 131,
+      "scene": "ep01_04_battle",
+      "pc": 9,
+      "type": "message"
+    },
+    {
+      "index": 132,
+      "scene": "ep01_04_battle",
+      "pc": 10,
+      "type": "sprite"
+    },
+    {
+      "index": 133,
+      "scene": "ep01_04_battle",
+      "pc": 11,
+      "type": "message"
+    },
+    {
+      "index": 134,
+      "scene": "ep01_04_battle",
+      "pc": 12,
+      "type": "sprite"
+    },
+    {
+      "index": 135,
+      "scene": "ep01_04_battle",
+      "pc": 13,
+      "type": "message"
+    },
+    {
+      "index": 136,
+      "scene": "ep01_04_battle",
+      "pc": 14,
+      "type": "message"
+    },
+    {
+      "index": 137,
+      "scene": "ep01_04_battle",
+      "pc": 15,
+      "type": "message"
+    },
+    {
+      "index": 138,
+      "scene": "ep01_04_battle",
+      "pc": 16,
+      "type": "sprite"
+    },
+    {
+      "index": 139,
+      "scene": "ep01_04_battle",
+      "pc": 17,
+      "type": "message"
+    },
+    {
+      "index": 140,
+      "scene": "ep01_04_battle",
+      "pc": 18,
+      "type": "spritemove"
+    },
+    {
+      "index": 141,
+      "scene": "ep01_04_battle",
+      "pc": 19,
+      "type": "message"
+    },
+    {
+      "index": 142,
+      "scene": "ep01_04_battle",
+      "pc": 20,
+      "type": "sprite"
+    },
+    {
+      "index": 143,
+      "scene": "ep01_04_battle",
+      "pc": 21,
+      "type": "message"
+    },
+    {
+      "index": 144,
+      "scene": "ep01_04_battle",
+      "pc": 22,
+      "type": "message"
+    },
+    {
+      "index": 145,
+      "scene": "ep01_04_battle",
+      "pc": 23,
+      "type": "sprite"
+    },
+    {
+      "index": 146,
+      "scene": "ep01_04_battle",
+      "pc": 24,
+      "type": "message"
+    },
+    {
+      "index": 147,
+      "scene": "ep01_04_battle",
+      "pc": 25,
+      "type": "sprite"
+    },
+    {
+      "index": 148,
+      "scene": "ep01_04_battle",
+      "pc": 26,
+      "type": "message"
+    },
+    {
+      "index": 149,
+      "scene": "ep01_04_battle",
+      "pc": 27,
+      "type": "message"
+    },
+    {
+      "index": 150,
+      "scene": "ep01_04_battle",
+      "pc": 28,
+      "type": "sprite"
+    },
+    {
+      "index": 151,
+      "scene": "ep01_04_battle",
+      "pc": 29,
+      "type": "message"
+    },
+    {
+      "index": 152,
+      "scene": "ep01_04_battle",
+      "pc": 30,
+      "type": "sprite"
+    },
+    {
+      "index": 153,
+      "scene": "ep01_04_battle",
+      "pc": 31,
+      "type": "message"
+    },
+    {
+      "index": 154,
+      "scene": "ep01_04_battle",
+      "pc": 32,
+      "type": "message"
+    },
+    {
+      "index": 155,
+      "scene": "ep01_04_battle",
+      "pc": 33,
+      "type": "message"
+    },
+    {
+      "index": 156,
+      "scene": "ep01_04_battle",
+      "pc": 34,
+      "type": "message"
+    },
+    {
+      "index": 157,
+      "scene": "ep01_04_battle",
+      "pc": 35,
+      "type": "sprite"
+    },
+    {
+      "index": 158,
+      "scene": "ep01_04_battle",
+      "pc": 36,
+      "type": "message"
+    },
+    {
+      "index": 159,
+      "scene": "ep01_04_battle",
+      "pc": 37,
+      "type": "sprite"
+    },
+    {
+      "index": 160,
+      "scene": "ep01_04_battle",
+      "pc": 38,
+      "type": "message"
+    },
+    {
+      "index": 161,
+      "scene": "ep01_04_battle",
+      "pc": 39,
+      "type": "message"
+    },
+    {
+      "index": 162,
+      "scene": "ep01_04_battle",
+      "pc": 40,
+      "type": "sprite"
+    },
+    {
+      "index": 163,
+      "scene": "ep01_04_battle",
+      "pc": 41,
+      "type": "message"
+    },
+    {
+      "index": 164,
+      "scene": "ep01_04_battle",
+      "pc": 42,
+      "type": "jump"
+    },
+    {
+      "index": 165,
+      "scene": "ep01_05_round1",
+      "pc": 0,
+      "type": "sprite"
+    },
+    {
+      "index": 166,
+      "scene": "ep01_05_round1",
+      "pc": 1,
+      "type": "sprite"
+    },
+    {
+      "index": 167,
+      "scene": "ep01_05_round1",
+      "pc": 2,
+      "type": "sprite"
+    },
+    {
+      "index": 168,
+      "scene": "ep01_05_round1",
+      "pc": 3,
+      "type": "background"
+    },
+    {
+      "index": 169,
+      "scene": "ep01_05_round1",
+      "pc": 4,
+      "type": "message"
+    },
+    {
+      "index": 170,
+      "scene": "ep01_05_round1",
+      "pc": 5,
+      "type": "audio"
+    },
+    {
+      "index": 171,
+      "scene": "ep01_05_round1",
+      "pc": 6,
+      "type": "message"
+    },
+    {
+      "index": 172,
+      "scene": "ep01_05_round1",
+      "pc": 7,
+      "type": "message"
+    },
+    {
+      "index": 173,
+      "scene": "ep01_05_round1",
+      "pc": 8,
+      "type": "message"
+    },
+    {
+      "index": 174,
+      "scene": "ep01_05_round1",
+      "pc": 9,
+      "type": "message"
+    },
+    {
+      "index": 175,
+      "scene": "ep01_05_round1",
+      "pc": 10,
+      "type": "message"
+    },
+    {
+      "index": 176,
+      "scene": "ep01_05_round1",
+      "pc": 11,
+      "type": "message"
+    },
+    {
+      "index": 177,
+      "scene": "ep01_05_round1",
+      "pc": 12,
+      "type": "message"
+    },
+    {
+      "index": 178,
+      "scene": "ep01_05_round1",
+      "pc": 13,
+      "type": "message"
+    },
+    {
+      "index": 179,
+      "scene": "ep01_05_round1",
+      "pc": 14,
+      "type": "message"
+    },
+    {
+      "index": 180,
+      "scene": "ep01_05_round1",
+      "pc": 15,
+      "type": "message"
+    },
+    {
+      "index": 181,
+      "scene": "ep01_05_round1",
+      "pc": 16,
+      "type": "message"
+    },
+    {
+      "index": 182,
+      "scene": "ep01_05_round1",
+      "pc": 17,
+      "type": "message"
+    },
+    {
+      "index": 183,
+      "scene": "ep01_05_round1",
+      "pc": 18,
+      "type": "message"
+    },
+    {
+      "index": 184,
+      "scene": "ep01_05_round1",
+      "pc": 19,
+      "type": "message"
+    },
+    {
+      "index": 185,
+      "scene": "ep01_05_round1",
+      "pc": 20,
+      "type": "message"
+    },
+    {
+      "index": 186,
+      "scene": "ep01_05_round1",
+      "pc": 21,
+      "type": "message"
+    },
+    {
+      "index": 187,
+      "scene": "ep01_05_round1",
+      "pc": 22,
+      "type": "message"
+    },
+    {
+      "index": 188,
+      "scene": "ep01_05_round1",
+      "pc": 23,
+      "type": "message"
+    },
+    {
+      "index": 189,
+      "scene": "ep01_05_round1",
+      "pc": 24,
+      "type": "message"
+    },
+    {
+      "index": 190,
+      "scene": "ep01_05_round1",
+      "pc": 25,
+      "type": "message"
+    },
+    {
+      "index": 191,
+      "scene": "ep01_05_round1",
+      "pc": 26,
+      "type": "message"
+    },
+    {
+      "index": 192,
+      "scene": "ep01_05_round1",
+      "pc": 27,
+      "type": "message"
+    },
+    {
+      "index": 193,
+      "scene": "ep01_05_round1",
+      "pc": 28,
+      "type": "message"
+    },
+    {
+      "index": 194,
+      "scene": "ep01_05_round1",
+      "pc": 29,
+      "type": "message"
+    },
+    {
+      "index": 195,
+      "scene": "ep01_05_round1",
+      "pc": 30,
+      "type": "message"
+    },
+    {
+      "index": 196,
+      "scene": "ep01_05_round1",
+      "pc": 31,
+      "type": "message"
+    },
+    {
+      "index": 197,
+      "scene": "ep01_05_round1",
+      "pc": 32,
+      "type": "message"
+    },
+    {
+      "index": 198,
+      "scene": "ep01_05_round1",
+      "pc": 33,
+      "type": "message"
+    },
+    {
+      "index": 199,
+      "scene": "ep01_05_round1",
+      "pc": 34,
+      "type": "message"
+    },
+    {
+      "index": 200,
+      "scene": "ep01_05_round1",
+      "pc": 35,
+      "type": "jump"
+    },
+    {
+      "index": 201,
+      "scene": "ep01_06_choice",
+      "pc": 0,
+      "type": "background"
+    },
+    {
+      "index": 202,
+      "scene": "ep01_06_choice",
+      "pc": 1,
+      "type": "sprite"
+    },
+    {
+      "index": 203,
+      "scene": "ep01_06_choice",
+      "pc": 2,
+      "type": "sprite"
+    },
+    {
+      "index": 204,
+      "scene": "ep01_06_choice",
+      "pc": 3,
+      "type": "sprite"
+    },
+    {
+      "index": 205,
+      "scene": "ep01_06_choice",
+      "pc": 4,
+      "type": "message"
+    },
+    {
+      "index": 206,
+      "scene": "ep01_06_choice",
+      "pc": 5,
+      "type": "message"
+    },
+    {
+      "index": 207,
+      "scene": "ep01_06_choice",
+      "pc": 6,
+      "type": "message"
+    },
+    {
+      "index": 208,
+      "scene": "ep01_06_choice",
+      "pc": 7,
+      "type": "message"
+    },
+    {
+      "index": 209,
+      "scene": "ep01_06_choice",
+      "pc": 8,
+      "type": "sprite"
+    },
+    {
+      "index": 210,
+      "scene": "ep01_06_choice",
+      "pc": 9,
+      "type": "message"
+    },
+    {
+      "index": 211,
+      "scene": "ep01_06_choice",
+      "pc": 10,
+      "type": "sprite"
+    },
+    {
+      "index": 212,
+      "scene": "ep01_06_choice",
+      "pc": 11,
+      "type": "message"
+    },
+    {
+      "index": 213,
+      "scene": "ep01_06_choice",
+      "pc": 12,
+      "type": "message"
+    },
+    {
+      "index": 214,
+      "scene": "ep01_06_choice",
+      "pc": 13,
+      "type": "message"
+    },
+    {
+      "index": 215,
+      "scene": "ep01_06_choice",
+      "pc": 14,
+      "type": "message"
+    },
+    {
+      "index": 216,
+      "scene": "ep01_06_choice",
+      "pc": 15,
+      "type": "sprite"
+    },
+    {
+      "index": 217,
+      "scene": "ep01_06_choice",
+      "pc": 16,
+      "type": "message"
+    },
+    {
+      "index": 218,
+      "scene": "ep01_06_choice",
+      "pc": 17,
+      "type": "message"
+    },
+    {
+      "index": 219,
+      "scene": "ep01_06_choice",
+      "pc": 18,
+      "type": "sprite"
+    },
+    {
+      "index": 220,
+      "scene": "ep01_06_choice",
+      "pc": 19,
+      "type": "message"
+    },
+    {
+      "index": 221,
+      "scene": "ep01_06_choice",
+      "pc": 20,
+      "type": "sprite"
+    },
+    {
+      "index": 222,
+      "scene": "ep01_06_choice",
+      "pc": 21,
+      "type": "message"
+    },
+    {
+      "index": 223,
+      "scene": "ep01_06_choice",
+      "pc": 22,
+      "type": "sprite"
+    },
+    {
+      "index": 224,
+      "scene": "ep01_06_choice",
+      "pc": 23,
+      "type": "message"
+    },
+    {
+      "index": 225,
+      "scene": "ep01_06_choice",
+      "pc": 24,
+      "type": "sprite"
+    },
+    {
+      "index": 226,
+      "scene": "ep01_06_choice",
+      "pc": 25,
+      "type": "message"
+    },
+    {
+      "index": 227,
+      "scene": "ep01_06_choice",
+      "pc": 26,
+      "type": "sprite"
+    },
+    {
+      "index": 228,
+      "scene": "ep01_06_choice",
+      "pc": 27,
+      "type": "message"
+    },
+    {
+      "index": 229,
+      "scene": "ep01_06_choice",
+      "pc": 28,
+      "type": "sprite"
+    },
+    {
+      "index": 230,
+      "scene": "ep01_06_choice",
+      "pc": 29,
+      "type": "message"
+    },
+    {
+      "index": 231,
+      "scene": "ep01_06_choice",
+      "pc": 30,
+      "type": "sprite"
+    },
+    {
+      "index": 232,
+      "scene": "ep01_06_choice",
+      "pc": 31,
+      "type": "message"
+    },
+    {
+      "index": 233,
+      "scene": "ep01_06_choice",
+      "pc": 32,
+      "type": "sprite"
+    },
+    {
+      "index": 234,
+      "scene": "ep01_06_choice",
+      "pc": 33,
+      "type": "message"
+    },
+    {
+      "index": 235,
+      "scene": "ep01_06_choice",
+      "pc": 34,
+      "type": "message"
+    },
+    {
+      "index": 236,
+      "scene": "ep01_06_choice",
+      "pc": 35,
+      "type": "message"
+    },
+    {
+      "index": 237,
+      "scene": "ep01_06_choice",
+      "pc": 36,
+      "type": "message"
+    },
+    {
+      "index": 238,
+      "scene": "ep01_06_choice",
+      "pc": 37,
+      "type": "message"
+    },
+    {
+      "index": 239,
+      "scene": "ep01_06_choice",
+      "pc": 38,
+      "type": "choice"
+    },
+    {
+      "index": 240,
+      "scene": "ep01_06_01_branch",
+      "pc": 0,
+      "type": "audio"
+    },
+    {
+      "index": 241,
+      "scene": "ep01_06_01_branch",
+      "pc": 1,
+      "type": "sprite"
+    },
+    {
+      "index": 242,
+      "scene": "ep01_06_01_branch",
+      "pc": 2,
+      "type": "sprite"
+    },
+    {
+      "index": 243,
+      "scene": "ep01_06_01_branch",
+      "pc": 3,
+      "type": "sprite"
+    },
+    {
+      "index": 244,
+      "scene": "ep01_06_01_branch",
+      "pc": 4,
+      "type": "message"
+    },
+    {
+      "index": 245,
+      "scene": "ep01_06_01_branch",
+      "pc": 5,
+      "type": "sprite"
+    },
+    {
+      "index": 246,
+      "scene": "ep01_06_01_branch",
+      "pc": 6,
+      "type": "message"
+    },
+    {
+      "index": 247,
+      "scene": "ep01_06_01_branch",
+      "pc": 7,
+      "type": "message"
+    },
+    {
+      "index": 248,
+      "scene": "ep01_06_01_branch",
+      "pc": 8,
+      "type": "message"
+    },
+    {
+      "index": 249,
+      "scene": "ep01_06_01_branch",
+      "pc": 9,
+      "type": "sprite"
+    },
+    {
+      "index": 250,
+      "scene": "ep01_06_01_branch",
+      "pc": 10,
+      "type": "message"
+    },
+    {
+      "index": 251,
+      "scene": "ep01_06_01_branch",
+      "pc": 11,
+      "type": "sprite"
+    },
+    {
+      "index": 252,
+      "scene": "ep01_06_01_branch",
+      "pc": 12,
+      "type": "message"
+    },
+    {
+      "index": 253,
+      "scene": "ep01_06_01_branch",
+      "pc": 13,
+      "type": "message"
+    },
+    {
+      "index": 254,
+      "scene": "ep01_06_01_branch",
+      "pc": 14,
+      "type": "sprite"
+    },
+    {
+      "index": 255,
+      "scene": "ep01_06_01_branch",
+      "pc": 15,
+      "type": "message"
+    },
+    {
+      "index": 256,
+      "scene": "ep01_06_01_branch",
+      "pc": 16,
+      "type": "sprite"
+    },
+    {
+      "index": 257,
+      "scene": "ep01_06_01_branch",
+      "pc": 17,
+      "type": "message"
+    },
+    {
+      "index": 258,
+      "scene": "ep01_06_01_branch",
+      "pc": 18,
+      "type": "sprite"
+    },
+    {
+      "index": 259,
+      "scene": "ep01_06_01_branch",
+      "pc": 19,
+      "type": "message"
+    },
+    {
+      "index": 260,
+      "scene": "ep01_06_01_branch",
+      "pc": 20,
+      "type": "jump"
+    },
+    {
+      "index": 261,
+      "scene": "ep01_06_02_branch",
+      "pc": 0,
+      "type": "audio"
+    },
+    {
+      "index": 262,
+      "scene": "ep01_06_02_branch",
+      "pc": 1,
+      "type": "sprite"
+    },
+    {
+      "index": 263,
+      "scene": "ep01_06_02_branch",
+      "pc": 2,
+      "type": "sprite"
+    },
+    {
+      "index": 264,
+      "scene": "ep01_06_02_branch",
+      "pc": 3,
+      "type": "sprite"
+    },
+    {
+      "index": 265,
+      "scene": "ep01_06_02_branch",
+      "pc": 4,
+      "type": "message"
+    },
+    {
+      "index": 266,
+      "scene": "ep01_06_02_branch",
+      "pc": 5,
+      "type": "sprite"
+    },
+    {
+      "index": 267,
+      "scene": "ep01_06_02_branch",
+      "pc": 6,
+      "type": "message"
+    },
+    {
+      "index": 268,
+      "scene": "ep01_06_02_branch",
+      "pc": 7,
+      "type": "message"
+    },
+    {
+      "index": 269,
+      "scene": "ep01_06_02_branch",
+      "pc": 8,
+      "type": "message"
+    },
+    {
+      "index": 270,
+      "scene": "ep01_06_02_branch",
+      "pc": 9,
+      "type": "sprite"
+    },
+    {
+      "index": 271,
+      "scene": "ep01_06_02_branch",
+      "pc": 10,
+      "type": "message"
+    },
+    {
+      "index": 272,
+      "scene": "ep01_06_02_branch",
+      "pc": 11,
+      "type": "sprite"
+    },
+    {
+      "index": 273,
+      "scene": "ep01_06_02_branch",
+      "pc": 12,
+      "type": "message"
+    },
+    {
+      "index": 274,
+      "scene": "ep01_06_02_branch",
+      "pc": 13,
+      "type": "message"
+    },
+    {
+      "index": 275,
+      "scene": "ep01_06_02_branch",
+      "pc": 14,
+      "type": "sprite"
+    },
+    {
+      "index": 276,
+      "scene": "ep01_06_02_branch",
+      "pc": 15,
+      "type": "message"
+    },
+    {
+      "index": 277,
+      "scene": "ep01_06_02_branch",
+      "pc": 16,
+      "type": "sprite"
+    },
+    {
+      "index": 278,
+      "scene": "ep01_06_02_branch",
+      "pc": 17,
+      "type": "message"
+    },
+    {
+      "index": 279,
+      "scene": "ep01_06_02_branch",
+      "pc": 18,
+      "type": "sprite"
+    },
+    {
+      "index": 280,
+      "scene": "ep01_06_02_branch",
+      "pc": 19,
+      "type": "message"
+    },
+    {
+      "index": 281,
+      "scene": "ep01_06_02_branch",
+      "pc": 20,
+      "type": "sprite"
+    },
+    {
+      "index": 282,
+      "scene": "ep01_06_02_branch",
+      "pc": 21,
+      "type": "message"
+    },
+    {
+      "index": 283,
+      "scene": "ep01_06_02_branch",
+      "pc": 22,
+      "type": "sprite"
+    },
+    {
+      "index": 284,
+      "scene": "ep01_06_02_branch",
+      "pc": 23,
+      "type": "message"
+    },
+    {
+      "index": 285,
+      "scene": "ep01_06_02_branch",
+      "pc": 24,
+      "type": "sprite"
+    },
+    {
+      "index": 286,
+      "scene": "ep01_06_02_branch",
+      "pc": 25,
+      "type": "message"
+    },
+    {
+      "index": 287,
+      "scene": "ep01_06_02_branch",
+      "pc": 26,
+      "type": "jump"
+    },
+    {
+      "index": 288,
+      "scene": "ep01_07_battle",
+      "pc": 0,
+      "type": "sprite"
+    },
+    {
+      "index": 289,
+      "scene": "ep01_07_battle",
+      "pc": 1,
+      "type": "sprite"
+    },
+    {
+      "index": 290,
+      "scene": "ep01_07_battle",
+      "pc": 2,
+      "type": "sprite"
+    },
+    {
+      "index": 291,
+      "scene": "ep01_07_battle",
+      "pc": 3,
+      "type": "message"
+    },
+    {
+      "index": 292,
+      "scene": "ep01_07_battle",
+      "pc": 4,
+      "type": "sprite"
+    },
+    {
+      "index": 293,
+      "scene": "ep01_07_battle",
+      "pc": 5,
+      "type": "message"
+    },
+    {
+      "index": 294,
+      "scene": "ep01_07_battle",
+      "pc": 6,
+      "type": "sprite"
+    },
+    {
+      "index": 295,
+      "scene": "ep01_07_battle",
+      "pc": 7,
+      "type": "message"
+    },
+    {
+      "index": 296,
+      "scene": "ep01_07_battle",
+      "pc": 8,
+      "type": "message"
+    },
+    {
+      "index": 297,
+      "scene": "ep01_07_battle",
+      "pc": 9,
+      "type": "sprite"
+    },
+    {
+      "index": 298,
+      "scene": "ep01_07_battle",
+      "pc": 10,
+      "type": "message"
+    },
+    {
+      "index": 299,
+      "scene": "ep01_07_battle",
+      "pc": 11,
+      "type": "message"
+    },
+    {
+      "index": 300,
+      "scene": "ep01_07_battle",
+      "pc": 12,
+      "type": "sprite"
+    },
+    {
+      "index": 301,
+      "scene": "ep01_07_battle",
+      "pc": 13,
+      "type": "message"
+    },
+    {
+      "index": 302,
+      "scene": "ep01_07_battle",
+      "pc": 14,
+      "type": "message"
+    },
+    {
+      "index": 303,
+      "scene": "ep01_07_battle",
+      "pc": 15,
+      "type": "sprite"
+    },
+    {
+      "index": 304,
+      "scene": "ep01_07_battle",
+      "pc": 16,
+      "type": "message"
+    },
+    {
+      "index": 305,
+      "scene": "ep01_07_battle",
+      "pc": 17,
+      "type": "sprite"
+    },
+    {
+      "index": 306,
+      "scene": "ep01_07_battle",
+      "pc": 18,
+      "type": "message"
+    },
+    {
+      "index": 307,
+      "scene": "ep01_07_battle",
+      "pc": 19,
+      "type": "sprite"
+    },
+    {
+      "index": 308,
+      "scene": "ep01_07_battle",
+      "pc": 20,
+      "type": "message"
+    },
+    {
+      "index": 309,
+      "scene": "ep01_07_battle",
+      "pc": 21,
+      "type": "sprite"
+    },
+    {
+      "index": 310,
+      "scene": "ep01_07_battle",
+      "pc": 22,
+      "type": "message"
+    },
+    {
+      "index": 311,
+      "scene": "ep01_07_battle",
+      "pc": 23,
+      "type": "message"
+    },
+    {
+      "index": 312,
+      "scene": "ep01_07_battle",
+      "pc": 24,
+      "type": "sprite"
+    },
+    {
+      "index": 313,
+      "scene": "ep01_07_battle",
+      "pc": 25,
+      "type": "message"
+    },
+    {
+      "index": 314,
+      "scene": "ep01_07_battle",
+      "pc": 26,
+      "type": "message"
+    },
+    {
+      "index": 315,
+      "scene": "ep01_07_battle",
+      "pc": 27,
+      "type": "sprite"
+    },
+    {
+      "index": 316,
+      "scene": "ep01_07_battle",
+      "pc": 28,
+      "type": "message"
+    },
+    {
+      "index": 317,
+      "scene": "ep01_07_battle",
+      "pc": 29,
+      "type": "message"
+    },
+    {
+      "index": 318,
+      "scene": "ep01_07_battle",
+      "pc": 30,
+      "type": "message"
+    },
+    {
+      "index": 319,
+      "scene": "ep01_07_battle",
+      "pc": 31,
+      "type": "sprite"
+    },
+    {
+      "index": 320,
+      "scene": "ep01_07_battle",
+      "pc": 32,
+      "type": "message"
+    },
+    {
+      "index": 321,
+      "scene": "ep01_07_battle",
+      "pc": 33,
+      "type": "sprite"
+    },
+    {
+      "index": 322,
+      "scene": "ep01_07_battle",
+      "pc": 34,
+      "type": "message"
+    },
+    {
+      "index": 323,
+      "scene": "ep01_07_battle",
+      "pc": 35,
+      "type": "message"
+    },
+    {
+      "index": 324,
+      "scene": "ep01_07_battle",
+      "pc": 36,
+      "type": "sprite"
+    },
+    {
+      "index": 325,
+      "scene": "ep01_07_battle",
+      "pc": 37,
+      "type": "message"
+    },
+    {
+      "index": 326,
+      "scene": "ep01_07_battle",
+      "pc": 38,
+      "type": "sprite"
+    },
+    {
+      "index": 327,
+      "scene": "ep01_07_battle",
+      "pc": 39,
+      "type": "message"
+    },
+    {
+      "index": 328,
+      "scene": "ep01_07_battle",
+      "pc": 40,
+      "type": "sprite"
+    },
+    {
+      "index": 329,
+      "scene": "ep01_07_battle",
+      "pc": 41,
+      "type": "message"
+    },
+    {
+      "index": 330,
+      "scene": "ep01_07_battle",
+      "pc": 42,
+      "type": "sprite"
+    },
+    {
+      "index": 331,
+      "scene": "ep01_07_battle",
+      "pc": 43,
+      "type": "message"
+    },
+    {
+      "index": 332,
+      "scene": "ep01_07_battle",
+      "pc": 44,
+      "type": "message"
+    },
+    {
+      "index": 333,
+      "scene": "ep01_07_battle",
+      "pc": 45,
+      "type": "sprite"
+    },
+    {
+      "index": 334,
+      "scene": "ep01_07_battle",
+      "pc": 46,
+      "type": "message"
+    },
+    {
+      "index": 335,
+      "scene": "ep01_07_battle",
+      "pc": 47,
+      "type": "message"
+    },
+    {
+      "index": 336,
+      "scene": "ep01_07_battle",
+      "pc": 48,
+      "type": "sprite"
+    },
+    {
+      "index": 337,
+      "scene": "ep01_07_battle",
+      "pc": 49,
+      "type": "message"
+    },
+    {
+      "index": 338,
+      "scene": "ep01_07_battle",
+      "pc": 50,
+      "type": "message"
+    },
+    {
+      "index": 339,
+      "scene": "ep01_07_battle",
+      "pc": 51,
+      "type": "jump"
+    },
+    {
+      "index": 340,
+      "scene": "ep01_08_wakai",
+      "pc": 0,
+      "type": "sprite"
+    },
+    {
+      "index": 341,
+      "scene": "ep01_08_wakai",
+      "pc": 1,
+      "type": "message"
+    },
+    {
+      "index": 342,
+      "scene": "ep01_08_wakai",
+      "pc": 2,
+      "type": "sprite"
+    },
+    {
+      "index": 343,
+      "scene": "ep01_08_wakai",
+      "pc": 3,
+      "type": "message"
+    },
+    {
+      "index": 344,
+      "scene": "ep01_08_wakai",
+      "pc": 4,
+      "type": "message"
+    },
+    {
+      "index": 345,
+      "scene": "ep01_08_wakai",
+      "pc": 5,
+      "type": "message"
+    },
+    {
+      "index": 346,
+      "scene": "ep01_08_wakai",
+      "pc": 6,
+      "type": "sprite"
+    },
+    {
+      "index": 347,
+      "scene": "ep01_08_wakai",
+      "pc": 7,
+      "type": "message"
+    },
+    {
+      "index": 348,
+      "scene": "ep01_08_wakai",
+      "pc": 8,
+      "type": "sprite"
+    },
+    {
+      "index": 349,
+      "scene": "ep01_08_wakai",
+      "pc": 9,
+      "type": "message"
+    },
+    {
+      "index": 350,
+      "scene": "ep01_08_wakai",
+      "pc": 10,
+      "type": "message"
+    },
+    {
+      "index": 351,
+      "scene": "ep01_08_wakai",
+      "pc": 11,
+      "type": "message"
+    },
+    {
+      "index": 352,
+      "scene": "ep01_08_wakai",
+      "pc": 12,
+      "type": "message"
+    },
+    {
+      "index": 353,
+      "scene": "ep01_08_wakai",
+      "pc": 13,
+      "type": "message"
+    },
+    {
+      "index": 354,
+      "scene": "ep01_08_wakai",
+      "pc": 14,
+      "type": "message"
+    },
+    {
+      "index": 355,
+      "scene": "ep01_08_wakai",
+      "pc": 15,
+      "type": "sprite"
+    },
+    {
+      "index": 356,
+      "scene": "ep01_08_wakai",
+      "pc": 16,
+      "type": "message"
+    },
+    {
+      "index": 357,
+      "scene": "ep01_08_wakai",
+      "pc": 17,
+      "type": "sprite"
+    },
+    {
+      "index": 358,
+      "scene": "ep01_08_wakai",
+      "pc": 18,
+      "type": "message"
+    },
+    {
+      "index": 359,
+      "scene": "ep01_08_wakai",
+      "pc": 19,
+      "type": "message"
+    },
+    {
+      "index": 360,
+      "scene": "ep01_08_wakai",
+      "pc": 20,
+      "type": "message"
+    },
+    {
+      "index": 361,
+      "scene": "ep01_08_wakai",
+      "pc": 21,
+      "type": "audio"
+    },
+    {
+      "index": 362,
+      "scene": "ep01_08_wakai",
+      "pc": 22,
+      "type": "message"
+    },
+    {
+      "index": 363,
+      "scene": "ep01_08_wakai",
+      "pc": 23,
+      "type": "jump"
+    },
+    {
+      "index": 364,
+      "scene": "ep01_09_game_battle",
+      "pc": 0,
+      "type": "sprite"
+    },
+    {
+      "index": 365,
+      "scene": "ep01_09_game_battle",
+      "pc": 1,
+      "type": "sprite"
+    },
+    {
+      "index": 366,
+      "scene": "ep01_09_game_battle",
+      "pc": 2,
+      "type": "sprite"
+    },
+    {
+      "index": 367,
+      "scene": "ep01_09_game_battle",
+      "pc": 3,
+      "type": "background"
+    },
+    {
+      "index": 368,
+      "scene": "ep01_09_game_battle",
+      "pc": 4,
+      "type": "audio"
+    },
+    {
+      "index": 369,
+      "scene": "ep01_09_game_battle",
+      "pc": 5,
+      "type": "message"
+    },
+    {
+      "index": 370,
+      "scene": "ep01_09_game_battle",
+      "pc": 6,
+      "type": "message"
+    },
+    {
+      "index": 371,
+      "scene": "ep01_09_game_battle",
+      "pc": 7,
+      "type": "message"
+    },
+    {
+      "index": 372,
+      "scene": "ep01_09_game_battle",
+      "pc": 8,
+      "type": "message"
+    },
+    {
+      "index": 373,
+      "scene": "ep01_09_game_battle",
+      "pc": 9,
+      "type": "message"
+    },
+    {
+      "index": 374,
+      "scene": "ep01_09_game_battle",
+      "pc": 10,
+      "type": "audio"
+    },
+    {
+      "index": 375,
+      "scene": "ep01_09_game_battle",
+      "pc": 11,
+      "type": "message"
+    },
+    {
+      "index": 376,
+      "scene": "ep01_09_game_battle",
+      "pc": 12,
+      "type": "message"
+    },
+    {
+      "index": 377,
+      "scene": "ep01_09_game_battle",
+      "pc": 13,
+      "type": "message"
+    },
+    {
+      "index": 378,
+      "scene": "ep01_09_game_battle",
+      "pc": 14,
+      "type": "message"
+    },
+    {
+      "index": 379,
+      "scene": "ep01_09_game_battle",
+      "pc": 15,
+      "type": "message"
+    },
+    {
+      "index": 380,
+      "scene": "ep01_09_game_battle",
+      "pc": 16,
+      "type": "effect"
+    },
+    {
+      "index": 381,
+      "scene": "ep01_09_game_battle",
+      "pc": 17,
+      "type": "background"
+    },
+    {
+      "index": 382,
+      "scene": "ep01_09_game_battle",
+      "pc": 18,
+      "type": "sprite"
+    },
+    {
+      "index": 383,
+      "scene": "ep01_09_game_battle",
+      "pc": 19,
+      "type": "sprite"
+    },
+    {
+      "index": 384,
+      "scene": "ep01_09_game_battle",
+      "pc": 20,
+      "type": "sprite"
+    },
+    {
+      "index": 385,
+      "scene": "ep01_09_game_battle",
+      "pc": 21,
+      "type": "message"
+    },
+    {
+      "index": 386,
+      "scene": "ep01_09_game_battle",
+      "pc": 22,
+      "type": "message"
+    },
+    {
+      "index": 387,
+      "scene": "ep01_09_game_battle",
+      "pc": 23,
+      "type": "message"
+    },
+    {
+      "index": 388,
+      "scene": "ep01_09_game_battle",
+      "pc": 24,
+      "type": "message"
+    },
+    {
+      "index": 389,
+      "scene": "ep01_09_game_battle",
+      "pc": 25,
+      "type": "message"
+    },
+    {
+      "index": 390,
+      "scene": "ep01_09_game_battle",
+      "pc": 26,
+      "type": "message"
+    },
+    {
+      "index": 391,
+      "scene": "ep01_09_game_battle",
+      "pc": 27,
+      "type": "spritemove"
+    },
+    {
+      "index": 392,
+      "scene": "ep01_09_game_battle",
+      "pc": 28,
+      "type": "spritemove"
+    },
+    {
+      "index": 393,
+      "scene": "ep01_09_game_battle",
+      "pc": 29,
+      "type": "sprite"
+    },
+    {
+      "index": 394,
+      "scene": "ep01_09_game_battle",
+      "pc": 30,
+      "type": "jump"
+    },
+    {
+      "index": 395,
+      "scene": "ep01_10_game_shop",
+      "pc": 0,
+      "type": "sprite"
+    },
+    {
+      "index": 396,
+      "scene": "ep01_10_game_shop",
+      "pc": 1,
+      "type": "sprite"
+    },
+    {
+      "index": 397,
+      "scene": "ep01_10_game_shop",
+      "pc": 2,
+      "type": "message"
+    },
+    {
+      "index": 398,
+      "scene": "ep01_10_game_shop",
+      "pc": 3,
+      "type": "message"
+    },
+    {
+      "index": 399,
+      "scene": "ep01_10_game_shop",
+      "pc": 4,
+      "type": "message"
+    },
+    {
+      "index": 400,
+      "scene": "ep01_10_game_shop",
+      "pc": 5,
+      "type": "message"
+    },
+    {
+      "index": 401,
+      "scene": "ep01_10_game_shop",
+      "pc": 6,
+      "type": "message"
+    },
+    {
+      "index": 402,
+      "scene": "ep01_10_game_shop",
+      "pc": 7,
+      "type": "message"
+    },
+    {
+      "index": 403,
+      "scene": "ep01_10_game_shop",
+      "pc": 8,
+      "type": "sprite"
+    },
+    {
+      "index": 404,
+      "scene": "ep01_10_game_shop",
+      "pc": 9,
+      "type": "message"
+    },
+    {
+      "index": 405,
+      "scene": "ep01_10_game_shop",
+      "pc": 10,
+      "type": "sprite"
+    },
+    {
+      "index": 406,
+      "scene": "ep01_10_game_shop",
+      "pc": 11,
+      "type": "message"
+    },
+    {
+      "index": 407,
+      "scene": "ep01_10_game_shop",
+      "pc": 12,
+      "type": "message"
+    },
+    {
+      "index": 408,
+      "scene": "ep01_10_game_shop",
+      "pc": 13,
+      "type": "message"
+    },
+    {
+      "index": 409,
+      "scene": "ep01_10_game_shop",
+      "pc": 14,
+      "type": "message"
+    },
+    {
+      "index": 410,
+      "scene": "ep01_10_game_shop",
+      "pc": 15,
+      "type": "sprite"
+    },
+    {
+      "index": 411,
+      "scene": "ep01_10_game_shop",
+      "pc": 16,
+      "type": "message"
+    },
+    {
+      "index": 412,
+      "scene": "ep01_10_game_shop",
+      "pc": 17,
+      "type": "sprite"
+    },
+    {
+      "index": 413,
+      "scene": "ep01_10_game_shop",
+      "pc": 18,
+      "type": "message"
+    },
+    {
+      "index": 414,
+      "scene": "ep01_10_game_shop",
+      "pc": 19,
+      "type": "message"
+    },
+    {
+      "index": 415,
+      "scene": "ep01_10_game_shop",
+      "pc": 20,
+      "type": "sprite"
+    },
+    {
+      "index": 416,
+      "scene": "ep01_10_game_shop",
+      "pc": 21,
+      "type": "spritemove"
+    },
+    {
+      "index": 417,
+      "scene": "ep01_10_game_shop",
+      "pc": 22,
+      "type": "spritemove"
+    },
+    {
+      "index": 418,
+      "scene": "ep01_10_game_shop",
+      "pc": 23,
+      "type": "message"
+    },
+    {
+      "index": 419,
+      "scene": "ep01_10_game_shop",
+      "pc": 24,
+      "type": "sprite"
+    },
+    {
+      "index": 420,
+      "scene": "ep01_10_game_shop",
+      "pc": 25,
+      "type": "message"
+    },
+    {
+      "index": 421,
+      "scene": "ep01_10_game_shop",
+      "pc": 26,
+      "type": "sprite"
+    },
+    {
+      "index": 422,
+      "scene": "ep01_10_game_shop",
+      "pc": 27,
+      "type": "message"
+    },
+    {
+      "index": 423,
+      "scene": "ep01_10_game_shop",
+      "pc": 28,
+      "type": "sprite"
+    },
+    {
+      "index": 424,
+      "scene": "ep01_10_game_shop",
+      "pc": 29,
+      "type": "message"
+    },
+    {
+      "index": 425,
+      "scene": "ep01_10_game_shop",
+      "pc": 30,
+      "type": "sprite"
+    },
+    {
+      "index": 426,
+      "scene": "ep01_10_game_shop",
+      "pc": 31,
+      "type": "message"
+    },
+    {
+      "index": 427,
+      "scene": "ep01_10_game_shop",
+      "pc": 32,
+      "type": "sprite"
+    },
+    {
+      "index": 428,
+      "scene": "ep01_10_game_shop",
+      "pc": 33,
+      "type": "message"
+    },
+    {
+      "index": 429,
+      "scene": "ep01_10_game_shop",
+      "pc": 34,
+      "type": "sprite"
+    },
+    {
+      "index": 430,
+      "scene": "ep01_10_game_shop",
+      "pc": 35,
+      "type": "message"
+    },
+    {
+      "index": 431,
+      "scene": "ep01_10_game_shop",
+      "pc": 36,
+      "type": "sprite"
+    },
+    {
+      "index": 432,
+      "scene": "ep01_10_game_shop",
+      "pc": 37,
+      "type": "message"
+    },
+    {
+      "index": 433,
+      "scene": "ep01_10_game_shop",
+      "pc": 38,
+      "type": "sprite"
+    },
+    {
+      "index": 434,
+      "scene": "ep01_10_game_shop",
+      "pc": 39,
+      "type": "message"
+    },
+    {
+      "index": 435,
+      "scene": "ep01_10_game_shop",
+      "pc": 40,
+      "type": "sprite"
+    },
+    {
+      "index": 436,
+      "scene": "ep01_10_game_shop",
+      "pc": 41,
+      "type": "message"
+    },
+    {
+      "index": 437,
+      "scene": "ep01_10_game_shop",
+      "pc": 42,
+      "type": "sprite"
+    },
+    {
+      "index": 438,
+      "scene": "ep01_10_game_shop",
+      "pc": 43,
+      "type": "message"
+    },
+    {
+      "index": 439,
+      "scene": "ep01_10_game_shop",
+      "pc": 44,
+      "type": "sprite"
+    },
+    {
+      "index": 440,
+      "scene": "ep01_10_game_shop",
+      "pc": 45,
+      "type": "message"
+    },
+    {
+      "index": 441,
+      "scene": "ep01_10_game_shop",
+      "pc": 46,
+      "type": "sprite"
+    },
+    {
+      "index": 442,
+      "scene": "ep01_10_game_shop",
+      "pc": 47,
+      "type": "message"
+    },
+    {
+      "index": 443,
+      "scene": "ep01_10_game_shop",
+      "pc": 48,
+      "type": "message"
+    },
+    {
+      "index": 444,
+      "scene": "ep01_10_game_shop",
+      "pc": 49,
+      "type": "message"
+    },
+    {
+      "index": 445,
+      "scene": "ep01_10_game_shop",
+      "pc": 50,
+      "type": "sprite"
+    },
+    {
+      "index": 446,
+      "scene": "ep01_10_game_shop",
+      "pc": 51,
+      "type": "message"
+    },
+    {
+      "index": 447,
+      "scene": "ep01_10_game_shop",
+      "pc": 52,
+      "type": "message"
+    },
+    {
+      "index": 448,
+      "scene": "ep01_10_game_shop",
+      "pc": 53,
+      "type": "message"
+    },
+    {
+      "index": 449,
+      "scene": "ep01_10_game_shop",
+      "pc": 54,
+      "type": "message"
+    },
+    {
+      "index": 450,
+      "scene": "ep01_10_game_shop",
+      "pc": 55,
+      "type": "sprite"
+    },
+    {
+      "index": 451,
+      "scene": "ep01_10_game_shop",
+      "pc": 56,
+      "type": "message"
+    },
+    {
+      "index": 452,
+      "scene": "ep01_10_game_shop",
+      "pc": 57,
+      "type": "sprite"
+    },
+    {
+      "index": 453,
+      "scene": "ep01_10_game_shop",
+      "pc": 58,
+      "type": "message"
+    },
+    {
+      "index": 454,
+      "scene": "ep01_10_game_shop",
+      "pc": 59,
+      "type": "message"
+    },
+    {
+      "index": 455,
+      "scene": "ep01_10_game_shop",
+      "pc": 60,
+      "type": "sprite"
+    },
+    {
+      "index": 456,
+      "scene": "ep01_10_game_shop",
+      "pc": 61,
+      "type": "message"
+    },
+    {
+      "index": 457,
+      "scene": "ep01_10_game_shop",
+      "pc": 62,
+      "type": "sprite"
+    },
+    {
+      "index": 458,
+      "scene": "ep01_10_game_shop",
+      "pc": 63,
+      "type": "message"
+    },
+    {
+      "index": 459,
+      "scene": "ep01_10_game_shop",
+      "pc": 64,
+      "type": "sprite"
+    },
+    {
+      "index": 460,
+      "scene": "ep01_10_game_shop",
+      "pc": 65,
+      "type": "message"
+    },
+    {
+      "index": 461,
+      "scene": "ep01_10_game_shop",
+      "pc": 66,
+      "type": "sprite"
+    },
+    {
+      "index": 462,
+      "scene": "ep01_10_game_shop",
+      "pc": 67,
+      "type": "message"
+    },
+    {
+      "index": 463,
+      "scene": "ep01_10_game_shop",
+      "pc": 68,
+      "type": "sprite"
+    },
+    {
+      "index": 464,
+      "scene": "ep01_10_game_shop",
+      "pc": 69,
+      "type": "message"
+    },
+    {
+      "index": 465,
+      "scene": "ep01_10_game_shop",
+      "pc": 70,
+      "type": "spritemove"
+    },
+    {
+      "index": 466,
+      "scene": "ep01_10_game_shop",
+      "pc": 71,
+      "type": "sprite"
+    },
+    {
+      "index": 467,
+      "scene": "ep01_10_game_shop",
+      "pc": 72,
+      "type": "spritemove"
+    },
+    {
+      "index": 468,
+      "scene": "ep01_10_game_shop",
+      "pc": 73,
+      "type": "message"
+    },
+    {
+      "index": 469,
+      "scene": "ep01_10_game_shop",
+      "pc": 74,
+      "type": "sprite"
+    },
+    {
+      "index": 470,
+      "scene": "ep01_10_game_shop",
+      "pc": 75,
+      "type": "message"
+    },
+    {
+      "index": 471,
+      "scene": "ep01_10_game_shop",
+      "pc": 76,
+      "type": "sprite"
+    },
+    {
+      "index": 472,
+      "scene": "ep01_10_game_shop",
+      "pc": 77,
+      "type": "message"
+    },
+    {
+      "index": 473,
+      "scene": "ep01_10_game_shop",
+      "pc": 78,
+      "type": "message"
+    },
+    {
+      "index": 474,
+      "scene": "ep01_10_game_shop",
+      "pc": 79,
+      "type": "sprite"
+    },
+    {
+      "index": 475,
+      "scene": "ep01_10_game_shop",
+      "pc": 80,
+      "type": "message"
+    },
+    {
+      "index": 476,
+      "scene": "ep01_10_game_shop",
+      "pc": 81,
+      "type": "jump"
+    },
+    {
+      "index": 477,
+      "scene": "ep01_10_ending",
+      "pc": 0,
+      "type": "sprite"
+    },
+    {
+      "index": 478,
+      "scene": "ep01_10_ending",
+      "pc": 1,
+      "type": "sprite"
+    },
+    {
+      "index": 479,
+      "scene": "ep01_10_ending",
+      "pc": 2,
+      "type": "sprite"
+    },
+    {
+      "index": 480,
+      "scene": "ep01_10_ending",
+      "pc": 3,
+      "type": "background"
+    },
+    {
+      "index": 481,
+      "scene": "ep01_10_ending",
+      "pc": 4,
+      "type": "audio"
+    },
+    {
+      "index": 482,
+      "scene": "ep01_10_ending",
+      "pc": 5,
+      "type": "message"
+    },
+    {
+      "index": 483,
+      "scene": "ep01_10_ending",
+      "pc": 6,
+      "type": "message"
+    },
+    {
+      "index": 484,
+      "scene": "ep01_10_ending",
+      "pc": 7,
+      "type": "message"
+    },
+    {
+      "index": 485,
+      "scene": "ep01_10_ending",
+      "pc": 8,
+      "type": "message"
+    },
+    {
+      "index": 486,
+      "scene": "ep01_10_ending",
+      "pc": 9,
+      "type": "message"
+    },
+    {
+      "index": 487,
+      "scene": "ep01_10_ending",
+      "pc": 10,
+      "type": "message"
+    },
+    {
+      "index": 488,
+      "scene": "ep01_10_ending",
+      "pc": 11,
+      "type": "message"
+    },
+    {
+      "index": 489,
+      "scene": "ep01_10_ending",
+      "pc": 12,
+      "type": "audio"
+    },
+    {
+      "index": 490,
+      "scene": "ep01_10_ending",
+      "pc": 13,
+      "type": "jump"
+    },
+    {
+      "index": 491,
+      "scene": "eye_catch",
+      "pc": 0,
+      "type": "background"
+    },
+    {
+      "index": 492,
+      "scene": "eye_catch",
+      "pc": 1,
+      "type": "audio"
+    },
+    {
+      "index": 493,
+      "scene": "eye_catch",
+      "pc": 2,
+      "type": "inputcheck"
+    },
+    {
+      "index": 494,
+      "scene": "eye_catch",
+      "pc": 3,
+      "type": "wait"
+    },
+    {
+      "index": 495,
+      "scene": "eye_catch",
+      "pc": 4,
+      "type": "inputcheck"
+    },
+    {
+      "index": 496,
+      "scene": "eye_catch",
+      "pc": 5,
+      "type": "audio"
+    },
+    {
+      "index": 497,
+      "scene": "eye_catch",
+      "pc": 6,
+      "type": "wait"
+    },
+    {
+      "index": 498,
+      "scene": "eye_catch",
+      "pc": 7,
+      "type": "audio"
+    },
+    {
+      "index": 499,
+      "scene": "eye_catch",
+      "pc": 8,
+      "type": "wait"
+    },
+    {
+      "index": 500,
+      "scene": "eye_catch",
+      "pc": 9,
+      "type": "jump"
+    }
+  ],
+  "conversion_notes": [
+    "PCE legacy coordinates centered in a 320x224 viewport.",
+    "Japanese font uses JF-Dot-Shinonome16, 19 columns x 4 lines.",
+    "Character palettes: one shared 15-color palette for Mu/Chika, one for Ren.",
+    "PSG patterns rendered to 8 kHz mono IMA; waveform IDs use documented approximations.",
+    "Voice: 11.025 kHz mono IMA; short SFX: 16 kHz. No duration truncation."
+  ]
+}

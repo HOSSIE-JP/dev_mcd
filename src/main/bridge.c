@@ -25,7 +25,7 @@ static bool submit(u16 op, u16 p1, u16 p2)
   if (STAT[7] != MCD_READY_MAGIC || STAT[6] != MCD_ABI_VERSION) {
     last_result = MCD_ERR_NOT_READY; return false;
   }
-  if (op == MCD_CMD_READ) {
+  if (op == MCD_CMD_READ || op == MCD_CMD_READ_RANGE) {
     valid_word = false;
     MEMMODE |= 2;
   }
@@ -46,8 +46,8 @@ void MCD_update(void)
     CMD[0] = 0;
     state = 2;
   } else if (state == 2 && !STAT[0]) {
-    if (command == MCD_CMD_READ && !(MEMMODE & 1)) return;
-    valid_word = command == MCD_CMD_READ && last_result == MCD_OK;
+    if ((command == MCD_CMD_READ || command == MCD_CMD_READ_RANGE) && !(MEMMODE & 1)) return;
+    valid_word = (command == MCD_CMD_READ || command == MCD_CMD_READ_RANGE) && last_result == MCD_OK;
     state = 0;
   }
 }
@@ -65,6 +65,20 @@ bool MCD_playCDDA(u16 track, bool repeat) { return submit(MCD_CMD_PLAY_CDDA, tra
 bool MCD_stopCDDA(void) { return submit(MCD_CMD_STOP_CDDA, 0, 0); }
 bool MCD_pauseCDDA(void) { return submit(MCD_CMD_PAUSE_CDDA, 0, 0); }
 bool MCD_resumeCDDA(void) { return submit(MCD_CMD_RESUME_CDDA, 0, 0); }
+static bool range_submit(u16 op, u32 offset, u32 bytes, u16 option)
+{
+  if (state || CMD[0] || STAT[0]) return false;
+  /* The command word is still zero while all five parameters are published. */
+  CMD[3] = (u16)offset; CMD[4] = bytes >> 16; CMD[5] = (u16)bytes;
+  return submit(op, option, offset >> 16);
+}
+bool MCD_readRangeAsync(u32 o, u32 n, u16 d) { return range_submit(MCD_CMD_READ_RANGE,o,n,d); }
+bool MCD_prepareStreamAsync(u32 o,u32 n,u16 c,bool loop) {
+  if (c>1) return false;
+  return range_submit(MCD_CMD_PREPARE_STREAM,o,n,c | (loop ? 2 : 0));
+}
+bool MCD_playStream(u16 c) { return submit(MCD_CMD_PLAY_STREAM,c,0); }
+bool MCD_stopStream(u16 c) { return submit(MCD_CMD_STOP_STREAM,c,0); }
 void SYS_doVBlankProcess(void) { mcd_wait_frame(); MCD_update(); }
 u16 JOY_readJoypad(u16 joy) { return joy == JOY_1 ? *(volatile u8 *)BIOS_JOY1_HOLD : 0; }
 

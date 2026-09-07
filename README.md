@@ -3,7 +3,7 @@
 メガCD専用の長期開発ブランチ `long-term/mcdk-native`。
 Megadev v1.2.0のCDブートを基盤に、SGDK風Main APIとSub CPU常駐サービスを実装しています。
 
-画像表示、IMA ADPCMのSub CPU展開→RF5C164再生、CD-DAトラック2の再生に対応。
+画像表示、IMA ADPCMのSub CPU展開→RF5C164再生、CD-DA再生に対応。
 SGDK本体はリンクしていません。APIの対応範囲は限定されています。
 `make libs`でMain / Sub用の静的ライブラリを生成でき、サンプル自身もこれらを使用します。
 
@@ -54,6 +54,17 @@ ISO単体にはCD-DAがありません。音源・画像はツールが生成す
 手元で吸い出したBIOSは`.local/`などGit管理外の場所に置いてください。
 ビルド自体にBIOSは必要ありません。
 
+## ノベルゲーム「いしのうらにいる！？」第1話
+
+MD Game Editorのノベル実行モデルをメガCDへ移植し、PCE版の第1話を取り込みました。
+18シーン・275会話、立ち絵の表情と移動、2か所の選択肢、台詞音声とBGM、CD-DAを含みます。
+
+Windowsは `.\mcd.cmd novel`、Linuxは `make novel` でビルドし、
+`dist/ishinoura_ep01/ishinoura_ep01.cue` を開いてください。
+通常のビルドはコミット済みの変換データを使うため、元エディターや追加Pythonパッケージは不要です。
+操作・変換方法・対応範囲は [ノベルエンジンの説明](docs/novel.md) を参照してください。
+[実行画面と全4ルートの検証結果](docs/novel-validation.md) も掲載しています。
+
 ## 検証
 
 提供された日本版BIOSでGenesis Plus GXを起動し、画像・音声出力、停止・一時停止・再開を確認しています。
@@ -73,6 +84,7 @@ BIOSやセーブステートは結果に含めません。CIもBIOSを必要と�
 
 - [構成、API、メモリ配置、IPC](docs/architecture.md)
 - [画像・ADPCM・CD-DA素材の形式と差し替え](docs/asset-formats.md)
+- [ノベルエンジンとPCE第1話の取り込み](docs/novel.md)
 - [他PCでの再構築・BIOSの扱い](docs/setup.md)
 - [検証結果と制限](docs/validation.md)
 

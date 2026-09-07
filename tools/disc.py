@@ -12,19 +12,18 @@ def both32(x): return struct.pack('<I',x)+struct.pack('>I',x)
 def record(name,extent,size,directory=False):
     n=33+len(name)+(len(name)%2==0)
     return bytes([n,0])+both32(extent)+both32(size)+bytes([126,9,6,0,0,0,0,int(directory)*2,0,0])+both16(1)+bytes([len(name)])+name+b'\0'*(n-33-len(name))
-def build():
-    boot=(ROOT/'build/boot.bin').read_bytes()
+def make_iso(boot,contents):
     assert len(boot)<=16*SECTOR
     assert boot.startswith(b'SEGADISCSYSTEM')
-    paths=sorted((ROOT/'build/disc').iterdir())
-    assert all(p.is_file() and p.name==p.name.upper() for p in paths)
+    paths=sorted(contents)
+    assert all(p==p.upper() for p in paths)
     # sector 16 PVD, 17 terminator, 18 L path table, 19 M path table, 20 root
     entries=[record(b'\0',20,SECTOR,True),record(b'\1',20,SECTOR,True)]
     extent=21; files=[]
     for p in paths:
-        name=(p.name+';1').encode('ascii')
-        data=p.read_bytes()
-        assert len(p.stem)<=8 and len(p.suffix)<=4 and data
+        name=(p+';1').encode('ascii')
+        data=contents[p]
+        assert len(Path(p).stem)<=8 and len(Path(p).suffix)<=4 and data
         entries.append(record(name,extent,len(data)))
         files.append((extent,data)); extent+=(len(data)+2047)//2048
     root=b''.join(entries)
@@ -50,7 +49,11 @@ def build():
     image[19*SECTOR:19*SECTOR+10]=struct.pack('>BBIHBB',1,0,20,1,0,0)
     image[20*SECTOR:20*SECTOR+len(root)]=root
     for sector,data in files: image[sector*SECTOR:sector*SECTOR+len(data)]=data
+    return image
+def build():
+    paths=sorted((ROOT/'build/disc').iterdir())
+    image=make_iso((ROOT/'build/boot.bin').read_bytes(),{p.name:p.read_bytes() for p in paths})
     (ROOT/'dist/mcd_demo.iso').write_bytes(image)
     (ROOT/'dist/mcd_demo.cue').write_text('FILE "mcd_demo.iso" BINARY\n  TRACK 01 MODE1/2048\n    INDEX 01 00:00:00\nFILE "track02.wav" WAVE\n  TRACK 02 AUDIO\n    INDEX 00 00:00:00\n    INDEX 01 00:02:00\n')
-    print(f'Disc: {sectors} data sectors, {len(paths)} files, track 02 stereo CD-DA')
+    print(f'Disc: {len(image)//SECTOR} data sectors, {len(paths)} files, track 02 stereo CD-DA')
 if __name__=='__main__': build()

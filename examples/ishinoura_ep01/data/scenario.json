@@ -1,0 +1,4593 @@
+{
+  "version": 2,
+  "settings": {
+    "messageSpeedFrames": 10,
+    "messageAdvanceMode": "button",
+    "messageAutoWaitFrames": 60
+  },
+  "startScene": "logo",
+  "scenes": [
+    {
+      "id": "logo",
+      "name": "タイトル画面/ロゴ",
+      "fullScreenBg": true,
+      "commands": [
+        {
+          "type": "audio",
+          "kind": "cdda",
+          "action": "stop",
+          "assetId": "",
+          "channel": 0
+        },
+        {
+          "type": "inputcheck",
+          "buttons": [
+            "run",
+            "i",
+            "ii"
+          ],
+          "mode": "async",
+          "targetLabel": "SKIP_DEMO"
+        },
+        {
+          "type": "comment",
+          "text": "HuCARDとCD-ROM2ビルドで切り替える",
+          "color": ""
+        },
+        {
+          "type": "background",
+          "assetId": "system_01",
+          "transition": "fade",
+          "fadeOutFrames": 30,
+          "fadeInFrames": 30,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "type": "wait",
+          "frames": 180
+        },
+        {
+          "type": "background",
+          "assetId": "system_02",
+          "transition": "fade",
+          "fadeOutFrames": 30,
+          "fadeInFrames": 30,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "type": "wait",
+          "frames": 180
+        },
+        {
+          "type": "label",
+          "name": "SKIP_DEMO"
+        },
+        {
+          "type": "inputcheck",
+          "buttons": [],
+          "mode": "cancel",
+          "targetLabel": ""
+        },
+        {
+          "type": "jump",
+          "sceneId": "title"
+        }
+      ],
+      "nextSceneId": ""
+    },
+    {
+      "id": "title",
+      "name": "タイトル画面/タイトル",
+      "fullScreenBg": true,
+      "commands": [
+        {
+          "type": "background",
+          "assetId": "title",
+          "transition": "fade",
+          "fadeOutFrames": 30,
+          "fadeInFrames": 30,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "type": "audio",
+          "kind": "cdda",
+          "action": "play",
+          "assetId": "cdda_title",
+          "channel": 0
+        },
+        {
+          "type": "wait",
+          "frames": 60
+        },
+        {
+          "type": "spritetext",
+          "slot": 0,
+          "text": "はじめる",
+          "x": 107,
+          "y": 193,
+          "color": "#00246d",
+          "blinkFrames": 60,
+          "visible": true
+        },
+        {
+          "type": "inputcheck",
+          "buttons": [
+            "run",
+            "i",
+            "ii"
+          ],
+          "mode": "async",
+          "targetLabel": "GAME_START"
+        },
+        {
+          "type": "wait",
+          "frames": 3000
+        },
+        {
+          "type": "inputcheck",
+          "buttons": [],
+          "mode": "cancel",
+          "targetLabel": ""
+        },
+        {
+          "type": "spritetext",
+          "slot": 0,
+          "text": "",
+          "x": 84,
+          "y": 192,
+          "color": "#922424",
+          "blinkFrames": 60,
+          "visible": true
+        },
+        {
+          "type": "jump",
+          "sceneId": "logo"
+        },
+        {
+          "type": "comment",
+          "text": "ボタンを押すとここにジャンプしゲーム開始",
+          "color": ""
+        },
+        {
+          "type": "label",
+          "name": "GAME_START"
+        },
+        {
+          "type": "inputcheck",
+          "buttons": [],
+          "mode": "cancel",
+          "targetLabel": ""
+        },
+        {
+          "type": "spritetext",
+          "slot": 0,
+          "text": "",
+          "x": 84,
+          "y": 192,
+          "color": "#922424",
+          "blinkFrames": 60,
+          "visible": true
+        },
+        {
+          "type": "audio",
+          "kind": "cdda",
+          "action": "play",
+          "assetId": "cdda_eye_catch_all",
+          "channel": 0
+        },
+        {
+          "type": "wait",
+          "frames": 180
+        },
+        {
+          "type": "jump",
+          "sceneId": "ep01_01_openning"
+        }
+      ],
+      "nextSceneId": ""
+    },
+    {
+      "id": "ep01_01_openning",
+      "name": "第01話/オープニング/ナレーション",
+      "fullScreenBg": false,
+      "commands": [
+        {
+          "type": "audio",
+          "kind": "psg",
+          "action": "play",
+          "assetId": "nonki_bukatsu_bgm",
+          "channel": 0
+        },
+        {
+          "type": "background",
+          "assetId": "bg_school_day",
+          "transition": "fade",
+          "fadeOutFrames": 30,
+          "fadeInFrames": 30,
+          "x": 2,
+          "y": 1
+        },
+        {
+          "type": "message",
+          "speaker": "",
+          "text": "ここは私立星屑高校",
+          "textColor": "#ffdb00",
+          "voiceAssetId": "voice_0001",
+          "mouthSlot": 0
+        },
+        {
+          "type": "background",
+          "assetId": "bg_hallway_day",
+          "transition": "fade",
+          "fadeOutFrames": 30,
+          "fadeInFrames": 30,
+          "x": 2,
+          "y": 1
+        },
+        {
+          "type": "message",
+          "speaker": "",
+          "text": "旧校舎のはずれにある\n生徒会にも忘れられた小さな部室が\nこの物語の舞台となる",
+          "textColor": "#ffdb00",
+          "voiceAssetId": "voice_0002",
+          "mouthSlot": 0
+        },
+        {
+          "type": "background",
+          "assetId": "bg_clubroom_door",
+          "transition": "fade",
+          "fadeOutFrames": 30,
+          "fadeInFrames": 30,
+          "x": 2,
+          "y": 1
+        },
+        {
+          "type": "message",
+          "speaker": "",
+          "text": "「いしのうら部」",
+          "textColor": "#ffdb00",
+          "voiceAssetId": "voice_0003",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "",
+          "text": "その活動内容は\nゲームを集め・遊び・語り\nそして争うこと",
+          "textColor": "#ffdb00",
+          "voiceAssetId": "voice_0004",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "",
+          "text": "ゲームとハードを愛する偏った\n変人たちの巣窟である",
+          "textColor": "#ffdb00",
+          "voiceAssetId": "voice_0005",
+          "mouthSlot": 0
+        },
+        {
+          "type": "jump",
+          "sceneId": "ep01_02_clubroom"
+        }
+      ],
+      "nextSceneId": ""
+    },
+    {
+      "id": "ep01_02_clubroom",
+      "name": "第01話/部室導入/会話（部長・チカ）",
+      "fullScreenBg": false,
+      "commands": [
+        {
+          "type": "audio",
+          "kind": "psg",
+          "action": "play",
+          "assetId": "classroom_whisper",
+          "channel": 0
+        },
+        {
+          "type": "background",
+          "assetId": "bg_clubroom_day",
+          "transition": "fade",
+          "fadeOutFrames": 30,
+          "fadeInFrames": 30,
+          "x": 2,
+          "y": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_01",
+          "x": 151,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "ここでハンドルを…右に…\n入れれば……",
+          "textColor": "",
+          "voiceAssetId": "voice_0006",
+          "mouthSlot": 0
+        },
+        {
+          "type": "audio",
+          "kind": "psg",
+          "action": "play",
+          "assetId": "psg_1784890911053",
+          "channel": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_03",
+          "x": 151,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "よし\n今の抜け方は　かなりきれいだね",
+          "textColor": "",
+          "voiceAssetId": "voice_0007",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "うん この操作感\nやっぱり落ち着くなあ",
+          "textColor": "",
+          "voiceAssetId": "voice_0008",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_06",
+          "x": 151,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_01",
+          "x": 186,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "spritemove",
+          "slot": 0,
+          "x": 50,
+          "y": 16,
+          "frames": 60,
+          "async": true,
+          "animationAssetId": "",
+          "animationId": ""
+        },
+        {
+          "type": "spritemove",
+          "slot": 1,
+          "x": 151,
+          "y": 16,
+          "frames": 60,
+          "async": false,
+          "animationAssetId": "",
+          "animationId": ""
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "こんにちはです\n部長　もう来てたんですね",
+          "textColor": "",
+          "voiceAssetId": "voice_0009",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "やあ　チカくん\n今日の部活は もう始まっているよ",
+          "textColor": "",
+          "voiceAssetId": "voice_0010",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "えっと…\nゲームをしているだけでは？",
+          "textColor": "",
+          "voiceAssetId": "voice_0011",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "うん\nつまり　立派な部活だね",
+          "textColor": "",
+          "voiceAssetId": "voice_0012",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "いつも通りですね",
+          "textColor": "",
+          "voiceAssetId": "voice_0013",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "それ　何のゲーム機なんですか？",
+          "textColor": "",
+          "voiceAssetId": "voice_0014",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_04",
+          "x": 151,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "白くて…小さくて…\nお弁当箱みたいです",
+          "textColor": "",
+          "voiceAssetId": "voice_0015",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "いい質問だね\nこれはただの白い箱ではないんだ",
+          "textColor": "",
+          "voiceAssetId": "voice_0016",
+          "mouthSlot": 0
+        },
+        {
+          "type": "jump",
+          "sceneId": "ep01_03_pce"
+        }
+      ],
+      "nextSceneId": ""
+    },
+    {
+      "id": "ep01_03_pce",
+      "name": "第01話/PCエンジン語り/分岐まで",
+      "fullScreenBg": false,
+      "commands": [
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_01",
+          "x": 128,
+          "y": 24,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": false
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_mu_01",
+          "x": 128,
+          "y": 24,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": false
+        },
+        {
+          "type": "background",
+          "assetId": "ep01_001",
+          "transition": "fade",
+          "fadeOutFrames": 30,
+          "fadeInFrames": 30,
+          "x": 2,
+          "y": 1
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "これは　PCエンジン！",
+          "textColor": "",
+          "voiceAssetId": "voice_0017",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "PC…エンジン？",
+          "textColor": "",
+          "voiceAssetId": "voice_0018",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "名前にPCとエンジンが入っている",
+          "textColor": "",
+          "voiceAssetId": "voice_0019",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "ほら　もう強そうだろう？",
+          "textColor": "",
+          "voiceAssetId": "voice_0020",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "説明が\n名前の印象だけで進んでいますが…",
+          "textColor": "",
+          "voiceAssetId": "voice_0021",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "ところで　チカくん\n見たまえ　この小ささを",
+          "textColor": "",
+          "voiceAssetId": "voice_0022",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "手に乗る　棚に入る　机にもなじむ\nそしてかわいい",
+          "textColor": "",
+          "voiceAssetId": "voice_0023",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "最後だけ\n部長の感想ですよね？",
+          "textColor": "",
+          "voiceAssetId": "voice_0024",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "感想も大事だよ\nゲーム機は愛でるものだ",
+          "textColor": "",
+          "voiceAssetId": "voice_0025",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "そういうものなんですか？",
+          "textColor": "",
+          "voiceAssetId": "voice_0026",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "少なくともこの部室では\nかなり大事だよ",
+          "textColor": "",
+          "voiceAssetId": "voice_0027",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "次はこれ　HuCARD\nこの薄いカードにゲームが入っている",
+          "textColor": "",
+          "voiceAssetId": "voice_0028",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "カード…\nトレーディングなデュエルではなく\nゲームが動くんですか？",
+          "textColor": "",
+          "voiceAssetId": "voice_0029",
+          "mouthSlot": null
+        },
+        {
+          "type": "background",
+          "assetId": "bg_clubroom_day",
+          "transition": "fade",
+          "fadeOutFrames": 30,
+          "fadeInFrames": 30,
+          "x": 2,
+          "y": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_03",
+          "x": 152,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_02",
+          "x": 43,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "うん\n薄い　軽い　かさばらない\nケースに並べると　また楽しい",
+          "textColor": "",
+          "voiceAssetId": "voice_0030",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "収納の話になりました",
+          "textColor": "",
+          "voiceAssetId": "voice_0031",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "収納は大事だよ？\nこのせまい部室には特にね",
+          "textColor": "",
+          "voiceAssetId": "voice_0032",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "そのわりに\n部室の半分がケーブルだらけです",
+          "textColor": "",
+          "voiceAssetId": "voice_0033",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "ケーブルは\n部室の血管みたいなもの",
+          "textColor": "",
+          "voiceAssetId": "voice_0034",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "片づけた方が\n健康によさそうですが",
+          "textColor": "",
+          "voiceAssetId": "voice_0035",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "返す言葉も\nケーブルの下に埋まっているね",
+          "textColor": "",
+          "voiceAssetId": "voice_0036",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "PCエンジンは\n白いだけじゃないんだよ",
+          "textColor": "",
+          "voiceAssetId": "voice_0037",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "ほかにも\n何かあるんですか？",
+          "textColor": "",
+          "voiceAssetId": "voice_0038",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_01",
+          "x": 43,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": false
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_mu_01",
+          "x": 43,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": false
+        },
+        {
+          "type": "background",
+          "assetId": "ep01_002",
+          "transition": "fade",
+          "fadeOutFrames": 30,
+          "fadeInFrames": 30,
+          "x": 2,
+          "y": 1
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "CDもある",
+          "textColor": "",
+          "voiceAssetId": "voice_0039",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "CDですか？\n音楽の？",
+          "textColor": "",
+          "voiceAssetId": "voice_0040",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "ゲーム機に\nCDをつけると夢が広がる",
+          "textColor": "",
+          "voiceAssetId": "voice_0041",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "声が出る　音楽が鳴る\nディスクが回る",
+          "textColor": "",
+          "voiceAssetId": "voice_0042",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "最後だけ　機械の動きです",
+          "textColor": "",
+          "voiceAssetId": "voice_0043",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "回るものはロマンだからね",
+          "textColor": "",
+          "voiceAssetId": "voice_0044",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "部長\nかなり楽しそうですね",
+          "textColor": "",
+          "voiceAssetId": "voice_0045",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "かなりどころか\nこの部室で一番楽しい時間\nかもしれない",
+          "textColor": "",
+          "voiceAssetId": "voice_0046",
+          "mouthSlot": null
+        },
+        {
+          "type": "background",
+          "assetId": "bg_clubroom_day",
+          "transition": "fade",
+          "fadeOutFrames": 30,
+          "fadeInFrames": 30,
+          "x": 2,
+          "y": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_05",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_03",
+          "x": 160,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "",
+          "text": "チカは白い箱を見て思った",
+          "textColor": "#ffff00",
+          "voiceAssetId": "voice_0047",
+          "mouthSlot": null
+        },
+        {
+          "type": "choice",
+          "variableName": "choice1",
+          "choices": [
+            {
+              "label": "かわいいですね",
+              "value": 1,
+              "targetSceneId": "ep01_03_01_branch"
+            },
+            {
+              "label": "古そうですね",
+              "value": 2,
+              "targetSceneId": "ep01_03_02_branch"
+            }
+          ],
+          "defaultIndex": 0
+        }
+      ],
+      "nextSceneId": ""
+    },
+    {
+      "id": "ep01_03_01_branch",
+      "name": "第01話/PCエンジン語り/分岐1/選択1：かわいいですね",
+      "fullScreenBg": false,
+      "commands": [
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_04",
+          "x": 160,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "でも…\nたしかに　かわいいですね",
+          "textColor": "",
+          "voiceAssetId": "voice_0048",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_02",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "だろう？\nチカくんは見どころがあるね",
+          "textColor": "",
+          "voiceAssetId": "voice_0049",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "この白さ　この丸さ\n無理のない存在感",
+          "textColor": "",
+          "voiceAssetId": "voice_0050",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "部長の使う言葉が急に増えました",
+          "textColor": "",
+          "voiceAssetId": "voice_0051",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "好きなものを\n語る時　人は早口になるんだよ",
+          "textColor": "",
+          "voiceAssetId": "voice_0052",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "今　とても実感しました",
+          "textColor": "",
+          "voiceAssetId": "voice_0053",
+          "mouthSlot": 1
+        },
+        {
+          "type": "jump",
+          "sceneId": "ep01_04_battle"
+        }
+      ],
+      "nextSceneId": ""
+    },
+    {
+      "id": "ep01_03_02_branch",
+      "name": "第01話/PCエンジン語り/分岐1/選択2：古そうですね",
+      "fullScreenBg": false,
+      "commands": [
+        {
+          "type": "comment",
+          "text": "分岐２",
+          "color": ""
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_05",
+          "x": 160,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "でも…\nちょっと古そうですね",
+          "textColor": "",
+          "voiceAssetId": "voice_0054",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_06",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "その通り　古いよ",
+          "textColor": "",
+          "voiceAssetId": "voice_0055",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_03",
+          "x": 160,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "あっ　すみません",
+          "textColor": "",
+          "voiceAssetId": "voice_0056",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "いいんだよ　古いということは\n今日まで残ったということ",
+          "textColor": "",
+          "voiceAssetId": "voice_0057",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_03",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "生き残った白い箱なんだ",
+          "textColor": "",
+          "voiceAssetId": "voice_0058",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_05",
+          "x": 160,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "部長の中で\n物語が始まりました？",
+          "textColor": "",
+          "voiceAssetId": "voice_0059",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "レトロゲームは\nだいたい物語を背負っているよ",
+          "textColor": "",
+          "voiceAssetId": "voice_0060",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_01",
+          "x": 160,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "箱にも人生があるんですね",
+          "textColor": "",
+          "voiceAssetId": "voice_0061",
+          "mouthSlot": 1
+        },
+        {
+          "type": "jump",
+          "sceneId": "ep01_04_battle"
+        }
+      ],
+      "nextSceneId": ""
+    },
+    {
+      "id": "ep01_04_battle",
+      "name": "第01話/レスバ/レン登場",
+      "fullScreenBg": false,
+      "commands": [
+        {
+          "type": "background",
+          "assetId": "bg_clubroom_day",
+          "transition": "fade",
+          "fadeOutFrames": 30,
+          "fadeInFrames": 30,
+          "x": 2,
+          "y": 1,
+          "skip": true
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_01",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_03",
+          "x": 160,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_02",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "spritemove",
+          "slot": 0,
+          "x": 15,
+          "y": 16,
+          "frames": 60,
+          "async": true,
+          "animationAssetId": "",
+          "animationId": ""
+        },
+        {
+          "type": "spritemove",
+          "slot": 1,
+          "x": 180,
+          "y": 16,
+          "frames": 60,
+          "async": true,
+          "animationAssetId": "",
+          "animationId": ""
+        },
+        {
+          "type": "spritemove",
+          "slot": 2,
+          "x": 117,
+          "y": 16,
+          "frames": 60,
+          "async": true,
+          "animationAssetId": "",
+          "animationId": ""
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "なんやなんや\nまた古い箱で 盛り上がっとるんか",
+          "textColor": "",
+          "voiceAssetId": "voice_0062",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "あっ　レンちゃん\nこんにちはです",
+          "textColor": "",
+          "voiceAssetId": "voice_0063",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_01",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "やあ　レンくん\n今日も元気に遅刻だね",
+          "textColor": "",
+          "voiceAssetId": "voice_0064",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_04",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "遅刻ちゃう　最新ハードの\n情報収集で忙しかったんや",
+          "textColor": "",
+          "voiceAssetId": "voice_0065",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_05",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "それは部活の前にすることですか？",
+          "textColor": "",
+          "voiceAssetId": "voice_0066",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "チカ　時代は止まったら負けやで",
+          "textColor": "",
+          "voiceAssetId": "voice_0067",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "今は最新　高解像度\n高速ロード　豪華演出や",
+          "textColor": "",
+          "voiceAssetId": "voice_0068",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_05",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "せやのに部長は\nその白い古代遺跡や",
+          "textColor": "",
+          "voiceAssetId": "voice_0069",
+          "mouthSlot": 2
+        },
+        {
+          "type": "spritemove",
+          "slot": 0,
+          "x": 30,
+          "y": 16,
+          "frames": 60,
+          "async": true,
+          "animationAssetId": "",
+          "animationId": ""
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "古代遺跡って言い方は\n少しロマンがあるね",
+          "textColor": "",
+          "voiceAssetId": "voice_0070",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_02",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "ほめてへんわ！",
+          "textColor": "",
+          "voiceAssetId": "voice_0071",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "でも　ロマンはある",
+          "textColor": "",
+          "voiceAssetId": "voice_0072",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_04",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "ロマンでフレームレートは\n上がらへん！",
+          "textColor": "",
+          "voiceAssetId": "voice_0073",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_03",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "ふれーむ…れーと？",
+          "textColor": "",
+          "voiceAssetId": "voice_0074",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "フレームレートとは\nざっくり言うと画面のなめらかさだね",
+          "textColor": "",
+          "voiceAssetId": "voice_0075",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_04",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "なるほどです",
+          "textColor": "",
+          "voiceAssetId": "voice_0076",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_01",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "最新機はなめらかで強いんや",
+          "textColor": "",
+          "voiceAssetId": "voice_0077",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "でもレンくん\nなめらかなら全部えらいの？",
+          "textColor": "",
+          "voiceAssetId": "voice_0078",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "えらいやろ　カクカクは時代遅れや",
+          "textColor": "",
+          "voiceAssetId": "voice_0079",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "昔のゲームは少ない動きで\n気持ちよさを作るんだ",
+          "textColor": "",
+          "voiceAssetId": "voice_0080",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_05",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "制限の中でどう遊ばせるか\nそこに技がある",
+          "textColor": "",
+          "voiceAssetId": "voice_0081",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_02",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "うっ…\nそれっぽいこと言いよって",
+          "textColor": "",
+          "voiceAssetId": "voice_0082",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "レンちゃん\n少し押されていますね",
+          "textColor": "",
+          "voiceAssetId": "voice_0083",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_03",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "押されてへん！\nまだ起動しただけや！",
+          "textColor": "",
+          "voiceAssetId": "voice_0084",
+          "mouthSlot": 2
+        },
+        {
+          "type": "jump",
+          "sceneId": "ep01_05_round1"
+        }
+      ],
+      "nextSceneId": ""
+    },
+    {
+      "id": "ep01_05_round1",
+      "name": "第01話/レスバ/イベントスチル",
+      "fullScreenBg": false,
+      "commands": [
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_01",
+          "x": 128,
+          "y": 24,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": false
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_mu_01",
+          "x": 128,
+          "y": 24,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": false
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_mu_01",
+          "x": 128,
+          "y": 24,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": false
+        },
+        {
+          "type": "background",
+          "assetId": "ep01_005",
+          "transition": "fade",
+          "fadeOutFrames": 30,
+          "fadeInFrames": 30,
+          "x": 2,
+          "y": 1
+        },
+        {
+          "type": "message",
+          "speaker": "",
+          "text": "～　ラウンド1　～",
+          "textColor": "#b6ff00",
+          "voiceAssetId": "voice_0085",
+          "mouthSlot": null
+        },
+        {
+          "type": "audio",
+          "kind": "psg",
+          "action": "play",
+          "assetId": "desperate_battle",
+          "channel": 0
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "何が始まったんですか？",
+          "textColor": "",
+          "voiceAssetId": "voice_0086",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "いしのうら部名物\n部室レスバトルだね",
+          "textColor": "",
+          "voiceAssetId": "voice_0087",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "名物にすな！",
+          "textColor": "",
+          "voiceAssetId": "voice_0088",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "ところでレンくん\nPCエンジンのよさを知ってるかい？",
+          "textColor": "",
+          "voiceAssetId": "voice_0089",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "知らん　知る必要もあらへん",
+          "textColor": "",
+          "voiceAssetId": "voice_0090",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "本体が小さい　部室に置ける",
+          "textColor": "",
+          "voiceAssetId": "voice_0091",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "いまの最新ゲーム機だって置けるわ！",
+          "textColor": "",
+          "voiceAssetId": "voice_0092",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "HuCARDが薄い",
+          "textColor": "",
+          "voiceAssetId": "voice_0093",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "薄けりゃええんか！",
+          "textColor": "",
+          "voiceAssetId": "voice_0094",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "CD-ROMも使える",
+          "textColor": "",
+          "voiceAssetId": "voice_0095",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "それは…　まあ…\nちょっとだけ認めたる",
+          "textColor": "",
+          "voiceAssetId": "voice_0096",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "あ　そこは認めるんですね",
+          "textColor": "",
+          "voiceAssetId": "voice_0097",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "ちゃう！\n昔にしてはがんばったな　いうだけや！",
+          "textColor": "",
+          "voiceAssetId": "voice_0098",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "ありがとう　レンくん",
+          "textColor": "",
+          "voiceAssetId": "voice_0099",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "礼を言うな！\nウチが負けたみたいになるやろ！",
+          "textColor": "",
+          "voiceAssetId": "voice_0100",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "ゲーム機の良さは\n性能だけで決まらないよ",
+          "textColor": "",
+          "voiceAssetId": "voice_0101",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "出たで\n古いハード派の　ありがちな逃げ道や",
+          "textColor": "",
+          "voiceAssetId": "voice_0102",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "逃げ道じゃないよ\n遊び方　値段　ソフト",
+          "textColor": "",
+          "voiceAssetId": "voice_0103",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "それに　思い出\nぜんぶ合わせて　ゲーム機なんだ",
+          "textColor": "",
+          "voiceAssetId": "voice_0104",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "ぐっ…\nまっとうなことを言いよる",
+          "textColor": "",
+          "voiceAssetId": "voice_0105",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "部長…\nたまに　まともなことを…",
+          "textColor": "",
+          "voiceAssetId": "voice_0106",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "たまに　か\nまあ否定はしないけど",
+          "textColor": "",
+          "voiceAssetId": "voice_0107",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "たとえば　このカード",
+          "textColor": "",
+          "voiceAssetId": "voice_0108",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "本当に薄いですね",
+          "textColor": "",
+          "voiceAssetId": "voice_0109",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "差し込む　電源を入れる　すぐ遊ぶ",
+          "textColor": "",
+          "voiceAssetId": "voice_0110",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "でも容量は　少ないんやろ？",
+          "textColor": "",
+          "voiceAssetId": "voice_0111",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "少ないなら\n少ないなりに　作り方が変わるんだ",
+          "textColor": "",
+          "voiceAssetId": "voice_0112",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "短くても　強い曲　\n少なくても　残る絵",
+          "textColor": "",
+          "voiceAssetId": "voice_0113",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "お弁当箱が小さいから\n詰め方を工夫する\nみたいな感じですね",
+          "textColor": "",
+          "voiceAssetId": "voice_0114",
+          "mouthSlot": null
+        },
+        {
+          "type": "jump",
+          "sceneId": "ep01_06_choice"
+        }
+      ],
+      "nextSceneId": ""
+    },
+    {
+      "id": "ep01_06_choice",
+      "name": "第01話/レスバ/レスバ中",
+      "fullScreenBg": false,
+      "commands": [
+        {
+          "type": "comment",
+          "text": "イベントスチル終了",
+          "color": ""
+        },
+        {
+          "type": "background",
+          "assetId": "bg_clubroom_day",
+          "transition": "fade",
+          "fadeOutFrames": 30,
+          "fadeInFrames": 30,
+          "x": 2,
+          "y": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_01",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_03",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_02",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "それだよ　チカくん",
+          "textColor": "",
+          "voiceAssetId": "voice_0115",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "なんやその\nおしゃれな言い方は",
+          "textColor": "",
+          "voiceAssetId": "voice_0116",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "レンちゃん　\nちょっと感心しました？",
+          "textColor": "",
+          "voiceAssetId": "voice_0117",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "してへん！\nただ弁当の例えは　わかりやすかった",
+          "textColor": "",
+          "voiceAssetId": "voice_0118",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_02",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "普通の例えは\n強いね　オタクはすぐ遠くへ行く",
+          "textColor": "",
+          "voiceAssetId": "voice_0119",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_01",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "部長がそれを言うんか",
+          "textColor": "",
+          "voiceAssetId": "voice_0120",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "でも部長は　\nどうして古いゲーム機が\n好きなんですか？",
+          "textColor": "",
+          "voiceAssetId": "voice_0121",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "古い機械は手がかかる",
+          "textColor": "",
+          "voiceAssetId": "voice_0122",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "映らない　鳴らない　\n端子がぐらぐらする",
+          "textColor": "",
+          "voiceAssetId": "voice_0123",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_06",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "それは　困りますね",
+          "textColor": "",
+          "voiceAssetId": "voice_0124",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "だから直す　\n掃除する　ケーブルを探す",
+          "textColor": "",
+          "voiceAssetId": "voice_0125",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_03",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "そして動く　\nその瞬間　ちょっと勝った気分になる",
+          "textColor": "",
+          "voiceAssetId": "voice_0126",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_04",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "ゲームの前に\nもうゲームが始まってます",
+          "textColor": "",
+          "voiceAssetId": "voice_0127",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_05",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "うまいね　\nまさに　そこなんだ",
+          "textColor": "",
+          "voiceAssetId": "voice_0128",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_02",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "めんどくさ！\n最新機ならつなげば動くやろ！",
+          "textColor": "",
+          "voiceAssetId": "voice_0129",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_02",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "でもレンくん　\nこの前　ゲーム機の本体更新で\n一時間待ってたよね",
+          "textColor": "",
+          "voiceAssetId": "voice_0130",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_01",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "ありました　\nレンちゃんは　ずっと床を見ていました",
+          "textColor": "",
+          "voiceAssetId": "voice_0131",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_03",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "あれは未来へ\n進むための　準備運動や！",
+          "textColor": "",
+          "voiceAssetId": "voice_0132",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_05",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "PCエンジンは\nだいたい　すぐ走るよ",
+          "textColor": "",
+          "voiceAssetId": "voice_0133",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "古いから\n更新がないだけや！",
+          "textColor": "",
+          "voiceAssetId": "voice_0134",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "それも　ひとつの強み",
+          "textColor": "",
+          "voiceAssetId": "voice_0135",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "弱点を強みに変換すな！",
+          "textColor": "",
+          "voiceAssetId": "voice_0136",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "",
+          "text": "チカは二人を見くらべた",
+          "textColor": "#ffff00",
+          "voiceAssetId": "voice_0137",
+          "mouthSlot": null
+        },
+        {
+          "type": "choice",
+          "variableName": "choice2",
+          "choices": [
+            {
+              "label": "部長を止める",
+              "value": 1,
+              "targetSceneId": "ep01_06_01_branch"
+            },
+            {
+              "label": "レンちゃんを止める",
+              "value": 2,
+              "targetSceneId": "ep01_06_02_branch"
+            }
+          ],
+          "defaultIndex": 0
+        }
+      ],
+      "nextSceneId": ""
+    },
+    {
+      "id": "ep01_06_01_branch",
+      "name": "第01話/レスバ/分岐2/選択1：部長を止める",
+      "fullScreenBg": false,
+      "commands": [
+        {
+          "type": "audio",
+          "kind": "psg",
+          "action": "play",
+          "assetId": "classroom_whisper",
+          "channel": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_02",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_01",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_05",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "部長　説明が少し長くなってます",
+          "textColor": "",
+          "voiceAssetId": "voice_0138",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_01",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "たしかに　\nでも今のはまだ　本体の話だけだよ",
+          "textColor": "",
+          "voiceAssetId": "voice_0139",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "まだ本体なんですか？",
+          "textColor": "",
+          "voiceAssetId": "voice_0140",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "次は周辺機器と\nロマンの関係を話そうかと",
+          "textColor": "",
+          "voiceAssetId": "voice_0141",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_02",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "長いわ！\n卒業まで続くやろ！",
+          "textColor": "",
+          "voiceAssetId": "voice_0142",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_05",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "PCエンジンの歴史なら\n卒業まで語れるよ！",
+          "textColor": "",
+          "voiceAssetId": "voice_0143",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "部長　\n止まる気がありません",
+          "textColor": "",
+          "voiceAssetId": "voice_0144",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_05",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "チカ　\n止める相手を間違えたで！",
+          "textColor": "",
+          "voiceAssetId": "voice_0145",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_06",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "すみません　\nでもレンちゃんも　声が大きいです",
+          "textColor": "",
+          "voiceAssetId": "voice_0146",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_02",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "うっ　\nそれは…　否定できん",
+          "textColor": "",
+          "voiceAssetId": "voice_0147",
+          "mouthSlot": 2
+        },
+        {
+          "type": "jump",
+          "sceneId": "ep01_07_battle"
+        }
+      ],
+      "nextSceneId": "ep01_07_battle"
+    },
+    {
+      "id": "ep01_06_02_branch",
+      "name": "第01話/レスバ/分岐2/選択2：レンちゃんを止める",
+      "fullScreenBg": false,
+      "commands": [
+        {
+          "type": "audio",
+          "kind": "psg",
+          "action": "play",
+          "assetId": "classroom_whisper",
+          "channel": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_02",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_01",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_05",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "レンちゃんも\n落ち着いてください",
+          "textColor": "",
+          "voiceAssetId": "voice_0148",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_03",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "うちは\nめちゃくちゃ冷静や！",
+          "textColor": "",
+          "voiceAssetId": "voice_0149",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "冷静な人は\n机を叩かないと思います",
+          "textColor": "",
+          "voiceAssetId": "voice_0150",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "これは\n強調表現や！",
+          "textColor": "",
+          "voiceAssetId": "voice_0151",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_01",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "ところでレンくん\n部費の帳簿　まだ紙だよね",
+          "textColor": "",
+          "voiceAssetId": "voice_0152",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_01",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "それがなんやねん",
+          "textColor": "",
+          "voiceAssetId": "voice_0153",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "最新至上主義なら\n表計算ソフトでデジタルにしないの？",
+          "textColor": "",
+          "voiceAssetId": "voice_0154",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_04",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "紙には紙のよさがあるんや！",
+          "textColor": "",
+          "voiceAssetId": "voice_0155",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_03",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "あっ",
+          "textColor": "",
+          "voiceAssetId": "voice_0156",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_06",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "うん　\n古いものにも　よさがある",
+          "textColor": "",
+          "voiceAssetId": "voice_0157",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_02",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "しまった！",
+          "textColor": "",
+          "voiceAssetId": "voice_0158",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_05",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "レンちゃんが\nロジックエラーになりました",
+          "textColor": "",
+          "voiceAssetId": "voice_0159",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_04",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "今のはノーカンや！",
+          "textColor": "",
+          "voiceAssetId": "voice_0160",
+          "mouthSlot": 2
+        },
+        {
+          "type": "jump",
+          "sceneId": "ep01_07_battle"
+        }
+      ],
+      "nextSceneId": "ep01_07_battle"
+    },
+    {
+      "id": "ep01_07_battle",
+      "name": "第01話/レスバ2/まとめ",
+      "fullScreenBg": false,
+      "commands": [
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_01",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_01",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_04",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "そもそもやな！\n古いゲームなんて思い出補正で\n持ち上げとるだけや！",
+          "textColor": "",
+          "voiceAssetId": "voice_0161",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_06",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "思い出補正も\n楽しさの一部じゃないかな",
+          "textColor": "",
+          "voiceAssetId": "voice_0162",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_02",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "またきれいに\nまとめようとしとる！",
+          "textColor": "",
+          "voiceAssetId": "voice_0163",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "ゲームは\n画面の中だけで終わらない",
+          "textColor": "",
+          "voiceAssetId": "voice_0164",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_03",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "誰と遊んだか　\nどこで買ったか　どう持ち帰ったか",
+          "textColor": "",
+          "voiceAssetId": "voice_0165",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "そういうのも\nぜんぶ　ゲームの記憶だよ",
+          "textColor": "",
+          "voiceAssetId": "voice_0166",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_04",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "それは…\n少し　わかる気がします",
+          "textColor": "",
+          "voiceAssetId": "voice_0167",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "私も昔　家族で遊んだ\nパズルゲームは覚えています",
+          "textColor": "",
+          "voiceAssetId": "voice_0168",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_03",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "チカまでそっちに行くんか！",
+          "textColor": "",
+          "voiceAssetId": "voice_0169",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_01",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "そっちというか　\n楽しかった記憶は　大事かなと",
+          "textColor": "",
+          "voiceAssetId": "voice_0170",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_01",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "その感覚で合っているよ",
+          "textColor": "",
+          "voiceAssetId": "voice_0171",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_04",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "でも！\n最新のほうが画面はきれいや！",
+          "textColor": "",
+          "voiceAssetId": "voice_0172",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "もちろん　\n新しいゲームもすごいよ",
+          "textColor": "",
+          "voiceAssetId": "voice_0173",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_02",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "えっ",
+          "textColor": "",
+          "voiceAssetId": "voice_0174",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "あれ？\n部長　認めるんですね",
+          "textColor": "",
+          "voiceAssetId": "voice_0175",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_03",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "認めるよ　\n私は新しいゲームも好きだし",
+          "textColor": "",
+          "voiceAssetId": "voice_0176",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "ちょっ…\n待ちいや　なら何で争っとるんや",
+          "textColor": "",
+          "voiceAssetId": "voice_0177",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "レンくんが\n白い箱を古代遺跡って言ったから",
+          "textColor": "",
+          "voiceAssetId": "voice_0178",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_05",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "原因がはっきりしていました",
+          "textColor": "",
+          "voiceAssetId": "voice_0179",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_03",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "うぐっ",
+          "textColor": "",
+          "voiceAssetId": "voice_0180",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "レンくんの\n最新機もいいゲーム機だよ",
+          "textColor": "",
+          "voiceAssetId": "voice_0181",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_04",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "そ　そうやろ？\nやっとわかったか",
+          "textColor": "",
+          "voiceAssetId": "voice_0182",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_02",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "でも　最新機がえらいことと　\n古い機械を笑っていい\nということは別だね",
+          "textColor": "",
+          "voiceAssetId": "voice_0183",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_03",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "うっ",
+          "textColor": "",
+          "voiceAssetId": "voice_0184",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_06",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "部長の正論が\n静かに刺さりました",
+          "textColor": "",
+          "voiceAssetId": "voice_0185",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "正論を部室に持ち込むなや！",
+          "textColor": "",
+          "voiceAssetId": "voice_0186",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_04",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "レスバトルなのに？",
+          "textColor": "",
+          "voiceAssetId": "voice_0187",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "レスバは勢いや！\n正しさで殴るのは反則や！",
+          "textColor": "",
+          "voiceAssetId": "voice_0188",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_05",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "それは\n負け宣言では？",
+          "textColor": "",
+          "voiceAssetId": "voice_0189",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "違うわ！\n戦略的撤退や！",
+          "textColor": "",
+          "voiceAssetId": "voice_0190",
+          "mouthSlot": 2
+        },
+        {
+          "type": "jump",
+          "sceneId": "ep01_08_wakai"
+        }
+      ],
+      "nextSceneId": "ep01_08_wakai"
+    },
+    {
+      "id": "ep01_08_wakai",
+      "name": "第01話/レスバ2/和解",
+      "fullScreenBg": false,
+      "commands": [
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_03",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "ところで\nレンくん　一緒に遊ぶ？",
+          "textColor": "",
+          "voiceAssetId": "voice_0191",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_03",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "遊ばへん！",
+          "textColor": "",
+          "voiceAssetId": "voice_0192",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "二人用の対戦もあるよ",
+          "textColor": "",
+          "voiceAssetId": "voice_0193",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "やらへん！",
+          "textColor": "",
+          "voiceAssetId": "voice_0194",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_04",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "でもレンちゃん　\nさっきから画面を見てます",
+          "textColor": "",
+          "voiceAssetId": "voice_0195",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_02",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "見てへん！\n視界に勝手に入っとるだけや！",
+          "textColor": "",
+          "voiceAssetId": "voice_0196",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "コントローラも軽いよ",
+          "textColor": "",
+          "voiceAssetId": "voice_0197",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "軽さで人の心は動かへん！",
+          "textColor": "",
+          "voiceAssetId": "voice_0198",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "じゃあ　一回だけ",
+          "textColor": "",
+          "voiceAssetId": "voice_0199",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "一回だけでもやらへん！",
+          "textColor": "",
+          "voiceAssetId": "voice_0200",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "レンちゃんの手　\nもうコントローラの近くにあります",
+          "textColor": "",
+          "voiceAssetId": "voice_0201",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_04",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "これは…敵情視察や",
+          "textColor": "",
+          "voiceAssetId": "voice_0202",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_02",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "視察なら仕方ないね",
+          "textColor": "",
+          "voiceAssetId": "voice_0203",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "ウチは認めたわけやないからな！",
+          "textColor": "",
+          "voiceAssetId": "voice_0204",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "うん\nじゃあスタート",
+          "textColor": "",
+          "voiceAssetId": "voice_0205",
+          "mouthSlot": 0
+        },
+        {
+          "type": "audio",
+          "kind": "psg",
+          "action": "play",
+          "assetId": "argument_battle",
+          "channel": 0
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "あっ　ちょっ　待ちいや！",
+          "textColor": "",
+          "voiceAssetId": "voice_0206",
+          "mouthSlot": 2
+        },
+        {
+          "type": "jump",
+          "sceneId": "ep01_09_game_battle"
+        }
+      ],
+      "nextSceneId": "ep01_09_game_battle"
+    },
+    {
+      "id": "ep01_09_game_battle",
+      "name": "第01話/レスバ2/ゲームバトルイベントスチル",
+      "fullScreenBg": false,
+      "commands": [
+        {
+          "type": "comment",
+          "text": "ゲームバトルのイベントスチル",
+          "color": ""
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_03",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": false
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_04",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": false
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_03",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": false
+        },
+        {
+          "type": "background",
+          "assetId": "ep01_003",
+          "transition": "fade",
+          "fadeOutFrames": 30,
+          "fadeInFrames": 30,
+          "x": 2,
+          "y": 1
+        },
+        {
+          "type": "audio",
+          "kind": "psg",
+          "action": "play",
+          "assetId": "psg_1784890911053",
+          "channel": 1
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "なんでや！\n今の当たったやろ！",
+          "textColor": "",
+          "voiceAssetId": "voice_0207",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "当たってないね",
+          "textColor": "",
+          "voiceAssetId": "voice_0208",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "画面では　はずれていました",
+          "textColor": "",
+          "voiceAssetId": "voice_0209",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "古いゲームは判定まで古いんか！",
+          "textColor": "",
+          "voiceAssetId": "voice_0210",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "判定は　むしろ正直だよ",
+          "textColor": "",
+          "voiceAssetId": "voice_0211",
+          "mouthSlot": 0
+        },
+        {
+          "type": "audio",
+          "kind": "psg",
+          "action": "play",
+          "assetId": "psg_1784890793301",
+          "channel": 1
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "うわっ！\nまた落ちた！",
+          "textColor": "",
+          "voiceAssetId": "voice_0212",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "レンちゃん　\nすごく夢中です",
+          "textColor": "",
+          "voiceAssetId": "voice_0213",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "夢中ちゃう！\n怒っとるんや！",
+          "textColor": "",
+          "voiceAssetId": "voice_0214",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "怒りながら\n遊ぶのもゲームだね",
+          "textColor": "",
+          "voiceAssetId": "voice_0215",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "もうええ！",
+          "textColor": "",
+          "voiceAssetId": "voice_0216",
+          "mouthSlot": 2
+        },
+        {
+          "type": "effect",
+          "effect": "shake",
+          "frames": 16,
+          "intensity": 5,
+          "color": "#ffffff"
+        },
+        {
+          "type": "background",
+          "assetId": "bg_clubroom_day",
+          "transition": "fade",
+          "fadeOutFrames": 30,
+          "fadeInFrames": 30,
+          "x": 2,
+          "y": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_03",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_04",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_03",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "こんな白い箱に\nうちの最新魂を乱されて\nたまるかい！",
+          "textColor": "",
+          "voiceAssetId": "voice_0217",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "うちは帰る！\n未来へ帰るんや！",
+          "textColor": "",
+          "voiceAssetId": "voice_0218",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "レンちゃん　\n泣きそうです",
+          "textColor": "",
+          "voiceAssetId": "voice_0219",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "泣いてへん！\n目から　ロード時間が出とるだけや！",
+          "textColor": "",
+          "voiceAssetId": "voice_0220",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "それは涙では？",
+          "textColor": "",
+          "voiceAssetId": "voice_0221",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "うるさいわー！",
+          "textColor": "",
+          "voiceAssetId": "voice_0222",
+          "mouthSlot": 2
+        },
+        {
+          "type": "spritemove",
+          "slot": 2,
+          "x": 182,
+          "y": 16,
+          "frames": 30,
+          "async": false,
+          "animationAssetId": "",
+          "animationId": ""
+        },
+        {
+          "type": "spritemove",
+          "slot": 1,
+          "x": 145,
+          "y": 16,
+          "frames": 30,
+          "async": false,
+          "animationAssetId": "",
+          "animationId": ""
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_03",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": false
+        },
+        {
+          "type": "jump",
+          "sceneId": "ep01_10_game_shop"
+        }
+      ],
+      "nextSceneId": "ep01_10_game_shop"
+    },
+    {
+      "id": "ep01_10_game_shop",
+      "name": "第01話/エンディング/ゲームショップへ",
+      "fullScreenBg": false,
+      "commands": [
+        {
+          "type": "background",
+          "assetId": "bg_clubroom_day",
+          "transition": "fade",
+          "fadeOutFrames": 30,
+          "fadeInFrames": 30,
+          "x": 2,
+          "y": 1,
+          "skip": true
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_02",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_05",
+          "x": 145,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "行っちゃいました…",
+          "textColor": "",
+          "voiceAssetId": "voice_0223",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "レンちゃん　\n大丈夫でしょうか",
+          "textColor": "",
+          "voiceAssetId": "voice_0224",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "大丈夫　\nいつものことだよ",
+          "textColor": "",
+          "voiceAssetId": "voice_0225",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "いつも\nなんですか？",
+          "textColor": "",
+          "voiceAssetId": "voice_0226",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "前回は　セーブデータ論争で\n廊下まで走っていった",
+          "textColor": "",
+          "voiceAssetId": "voice_0227",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "思ったより激しい部活です",
+          "textColor": "",
+          "voiceAssetId": "voice_0228",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_03",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "でも　\nちゃんと戻ってくる",
+          "textColor": "",
+          "voiceAssetId": "voice_0229",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_01",
+          "x": 145,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "どうして\nわかるんですか？",
+          "textColor": "",
+          "voiceAssetId": "voice_0230",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "今日は\n駅前の中古屋でセールがある",
+          "textColor": "",
+          "voiceAssetId": "voice_0231",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "中古屋",
+          "textColor": "",
+          "voiceAssetId": "voice_0232",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "レトロゲームも\n周辺機器も　少し安い日",
+          "textColor": "",
+          "voiceAssetId": "voice_0233",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_05",
+          "x": 145,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "それはレンちゃんに\n関係ないのでは？",
+          "textColor": "",
+          "voiceAssetId": "voice_0234",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_06",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "レンくんは\n最新至上主義だけど　\n限定カラーに弱いんだ",
+          "textColor": "",
+          "voiceAssetId": "voice_0235",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "最新でも古くても　\n色違いには　弱いんですね",
+          "textColor": "",
+          "voiceAssetId": "voice_0236",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_06",
+          "x": 184,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "spritemove",
+          "slot": 2,
+          "x": 117,
+          "y": 16,
+          "frames": 60,
+          "async": true,
+          "animationAssetId": "",
+          "animationId": ""
+        },
+        {
+          "type": "spritemove",
+          "slot": 1,
+          "x": 180,
+          "y": 16,
+          "frames": 60,
+          "async": true,
+          "animationAssetId": "",
+          "animationId": ""
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "…中古屋って\n言うた？",
+          "textColor": "",
+          "voiceAssetId": "voice_0237",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_03",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "戻ってきました",
+          "textColor": "",
+          "voiceAssetId": "voice_0238",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_03",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "おかえり　\nレンくん",
+          "textColor": "",
+          "voiceAssetId": "voice_0239",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_04",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "帰ってへん　\nたまたま　廊下の空気を\n確認しとっただけや",
+          "textColor": "",
+          "voiceAssetId": "voice_0240",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_01",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "廊下の空気は　どうでした？",
+          "textColor": "",
+          "voiceAssetId": "voice_0241",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_01",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "中古屋のにおいがした",
+          "textColor": "",
+          "voiceAssetId": "voice_0242",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_05",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "どんなにおいですか…",
+          "textColor": "",
+          "voiceAssetId": "voice_0243",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_06",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "限定カラーの\nコントローラがあるかも",
+          "textColor": "",
+          "voiceAssetId": "voice_0244",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_06",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "なっ…\nそんなん　確認せなあかんやろ！",
+          "textColor": "",
+          "voiceAssetId": "voice_0245",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_04",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "確認するんですね",
+          "textColor": "",
+          "voiceAssetId": "voice_0246",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_04",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "敵情視察や　\n中古市場の　動向調査や",
+          "textColor": "",
+          "voiceAssetId": "voice_0247",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_03",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "じゃあ　\nみんなで行こう",
+          "textColor": "",
+          "voiceAssetId": "voice_0248",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_03",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "部活は\nどうするんですか？",
+          "textColor": "",
+          "voiceAssetId": "voice_0249",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "これも部活だよ　\n中古ゲーム市場調査だからね",
+          "textColor": "",
+          "voiceAssetId": "voice_0250",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "せや　\n最新を知るには\n過去も見なあかんのや",
+          "textColor": "",
+          "voiceAssetId": "voice_0251",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_04",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "レンちゃんが\n急に都合のいいことを\n言い始めました",
+          "textColor": "",
+          "voiceAssetId": "voice_0252",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "うちは最初から\nそういう方針や！",
+          "textColor": "",
+          "voiceAssetId": "voice_0253",
+          "mouthSlot": 2
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "チカくん　本体を見たあとは\n売り場を見るのが\nいちばん勉強になるよ",
+          "textColor": "",
+          "voiceAssetId": "voice_0254",
+          "mouthSlot": 0
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "今日は\nそういう回なんですね",
+          "textColor": "",
+          "voiceAssetId": "voice_0255",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_02",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "待てや　チカまで\n白い箱側に行くんちゃうやろな",
+          "textColor": "",
+          "voiceAssetId": "voice_0256",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_02",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "私は別に\nどちら側でもないです　中立です",
+          "textColor": "",
+          "voiceAssetId": "voice_0257",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "ただ…　どっちも\n楽しそうだなとは　思いました",
+          "textColor": "",
+          "voiceAssetId": "voice_0258",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_01",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "それが一番\nいい入り口だね",
+          "textColor": "",
+          "voiceAssetId": "voice_0259",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_03",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "ぐぬぬ　\n平和な答えで\nレスバを終わらせるなや",
+          "textColor": "",
+          "voiceAssetId": "voice_0260",
+          "mouthSlot": 2
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_04",
+          "x": 180,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "レスバは\n終わっていいと思います",
+          "textColor": "",
+          "voiceAssetId": "voice_0261",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_03",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "平和になったし\n中古屋へ行こう",
+          "textColor": "",
+          "voiceAssetId": "voice_0262",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_06",
+          "x": 117,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "部長！　先に行くで！\n限定カラーは早い者勝ちや！",
+          "textColor": "",
+          "voiceAssetId": "voice_0263",
+          "mouthSlot": 2
+        },
+        {
+          "type": "spritemove",
+          "slot": 2,
+          "x": 186,
+          "y": 16,
+          "frames": 30,
+          "async": false,
+          "animationAssetId": "",
+          "animationId": ""
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_ren_06",
+          "x": 186,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": false
+        },
+        {
+          "type": "spritemove",
+          "slot": 1,
+          "x": 153,
+          "y": 16,
+          "frames": 30,
+          "async": false,
+          "animationAssetId": "",
+          "animationId": ""
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "あっ　\nレンちゃんが　一番乗りです",
+          "textColor": "",
+          "voiceAssetId": "voice_0264",
+          "mouthSlot": 1
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_02",
+          "x": 30,
+          "y": 16,
+          "animationId": "default",
+          "flipX": true,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "レンくんは　行動が速いね",
+          "textColor": "",
+          "voiceAssetId": "voice_0265",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_05",
+          "x": 153,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "さっきは泣いて　出ていったのに",
+          "textColor": "",
+          "voiceAssetId": "voice_0266",
+          "mouthSlot": 1
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "涙もロード時間も　\n終われば　次の画面だよ",
+          "textColor": "",
+          "voiceAssetId": "voice_0267",
+          "mouthSlot": 0
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_chika_04",
+          "x": 153,
+          "y": 16,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": true
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "部長　\nそれっぽく　まとめましたね",
+          "textColor": "",
+          "voiceAssetId": "voice_0268",
+          "mouthSlot": 1
+        },
+        {
+          "type": "jump",
+          "sceneId": "ep01_10_ending"
+        }
+      ],
+      "nextSceneId": ""
+    },
+    {
+      "id": "ep01_10_ending",
+      "name": "第01話/エンディング/下校イベントスチル",
+      "fullScreenBg": false,
+      "commands": [
+        {
+          "type": "comment",
+          "text": "EDイベントスチル",
+          "color": ""
+        },
+        {
+          "type": "sprite",
+          "slot": 0,
+          "assetId": "sp_mu_01",
+          "x": 128,
+          "y": 24,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": false
+        },
+        {
+          "type": "sprite",
+          "slot": 1,
+          "assetId": "sp_mu_01",
+          "x": 128,
+          "y": 24,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": false
+        },
+        {
+          "type": "sprite",
+          "slot": 2,
+          "assetId": "sp_mu_01",
+          "x": 128,
+          "y": 24,
+          "animationId": "default",
+          "flipX": false,
+          "flipY": false,
+          "visible": false
+        },
+        {
+          "type": "background",
+          "assetId": "ep01_004",
+          "transition": "fade",
+          "fadeOutFrames": 30,
+          "fadeInFrames": 30,
+          "x": 2,
+          "y": 1
+        },
+        {
+          "type": "audio",
+          "kind": "psg",
+          "action": "play",
+          "assetId": "nonki_bukatsu_bgm",
+          "channel": 0
+        },
+        {
+          "type": "message",
+          "speaker": "",
+          "text": "こうして　\nいしのうら部は",
+          "textColor": "#ffdb00",
+          "voiceAssetId": "voice_0269",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "",
+          "text": "今日も\n小さな白い箱から大きな争いを\n生み出し",
+          "textColor": "#ffdb00",
+          "voiceAssetId": "voice_0270",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "",
+          "text": "そして結局　\nみんなで　中古屋へ向かうのだった",
+          "textColor": "#ffdb00",
+          "voiceAssetId": "voice_0271",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "部長",
+          "text": "ところで　\nPCエンジンって　かわいいよね",
+          "textColor": "",
+          "voiceAssetId": "voice_0272",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "レン",
+          "text": "まだ言うか！",
+          "textColor": "",
+          "voiceAssetId": "voice_0273",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "チカ",
+          "text": "今日の結論　\nそこなんですね",
+          "textColor": "",
+          "voiceAssetId": "voice_0274",
+          "mouthSlot": null
+        },
+        {
+          "type": "message",
+          "speaker": "",
+          "text": "第1話\n「部室の白い箱」\n\nおしまい",
+          "textColor": "#ffdb00",
+          "voiceAssetId": "voice_0275",
+          "mouthSlot": null
+        },
+        {
+          "type": "audio",
+          "kind": "psg",
+          "action": "stop",
+          "assetId": "",
+          "channel": 0,
+          "target": "all"
+        },
+        {
+          "type": "jump",
+          "sceneId": "eye_catch"
+        }
+      ],
+      "nextSceneId": ""
+    },
+    {
+      "id": "eye_catch",
+      "name": "エンディング/アイキャッチ",
+      "fullScreenBg": true,
+      "commands": [
+        {
+          "type": "background",
+          "assetId": "eye_catch",
+          "transition": "fade",
+          "fadeOutFrames": 30,
+          "fadeInFrames": 30,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "type": "audio",
+          "kind": "cdda",
+          "action": "play",
+          "assetId": "cdda_eyecatch",
+          "channel": 0
+        },
+        {
+          "type": "inputcheck",
+          "buttons": [
+            "run",
+            "i",
+            "ii"
+          ],
+          "mode": "async",
+          "targetLabel": ""
+        },
+        {
+          "type": "wait",
+          "frames": 160
+        },
+        {
+          "type": "inputcheck",
+          "buttons": [],
+          "mode": "cancel",
+          "targetLabel": ""
+        },
+        {
+          "type": "audio",
+          "kind": "cdda",
+          "action": "play",
+          "assetId": "cdda_eye_catch_all",
+          "channel": 0
+        },
+        {
+          "type": "wait",
+          "frames": 90
+        },
+        {
+          "type": "audio",
+          "kind": "cdda",
+          "action": "stop",
+          "assetId": "",
+          "channel": 0
+        },
+        {
+          "type": "wait",
+          "frames": 100
+        },
+        {
+          "type": "jump",
+          "sceneId": "logo"
+        }
+      ],
+      "nextSceneId": ""
+    }
+  ]
+}

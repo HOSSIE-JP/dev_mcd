@@ -41,3 +41,22 @@ must be followed; no emulator binary is bundled with this project or game.
 
 No SGDK source or runtime is linked. The bridge API and procedural test assets
 are project code. No commercial music or user BIOS data is used in the generated assets.
+
+## MD Game Editor novel model and Ishinoura episode 1
+
+The MCD novel interpreter and converter follow the command model and import
+semantics in HOSSIE-JP/md-game-editor at
+`26f0cda3d9869acd3c44961d89e42e102af6381d`.
+They do not bundle or modify the editor, SGDK, or the generated cartridge ROM.
+
+The story, artwork and recorded voices/music in `examples/ishinoura_ep01/data`
+are converted from the owner's HOSSIE-JP/pce-novel-game-projects repository at
+`6e0ff601e7ac2af69ce39677b623781ff01f1e0c`, episode
+`いしのうらにいる！？/01_部室の白い箱`, with the owner's permission for this sample.
+Their ownership is retained; this notice does not grant an additional license
+for unrelated reuse of the story or audiovisual assets.
+
+The Japanese glyph subset is derived from JF-Dot-Shinonome16, distributed with
+MD Game Editor. The accompanying efont/Shinonome notice is reproduced in
+`examples/ishinoura_ep01/FONT-LICENSE.txt` (lossless EUC-JP to UTF-8 conversion).
+The full font is not required for normal builds and is not bundled.

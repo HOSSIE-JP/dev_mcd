@@ -31,3 +31,22 @@ GLABEL sp_main
 GLABEL sp_user
   rts
 #include <sub/cdrom.s>
+
+/* Bounded range adapter to the pinned Megadev CDC coroutine. Its source stays
+ * unmodified. The caller has validated extent, rounded length and destination. */
+.section .text
+GLABEL mcd_read_range
+  move.w sr,d0
+  ori.w #0x700,sr
+  move.l 4(sp),cdread_sector_start
+  move.l 8(sp),cdread_sector_count
+  move.l 12(sp),filebuff
+  move.b #CDC_DEST_SUBREAD,cdc_dev_dest
+  move.l #mcd_range_entry,acc_loop_jump
+  move.w #6,access_op
+  move.w d0,sr
+  rts
+mcd_range_entry:
+  bsr load_data_sub
+  clr.w access_op
+  bra access_op_idle

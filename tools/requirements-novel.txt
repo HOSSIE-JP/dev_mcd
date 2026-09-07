@@ -1,0 +1,3 @@
+# Only needed to re-import source projects. Normal builds use committed data.
+numpy==2.3.5
+Pillow==12.3.0
