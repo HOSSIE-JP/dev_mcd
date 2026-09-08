@@ -222,6 +222,7 @@ def video_metadata(metadata):
     total=int(duration*RATE)
     if not total:raise ValueError('Video duration is shorter than one audio sample')
     return {'stream_index':index,'width':width,'height':height,'total_samples':total,
+            'duration_seconds':float(duration),
             'has_audio':any(stream.get('codec_type')=='audio' for stream in streams)}
 
 def processing_options(options, metadata):
@@ -232,9 +233,12 @@ def processing_options(options, metadata):
         if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or not low <= value <= high:
             raise ValueError('Invalid video option: ' + key)
         return value
-    duration = metadata['total_samples']/RATE
+    sample_duration = metadata['total_samples']/RATE
+    # Validate against the probed duration before truncating to the output clock.
+    duration = metadata.get('duration_seconds', sample_duration)
     start = number('trimStart', 0, 0, duration)
     end = number('trimEnd', duration, 0, duration) if options.get('trimEnd') is not None else duration
+    end = min(end, sample_duration)
     if end-start < 1/RATE: raise ValueError('Empty video trim range')
     result = dict(trimStart=start, trimEnd=end)
     result['dither'], result['ditherStrength'] = _dither_options(options.get('dither', 'none'), options.get('ditherStrength', 0.5))

@@ -40,7 +40,7 @@ class VideoMetadataTests(unittest.TestCase):
         original = copy.deepcopy(source)
         self.assertEqual(video.video_metadata(source), {
             'stream_index': 3, 'width': 128, 'height': 64,
-            'total_samples': 4000, 'has_audio': True,
+            'total_samples': 4000, 'duration_seconds': 0.25, 'has_audio': True,
         })
         self.assertEqual(source, original, 'Probing must not mutate source metadata')
 
