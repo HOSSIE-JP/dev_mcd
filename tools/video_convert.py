@@ -7,6 +7,7 @@ codebook. Records retain 16 kHz RF5C164 PCM for the native guarded audio ring.
 import argparse
 import contextlib
 import json
+import math
 import os
 import shutil
 import struct
@@ -20,6 +21,7 @@ from PIL import Image, ImageDraw
 
 # width, height, fps numerator, fps denominator, maximum dictionary tiles
 PROFILES = {'small15': (160,112,15,1,96), 'medium12': (224,160,12,1,128),
+            'medium15': (224,160,15,1,128), 'mediumhq12': (224,160,12,1,192),
             'balanced10': (256,176,10,1,192), 'full6': (320,224,6,1,256),
             'full75': (320,224,15,2,256), 'full10': (320,224,10,1,256),
             'fullhq6': (320,224,6,1,384)}
@@ -28,6 +30,17 @@ RATE = 16000
 MAX_SAMPLES = RATE*7200
 HEADER = struct.Struct('>4s6H4I2H')
 FRAME = struct.Struct('>4s3I2H3I')
+# Screen-anchored thresholds repeat exactly at the 8x8 tile boundaries. They
+# never depend on frame number, so a still picture cannot acquire dither shimmer.
+BAYER4 = np.array([[0,8,2,10], [12,4,14,6], [3,11,1,9], [15,7,13,5]], dtype=np.float32)
+
+
+def _dither_options(dither, strength):
+    if dither not in ('none', 'ordered'):
+        raise ValueError('Invalid video dither')
+    if isinstance(strength, bool) or not isinstance(strength, (int, float)) or not math.isfinite(strength) or not 0 <= strength <= 1:
+        raise ValueError('Invalid video option: ditherStrength')
+    return dither, strength
 
 def _profile(name):
     if name not in PROFILES:
@@ -44,8 +57,9 @@ def _fit(image, width, height):
     canvas.paste(image.resize((w,h), Image.Resampling.LANCZOS), ((width-w)//2,(height-h)//2))
     return canvas
 
-def encode_frame(image, width, height, limit, pre_fitted=False):
-    """Return palette, capped dictionary and map; tiles use actual RGB distance."""
+def encode_frame(image, width, height, limit, pre_fitted=False, dither='none', dither_strength=0.5):
+    """Return palette, capped dictionary and map using the actual RGB333 colors."""
+    dither, dither_strength = _dither_options(dither, dither_strength)
     image = image.convert('RGB') if pre_fitted else _fit(image, width, height)
     if image.size != (width,height):raise ValueError('Pre-fitted video frame dimensions mismatch')
     q = image.quantize(colors=15, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE)
@@ -53,9 +67,21 @@ def encode_frame(image, width, height, limit, pre_fitted=False):
     raw_palette += [0]*(45-len(raw_palette))
     rgb = np.zeros((16,3), dtype=np.int32)
     rgb[1:] = (np.array(raw_palette).reshape(15,3)*7+127)//255
-    pixels = np.array(q,dtype=np.uint8)+1
+    source = np.asarray(image, dtype=np.float32)
+    target = source
+    if dither == 'ordered' and dither_strength:
+        # At full strength the bias spans one RGB333 step; the default uses
+        # half that span to avoid overwhelming the small tile dictionary.
+        thresholds = np.tile((BAYER4 + 0.5)/16 - 0.5, ((height+3)//4, (width+3)//4))[:height,:width]
+        target = np.clip(source + thresholds[:,:,None]*(255/7)*dither_strength, 0, 255)
+    actual = rgb.astype(np.float32)*(255/7)
+    # Median-cut indices refer to RGB888 palette entries. After rounding those
+    # colors to CRAM RGB333, their old nearest-color assignments are no longer
+    # valid. Reassign against the exact colors the hardware will display.
+    distance = np.sum((target[:,:,None,:] - actual[None,None,:,:])**2, axis=3)
+    pixels = np.argmin(distance, axis=2).astype(np.uint8)
     # Exact black stays index zero, especially letterboxing.
-    pixels[np.all(np.array(image)==0,axis=2)] = 0
+    pixels[np.all(source==0,axis=2)] = 0
     tile_pixels = pixels.reshape(height//8,8,width//8,8).transpose(0,2,1,3).reshape(-1,64)
     packed = (tile_pixels[:,::2]<<4)|tile_pixels[:,1::2]
     unique, inverse, counts = np.unique(packed, axis=0, return_inverse=True, return_counts=True)
@@ -96,9 +122,10 @@ def _pcm(raw, samples):
     magnitude = np.where(values>=0,np.minimum(magnitude,126),np.minimum(magnitude,127))
     return np.where(values>=0,magnitude|128,magnitude).astype(np.uint8).tobytes()
 
-def encode_frames(frames, output, profile='medium12', total_samples=None, audio_pcm16=None, pre_fitted=False):
+def encode_frames(frames, output, profile='medium12', total_samples=None, audio_pcm16=None, pre_fitted=False, dither='none', dither_strength=0.5):
     """Atomically stream PIL frames and optional mono PCM16 into exact MTV1 v1."""
     width,height,fn,fd,limit = _profile(profile)
+    dither, dither_strength = _dither_options(dither, dither_strength)
     if total_samples is not None and not 0<total_samples<=MAX_SAMPLES:
         raise ValueError('Video duration must be greater than zero and at most two hours')
     output = Path(output);output.parent.mkdir(parents=True,exist_ok=True)
@@ -114,7 +141,7 @@ def encode_frames(frames, output, profile='medium12', total_samples=None, audio_
                     if pts>=total_samples:break
                     end=min(end,total_samples)
                 if end>MAX_SAMPLES:raise ValueError('Video exceeds two hours')
-                palette,tiles,mapping=encode_frame(image,width,height,limit,pre_fitted)
+                palette,tiles,mapping=encode_frame(image,width,height,limit,pre_fitted,dither,dither_strength)
                 samples=end-pts
                 pcm=_pcm(audio.read(samples*2),samples) if audio else b'\x80'*samples
                 body=palette+tiles+mapping+pcm
@@ -134,6 +161,7 @@ def encode_frames(frames, output, profile='medium12', total_samples=None, audio_
         os.replace(staged,output)
     return {'format':'MTV1','profile':profile,'width':width,'height':height,'fps_num':fn,'fps_den':fd,
             'fps':fn/fd,'frames':count,'max_record':peak,'dictionary_limit':limit,'bytes':size,
+            'dither':dither,'ditherStrength':dither_strength,
             'nominal_seconds':total/RATE,'audio_samples':total,'video_bytes_per_second':size*RATE/total,
             'audio':'embedded RF5C164 PCM8; native player uses a guarded PCM ring',
             'timing':'target rate only; 2M cache refills may cause dropped frames or audio rebuffer pauses'}
@@ -199,7 +227,6 @@ def video_metadata(metadata):
 def processing_options(options, metadata):
     options = options or {}
     if not isinstance(options, dict): raise ValueError('Video options must be an object')
-    import math
     def number(key, default, low, high):
         value = options.get(key, default)
         if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or not low <= value <= high:
@@ -210,6 +237,7 @@ def processing_options(options, metadata):
     end = number('trimEnd', duration, 0, duration) if options.get('trimEnd') is not None else duration
     if end-start < 1/RATE: raise ValueError('Empty video trim range')
     result = dict(trimStart=start, trimEnd=end)
+    result['dither'], result['ditherStrength'] = _dither_options(options.get('dither', 'none'), options.get('ditherStrength', 0.5))
     for key, default, low, high in [('brightness',0,-1,1),('contrast',1,0,2),('gamma',1,0.1,3),('saturation',1,0,3),('volume',1,0,2)]:
         result[key] = number(key, default, low, high)
     result['fit'] = options.get('fit', 'pad')
@@ -277,7 +305,8 @@ def convert_video(source, output, profile='medium12', ffmpeg='ffmpeg', ffprobe=N
             if process.wait()!=0:
                 errors.seek(0);raise ValueError('ffmpeg failed: '+errors.read(4000).decode('utf-8','replace'))
         try:
-            return encode_frames(frames(),output,profile,total,audio if audio.exists() else None,pre_fitted=True)
+            return encode_frames(frames(),output,profile,total,audio if audio.exists() else None,pre_fitted=True,
+                                 dither=edit['dither'],dither_strength=edit['ditherStrength'])
         finally:
             process.stdout.close()
             if process.poll() is None:process.kill()

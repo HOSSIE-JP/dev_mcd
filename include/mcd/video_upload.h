@@ -34,4 +34,11 @@ unsigned MCDV_uploadComplete(const MCDV_UploadPlan *plan);
  * this register word DURING VBlank. Do not blank the active display per frame.
  */
 uint16_t MCDV_planeBRegister(const MCDV_UploadPlan *plan);
+/* Native playback is H40, NTSC, 224 active lines. Permit an already prepared
+ * bank to be published in the current blank only when the sampled V counter
+ * leaves at least 16 scanlines before active display. The repeated E5..EA
+ * range in the NTSC counter is also safely inside this window. This is not a
+ * transfer budget: all tile/map/CRAM writes and the PTS wait must be complete.
+ * Other display modes must use their own timing rather than this predicate. */
+unsigned MCDV_canPublishNtsc224(uint16_t status,uint16_t vertical_counter);
 #endif

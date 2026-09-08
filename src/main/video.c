@@ -34,6 +34,15 @@ static void poll(Playback *p) {
   p->oldButtons=now;
 }
 static void step(Playback *p) {SYS_doVBlankProcess();poll(p);}
+static void publish(Playback *p,u16 bank) {
+  /* Reuse the last upload/PTS wait's VBlank when ample time remains. The
+   * inactive tile/map/palette transfers are already complete; only this
+   * register store is left. Late blank or active display waits normally.
+   * HV is sampled before status so a crossed frame boundary rejects reuse. */
+  u16 line=(*(volatile u16 *)0xC00008)>>8;
+  if(!MCDV_canPublishNtsc224(VR,line))step(p);
+  VR=bank?0x8407:0x8405;
+}
 static u16 complete(Playback *p,bool accepted) {
   if(!accepted)return MCD_getResult()?MCD_getResult():MCD_ERR_BUSY;
   while(MCD_isBusy())step(p);
@@ -273,7 +282,7 @@ u16 MCD_playVideoEx(u32 offset,u32 bytes,bool skipEnabled,bool audioEnabled,MCDV
     u32 clock=0;
     if(!p.audio && sequence==0) {p.lastTick=MCD_getSubTicks();p.silentClock=0;p.silentRemainder=0;}
     if(p.audio && !p.audioStarted) {
-      step(&p);VR=bank?0x8407:0x8405;
+      publish(&p,bank);
       p.clockTick=MCD_getSubTicks();
       result=complete(&p,MCD_videoAudioPlayAsync());if(result)break;p.audioStarted=true;
       p.clockValue=p.clockBase+MCD_getVideoAudioClock();
@@ -288,7 +297,7 @@ u16 MCD_playVideoEx(u32 offset,u32 bytes,bool skipEnabled,bool audioEnabled,MCDV
     /* Publish a prepared frame even when its upload finished late. Dropping
      * it here can starve the display indefinitely on a slower target; the
      * next iteration cheaply discards obsolete frames before uploading. */
-    step(&p);VR=bank?0x8407:0x8405;bank^=1;++p.status.framesShown;
+    publish(&p,bank);bank^=1;++p.status.framesShown;
     cursor+=frame.bytes;
   }
   if(!result && !p.skipped) {

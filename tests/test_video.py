@@ -327,6 +327,28 @@ class VideoTests(unittest.TestCase):
                 self.assertEqual(self.native.MCDV_planeBRegister(C.byref(plan)), (0x8405, 0x8407)[bank])
                 self.assertEqual(self.native.MCDV_uploadNext(C.byref(plan), 2048, C.byref(transfer)), 0)
 
+    def test_publish_reuses_only_early_ntsc_224_vblank(self):
+        ready = self.native.MCDV_canPublishNtsc224
+        ready.argtypes = [C.c_uint16, C.c_uint16]
+        ready.restype = C.c_uint
+        # Exhaust the real NTSC 224-line sequence, including the repeated
+        # counter values after physical line 234. No accepted sample is close
+        # to the next active frame; VBlank status must independently agree.
+        counter_sequence = list(range(235)) + list(range(229, 256))
+        self.assertEqual(len(counter_sequence), 262)
+        for physical_line, counter in enumerate(counter_sequence):
+            in_blank = physical_line >= 224
+            accepted = bool(ready(8 if in_blank else 0, counter))
+            if accepted:
+                self.assertTrue(in_blank)
+                self.assertGreaterEqual(262 - physical_line, 17)
+            if in_blank and 262 - physical_line > 17:
+                self.assertTrue(accepted)
+            self.assertFalse(ready(0, counter))
+        # Guard a status/counter sample taken across a frame transition.
+        for counter in (0, 1, 223, 240, 255, 256, 65535):
+            self.assertFalse(ready(8, counter))
+
     def test_both_vram_banks_upload_with_bounded_vblank_budget(self):
         for movie in self.movies.values():
             self.verify_upload(movie)

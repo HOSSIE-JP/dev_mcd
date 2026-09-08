@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "features": [
+    "rgb333-remap",
+    "ordered-dither"
+  ],
+  "profiles": [
+    "small15",
+    "medium12",
+    "medium15",
+    "mediumhq12",
+    "balanced10",
+    "full6",
+    "full75",
+    "full10",
+    "fullhq6"
+  ]
+}

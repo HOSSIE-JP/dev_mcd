@@ -177,3 +177,42 @@ python tools/video_smoke.py --bios /path/to/user-bios.bin --case audio_eof \
 キャッシュ境界でアドレスエラーを起こすケースがあった。再生制御フラグを16bitへ変更し、ビルド側でも
 `-fno-store-merging` を指定して修正した。またWord RAMを移譲しない時計要求で読込済みポインタの有効性が
 消えていたブリッジも修正した。その後に上記EOF／スキップ検証を完了している。
+
+## VBlank内の表示切替改善（2026-09-08）
+
+`src/main/video.c` の表示切替は、非表示側のタイル・配置表・パレット転送とPTS待ちが
+すべて完了した時点で、現在のVBlankを再利用できるようにした。H40 / NTSC / 224行専用で、
+VDPのVBlank statusと垂直カウンターを確認し、次の有効表示まで16走査線以上の余裕がある
+区間だけでPlane Bを切り替える。遅いVBlank・有効表示中は従来どおり次のVBlankを待つ。
+1回のVDP転送上限2KiB、Word RAM所有権、音声時計、PCM補充・再バッファ処理は変えていない。
+NTSCの262走査線と途中で繰り返す垂直カウンター範囲をホストテストで検査する。
+
+固定版Genesis Plus GXをWindows/UCRT64で構築し、同じMTV1ファイルのまま変更前後を
+比較した。今回の音声付き結果は以下。表示枚数/元尺の値は平均で、各フレームのPTS遅延とは異なる。
+
+| 独自検査素材 | 元尺 / 入力枚数 | 表示枚数（前→後） | 平均表示枚数/秒（前→後） | 再バッファ（前/後） |
+|---|---:|---:|---:|---:|
+| 既存の手続き生成 medium12 | 3秒 / 36 | 33 → 33 | 11.00 → 11.00 | 0 / 0 |
+| 辞書128タイルを使う移動ノイズ medium12 | 6秒 / 72 | 35 → 42 | 5.83 → 7.00 | 0 / 0 |
+
+負荷の高い独自検査素材では表示枚数が20%増えた。音声終端はどちらも入力と一致し、
+無音EOFと、実際の発音開始後にStartを押すスキップも正常に完了した。通常デモの
+起動・ADPCM・CD-DA・一時停止/再開・操作も `tools/smoke.py` で再確認した。
+`make all`、`make host-test`（74テスト、Windowsのシンボリックリンク権限による3サブケースのみ省略）、
+`tools/doctor.py` が成功した。FFmpeg実変換のテストも実行している。
+
+画面取得はエミュレーターの実VDP出力。実機・聴取・各フレームのA/V遅延は未検証であり、
+目標12fpsを持続達成したという意味ではない。比較ディスク・素材・ネイティブソース・coreの
+SHA-256と生のテレメトリは[今回の検証JSON](evidence/video/vblank-publish-report.json)に記録した。
+
+## SDK v2: color quantization and ordered dithering
+
+`options.dither` selects `none` (legacy default) or `ordered`; `ditherStrength`
+ranges from 0 to 1 with default 0.5. A fixed 4x4 Bayer pattern trades spatial
+noise for smoother gradients without changing the MTV1 format or playback cost.
+Pixels are reassigned to the actual RGB333 palette after rounding. Strong
+settings can worsen tile approximation; compare the decoded MTV1 preview.
+The experimental medium15 (224x160, 15fps, 128 tiles) and mediumhq12
+(224x160, 12fps, 192 tiles) profiles trade motion and detail. Rates are targets,
+not guarantees. tools/video-capabilities.json advertises these additions to
+editors so an older SDK cannot silently ignore a requested dither recipe.

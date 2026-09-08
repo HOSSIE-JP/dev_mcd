@@ -19,11 +19,12 @@ class VideoProcessingTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);source=root/'input.mkv';out=root/'result.mtv'
             subprocess.run(['ffmpeg','-v','error','-f','lavfi','-i','testsrc2=s=64x48:r=15:d=2','-f','lavfi','-i','sine=frequency=440:duration=2','-c:v','ffv1','-c:a','pcm_s16le',str(source)],check=True)
-            options=dict(trimStart=.5,trimEnd=1.25,mute=True,crop=dict(x=4,y=8,width=40,height=32),brightness=.1,gamma=1.2,volume=.5)
+            options=dict(trimStart=.5,trimEnd=1.25,mute=True,crop=dict(x=4,y=8,width=40,height=32),brightness=.1,gamma=1.2,volume=.5,dither='ordered',ditherStrength=.75)
             report=convert_video(source,out,'small15',options=options)
             data=out.read_bytes();info=validate_video(data)
             self.assertEqual(info['audio_samples'],12000)
             self.assertEqual(report['frames'],12)
+            self.assertEqual((report['dither'],report['ditherStrength']),('ordered',.75))
             _,size,_,_,tiles,cells,samples,_,_=FRAME.unpack_from(data,SECTOR)
             start=SECTOR+64+tiles*32+cells*2
             self.assertEqual(data[start:start+samples],b'\x80'*samples)

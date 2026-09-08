@@ -14,8 +14,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: >-
-          gh release create mcd-editor-sdk-v1 --target "$GITHUB_SHA"
-          --title "MD Game Editor SDK v1"
+          gh release create mcd-editor-sdk-v2 --target "$GITHUB_SHA"
+          --title "MD Game Editor SDK v2"
           --notes "Editor SDK sources and video converter scripts. No game media, BIOS or emulator. Runtime dependencies are installed separately; the pinned compiler is supplied by the toolchain Release."
           dist/editor-sdk-release/dev-mcd-editor-sdk.zip
           dist/editor-sdk-release/dev-mcd-editor-sdk-release.json

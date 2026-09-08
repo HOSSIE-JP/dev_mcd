@@ -38,3 +38,6 @@ unsigned MCDV_uploadNext(MCDV_UploadPlan *p,uint16_t budget,MCDV_Upload *out) {
 }
 unsigned MCDV_uploadComplete(const MCDV_UploadPlan *p) {return p && p->palette_done;}
 uint16_t MCDV_planeBRegister(const MCDV_UploadPlan *p) {return (uint16_t)(p->bank?0x8407:0x8405);}
+unsigned MCDV_canPublishNtsc224(uint16_t status,uint16_t vertical_counter) {
+    return (status&8u) && vertical_counter>=224u && vertical_counter<240u;
+}

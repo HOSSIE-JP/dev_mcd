@@ -1,0 +1,789 @@
+{
+  "date": "2026-09-08",
+  "emulator": "Genesis Plus GX",
+  "core_commit": "a7985a9c4278ac352f8ca7bb4d3cc6b36e9e3e7d",
+  "core_sha256": "fc02c62165a9a76c6e675ca634947680ed1a940c89625683ca68c9481e3c1cd4",
+  "hardware_tested": false,
+  "auditory_review": false,
+  "av_latency_measured": false,
+  "change": "Reuse a completed upload or PTS wait VBlank for Plane B publication only when NTSC 224-line counter and status leave at least 16 scanlines; upload budget stays 2048 bytes.",
+  "source_hashes": {
+    "src/main/video.c": "8e17a6806764e5c718156f21ad49c7cd8390247df2a1c0582c5c61044a993355",
+    "src/common/video_upload.c": "a492eea03e0c79213dc652eb07f8bf460a6c2761db6f7797b5b1de0664b85dd5",
+    "include/mcd/video_upload.h": "8e1fe6bd77d5eee7ebda30ac964c0a8bd28b03383cc52bc00208e6ed5e5f2580",
+    "tests/test_video.py": "e248b4fc8822618e287cb13396c1f5bffbb96168fa63ddd455e601d4b2630c8d"
+  },
+  "baseline_main_video_sha256": "2fd61168c9b1eb5a1b62c55f36b252a38f5f844a852817bf70af74d3025ece51",
+  "fixtures": {
+    "procedural_medium12_3s": {
+      "before": {
+        "emulator": "Genesis Plus GX",
+        "hardware_tested": false,
+        "core_commit": "a7985a9c4278ac352f8ca7bb4d3cc6b36e9e3e7d",
+        "disc_sha256": "9b17dea63a7376d368eccd93bd857ad66a7eafcb95c0160a1ddc3c5b5d6fe6a5",
+        "require_no_rebuffer": true,
+        "skip_after_audio": true,
+        "expected": {
+          "frames": 36,
+          "audio_samples": 48000,
+          "video_sha256": "d912cd71e60697862221c7205baddeb659df5b7061a76a7386525ef6240a255f"
+        },
+        "cases": {
+          "audio_eof": {
+            "status": "pass",
+            "case": "audio_eof",
+            "checks": {
+              "target_completed_without_error": true,
+              "no_audio_rebuffer": true,
+              "all_video_frames_accounted_for": true,
+              "exact_audio_eof": true,
+              "nonzero_audio_energy": true
+            },
+            "boot_frames": 793,
+            "play_request_frame": 793,
+            "captures": [
+              {
+                "file": "playing-0030.png",
+                "play_frame": 30
+              },
+              {
+                "file": "playing-0120.png",
+                "play_frame": 120
+              },
+              {
+                "file": "playing-0240.png",
+                "play_frame": 240
+              }
+            ],
+            "play_start_frame": 797,
+            "final_telemetry": {
+              "magic": 1297503281,
+              "stage": 3,
+              "error": 0,
+              "frames_shown": 33,
+              "frames_dropped": 3,
+              "cache_reads": 3,
+              "rebuffer_count": 0,
+              "audio_samples_played": 48000,
+              "skipped": 0
+            },
+            "emulated_frames": 1146,
+            "play_frames": 348,
+            "audio": {
+              "samples": 259789,
+              "rms_left": 1001.91,
+              "rms_right": 1001.91
+            },
+            "wall_seconds": 0.457,
+            "audio_timing": {
+              "frame_indices_zero_based": true,
+              "nonzero_threshold_int16": 1,
+              "emulator_fps": 59.92274340431231,
+              "output_sample_rate_hz": 44100.0,
+              "first_nonzero_frame": 955,
+              "last_nonzero_frame": 1118,
+              "first_nonzero_output_sample": 119261,
+              "last_nonzero_output_sample": 239846,
+              "frames_with_nonzero_audio": 92,
+              "request_to_first_nonzero_frames": 162,
+              "playback_to_first_nonzero_frames": 158,
+              "request_to_first_nonzero_seconds": 2.704331,
+              "audible_span_frames": 164,
+              "audible_span_seconds": 2.734376,
+              "note": "Audible span covers first through last nonzero output, including any intervening source silence; it does not classify silent gaps or establish continuity."
+            }
+          },
+          "silent_eof": {
+            "status": "pass",
+            "case": "silent_eof",
+            "checks": {
+              "target_completed_without_error": true,
+              "no_audio_rebuffer": true,
+              "all_video_frames_accounted_for": true
+            },
+            "boot_frames": 793,
+            "play_request_frame": 793,
+            "captures": [
+              {
+                "file": "playing-0030.png",
+                "play_frame": 30
+              },
+              {
+                "file": "playing-0120.png",
+                "play_frame": 120
+              },
+              {
+                "file": "playing-0240.png",
+                "play_frame": 240
+              }
+            ],
+            "play_start_frame": 797,
+            "final_telemetry": {
+              "magic": 1297503281,
+              "stage": 3,
+              "error": 0,
+              "frames_shown": 36,
+              "frames_dropped": 0,
+              "cache_reads": 3,
+              "rebuffer_count": 0,
+              "audio_samples_played": 0,
+              "skipped": 0
+            },
+            "emulated_frames": 1122,
+            "play_frames": 324,
+            "audio": {
+              "samples": 242127,
+              "rms_left": 0.0,
+              "rms_right": 0.0
+            },
+            "wall_seconds": 0.433,
+            "audio_timing": {
+              "frame_indices_zero_based": true,
+              "nonzero_threshold_int16": 1,
+              "emulator_fps": 59.92274340431231,
+              "output_sample_rate_hz": 44100.0,
+              "first_nonzero_frame": null,
+              "last_nonzero_frame": null,
+              "first_nonzero_output_sample": null,
+              "last_nonzero_output_sample": null,
+              "frames_with_nonzero_audio": 0,
+              "request_to_first_nonzero_frames": null,
+              "playback_to_first_nonzero_frames": null,
+              "request_to_first_nonzero_seconds": null,
+              "audible_span_frames": null,
+              "audible_span_seconds": null,
+              "note": "Audible span covers first through last nonzero output, including any intervening source silence; it does not classify silent gaps or establish continuity."
+            }
+          },
+          "skip": {
+            "status": "pass",
+            "case": "skip",
+            "checks": {
+              "target_completed_without_error": true,
+              "no_audio_rebuffer": true,
+              "controller_skip_acknowledged": true
+            },
+            "boot_frames": 793,
+            "play_request_frame": 793,
+            "captures": [
+              {
+                "file": "playing-0030.png",
+                "play_frame": 30
+              },
+              {
+                "file": "playing-0120.png",
+                "play_frame": 120
+              }
+            ],
+            "play_start_frame": 797,
+            "skip_timer_start_frame": 955,
+            "skip_requested_frame": 1001,
+            "final_telemetry": {
+              "magic": 1297503281,
+              "stage": 3,
+              "error": 0,
+              "frames_shown": 10,
+              "frames_dropped": 0,
+              "cache_reads": 2,
+              "rebuffer_count": 0,
+              "audio_samples_played": 11195,
+              "skipped": 1
+            },
+            "emulated_frames": 1010,
+            "play_frames": 212,
+            "audio": {
+              "samples": 159701,
+              "rms_left": 737.85,
+              "rms_right": 737.85
+            },
+            "wall_seconds": 0.372,
+            "audio_timing": {
+              "frame_indices_zero_based": true,
+              "nonzero_threshold_int16": 1,
+              "emulator_fps": 59.92274340431231,
+              "output_sample_rate_hz": 44100.0,
+              "first_nonzero_frame": 955,
+              "last_nonzero_frame": 999,
+              "first_nonzero_output_sample": 119261,
+              "last_nonzero_output_sample": 151733,
+              "frames_with_nonzero_audio": 30,
+              "request_to_first_nonzero_frames": 162,
+              "playback_to_first_nonzero_frames": 158,
+              "request_to_first_nonzero_seconds": 2.704331,
+              "audible_span_frames": 45,
+              "audible_span_seconds": 0.736349,
+              "note": "Audible span covers first through last nonzero output, including any intervening source silence; it does not classify silent gaps or establish continuity."
+            }
+          }
+        },
+        "status": "pass"
+      },
+      "after": {
+        "emulator": "Genesis Plus GX",
+        "hardware_tested": false,
+        "core_commit": "a7985a9c4278ac352f8ca7bb4d3cc6b36e9e3e7d",
+        "disc_sha256": "b1df1746595b155b182d64ddc37724a5a92ed0ab8d2f2b1cbebd0d5db5918557",
+        "require_no_rebuffer": true,
+        "skip_after_audio": true,
+        "expected": {
+          "frames": 36,
+          "audio_samples": 48000,
+          "video_sha256": "d912cd71e60697862221c7205baddeb659df5b7061a76a7386525ef6240a255f"
+        },
+        "cases": {
+          "audio_eof": {
+            "status": "pass",
+            "case": "audio_eof",
+            "checks": {
+              "target_completed_without_error": true,
+              "no_audio_rebuffer": true,
+              "all_video_frames_accounted_for": true,
+              "exact_audio_eof": true,
+              "nonzero_audio_energy": true
+            },
+            "boot_frames": 793,
+            "play_request_frame": 793,
+            "captures": [
+              {
+                "file": "playing-0030.png",
+                "play_frame": 30
+              },
+              {
+                "file": "playing-0120.png",
+                "play_frame": 120
+              },
+              {
+                "file": "playing-0240.png",
+                "play_frame": 240
+              }
+            ],
+            "play_start_frame": 797,
+            "final_telemetry": {
+              "magic": 1297503281,
+              "stage": 3,
+              "error": 0,
+              "frames_shown": 33,
+              "frames_dropped": 3,
+              "cache_reads": 3,
+              "rebuffer_count": 0,
+              "audio_samples_played": 48000,
+              "skipped": 0
+            },
+            "emulated_frames": 1145,
+            "play_frames": 347,
+            "audio": {
+              "samples": 259054,
+              "rms_left": 1003.33,
+              "rms_right": 1003.33
+            },
+            "wall_seconds": 0.47,
+            "audio_timing": {
+              "frame_indices_zero_based": true,
+              "nonzero_threshold_int16": 1,
+              "emulator_fps": 59.92274340431231,
+              "output_sample_rate_hz": 44100.0,
+              "first_nonzero_frame": 955,
+              "last_nonzero_frame": 1118,
+              "first_nonzero_output_sample": 119256,
+              "last_nonzero_output_sample": 239840,
+              "frames_with_nonzero_audio": 93,
+              "request_to_first_nonzero_frames": 162,
+              "playback_to_first_nonzero_frames": 158,
+              "request_to_first_nonzero_seconds": 2.704218,
+              "audible_span_frames": 164,
+              "audible_span_seconds": 2.734354,
+              "note": "Audible span covers first through last nonzero output, including any intervening source silence; it does not classify silent gaps or establish continuity."
+            }
+          },
+          "silent_eof": {
+            "status": "pass",
+            "case": "silent_eof",
+            "checks": {
+              "target_completed_without_error": true,
+              "no_audio_rebuffer": true,
+              "all_video_frames_accounted_for": true
+            },
+            "boot_frames": 793,
+            "play_request_frame": 793,
+            "captures": [
+              {
+                "file": "playing-0030.png",
+                "play_frame": 30
+              },
+              {
+                "file": "playing-0120.png",
+                "play_frame": 120
+              },
+              {
+                "file": "playing-0240.png",
+                "play_frame": 240
+              }
+            ],
+            "play_start_frame": 797,
+            "final_telemetry": {
+              "magic": 1297503281,
+              "stage": 3,
+              "error": 0,
+              "frames_shown": 36,
+              "frames_dropped": 0,
+              "cache_reads": 3,
+              "rebuffer_count": 0,
+              "audio_samples_played": 0,
+              "skipped": 0
+            },
+            "emulated_frames": 1121,
+            "play_frames": 323,
+            "audio": {
+              "samples": 241391,
+              "rms_left": 0.0,
+              "rms_right": 0.0
+            },
+            "wall_seconds": 0.451,
+            "audio_timing": {
+              "frame_indices_zero_based": true,
+              "nonzero_threshold_int16": 1,
+              "emulator_fps": 59.92274340431231,
+              "output_sample_rate_hz": 44100.0,
+              "first_nonzero_frame": null,
+              "last_nonzero_frame": null,
+              "first_nonzero_output_sample": null,
+              "last_nonzero_output_sample": null,
+              "frames_with_nonzero_audio": 0,
+              "request_to_first_nonzero_frames": null,
+              "playback_to_first_nonzero_frames": null,
+              "request_to_first_nonzero_seconds": null,
+              "audible_span_frames": null,
+              "audible_span_seconds": null,
+              "note": "Audible span covers first through last nonzero output, including any intervening source silence; it does not classify silent gaps or establish continuity."
+            }
+          },
+          "skip": {
+            "status": "pass",
+            "case": "skip",
+            "checks": {
+              "target_completed_without_error": true,
+              "no_audio_rebuffer": true,
+              "controller_skip_acknowledged": true
+            },
+            "boot_frames": 793,
+            "play_request_frame": 793,
+            "captures": [
+              {
+                "file": "playing-0030.png",
+                "play_frame": 30
+              },
+              {
+                "file": "playing-0120.png",
+                "play_frame": 120
+              }
+            ],
+            "play_start_frame": 797,
+            "skip_timer_start_frame": 955,
+            "skip_requested_frame": 1001,
+            "final_telemetry": {
+              "magic": 1297503281,
+              "stage": 3,
+              "error": 0,
+              "frames_shown": 10,
+              "frames_dropped": 0,
+              "cache_reads": 2,
+              "rebuffer_count": 0,
+              "audio_samples_played": 12270,
+              "skipped": 1
+            },
+            "emulated_frames": 1011,
+            "play_frames": 213,
+            "audio": {
+              "samples": 160437,
+              "rms_left": 736.16,
+              "rms_right": 736.16
+            },
+            "wall_seconds": 0.375,
+            "audio_timing": {
+              "frame_indices_zero_based": true,
+              "nonzero_threshold_int16": 1,
+              "emulator_fps": 59.92274340431231,
+              "output_sample_rate_hz": 44100.0,
+              "first_nonzero_frame": 955,
+              "last_nonzero_frame": 999,
+              "first_nonzero_output_sample": 119256,
+              "last_nonzero_output_sample": 151728,
+              "frames_with_nonzero_audio": 31,
+              "request_to_first_nonzero_frames": 162,
+              "playback_to_first_nonzero_frames": 158,
+              "request_to_first_nonzero_seconds": 2.704218,
+              "audible_span_frames": 45,
+              "audible_span_seconds": 0.736349,
+              "note": "Audible span covers first through last nonzero output, including any intervening source silence; it does not classify silent gaps or establish continuity."
+            }
+          }
+        },
+        "status": "pass"
+      },
+      "frames_shown_before": 33,
+      "frames_shown_after": 33
+    },
+    "saturated_medium12_6s": {
+      "before": {
+        "emulator": "Genesis Plus GX",
+        "hardware_tested": false,
+        "core_commit": "a7985a9c4278ac352f8ca7bb4d3cc6b36e9e3e7d",
+        "disc_sha256": "1e00915acd4f77f6fb1019ce4e159ffa44b5f7a16ab906d84a3fbc189488adda",
+        "require_no_rebuffer": true,
+        "skip_after_audio": false,
+        "expected": {
+          "frames": 72,
+          "audio_samples": 96000,
+          "video_sha256": "ee8c4343a71c1d6f14107f6797eb54c021de6049f50fc7ffad9ffa999bcdad56"
+        },
+        "cases": {
+          "audio_eof": {
+            "status": "pass",
+            "case": "audio_eof",
+            "checks": {
+              "target_completed_without_error": true,
+              "no_audio_rebuffer": true,
+              "all_video_frames_accounted_for": true,
+              "exact_audio_eof": true,
+              "nonzero_audio_energy": true
+            },
+            "boot_frames": 793,
+            "play_request_frame": 793,
+            "captures": [
+              {
+                "file": "playing-0030.png",
+                "play_frame": 30
+              },
+              {
+                "file": "playing-0120.png",
+                "play_frame": 120
+              },
+              {
+                "file": "playing-0240.png",
+                "play_frame": 240
+              }
+            ],
+            "play_start_frame": 797,
+            "final_telemetry": {
+              "magic": 1297503281,
+              "stage": 3,
+              "error": 0,
+              "frames_shown": 35,
+              "frames_dropped": 37,
+              "cache_reads": 8,
+              "rebuffer_count": 0,
+              "audio_samples_played": 96000,
+              "skipped": 0
+            },
+            "emulated_frames": 1333,
+            "play_frames": 535,
+            "audio": {
+              "samples": 397412,
+              "rms_left": 1870.89,
+              "rms_right": 1870.89
+            },
+            "wall_seconds": 0.522,
+            "audio_timing": {
+              "frame_indices_zero_based": true,
+              "nonzero_threshold_int16": 1,
+              "emulator_fps": 59.92274340431231,
+              "output_sample_rate_hz": 44100.0,
+              "first_nonzero_frame": 958,
+              "last_nonzero_frame": 1320,
+              "first_nonzero_output_sample": 121529,
+              "last_nonzero_output_sample": 388186,
+              "frames_with_nonzero_audio": 363,
+              "request_to_first_nonzero_frames": 165,
+              "playback_to_first_nonzero_frames": 161,
+              "request_to_first_nonzero_seconds": 2.75576,
+              "audible_span_frames": 363,
+              "audible_span_seconds": 6.046667,
+              "note": "Audible span covers first through last nonzero output, including any intervening source silence; it does not classify silent gaps or establish continuity."
+            }
+          }
+        },
+        "status": "pass"
+      },
+      "after": {
+        "emulator": "Genesis Plus GX",
+        "hardware_tested": false,
+        "core_commit": "a7985a9c4278ac352f8ca7bb4d3cc6b36e9e3e7d",
+        "disc_sha256": "27235571363987fb9ada7d5e51e2ffebf83159dbe20e677ebc2e63eaeb1f5c54",
+        "require_no_rebuffer": true,
+        "skip_after_audio": true,
+        "expected": {
+          "frames": 72,
+          "audio_samples": 96000,
+          "video_sha256": "ee8c4343a71c1d6f14107f6797eb54c021de6049f50fc7ffad9ffa999bcdad56"
+        },
+        "cases": {
+          "audio_eof": {
+            "status": "pass",
+            "case": "audio_eof",
+            "checks": {
+              "target_completed_without_error": true,
+              "no_audio_rebuffer": true,
+              "all_video_frames_accounted_for": true,
+              "exact_audio_eof": true,
+              "nonzero_audio_energy": true
+            },
+            "boot_frames": 793,
+            "play_request_frame": 793,
+            "captures": [
+              {
+                "file": "playing-0030.png",
+                "play_frame": 30
+              },
+              {
+                "file": "playing-0120.png",
+                "play_frame": 120
+              },
+              {
+                "file": "playing-0240.png",
+                "play_frame": 240
+              }
+            ],
+            "play_start_frame": 797,
+            "final_telemetry": {
+              "magic": 1297503281,
+              "stage": 3,
+              "error": 0,
+              "frames_shown": 42,
+              "frames_dropped": 30,
+              "cache_reads": 8,
+              "rebuffer_count": 0,
+              "audio_samples_played": 96000,
+              "skipped": 0
+            },
+            "emulated_frames": 1329,
+            "play_frames": 531,
+            "audio": {
+              "samples": 394468,
+              "rms_left": 1877.86,
+              "rms_right": 1877.86
+            },
+            "wall_seconds": 0.508,
+            "audio_timing": {
+              "frame_indices_zero_based": true,
+              "nonzero_threshold_int16": 1,
+              "emulator_fps": 59.92274340431231,
+              "output_sample_rate_hz": 44100.0,
+              "first_nonzero_frame": 957,
+              "last_nonzero_frame": 1319,
+              "first_nonzero_output_sample": 120792,
+              "last_nonzero_output_sample": 387449,
+              "frames_with_nonzero_audio": 363,
+              "request_to_first_nonzero_frames": 164,
+              "playback_to_first_nonzero_frames": 160,
+              "request_to_first_nonzero_seconds": 2.739048,
+              "audible_span_frames": 363,
+              "audible_span_seconds": 6.046667,
+              "note": "Audible span covers first through last nonzero output, including any intervening source silence; it does not classify silent gaps or establish continuity."
+            }
+          },
+          "silent_eof": {
+            "status": "pass",
+            "case": "silent_eof",
+            "checks": {
+              "target_completed_without_error": true,
+              "no_audio_rebuffer": true,
+              "all_video_frames_accounted_for": true
+            },
+            "boot_frames": 793,
+            "play_request_frame": 793,
+            "captures": [
+              {
+                "file": "playing-0030.png",
+                "play_frame": 30
+              },
+              {
+                "file": "playing-0120.png",
+                "play_frame": 120
+              },
+              {
+                "file": "playing-0240.png",
+                "play_frame": 240
+              }
+            ],
+            "play_start_frame": 797,
+            "final_telemetry": {
+              "magic": 1297503281,
+              "stage": 3,
+              "error": 0,
+              "frames_shown": 72,
+              "frames_dropped": 0,
+              "cache_reads": 8,
+              "rebuffer_count": 0,
+              "audio_samples_played": 0,
+              "skipped": 0
+            },
+            "emulated_frames": 1368,
+            "play_frames": 570,
+            "audio": {
+              "samples": 423170,
+              "rms_left": 0.0,
+              "rms_right": 0.0
+            },
+            "wall_seconds": 0.531,
+            "audio_timing": {
+              "frame_indices_zero_based": true,
+              "nonzero_threshold_int16": 1,
+              "emulator_fps": 59.92274340431231,
+              "output_sample_rate_hz": 44100.0,
+              "first_nonzero_frame": null,
+              "last_nonzero_frame": null,
+              "first_nonzero_output_sample": null,
+              "last_nonzero_output_sample": null,
+              "frames_with_nonzero_audio": 0,
+              "request_to_first_nonzero_frames": null,
+              "playback_to_first_nonzero_frames": null,
+              "request_to_first_nonzero_seconds": null,
+              "audible_span_frames": null,
+              "audible_span_seconds": null,
+              "note": "Audible span covers first through last nonzero output, including any intervening source silence; it does not classify silent gaps or establish continuity."
+            }
+          },
+          "skip": {
+            "status": "pass",
+            "case": "skip",
+            "checks": {
+              "target_completed_without_error": true,
+              "no_audio_rebuffer": true,
+              "controller_skip_acknowledged": true
+            },
+            "boot_frames": 793,
+            "play_request_frame": 793,
+            "captures": [
+              {
+                "file": "playing-0030.png",
+                "play_frame": 30
+              },
+              {
+                "file": "playing-0120.png",
+                "play_frame": 120
+              }
+            ],
+            "play_start_frame": 797,
+            "skip_timer_start_frame": 957,
+            "skip_requested_frame": 1003,
+            "final_telemetry": {
+              "magic": 1297503281,
+              "stage": 3,
+              "error": 0,
+              "frames_shown": 9,
+              "frames_dropped": 0,
+              "cache_reads": 3,
+              "rebuffer_count": 0,
+              "audio_samples_played": 10113,
+              "skipped": 1
+            },
+            "emulated_frames": 1011,
+            "play_frames": 213,
+            "audio": {
+              "samples": 160437,
+              "rms_left": 1052.67,
+              "rms_right": 1052.67
+            },
+            "wall_seconds": 0.371,
+            "audio_timing": {
+              "frame_indices_zero_based": true,
+              "nonzero_threshold_int16": 1,
+              "emulator_fps": 59.92274340431231,
+              "output_sample_rate_hz": 44100.0,
+              "first_nonzero_frame": 957,
+              "last_nonzero_frame": 1005,
+              "first_nonzero_output_sample": 120792,
+              "last_nonzero_output_sample": 156543,
+              "frames_with_nonzero_audio": 49,
+              "request_to_first_nonzero_frames": 164,
+              "playback_to_first_nonzero_frames": 160,
+              "request_to_first_nonzero_seconds": 2.739048,
+              "audible_span_frames": 49,
+              "audible_span_seconds": 0.810703,
+              "note": "Audible span covers first through last nonzero output, including any intervening source silence; it does not classify silent gaps or establish continuity."
+            }
+          }
+        },
+        "status": "pass"
+      },
+      "frames_shown_before": 35,
+      "frames_shown_after": 42,
+      "mean_frames_per_source_second_before": 5.833333333333333,
+      "mean_frames_per_source_second_after": 7.0,
+      "improvement_percent": 20.0,
+      "fixture": "NumPy seed 1212, 224x160 RGB noise translated one horizontal pixel per encoded frame; 72 frames, 128 dictionary tiles, 440 Hz mono tone, no dithering."
+    }
+  },
+  "verification": {
+    "make_all": "pass",
+    "host_test": {
+      "tests": 74,
+      "status": "pass",
+      "skipped_subcases": 3,
+      "skip_reason": "Windows symlink privilege unavailable; FFmpeg source conversion tests executed."
+    },
+    "doctor": {
+      "gcc": "m68k-elf-gcc (GCC) 14.2.0",
+      "ld": "GNU ld (GNU Binutils) 2.44",
+      "objcopy": "GNU objcopy (GNU Binutils) 2.44",
+      "megadev": "7a7246c14b845ad2f1bd3c7d73afb04cf67d83ef"
+    },
+    "standard_media_smoke": {
+      "core_commit": "a7985a9c4278ac352f8ca7bb4d3cc6b36e9e3e7d",
+      "checks": {
+        "native_boot_image_adpcm_prepare": true,
+        "cdda_invalid_state_rejected": true,
+        "adpcm_one_shot": {
+          "samples": 86841,
+          "rms_left": 5458.17,
+          "rms_right": 5458.17
+        },
+        "cdda_play": {
+          "samples": 88314,
+          "rms_left": 7776.47,
+          "rms_right": 7777.61
+        },
+        "cdda_pause_resume": true,
+        "adpcm_while_cdda": {
+          "adpcm_440_left": 7674.66,
+          "cdda_330_left": 11017.75,
+          "cdda_550_right": 11040.11
+        },
+        "stop": true,
+        "image_reload": true
+      },
+      "disc_sha256": "29047ec2df35f2e0f5364f55abf9759c84e903461b89e28f50016471d3d449ed",
+      "boot_frames": 1045,
+      "telemetry": {
+        "magic": 1296254018,
+        "frame": 247,
+        "stage": 3,
+        "error": 0,
+        "image_ok": 1,
+        "prepared": 1,
+        "flags": 0,
+        "sub_ticks": 0,
+        "event": 0,
+        "completed": 0
+      },
+      "final_telemetry": {
+        "magic": 1296254018,
+        "frame": 1949,
+        "stage": 3,
+        "error": 0,
+        "image_ok": 1,
+        "prepared": 1,
+        "flags": 1,
+        "sub_ticks": 2210,
+        "event": 9,
+        "completed": 9
+      },
+      "status": "pass"
+    }
+  },
+  "limitations": [
+    "Nominal profile FPS remains a conversion target.",
+    "The saturated fixture is a repeatable transfer stress case, not representative footage.",
+    "No physical hardware or per-frame A/V latency measurement; rendered frame count and audio end position are independent checks."
+  ]
+}
