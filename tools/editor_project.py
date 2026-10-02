@@ -218,8 +218,8 @@ def prepare_project(project, stage):
                 raise ValueError('MCD actor slots are 0..3')
             if kind == 'spritemove' and (command.get('animationId') or command.get('animationAssetId')):
                 raise ValueError('MCD sprite movement cannot switch animation; use a sprite command first')
-            if kind == 'spritetext' and int(command.get('slot', 0)) != 0:
-                raise ValueError('MCD currently supports SpriteText slot 0 only')
+            if kind == 'spritetext' and not 0 <= int(command.get('slot', 0)) <= 3:
+                raise ValueError('MCD SpriteText slots are 0..3')
             if kind in ('sprite', 'spritemove', 'spritetext') and not legacy:
                 command['x'] = int(command.get('x', 0)) - 32
             if kind in ('background', 'sprite') and aid and (kind != 'sprite' or command.get('visible', True)):

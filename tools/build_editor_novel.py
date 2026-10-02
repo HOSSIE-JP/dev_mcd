@@ -56,14 +56,25 @@ def build(project, output, font, cross=None, ffmpeg='ffmpeg', ffprobe=None):
                 raise ValueError('Project changed before conversion: ' + relative)
         info['sourceHashes'].update(freshness)
         font_hash = file_hash(font)
-        convert(source, font, data, ffmpeg=ffmpeg, ffprobe=ffprobe)
+        config = json.loads((project / 'project.json').read_text('utf-8-sig'))
+        novel_format = config.get('megaCd', {}).get('novelFormat', 'resident-v1')
+        if novel_format not in ('resident-v1', 'paged-v2'):
+            raise ValueError('Unknown Mega CD novelFormat: ' + str(novel_format))
+        if novel_format == 'paged-v2':
+            from novel_paged import convert_paged
+            convert_paged(source, font, data, ffmpeg=ffmpeg, ffprobe=ffprobe, cache=project / 'out/mcd/cache-v2')
+        else:
+            convert(source, font, data, ffmpeg=ffmpeg, ffprobe=ffprobe)
         manifest = json.loads((data / 'manifest.json').read_text())
         manifest.update(title=info['title'], sourceHashes=info['sourceHashes'], fontSha256=font_hash)
         manifest.pop('source_repositories', None)
-        manifest['conversion_notes'] = info['warnings']
+        manifest['sdkSourceHashes'] = {str(p.relative_to(ROOT)).replace('\\', '/'): file_hash(p)
+            for folder in ('include', 'src', 'tools') for p in sorted((ROOT / folder).rglob('*'))
+            if p.is_file() and p.suffix in ('.c', '.h', '.s', '.py')}
+        manifest['conversion_notes'] = manifest.get('conversion_notes', []) + info['warnings']
         manifest['conversion_notes'].extend([
             'MCD portrait cache: four slots, at most 64x128 pixels, two animations with two frames each.',
-            'Background VRAM budget: 511 dictionary tiles alongside actors; 896 in fullScreenBg scenes.',
+            'Background VRAM budget: 511 dictionary tiles with actors; paged actor-free projects may use 1023.',
             'Video uses the MTV1 format from the 2026-09-07 video study; throughput requires emulator/hardware validation.'
         ])
         runtime.mkdir()
@@ -94,6 +105,8 @@ def build(project, output, font, cross=None, ffmpeg='ffmpeg', ffprobe=None):
             raise ValueError('Generated pack hash mismatch')
         image = disc.make_iso((runtime / 'build/boot.bin').read_bytes(), {
             'IPX.MMD': (runtime / 'build/novel/IPX.MMD').read_bytes(), 'NOVEL.PAK': pack})
+        if len(image)//2048 + sum((t['samples']+587)//588 + 150 for t in manifest['tracks']) > 359850:
+            raise ValueError('Completed image and audio tracks exceed one 80-minute CD')
         publish.mkdir()
         (publish / 'novel.iso').write_bytes(image)
         cue = ['FILE "novel.iso" BINARY', '  TRACK 01 MODE1/2048', '    INDEX 01 00:00:00']

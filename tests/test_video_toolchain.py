@@ -33,6 +33,7 @@ class VideoToolchainTests(unittest.TestCase):
             root = Path(temporary)
             project, sdk = root / 'project', root / 'sdk'
             project.mkdir()
+            (project / 'project.json').write_text('{}')
             dependency = sdk / '.deps/megadev/cfg'
             dependency.mkdir(parents=True)
             (dependency / 'module_mmd.ld').write_text('test dependency')

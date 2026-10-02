@@ -89,7 +89,7 @@ def quantize(image,colors=16,palette=None):
     if palette is None:q=rgb.quantize(colors=colors,method=Image.Quantize.MEDIANCUT,dither=Image.Dither.NONE)
     else:q=rgb.quantize(palette=palette,dither=Image.Dither.NONE)
     return q
-def background(path,full):
+def background(path,full,tile_limit=None):
     image=Image.open(path).convert('RGB')
     expected=(256,224) if full else (224,136)
     if image.size not in (expected,(320,224)):raise ValueError(f'Background {path.name}: {image.size}, expected {expected} or prepared 320x224')
@@ -101,7 +101,7 @@ def background(path,full):
             t=tile_bytes(pixels[y:y+8,x:x+8].reshape(-1).tolist())
             if t not in dedup:dedup[t]=len(tiles);tiles.append(t)
             indices.append(dedup[t])
-    if len(tiles)>(896 if full else 511):raise ValueError('Background VRAM budget exceeded')
+    if len(tiles)>(tile_limit if tile_limit is not None else (896 if full else 511)):raise ValueError('Background VRAM budget exceeded')
     return b'MIMG'+struct.pack('>4H',40,28,len(tiles),0)+struct.pack('>16H',*colors)+b''.join(tiles)+struct.pack('>1120H',*indices)
 def sprite(path,options,palette,bank):
     image=Image.open(path).convert('RGBA');q=quantize(image,palette=palette)
@@ -126,9 +126,7 @@ def sprite(path,options,palette,bank):
             delays.append(max(1,int(ds[min(idx,len(ds)-1)])))
     return b'NSPR'+struct.pack('>6H',bank,*delays,(counts[0]<<8)|counts[1])+struct.pack('>16H',*colors)+b''.join(frames)
 
-def convert(source,font,out,ffmpeg='ffmpeg',ffprobe=None):
-    scene_doc=json.loads((source/'assets/pce-vn-scenes.json').read_text('utf-8-sig'))
-    catalog=json.loads((source/'assets/pce-assets.json').read_text('utf-8-sig'))['assets'];assets={a['id']:a for a in catalog}
+def compile_script(scene_doc, assets, resources, resource_ids, glyphs, font_data, variables=None, global_scene_ids=None):
     scenes=scene_doc['scenes'];scene_ids={s['id']:i for i,s in enumerate(scenes)}
     commands=[];scene_rows=[];labels=[];refs=set();fullrefs=set();texts=['▶','はじめる']
     for s in scenes:
@@ -143,59 +141,12 @@ def convert(source,font,out,ffmpeg='ffmpeg',ffprobe=None):
             texts.extend([c.get('text',''),c.get('speaker','')]);texts.extend(o['label'] for o in c.get('choices',[]))
         scene_rows.append((len(commands),len(emitted),scene_ids.get(s.get('nextSceneId'),-1),int(s.get('fullScreenBg',False))))
         commands.extend((i,c) for i,c in [(len(labels),c) for c in emitted]);labels.append(label)
-    missing=refs-assets.keys()
-    if missing:raise ValueError('Missing assets: '+str(sorted(missing)))
-    glyphs=sorted(set(''.join(texts))-{'\r','\n'});gid={c:i for i,c in enumerate(glyphs)}
-    if len(glyphs)>1024:raise ValueError('Font cache exceeds 32 KiB')
-    f=ImageFont.truetype(str(font),16);font_data=bytearray()
-    for ch in glyphs:
-        im=Image.new('L',(16,16));ImageDraw.Draw(im).text((0,f.getmetrics()[0]),ch,font=f,fill=255,anchor='ls')
-        a=np.array(im)>=80
-        for row in a:font_data.extend(struct.pack('>H',sum(int(v)<<(15-i) for i,v in enumerate(row))))
-    sprite_assets=[assets[k] for k in sorted(refs) if assets[k]['type']=='sprite']
-    # Shared character palette per group leaves palette 3 exclusively for UI.
-    palettes={}
-    for bank in (1,2):
-        images=[Image.open(source/a['source']).convert('RGB') for a in sprite_assets if a.get('mcdPalette',2 if 'ren' in a['id'] else 1)==bank]
-        strip=Image.new('RGB',(128,256*max(1,len(images))))
-        for i,im in enumerate(images):
-            rgb=np.array(im);rgb[np.all(rgb==rgb[0,0],axis=2)]=0;strip.paste(Image.fromarray(rgb),(0,i*256))
-        palettes[bank]=quantize(strip,15)
-        pal=palettes[bank].getpalette()[:45];pal+=[0]*(45-len(pal));palettes[bank].putpalette(pal+pal[:3]*(256-15))
-    payload=bytearray(131072);payload[98304:98304+len(font_data)]=font_data
-    resources=[(98304,len(font_data),0,len(glyphs))];resource_ids={};manifest_assets=[];tracks=[]
-    out.mkdir(parents=True,exist_ok=True);(out/'cdda').mkdir(exist_ok=True)
-    for asset_id in sorted(refs):
-        a=assets[asset_id];kind=a['type'];src=source/a['source'] if a.get('source') else None;opt=a.get('options',{})
-        aux=0
-        if kind=='image':data=background(src,asset_id in fullrefs);rk=1
-        elif kind=='sprite':
-            bank=a.get('mcdPalette',2 if 'ren' in asset_id else 1);data=sprite(src,opt,palettes[bank],bank);rk=2
-        elif kind=='adpcm':data=mima(read_wave(src,11025),11025);rk=3
-        elif kind in ('psg-song','psg-sfx'):
-            rate=8000 if kind=='psg-song' else 16000;data=mima(render_psg(opt,rate),rate);rk=4 if kind=='psg-song' else 6
-        elif kind=='cdda-track':
-            pcm=read_wave(src,44100,True).tobytes();pcm=padded(pcm,2352);pcm+=b'\0'*max(0,4*44100*4-len(pcm))
-            track=len(tracks)+2;name=f'track{track:02}.pcmz';(out/'cdda'/name).write_bytes(zlib.compress(pcm,9))
-            tracks.append({'assetId':asset_id,'track':track,'file':name,'samples':len(pcm)//4,'sha256':sha(pcm),'loop':bool(opt.get('loop'))})
-            data=b'';rk=5;aux=track
-        elif kind=='video':
-            from video_convert import convert_video, validate_video
-            video_path=out/(sha(asset_id.encode())[:16]+'.mtv')
-            if src.suffix.lower()=='.mtv':
-                data=src.read_bytes();validate_video(data)
-            else:
-                convert_video(src,video_path,profile=opt.get('profile','medium12'),ffmpeg=ffmpeg,ffprobe=ffprobe,options=opt.get('processing'))
-                data=video_path.read_bytes();video_path.unlink()
-            rk=7
-        else:raise ValueError(f'Unsupported asset type {kind}: {asset_id}')
-        if rk in (3,6) and len(padded(data))>131072:raise ValueError('Voice/SFX capacity exceeded: '+asset_id)
-        if rk==4 and len(padded(data))>253952:raise ValueError('BGM capacity exceeded: '+asset_id)
-        resource_ids[asset_id]=len(resources);offset=len(payload);resources.append((offset,len(data),rk,aux));payload.extend(padded(data))
-        manifest_assets.append({'id':asset_id,'kind':kind,'resource':resource_ids[asset_id],'offset':offset,'bytes':len(data),'sha256':sha(data),'source':a.get('source',''),'source_sha256':sha(src.read_bytes()) if src else None})
-        if len(manifest_assets)%40==0:print('Converted',len(manifest_assets),'/',len(refs),flush=True)
+    if global_scene_ids is not None:
+        scene_ids=global_scene_ids
+        scene_rows=[(r[0],r[1],scene_ids.get(s.get('nextSceneId'),-1),r[3]) for s,r in zip(scenes,scene_rows)]
+    gid={c:i for i,c in enumerate(glyphs)}
     scene_offset=48;command_offset=scene_offset+len(scenes)*8;resource_offset=command_offset+len(commands)*32
-    pool_offset=resource_offset+len(resources)*12;pool=bytearray();variables={}
+    pool_offset=resource_offset+len(resources)*12;pool=bytearray();variables={} if variables is None else variables
     def add(b):
         while len(pool)%2:pool.append(0)
         pos=pool_offset+len(pool);pool.extend(b);return pos
@@ -265,6 +216,99 @@ def convert(source,font,out,ffmpeg='ffmpeg',ffprobe=None):
     script=bytearray(48)+b''.join(struct.pack('>HHhH',*r) for r in scene_rows)+b''.join(encoded)+b''.join(struct.pack('>IIHH',*r) for r in resources)+pool
     settings=scene_doc.get('settings',{})
     struct.pack_into('>4s10H6I',script,0,b'MNVN',1,len(scenes),len(commands),scene_ids[scene_doc['startScene']],int(settings.get('messageSpeedFrames',10)),int(settings.get('messageAdvanceMode')=='auto'),int(settings.get('messageAutoWaitFrames',60)),len(resources),len(variables),gid['▶'],scene_offset,command_offset,resource_offset,len(script),len(font_data),0)
+    return script, command_map, scene_rows, variables
+
+def convert_resources(source,assets,refs,fullrefs,out,payload,resources,ffmpeg='ffmpeg',ffprobe=None,cache=None,background_limit=None,adaptive_bgm=False):
+    def cached(kind,source_bytes,options,generate):
+        if cache is None:return generate()
+        cache_path=Path(cache);cache_path.mkdir(parents=True,exist_ok=True)
+        key=sha(b'mcd-resource-v2-1'+kind.encode()+source_bytes+json.dumps(options,sort_keys=True).encode())
+        binary=cache_path/(key+'.bin');marker=cache_path/(key+'.sha256')
+        if binary.is_file() and marker.is_file():
+            data=binary.read_bytes()
+            if sha(data)==marker.read_text('ascii').strip():return data
+        data=generate()
+        temporary=binary.with_suffix('.tmp');temporary.write_bytes(data);temporary.replace(binary)
+        marker.write_text(sha(data),'ascii')
+        return data
+    sprite_assets=[assets[k] for k in sorted(refs) if assets[k]['type']=='sprite']
+    # Shared character palette per group leaves palette 3 exclusively for UI.
+    palettes={}
+    for bank in (1,2):
+        images=[Image.open(source/a['source']).convert('RGB') for a in sprite_assets if a.get('mcdPalette',2 if 'ren' in a['id'] else 1)==bank]
+        strip=Image.new('RGB',(128,256*max(1,len(images))))
+        for i,im in enumerate(images):
+            rgb=np.array(im);rgb[np.all(rgb==rgb[0,0],axis=2)]=0;strip.paste(Image.fromarray(rgb),(0,i*256))
+        palettes[bank]=quantize(strip,15)
+        pal=palettes[bank].getpalette()[:45];pal+=[0]*(45-len(pal));palettes[bank].putpalette(pal+pal[:3]*(256-15))
+    resource_ids={};manifest_assets=[];tracks=[]
+    out.mkdir(parents=True,exist_ok=True);(out/'cdda').mkdir(exist_ok=True)
+    for asset_id in sorted(refs):
+        a=assets[asset_id];kind=a['type'];src=source/a['source'] if a.get('source') else None;opt=a.get('options',{})
+        aux=0
+        if kind=='image':
+            data=cached('image',src.read_bytes(),{'full':asset_id in fullrefs,'limit':background_limit},lambda: background(src,asset_id in fullrefs,background_limit));rk=1
+        elif kind=='sprite':
+            bank=a.get('mcdPalette',2 if 'ren' in asset_id else 1);data=sprite(src,opt,palettes[bank],bank);rk=2
+        elif kind=='adpcm':data=mima(read_wave(src,11025),11025);rk=3
+        elif kind in ('psg-song','psg-sfx'):
+            rate=8000 if kind=='psg-song' else 16000
+            if adaptive_bgm and kind=='psg-song' and round(int(opt.get('steps',16))*60/float(opt.get('bpm',120))/4*rate)/2+16>253952:
+                rate=4000
+            data=cached('psg',b'',{'options':opt,'rate':rate},lambda: mima(render_psg(opt,rate),rate));rk=4 if kind=='psg-song' else 6
+        elif kind=='cdda-track':
+            pcm=read_wave(src,44100,True).tobytes();pcm=padded(pcm,2352);pcm+=b'\0'*max(0,4*44100*4-len(pcm))
+            track=len(tracks)+2;name=f'track{track:02}.pcmz';(out/'cdda'/name).write_bytes(zlib.compress(pcm,9))
+            tracks.append({'assetId':asset_id,'track':track,'file':name,'samples':len(pcm)//4,'sha256':sha(pcm),'loop':bool(opt.get('loop'))})
+            data=b'';rk=5;aux=track
+        elif kind=='video':
+            from video_convert import convert_video, validate_video
+            video_path=out/(sha(asset_id.encode())[:16]+'.mtv')
+            if src.suffix.lower()=='.mtv':
+                data=src.read_bytes();validate_video(data)
+            else:
+                convert_video(src,video_path,profile=opt.get('profile','medium12'),ffmpeg=ffmpeg,ffprobe=ffprobe,options=opt.get('processing'))
+                data=video_path.read_bytes();video_path.unlink()
+            rk=7
+        else:raise ValueError(f'Unsupported asset type {kind}: {asset_id}')
+        if rk in (3,6) and len(padded(data))>131072:raise ValueError('Voice/SFX capacity exceeded: '+asset_id)
+        if rk==4 and len(padded(data))>253952:raise ValueError('BGM capacity exceeded: '+asset_id)
+        resource_ids[asset_id]=len(resources);offset=len(payload);resources.append((offset,len(data),rk,aux));payload.extend(padded(data))
+        manifest_assets.append({'id':asset_id,'kind':kind,'resource':resource_ids[asset_id],'offset':offset,'bytes':len(data),'sha256':sha(data),'source':a.get('source',''),'source_sha256':sha(src.read_bytes()) if src else None})
+        if kind in ('psg-song','psg-sfx'):manifest_assets[-1].update(sampleRate=rate,samples=struct.unpack_from('>I',data,8)[0])
+        if len(manifest_assets)%40==0:print('Converted',len(manifest_assets),'/',len(refs),flush=True)
+    return resource_ids,manifest_assets,tracks
+
+def convert(source,font,out,ffmpeg='ffmpeg',ffprobe=None):
+    scene_doc=json.loads((source/'assets/pce-vn-scenes.json').read_text('utf-8-sig'))
+    catalog=json.loads((source/'assets/pce-assets.json').read_text('utf-8-sig'))['assets'];assets={a['id']:a for a in catalog}
+    scenes=scene_doc['scenes'];scene_ids={s['id']:i for i,s in enumerate(scenes)}
+    commands=[];scene_rows=[];labels=[];refs=set();fullrefs=set();texts=['▶','はじめる']
+    for s in scenes:
+        rows=[c for c in s['commands'] if not any(c.get(k) for k in ('skip','skipped','debugSkip')) and c['type']!='comment'];label={};emitted=[]
+        for c in rows:
+            if c['type']=='label':label[c['name']]=len(emitted);continue
+            if c['type'] not in OPS and c['type']!='cache':raise ValueError('Unsupported command '+c['type'])
+            emitted.append(c)
+            for k in ('assetId','voiceAssetId','animationAssetId'):
+                if c.get(k):refs.add(c[k])
+            if c['type']=='background' and s.get('fullScreenBg'):fullrefs.add(c['assetId'])
+            texts.extend([c.get('text',''),c.get('speaker','')]);texts.extend(o['label'] for o in c.get('choices',[]))
+        scene_rows.append((len(commands),len(emitted),scene_ids.get(s.get('nextSceneId'),-1),int(s.get('fullScreenBg',False))))
+        commands.extend((i,c) for i,c in [(len(labels),c) for c in emitted]);labels.append(label)
+    missing=refs-assets.keys()
+    if missing:raise ValueError('Missing assets: '+str(sorted(missing)))
+    glyphs=sorted(set(''.join(texts))-{'\r','\n'});gid={c:i for i,c in enumerate(glyphs)}
+    if len(glyphs)>1024:raise ValueError('Font cache exceeds 32 KiB')
+    f=ImageFont.truetype(str(font),16);font_data=bytearray()
+    for ch in glyphs:
+        im=Image.new('L',(16,16));ImageDraw.Draw(im).text((0,f.getmetrics()[0]),ch,font=f,fill=255,anchor='ls')
+        a=np.array(im)>=80
+        for row in a:font_data.extend(struct.pack('>H',sum(int(v)<<(15-i) for i,v in enumerate(row))))
+    payload=bytearray(131072);payload[98304:98304+len(font_data)]=font_data
+    resources=[(98304,len(font_data),0,len(glyphs))]
+    resource_ids,manifest_assets,tracks=convert_resources(source,assets,refs,fullrefs,out,payload,resources,ffmpeg,ffprobe)
+    script,command_map,scene_rows,variables=compile_script(scene_doc,assets,resources,resource_ids,glyphs,font_data)
     if len(script)>98304:raise ValueError('Script cache exceeds 96 KiB')
     payload[:len(script)]=script;(out/'novel.pak').write_bytes(payload)
     manifest={'format':'MCD-NVN-1','source_repositories':{'md-game-editor':'26f0cda3d9869acd3c44961d89e42e102af6381d','pce-novel-game-projects':'6e0ff601e7ac2af69ce39677b623781ff01f1e0c'},'title':'いしのうらにいる！？ 第1話 部室の白い箱','scenes':[{'id':s['id'],'index':i,'commands':scene_rows[i][1]} for i,s in enumerate(scenes)],'script_bytes':len(script),'glyphs':len(glyphs),'commands':len(commands),'variables':variables,'pack_bytes':len(payload),'pack_sha256':sha(payload),'tracks':tracks,'assets':manifest_assets,'command_map':command_map,'conversion_notes':['PCE legacy coordinates centered in a 320x224 viewport.','Japanese font uses JF-Dot-Shinonome16, 19 columns x 4 lines.','Character palettes: one shared 15-color palette for Mu/Chika, one for Ren.','PSG patterns rendered to 8 kHz mono IMA; waveform IDs use documented approximations.','Voice: 11.025 kHz mono IMA; short SFX: 16 kHz. No duration truncation.']}

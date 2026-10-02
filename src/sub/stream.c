@@ -43,7 +43,7 @@ u16 mcd_stream_prepare(u16 c,u32 bytes,bool loop) {
   mcd_stream_stop(c);s=&streams[c];s->ready=s->priming=false;p=mcd_stream_buffer(c);
   if(bytes<16 || be32(p)!=0x4D494D41UL || be16(p+4)!=1 || p[14]>88 || p[15])return MCD_ERR_FORMAT;
   s->count=be32(p+8);s->rate=be16(p+6);
-  if(s->rate<8000 || s->rate>22050 || !s->count || s->count>1000000UL ||
+  if(s->rate<4000 || s->rate>22050 || !s->count || s->count>1000000UL ||
      bytes!=16+((s->count+1)>>1) || bytes>mcd_stream_capacity(c))return MCD_ERR_SIZE;
   s->predictor=(s16)be16(p+12);s->index=p[14];
   s->ima.predictor=s->predictor;s->ima.index=s->index;
